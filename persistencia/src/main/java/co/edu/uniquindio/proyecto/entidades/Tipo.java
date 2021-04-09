@@ -8,17 +8,15 @@ public class Tipo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "nombre",length = 100,nullable = false)
     private String nombre;
 
-    public Tipo(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
 
     public Tipo() {
-
+        super();
     }
 
     public int getId() {

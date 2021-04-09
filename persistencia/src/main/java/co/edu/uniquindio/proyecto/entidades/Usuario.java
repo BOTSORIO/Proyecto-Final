@@ -6,8 +6,7 @@ import java.io.Serializable;
 @Entity
 public class Usuario extends Persona implements Serializable {
 
-    @Id
-    private String id;
-
-
+    public Usuario() {
+        super();
+    }
 }

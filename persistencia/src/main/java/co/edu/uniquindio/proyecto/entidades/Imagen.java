@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Ciudad implements Serializable {
+public class Imagen implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "nombre",length = 100,nullable = false)
-    private String nombre;
+    @Column(name = "url",length = 100,nullable = false)
+    private String url;
 
-    public Ciudad() {
+    public Imagen() {
         super();
     }
 
@@ -26,12 +26,12 @@ public class Ciudad implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUrl() {
+        return url;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -39,9 +39,9 @@ public class Ciudad implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Ciudad ciudad = (Ciudad) o;
+        Imagen imagen = (Imagen) o;
 
-        return id == ciudad.id;
+        return id == imagen.id;
     }
 
     @Override

@@ -3,26 +3,28 @@ package co.edu.uniquindio.proyecto.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Persona implements Serializable {
 
     @Id
+    @Column(name = "id", length = 10)
     private String id;
+
+    @Column(name = "nombre",length = 100,nullable = false)
     private String nombre;
+
+    @Column(name = "nickname",length = 100,nullable = false,unique = true)
     private String nickname;
+
+    @Column(name = "password",length = 100,nullable = false)
     private String password;
+
+    @Column(name = "email",length = 100,nullable = false,unique = true)
     private String email;
 
-    public Persona(String id, String nombre, String nickname, String password, String email) {
-        this.id = id;
-        this.nombre = nombre;
-        this.nickname = nickname;
-        this.password = password;
-        this.email = email;
-    }
-
     public Persona() {
-
+        super();
     }
 
     public String getId() {

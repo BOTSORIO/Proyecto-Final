@@ -7,17 +7,15 @@ import java.io.Serializable;
 public class Horario implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "horario",length =100,nullable = false)
     private String horario;
 
-    public Horario(int id, String horario) {
-        this.id = id;
-        this.horario = horario;
-    }
-
     public Horario() {
-
+        super();
     }
 
     public int getId() {
