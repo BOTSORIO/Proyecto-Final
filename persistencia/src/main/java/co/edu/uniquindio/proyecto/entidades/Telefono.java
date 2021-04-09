@@ -14,6 +14,9 @@ public class Telefono implements Serializable {
     @Column(name = "telefono_lugar",length = 12,nullable = false)
     private String telefonoLugar;
 
+    @ManyToOne
+    private Lugar idLugar;
+
     public Telefono() {
         super();
     }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Tipo implements Serializable {
@@ -13,6 +14,9 @@ public class Tipo implements Serializable {
 
     @Column(name = "nombre",length = 100,nullable = false)
     private String nombre;
+
+    @OneToMany(mappedBy = "idTipo")
+    private List<Lugar> lugares;
 
 
     public Tipo() {

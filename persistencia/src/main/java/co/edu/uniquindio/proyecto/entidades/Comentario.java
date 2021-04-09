@@ -25,6 +25,12 @@ public class Comentario implements Serializable {
     @Column(name = "fecha_comentario", nullable = false)
     private Date fechaComentario;
 
+    @ManyToOne
+    private Lugar idLugar;
+
+    @ManyToOne
+    private Usuario idUsuario;
+
     public Comentario() {
        super();
     }

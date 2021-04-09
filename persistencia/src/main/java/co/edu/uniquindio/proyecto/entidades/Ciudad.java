@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Ciudad implements Serializable {
@@ -13,6 +14,12 @@ public class Ciudad implements Serializable {
 
     @Column(name = "nombre",length = 100,nullable = false)
     private String nombre;
+
+    @OneToMany(mappedBy = "idCiudad")
+    private List<Usuario> usuarios;
+
+    @OneToMany(mappedBy = "idCiudad")
+    private List<Lugar> lugares;
 
     public Ciudad() {
         super();

@@ -14,6 +14,9 @@ public class Imagen implements Serializable {
     @Column(name = "url",length = 100,nullable = false)
     private String url;
 
+    @ManyToOne
+    private Lugar idLugar;
+
     public Imagen() {
         super();
     }

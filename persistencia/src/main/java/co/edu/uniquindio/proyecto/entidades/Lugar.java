@@ -35,6 +35,31 @@ public class Lugar implements Serializable {
     @Column(name = "estado", nullable = false)
     private String estado;
 
+    @ManyToOne
+    private Moderador idModerador;
+
+    @ManyToOne
+    private Usuario idUsuario;
+
+    @ManyToOne
+    private Ciudad idCiudad;
+
+    @OneToMany(mappedBy = "idLugar")
+    private List<Comentario> comentarios;
+
+    @ManyToOne
+    private Tipo idTipo;
+
+    @OneToMany(mappedBy = "idLugar")
+    private List<Imagen> imagenes;
+
+    @OneToMany(mappedBy = "idLugar")
+    private List<Telefono> telefonos;
+
+    @ManyToMany
+    private List<Horario> horarios;
+
+
 
     public Lugar() {
         super();

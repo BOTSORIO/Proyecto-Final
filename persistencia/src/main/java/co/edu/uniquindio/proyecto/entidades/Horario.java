@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Horario implements Serializable {
@@ -17,6 +18,9 @@ public class Horario implements Serializable {
     public Horario() {
         super();
     }
+
+    @ManyToMany(mappedBy = "horarios")
+    private List<Lugar> lugares;
 
     public int getId() {
         return id;
