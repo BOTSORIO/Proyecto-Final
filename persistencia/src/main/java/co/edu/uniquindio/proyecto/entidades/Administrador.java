@@ -34,7 +34,7 @@ public class Administrador extends Persona implements Serializable {
     @Override
     public String toString() {
         return "\nId :"+getId()+"\nNombre: "+ getNombre()+"\nNickname: "+getNickname()+"\nPassword: "
-                +getPassword()+"\nEmail: "+getEmail()+ "\nModeradores: "+getModeradores()+"\n\n";
+                +getPassword()+"\nEmail: "+getEmail()+ "\n\n";
     }
 
 }

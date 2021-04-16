@@ -282,7 +282,7 @@ public class Lugar implements Serializable {
         return "\nCodigo: "+getId()+"\nNombre: "+getNombre()+"\nDescripcion: "+getDescripcion()
                 +"\nFechaC: "+getFechaCreacion()+"\nFechaA: "+getFechaAprobacion()+"\nLogintud: "+getLongitud()
                 +"\nLatitud: "+getLatitud()+"\nEstado: "+getEstado()+"\n\nCiudad: "+getCiudad()
-                +"\nModerador: "+getModerador()+"\nUsuario: "+getUsuario()+"\n"+cadena+"\n";
+                +"\nModerador: "+getModerador()+"\nUsuario: "+getUsuario()+"\n"+"Tipo: "+getTipo()+"\n"+cadena+"\n";
     }
 
 }

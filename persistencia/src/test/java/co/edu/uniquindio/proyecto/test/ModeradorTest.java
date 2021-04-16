@@ -26,7 +26,7 @@ public class ModeradorTest {
     @Sql("classpath:administradores.sql")
     public void registrarModeradorTest(){
 
-        Administrador administradorBuscado = administradorRepo.findById("1193409775").orElse(null);
+        Administrador administradorBuscado = administradorRepo.findById("7").orElse(null);
 
         Moderador moderadorNuevo = new Moderador();
         moderadorNuevo.setId("1237");
@@ -50,7 +50,7 @@ public class ModeradorTest {
     @Sql("classpath:administradores.sql")
     public void eliminarModeradorTest() {
 
-        Administrador administradorBuscado = administradorRepo.findById("1193409775").orElse(null);
+        Administrador administradorBuscado = administradorRepo.findById("7").orElse(null);
 
         Moderador moderadorNuevo= new Moderador("1237","Daniel","Dan","12da03ni","d@gmail.com");
         moderadorNuevo.setAdministrador(administradorBuscado);
@@ -69,7 +69,7 @@ public class ModeradorTest {
     @Sql("classpath:administradores.sql")
     public void actualizarModeradorTest(){
 
-        Administrador administradorBuscado = administradorRepo.findById("1193409775").orElse(null);
+        Administrador administradorBuscado = administradorRepo.findById("7").orElse(null);
 
         Moderador moderadorNuevo= new Moderador("1237","Daniel","Dan","12da03ni","d@gmail.com");
         moderadorNuevo.setAdministrador(administradorBuscado);

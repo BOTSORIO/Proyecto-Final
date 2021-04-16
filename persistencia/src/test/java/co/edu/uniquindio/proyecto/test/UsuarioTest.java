@@ -97,6 +97,7 @@ public class UsuarioTest {
 
     }
 
+    //================================= Metodo para validar un inicio de secion =================================//
     @Test
     @Sql("classpath:usuarios.sql")
     public void iniciarSecionTest(){
@@ -105,6 +106,7 @@ public class UsuarioTest {
         Assertions.assertNotNull(usuarioNuevo);
     }
 
+    //================================= Metodo para listar los usuarios logueados =================================//
     @Test
     @Sql("classpath:usuarios.sql")
     public void listarUsuariosPaginadosTest(){
