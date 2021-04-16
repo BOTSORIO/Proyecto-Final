@@ -3,10 +3,12 @@ package co.edu.uniquindio.proyecto.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 
+//================================= RELACION DE HERENCIA =================================//
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Persona implements Serializable {
 
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @Column(name = "id", length = 10)
     private String id;
@@ -23,10 +25,20 @@ public class Persona implements Serializable {
     @Column(name = "email",length = 100,nullable = false,unique = true)
     private String email;
 
+    //================================= CONSTRUCTOR  =================================//
     public Persona() {
         super();
     }
 
+    public Persona(String id, String nombre, String nickname, String password, String email) {
+        this.id = id;
+        this.nombre = nombre;
+        this.nickname = nickname;
+        this.password = password;
+        this.email = email;
+    }
+
+    //================================= SETS Y GETS =================================//
     public String getId() {
         return id;
     }
@@ -67,6 +79,7 @@ public class Persona implements Serializable {
         this.email = email;
     }
 
+    //================================= EQUALS Y HASHCODE =================================//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,4 +94,6 @@ public class Persona implements Serializable {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+
 }

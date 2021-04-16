@@ -7,6 +7,7 @@ import java.util.*;
 @Entity
 public class Comentario implements Serializable {
 
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,16 +26,27 @@ public class Comentario implements Serializable {
     @Column(name = "fecha_comentario", nullable = false)
     private Date fechaComentario;
 
+    //================================= RELACION CON LA ENTIDAD LUGAR =================================//
     @ManyToOne
-    private Lugar idLugar;
+    private Lugar lugar;
 
+    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
-    private Usuario idUsuario;
+    private Usuario usuario;
 
+    //================================= CONSTRUCTOR  =================================//
     public Comentario() {
        super();
     }
 
+    public Comentario(String comentario, String calificacion, String respuesta, Date fechaComentario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.respuesta = respuesta;
+        this.fechaComentario = fechaComentario;
+    }
+
+    //================================= SETS Y GETS =================================//
     public int getId() {
         return id;
     }
@@ -75,6 +87,23 @@ public class Comentario implements Serializable {
         this.fechaComentario = fechaComentario;
     }
 
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    //================================= EQUALS Y HASHCODE =================================//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,5 +117,12 @@ public class Comentario implements Serializable {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    //================================= TO STRING =================================//
+    @Override
+    public String toString() {
+        return "\nComentario: " + getComentario() + "\nCalificacion: " + getCalificacion() +
+                "\nRespuesta: " + getRespuesta() + "\nFecha del comentario: " + getFechaComentario() ;
     }
 }

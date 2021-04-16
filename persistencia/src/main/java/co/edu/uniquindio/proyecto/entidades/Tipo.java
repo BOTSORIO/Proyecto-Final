@@ -2,11 +2,13 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Tipo implements Serializable {
 
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -15,14 +17,22 @@ public class Tipo implements Serializable {
     @Column(name = "nombre",length = 100,nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "idTipo")
+    //================================= RELACION CON LA ENTIDAD LUGAR =================================//
+    @OneToMany(mappedBy = "tipo")
     private List<Lugar> lugares;
 
-
+    //================================= CONSTRUCTOR  =================================//
     public Tipo() {
         super();
+        lugares= new ArrayList<>();
     }
 
+    public Tipo(String nombre) {
+        this.nombre = nombre;
+        lugares= new ArrayList<>();
+    }
+
+    //================================= SETS Y GETS =================================//
     public int getId() {
         return id;
     }
@@ -39,6 +49,15 @@ public class Tipo implements Serializable {
         this.nombre = nombre;
     }
 
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
+    }
+
+    //================================= EQUALS Y HASHCODE =================================//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,5 +71,20 @@ public class Tipo implements Serializable {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    //================================= TO STRING =================================//
+    @Override
+    public String toString() {
+
+        String cadena="";
+
+        for (int i=0;i<getLugares().size();i++){
+
+            cadena +="Codigo: "+getLugares().get(i).getId()+"\n";
+            cadena +="Nombre: "+getLugares().get(i).getNombre()+"\n";
+            cadena += "================\n";
+        }
+        return "\nCodigo :" + getId() + "\nNombre :" + getNombre()  + "\nLugares :\n" + cadena;
     }
 }

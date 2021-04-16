@@ -1,31 +1,34 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.io.*;
 
 @Entity
-public class Imagen implements Serializable {
+public class Favorito implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id",nullable = false)
     private int id;
 
-    @Column(name = "url",length = 100,nullable = false)
-    private String url;
-
+    @Column(name = "aporte",nullable = false)
+    private String aporte;
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//
     @ManyToOne
     private Lugar lugar;
 
+    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
+    @ManyToOne
+    private Usuario usuario;
+
     //================================= CONSTRUCTOR  =================================//
-    public Imagen() {
+    public Favorito() {
         super();
     }
 
-    public Imagen(String url) {
-        this.url = url;
+    public Favorito(String aporte) {
+        this.aporte = aporte;
     }
 
     //================================= SETS Y GETS =================================//
@@ -37,14 +40,6 @@ public class Imagen implements Serializable {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public Lugar getLugar() {
         return lugar;
     }
@@ -53,15 +48,31 @@ public class Imagen implements Serializable {
         this.lugar = lugar;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getAporte() {
+        return aporte;
+    }
+
+    public void setAporte(String aporte) {
+        this.aporte = aporte;
+    }
+
     //================================= EQUALS Y HASHCODE =================================//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Imagen imagen = (Imagen) o;
+        Favorito favorito = (Favorito) o;
 
-        return id == imagen.id;
+        return id == favorito.id;
     }
 
     @Override
@@ -72,6 +83,6 @@ public class Imagen implements Serializable {
     //================================= TO STRING =================================//
     @Override
     public String toString() {
-        return "\nCodigo: " + getId() + "\nURL: " + getUrl();
+        return "\nCodigo: " +getId()+ "\nAporte: " + getAporte() ;
     }
 }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 public class Telefono implements Serializable {
 
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -14,13 +15,20 @@ public class Telefono implements Serializable {
     @Column(name = "telefono_lugar",length = 12,nullable = false)
     private String telefonoLugar;
 
+    //================================= RELACION CON LA ENTIDAD LUGAR =================================//
     @ManyToOne
-    private Lugar idLugar;
+    private Lugar lugar;
 
+    //================================= CONSTRUCTOR  =================================//
     public Telefono() {
         super();
     }
 
+    public Telefono(String telefonoLugar) {
+        this.telefonoLugar = telefonoLugar;
+    }
+
+    //================================= SETS Y GETS =================================//
     public int getId() {
         return id;
     }
@@ -37,6 +45,15 @@ public class Telefono implements Serializable {
         this.telefonoLugar = telefonoLugar;
     }
 
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
+
+    //================================= EQUALS Y HASHCODE =================================//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,5 +67,11 @@ public class Telefono implements Serializable {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    //================================= TO STRING =================================//
+    @Override
+    public String toString() {
+        return  "\nCodigo :" + getId() + "\nTelefono del lugar :" + getTelefonoLugar();
     }
 }

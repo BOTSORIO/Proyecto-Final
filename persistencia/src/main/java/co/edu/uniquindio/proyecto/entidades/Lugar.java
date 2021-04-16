@@ -1,12 +1,13 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 @Entity
 public class Lugar implements Serializable {
 
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
@@ -35,36 +36,70 @@ public class Lugar implements Serializable {
     @Column(name = "estado", nullable = false)
     private String estado;
 
+    //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
     @ManyToOne
-    private Moderador idModerador;
+    private Moderador moderador;
 
+    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
-    private Usuario idUsuario;
+    private Usuario usuario;
 
+    //================================= RELACION CON LA ENTIDAD CIUDAD =================================//
     @ManyToOne
-    private Ciudad idCiudad;
+    private Ciudad ciudad;
 
-    @OneToMany(mappedBy = "idLugar")
+    //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
+    @OneToMany(mappedBy = "lugar")
     private List<Comentario> comentarios;
 
+    //================================= RELACION CON LA ENTIDAD TIPO =================================//
     @ManyToOne
-    private Tipo idTipo;
+    private Tipo tipo;
 
-    @OneToMany(mappedBy = "idLugar")
+    //================================= RELACION CON LA ENTIDAD IMAGEN =================================//
+    @OneToMany(mappedBy = "lugar")
     private List<Imagen> imagenes;
 
-    @OneToMany(mappedBy = "idLugar")
+    //================================= RELACION CON LA ENTIDAD TELEFONO =================================//
+    @OneToMany(mappedBy = "lugar")
     private List<Telefono> telefonos;
 
+    //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
+    @OneToMany(mappedBy = "lugar")
+    private List<Favorito> favoritos;
+
+    //================================= RELACION CON LA ENTIDAD HORARIO =================================//
     @ManyToMany
     private List<Horario> horarios;
 
-
-
+    //================================= CONSTRUCTOR  =================================//
     public Lugar() {
         super();
+        horarios=new ArrayList<>();
+        telefonos= new ArrayList<>();
+        imagenes = new ArrayList<>();
+        favoritos = new ArrayList<>();
+        comentarios = new ArrayList<>();
     }
 
+    public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud, String estado) {
+
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaAprobacion = fechaAprobacion;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.estado = estado;
+        horarios=new ArrayList<>();
+        telefonos= new ArrayList<>();
+        imagenes = new ArrayList<>();
+        favoritos = new ArrayList<>();
+        comentarios = new ArrayList<>();
+    }
+
+
+    //================================= SETS Y GETS =================================//
     public int getId() {
         return id;
     }
@@ -129,7 +164,80 @@ public class Lugar implements Serializable {
         this.estado = estado;
     }
 
+    public Moderador getModerador() {
+        return moderador;
+    }
 
+    public void setModerador(Moderador moderador) {
+        this.moderador = moderador;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public List<Telefono> getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(List<Telefono> telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    public List<Favorito> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(List<Favorito> favoritos) {
+        this.favoritos = favoritos;
+    }
+
+
+    //================================= EQUALS Y HASHCODE =================================//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -144,4 +252,37 @@ public class Lugar implements Serializable {
     public int hashCode() {
         return id;
     }
+
+    //================================= TO STRING =================================//
+    @Override
+    public String toString() {
+
+        String cadena="";
+
+        for(int i=0;i<getTelefonos().size();i++){
+
+            cadena += "Telefonos: \n"+getTelefonos().get(i).getTelefonoLugar()+"\n";
+        }
+
+        for (int i=0;i<getHorarios().size();i++){
+
+            cadena += "\nHorarios: \n"+ getHorarios().get(i).getHorario()+"\n";
+        }
+
+        for (int i=0;i<getComentarios().size();i++){
+
+            cadena += "\nComentarios: \n" +getComentarios().get(i).getComentario()+"\n";
+        }
+
+        for (int i=0;i<getFavoritos().size();i++){
+
+            cadena += "\nFavoritos: \n"+getFavoritos().get(i).getAporte()+"\n";
+        }
+
+        return "\nCodigo: "+getId()+"\nNombre: "+getNombre()+"\nDescripcion: "+getDescripcion()
+                +"\nFechaC: "+getFechaCreacion()+"\nFechaA: "+getFechaAprobacion()+"\nLogintud: "+getLongitud()
+                +"\nLatitud: "+getLatitud()+"\nEstado: "+getEstado()+"\n\nCiudad: "+getCiudad()
+                +"\nModerador: "+getModerador()+"\nUsuario: "+getUsuario()+"\n"+cadena+"\n";
+    }
+
 }
