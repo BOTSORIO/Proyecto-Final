@@ -73,7 +73,8 @@ public class Tipo implements Serializable {
         return id;
     }
 
-    //================================= TO STRING =================================//
+
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
 

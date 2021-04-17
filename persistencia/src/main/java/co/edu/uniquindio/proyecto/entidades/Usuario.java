@@ -69,7 +69,7 @@ public class Usuario extends Persona implements Serializable {
     }
 
 
-    //================================= TO STRING =================================//
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
         return "\nId :"+getId()+"\nNombre :"+ getNombre()+"\nNickname :"+getNickname()+"\nPassword"

@@ -80,7 +80,7 @@ public class Favorito implements Serializable {
         return id;
     }
 
-    //================================= TO STRING =================================//
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
         return "\nCodigo: " +getId()+ "\nAporte: " + getAporte() ;

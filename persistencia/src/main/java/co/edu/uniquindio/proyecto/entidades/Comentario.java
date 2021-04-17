@@ -119,7 +119,8 @@ public class Comentario implements Serializable {
         return id;
     }
 
-    //================================= TO STRING =================================//
+
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
         return "\nComentario: " + getComentario() + "\nCalificacion: " + getCalificacion() +

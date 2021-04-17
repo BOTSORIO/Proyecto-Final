@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
-
 import java.util.List;
 
 @DataJpaTest
@@ -100,13 +99,13 @@ public class UsuarioTest {
     //================================= Metodo para validar un inicio de secion =================================//
     @Test
     @Sql("classpath:usuarios.sql")
-    public void iniciarSecionTest(){
+    public void iniciarSeccionTest(){
         Usuario usuarioNuevo = usuarioRepo.findByEmailAndPassword("f@gmail.com","fer123") ;
 
         Assertions.assertNotNull(usuarioNuevo);
     }
 
-    //================================= Metodo para listar los usuarios logueados =================================//
+    //================================= Metodo para listar los usuarios ordenadamente =================================//
     @Test
     @Sql("classpath:usuarios.sql")
     public void listarUsuariosPaginadosTest(){

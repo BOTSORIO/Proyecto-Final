@@ -44,7 +44,8 @@ public class Moderador extends Persona implements Serializable {
         this.lugares = lugares;
     }
 
-    //================================= TO STRING =================================//
+
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
         return "\nId :"+getId()+"\nNombre :"+ getNombre()+"\nNickname :"+getNickname()+"\nPassword"

@@ -69,7 +69,8 @@ public class Imagen implements Serializable {
         return id;
     }
 
-    //================================= TO STRING =================================//
+
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
         return "\nCodigo: " + getId() + "\nURL: " + getUrl();

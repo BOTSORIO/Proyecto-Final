@@ -31,6 +31,8 @@ public class Administrador extends Persona implements Serializable {
         this.moderadores = moderadores;
     }
 
+
+    //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
         return "\nId :"+getId()+"\nNombre: "+ getNombre()+"\nNickname: "+getNickname()+"\nPassword: "
