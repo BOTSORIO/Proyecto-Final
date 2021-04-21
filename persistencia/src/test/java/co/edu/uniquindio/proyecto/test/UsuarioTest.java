@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
@@ -115,4 +116,22 @@ public class UsuarioTest {
             System.out.println(lista);
         }
     }
+
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosDadoNombreTest(){
+
+        List<Usuario> lista = usuarioRepo.findByNombre("Manuela");
+        System.out.println(lista);
+    }
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosPaginados2Test(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuarios(PageRequest.of(0,2));
+        System.out.println(lista);
+    }
+
 }
