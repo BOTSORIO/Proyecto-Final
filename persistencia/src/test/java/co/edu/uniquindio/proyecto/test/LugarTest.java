@@ -275,7 +275,8 @@ public class LugarTest {
         List<ComentariosLugarDTO> comentarios = lugarRepo.obtenerComentariosLugares();
 
         for(ComentariosLugarDTO l: comentarios){
-            System.out.println(l.getLugar().getNombre()+","+l.getComentario().getComentario());
+            //System.out.println(l.getLugar().getNombre()+","+l.getComentario().getComentario());
+            System.out.println(comentarios);
         }
     }
 
