@@ -183,7 +183,7 @@ public class LugarTest {
     @Sql("classpath:lugares.sql")
     public void obtenerTipoLugar(){
 
-        String nombreTipo = lugarRepo.obtenerTiposLugares(1);
+        String nombreTipo = lugarRepo.obtenerTiposLugares(2);
         System.out.println(nombreTipo);
     }
 

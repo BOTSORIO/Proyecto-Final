@@ -134,4 +134,16 @@ public class UsuarioTest {
         System.out.println(lista);
     }
 
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void obtenerUsuariosCiudadTest(){
+
+        List<Usuario>usuarios=ciudadRepo.obtenerCiudadUsuario("Armenia");
+
+        for(Usuario u:usuarios){
+
+            System.out.println(u);
+        }
+    }
+
 }
