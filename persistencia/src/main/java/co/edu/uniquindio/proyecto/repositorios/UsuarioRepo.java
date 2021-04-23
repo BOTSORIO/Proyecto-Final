@@ -33,12 +33,16 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     List<Usuario> findByNombre(String nombre);
 
+    @Query("select u.ciudad.nombre from Usuario u")
+    List<Usuario> obtenerUsuarios2();  //Ejemplo
 
+    @Query("select f from Usuario u,IN(u.favoritos) f where u.id = :id")
+    List<Lugar> obtenerLugaresFav(String id);
 
+    @Query("select f from Usuario u join u.favoritos f where u.id = :id")
+    List<Lugar> obtenerLugaresFav2(String id);
 
-
-
-
-
+    @Query("select u.email, l from Usuario u left join u.lugares l")
+    List<Object[]> obtenerLugaresPublicadosUsuarios();
 
 }

@@ -34,7 +34,7 @@ public class Lugar implements Serializable {
     private float longitud;
 
     @Column(name = "estado", nullable = false)
-    private String estado;
+    private Boolean estado;
 
     //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
     @ManyToOne
@@ -82,7 +82,7 @@ public class Lugar implements Serializable {
         comentarios = new ArrayList<>();
     }
 
-    public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud, String estado) {
+    public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud, Boolean estado) {
 
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -156,11 +156,11 @@ public class Lugar implements Serializable {
         this.longitud = longitud;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 

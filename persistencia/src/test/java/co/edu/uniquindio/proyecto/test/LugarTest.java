@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.junit.jupiter.api.*;
@@ -18,6 +19,12 @@ public class LugarTest {
     //================================= Instancias del repositorio =================================//
     @Autowired
     private LugarRepo lugarRepo;
+
+    @Autowired
+    private UsuarioRepo usuarioRepo;
+
+    @Autowired
+    private CiudadRepo ciudadRepo;
 
 
     //================================= Metodo para registrar o crear un lugar =================================//
@@ -38,7 +45,7 @@ public class LugarTest {
                 Telefono telefono = new Telefono("3116310037");
                 Favorito favorito = new Favorito("xd");
 
-                Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,"xyz");
+                Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
                 lugarNuevo.setCiudad(ciudad);
                 lugarNuevo.setUsuario(usuario);
                 lugarNuevo.setModerador(moderador);
@@ -82,7 +89,7 @@ public class LugarTest {
             Telefono telefono = new Telefono("3116310037");
             Favorito favorito = new Favorito("xd");
 
-            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,"xyz");
+            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
             lugarNuevo.setCiudad(ciudad);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);
@@ -129,12 +136,14 @@ public class LugarTest {
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
             Favorito favorito = new Favorito("xd");
+            Comentario comentario = new Comentario("hola","10","uwu",fechaCreacion);
 
-            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,"xyz");
+            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
             lugarNuevo.setCiudad(ciudad);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);
             lugarNuevo.setTipo(tipo);
+            lugarNuevo.getComentarios().add(comentario);
 
             lugarNuevo.getImagenes().add(imagen);
             lugarNuevo.getHorarios().add(horario);
@@ -170,4 +179,105 @@ public class LugarTest {
         System.out.println(lista);
     }
 
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerTipoLugar(){
+
+        String nombreTipo = lugarRepo.obtenerTiposLugares(1);
+        System.out.println(nombreTipo);
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLatitudLugar(){
+
+        Float latitudLugar = lugarRepo.latitudLugares(1);
+        System.out.println(latitudLugar);
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerinfoLugar(){
+
+        List<Object[]> infoLugar = lugarRepo.infoLugares(1);
+
+        for(int i=0;i<infoLugar.get(0).length;i++){
+
+            System.out.println(infoLugar.get(0)[i]);
+        }
+    }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerinfoLugar2(){
+
+        List<Object[]> infoLugar = lugarRepo.infoLugares2();
+
+        for(Object[] arr: infoLugar){
+
+            System.out.println(arr[0]+"\n"+arr[1]+"\n"+arr[2]);
+        }
+    }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresFavoritos() {
+
+        List<Lugar> lugares = usuarioRepo.obtenerLugaresFav("2");
+
+        for (Lugar l : lugares) {
+
+            System.out.println(l.toString());
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresFavoritos2() {
+
+        List<Lugar> lugares = usuarioRepo.obtenerLugaresFav2("2");
+
+        for (Lugar l : lugares) {
+
+            System.out.println(l.toString());
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerUsuariosCiudadTest() {
+
+        List<Usuario> usuarios = ciudadRepo.obtenerCiudadUsuario("Calarca");
+
+        for (Usuario u : usuarios) {
+
+            System.out.println(u);
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerUsuariosCiudad2Test() {
+
+        List<Object[]> usuarios = ciudadRepo.obtenerCiudadUsuarios();
+
+        for (Object[] u : usuarios) {
+
+            System.out.println(u[0]+"\n"+u[1] );
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerComentariosLugar(){
+        List<ComentariosLugarDTO> comentarios = lugarRepo.obtenerComentariosLugares();
+
+        for(ComentariosLugarDTO l: comentarios){
+            System.out.println(l.getLugar().getNombre()+","+l.getComentario().getComentario());
+        }
+    }
+
+    //Arreglar sql
 }
