@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface TipoRepo extends JpaRepository<Tipo,Integer> {
 
     //================================= REPOSITORIO DE TIPO =================================//
+
+
+
 }

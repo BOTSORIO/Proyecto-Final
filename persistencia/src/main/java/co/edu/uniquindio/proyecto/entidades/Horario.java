@@ -14,8 +14,14 @@ public class Horario implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "horario",length =100,nullable = false)
-    private String horario;
+    @Column(name = "diaSemana",length =100,nullable = false)
+    private String diaSemana;
+
+    @Column(name = "horaInicio",length =100,nullable = false)
+    private String horaInicio;
+
+    @Column(name = "horaFin",length =100,nullable = false)
+    private String horaFin;
 
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//
     @ManyToMany(mappedBy = "horarios")
@@ -27,8 +33,10 @@ public class Horario implements Serializable {
         lugares = new ArrayList<>();
     }
 
-    public Horario(String horario) {
-        this.horario = horario;
+    public Horario( String diaSemana, String horaInicio, String horaFin) {
+        this.diaSemana = diaSemana;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
         lugares = new ArrayList<>();
     }
 
@@ -41,12 +49,28 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getDiaSemana() {
+        return diaSemana;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
+    }
+
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
     }
 
     public List<Lugar> getLugares() {
@@ -75,8 +99,14 @@ public class Horario implements Serializable {
 
 
     //================================= TO STRING DE LA ENTIDAD =================================//
+
     @Override
     public String toString() {
-        return "\nCodigo :"+getId()+"\nHorario :"+getHorario();
+        return "Horario{" +
+                "id=" + id +
+                ", diaSemana='" + diaSemana + '\'' +
+                ", horaInicio='" + horaInicio + '\'' +
+                ", horaFin='" + horaFin + '\'' +
+                '}';
     }
 }

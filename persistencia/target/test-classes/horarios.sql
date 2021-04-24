@@ -1,3 +1,3 @@
-insert into horario(horario) values ("10am - 10pm");
-insert into horario(horario) values ("11am - 5pm");
-insert into horario(horario) values ("12am - 8pm");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Lunes","10pm","10am");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Martes","8pm","9am");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Miercoles","7pm","8am");

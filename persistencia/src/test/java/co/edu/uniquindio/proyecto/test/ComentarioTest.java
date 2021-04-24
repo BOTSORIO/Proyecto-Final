@@ -37,7 +37,7 @@ public class ComentarioTest {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaCreacion = sdf.parse("2021/01/04");
 
-            Comentario comentarioNuevo = new Comentario("Cool xd", "10", "Ya sabemos :v", fechaCreacion);
+            Comentario comentarioNuevo = new Comentario("Cool xd", 10, "Ya sabemos :v", fechaCreacion);
             comentarioNuevo.setUsuario(usuarioBuscado);
             comentarioNuevo.setLugar(lugarBuscado);
 
@@ -64,7 +64,7 @@ public class ComentarioTest {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaCreacion = sdf.parse("2021/01/04");
 
-            Comentario comentarioNuevo = new Comentario("Cool xd", "10", "Ya sabemos :v", fechaCreacion);
+            Comentario comentarioNuevo = new Comentario("Cool xd", 10, "Ya sabemos :v", fechaCreacion);
             comentarioNuevo.setUsuario(usuarioBuscado);
             comentarioNuevo.setLugar(lugarBuscado);
 
@@ -92,7 +92,7 @@ public class ComentarioTest {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaCreacion = sdf.parse("2021/01/04");
 
-            Comentario comentarioNuevo = new Comentario("Cool xd", "10", "Ya sabemos :v", fechaCreacion);
+            Comentario comentarioNuevo = new Comentario("Cool xd", 10, "Ya sabemos :v", fechaCreacion);
             comentarioNuevo.setUsuario(usuarioBuscado);
             comentarioNuevo.setLugar(lugarBuscado);
 

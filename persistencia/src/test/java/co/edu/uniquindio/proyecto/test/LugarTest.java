@@ -40,7 +40,7 @@ public class LugarTest {
                 Ciudad ciudad= new Ciudad("Medellin");
                 Tipo tipo= new Tipo("Deporte");
                 Usuario usuario= new Usuario("24584","Sandra","sandrita","21san","san@hotmail.com");
-                Horario horario= new Horario("4pm - 8pm");
+                Horario horario= new Horario("lunes a viernes","10am","10pm");
                 Imagen imagen = new Imagen("addafada.dadada");
                 Telefono telefono = new Telefono("3116310037");
                 Favorito favorito = new Favorito("xd");
@@ -84,7 +84,7 @@ public class LugarTest {
             Ciudad ciudad= new Ciudad("Medellin");
             Tipo tipo= new Tipo("Deporte");
             Usuario usuario= new Usuario("24584","Sandra","sandrita","21san","san@hotmail.com");
-            Horario horario= new Horario("4pm - 8pm");
+            Horario horario= new Horario("lunes a viernes","10am","10pm");
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
             Favorito favorito = new Favorito("xd");
@@ -132,11 +132,11 @@ public class LugarTest {
             Ciudad ciudad= new Ciudad("Medellin");
             Tipo tipo= new Tipo("Deporte");
             Usuario usuario= new Usuario("24584","Sandra","sandrita","21san","san@hotmail.com");
-            Horario horario= new Horario("4pm - 8pm");
+            Horario horario= new Horario("lunes a viernes","10am","10pm");
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
             Favorito favorito = new Favorito("xd");
-            Comentario comentario = new Comentario("hola","10","uwu",fechaCreacion);
+            Comentario comentario = new Comentario("hola",10,"uwu",fechaCreacion);
 
             Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
             lugarNuevo.setCiudad(ciudad);
@@ -241,7 +241,7 @@ public class LugarTest {
 
         for (Lugar l : lugares) {
 
-            System.out.println(l.toString());
+            System.out.println(l);
         }
     }
 
@@ -279,5 +279,26 @@ public class LugarTest {
         }
     }
 
-    //Arreglar sql
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerhorariosTest() {
+
+        List<Object[]> horarios = lugarRepo.obtenerLugaresHorario("Lunes","10pm","10am");
+
+        for (Object[] u : horarios) {
+
+            System.out.println(u[0]+"\n"+u[1] );
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerCantidadComentariosTest() {
+
+        int cantidad = lugarRepo.obtenerCantidadComentarios(1);
+
+        System.out.println("La cantidad de comentarios es: "+cantidad);
+    }
+
 }

@@ -45,4 +45,18 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     @Query("select u.email, l from Usuario u left join u.lugares l")
     List<Object[]> obtenerLugaresPublicadosUsuarios();
 
+
+    @Query("select u from Usuario u order by u.nombre asc")
+    List<Usuario> obtenerListaUsuariosOrdenadosAlfabeticamente();
+
+
+    @Query("select u from Usuario u where u.email like '%@gmail.%'")
+    List<Usuario> obtenerUsuariosDeGmail();
+
+    @Query("select u from Usuario u where u.email like :dominio")
+    List<Usuario> obtenerUsuariosDeDominio(String dominio);
+
+    @Query("select u from Usuario u where u.email like concat('%',:dominio,'%')")
+    List<Usuario> obtenerUsuariosDeDominio2(String dominio);
+
 }

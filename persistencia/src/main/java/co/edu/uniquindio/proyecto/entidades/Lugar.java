@@ -267,7 +267,7 @@ public class Lugar implements Serializable {
 
         for (int i=0;i<getHorarios().size();i++){
 
-            cadena += "\nHorarios: \n"+ getHorarios().get(i).getHorario()+"\n";
+            cadena += "\nHorarios: \n"+ getHorarios().get(i).toString()+"\n";
         }
 
         for (int i=0;i<getComentarios().size();i++){

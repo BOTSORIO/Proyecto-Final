@@ -16,8 +16,8 @@ public class Comentario implements Serializable {
     @Column(name = "comentario", nullable = false,length = 200)
     private String comentario;
 
-    @Column(name = "calificacion", nullable = false,length = 10)
-    private String calificacion;
+    @Column(name = "calificacion", nullable = false)
+    private int calificacion;
 
     @Column(name = "respuesta", nullable = false,length = 200)
     private String respuesta;
@@ -39,7 +39,7 @@ public class Comentario implements Serializable {
        super();
     }
 
-    public Comentario(String comentario, String calificacion, String respuesta, Date fechaComentario) {
+    public Comentario(String comentario, int calificacion, String respuesta, Date fechaComentario) {
         this.comentario = comentario;
         this.calificacion = calificacion;
         this.respuesta = respuesta;
@@ -63,11 +63,11 @@ public class Comentario implements Serializable {
         this.comentario = comentario;
     }
 
-    public String getCalificacion() {
+    public int getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(String calificacion) {
+    public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
 
