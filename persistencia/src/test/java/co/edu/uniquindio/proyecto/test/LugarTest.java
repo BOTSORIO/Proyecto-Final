@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
+import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
+import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCiudadDTO;
+import co.edu.uniquindio.proyecto.dto.NumeroTipoLugaresPopularDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.junit.jupiter.api.*;
@@ -301,5 +304,87 @@ public class LugarTest {
 
         System.out.println("La cantidad de comentarios es: "+cantidad);
     }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerModeradoresLugarTest() {
+
+        List<Object[]> moderadores = lugarRepo.obtenerLugaresModeradores("@hotmail.com");
+
+        for (Object[] u : moderadores) {
+
+            System.out.println(u[0]+"\n");
+        }
+    }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresCategoria(){
+        List<NumeroLugaresPorCategoriaDTO> cantidad=lugarRepo.obtenerCantidadLugaresPorCategoria();
+
+        for(NumeroLugaresPorCategoriaDTO l: cantidad){
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresSinHorario() {
+
+        List<Lugar> lugares = lugarRepo.obtenerLugaresSinHorarios();
+
+        for (Lugar l : lugares) {
+
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresPorCiudad(){
+        List<NumeroLugaresPorCiudadDTO> cantidad=lugarRepo.obtenerCantidadLugaresPorCiudad();
+
+        for(NumeroLugaresPorCiudadDTO l: cantidad){
+            System.out.println(l);
+        }
+    }
+
+    /*
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresAbiertos() {
+
+        List<Lugar> lugares = lugarRepo.obtenerLugaresAbiertos("Lunes","12pm");
+
+        for (Lugar l : lugares) {
+
+            System.out.println(l);
+        }
+    }
+     */
+
+    /*
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerTipoLugarPopular(){
+        List<NumeroTipoLugaresPopularDTO> cantidad=lugarRepo.obtenerTipoLugarPopular();
+
+        for(NumeroTipoLugaresPopularDTO l: cantidad){
+            System.out.println(l);
+        }
+    }
+     */
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerCalificacionPromedio() {
+
+        float calificacion = lugarRepo.obtenerCalificacionPromedio(3);
+
+        System.out.println("La calificacion promedio es: "+calificacion);
+    }
+
 
 }

@@ -30,10 +30,8 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select new co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO(l,c) from Lugar l left join l.comentarios c")
     List<ComentariosLugarDTO> obtenerComentariosLugares();
 
-    //Probar en el text
     @Query("select l.nombre,l.descripcion,l.ciudad.nombre from Lugar l where l.moderador.email = :emailMod and l.estado= true")
     List<Object[]> obtenerLugaresModeradores(String emailMod);
-
 
     @Query("select l.nombre,l.descripcion,l.longitud,l.latitud from Lugar l join l.horarios h where h.diaSemana = :diaSemana and h.horaInicio= :horaInicio and h.horaFin= :horaFin")
     List<Object[]> obtenerLugaresHorario(String diaSemana,String horaInicio,String horaFin);
@@ -42,26 +40,27 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     int obtenerCantidadComentarios(Integer idLugar);
 
 
-    //Probar en el text
+    //Probar en el test
 
     @Query("select new co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO(l.tipo.nombre, count(l)) from Lugar l group by l.tipo")
     List<NumeroLugaresPorCategoriaDTO> obtenerCantidadLugaresPorCategoria();
 
-
     @Query("select l from Lugar l where l.horarios is empty ")
     List<Lugar> obtenerLugaresSinHorarios();
 
-    @Query("select l.ciudad.nombre,count(l) from Lugar l group by l.ciudad")
+    @Query("select new co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCiudadDTO(l.ciudad.nombre,count(l)) from Lugar l group by l.ciudad")
     List<NumeroLugaresPorCiudadDTO> obtenerCantidadLugaresPorCiudad();
-    
+
     @Query("select l from Lugar l join l.horarios h where h.diaSemana= :diaSemana and(h.horaInicio<:horaActual and h.horaFin > :horaActual)")
-    List<Lugar> obtenerLugaresAbiertos(String diaSemana,Date horaActual);
+    List<Lugar> obtenerLugaresAbiertos(String diaSemana,String horaActual);
 
     @Query("select l from Lugar l join l.horarios h where h.diaSemana= :diaSemana and :horaActual between h.horaInicio and h.horaFin")
     List<Lugar> obtenerLugaresAbiertos2(String diaSemana,Date horaActual);
 
-    @Query("select l.tipo.nombre, count(l) as total from Lugar l where l.estado=true group by l.tipo order by total desc ")
+    /*
+    @Query("select new co.edu.uniquindio.proyecto.dto.NumeroTipoLugaresPopularDTO l.tipo.nombre, count(l) as total from Lugar l where l.estado=true group by l.tipo order by total desc ")
     List<NumeroTipoLugaresPopularDTO> obtenerTipoLugarPopular();
+     */
 
     @Query("select avg(c.calificacion) from Lugar l join l.comentarios c where l.id= :idLugar")
     float obtenerCalificacionPromedio(Integer idLugar);
