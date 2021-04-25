@@ -57,12 +57,19 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l from Lugar l join l.horarios h where h.diaSemana= :diaSemana and :horaActual between h.horaInicio and h.horaFin")
     List<Lugar> obtenerLugaresAbiertos2(String diaSemana,Date horaActual);
 
-    /*
-    @Query("select new co.edu.uniquindio.proyecto.dto.NumeroTipoLugaresPopularDTO l.tipo.nombre, count(l) as total from Lugar l where l.estado=true group by l.tipo order by total desc ")
+
+    @Query("select new co.edu.uniquindio.proyecto.dto.NumeroTipoLugaresPopularDTO(l.tipo.nombre, count(l)) from Lugar l where l.estado=true group by l.tipo order by count(l) desc ")
     List<NumeroTipoLugaresPopularDTO> obtenerTipoLugarPopular();
-     */
+
+
+    @Query("select new co.edu.uniquindio.proyecto.dto.ModeradorLugaresAprobadosDTO(l.moderador, count(l)) from Lugar l where l.estado=true group by l.moderador order by count(l) desc")
+    List<ModeradorLugaresAprobadosDTO> obtenerModeradorLugaresAprobados();
+
 
     @Query("select avg(c.calificacion) from Lugar l join l.comentarios c where l.id= :idLugar")
     float obtenerCalificacionPromedio(Integer idLugar);
+
+    @Query("select new co.edu.uniquindio.proyecto.dto.LugarMayorCalificacionDTO(l, avg(c.calificacion)) from Lugar l join l.comentarios c where l.estado=true and l.ciudad.id =:idCiudad group by c.calificacion order by avg(c.calificacion) desc ")
+    List<LugarMayorCalificacionDTO> obtenerLugarMayorCalificacion(Integer idCiudad);
 
 }

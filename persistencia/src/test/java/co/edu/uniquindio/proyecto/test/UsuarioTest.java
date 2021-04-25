@@ -146,4 +146,36 @@ public class UsuarioTest {
         }
     }
 
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosAlfabeticamenteTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerListaUsuariosOrdenadosAlfabeticamente();
+        System.out.println(lista);
+    }
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosDadoSuGmailTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuariosDeGmail();
+        System.out.println(lista);
+    }
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosDadoSuDominioEmailTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuariosDeDominio("%@hotmail.com%");
+        System.out.println(lista);
+    }
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosDadoSuDominioEmail2Test(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuariosDeDominio2("@gmail.com");
+        System.out.println(lista);
+    }
+
 }

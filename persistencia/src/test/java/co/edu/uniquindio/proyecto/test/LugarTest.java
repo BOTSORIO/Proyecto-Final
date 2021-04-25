@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
-import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
-import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
-import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCiudadDTO;
-import co.edu.uniquindio.proyecto.dto.NumeroTipoLugaresPopularDTO;
+import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.junit.jupiter.api.*;
@@ -343,7 +340,7 @@ public class LugarTest {
 
     @Test
     @Sql("classpath:lugares.sql")
-    public void obtenerLugaresPorCiudad(){
+    public void obtenerLugaresPorCiudadTest(){
         List<NumeroLugaresPorCiudadDTO> cantidad=lugarRepo.obtenerCantidadLugaresPorCiudad();
 
         for(NumeroLugaresPorCiudadDTO l: cantidad){
@@ -365,26 +362,61 @@ public class LugarTest {
     }
      */
 
-    /*
+
     @Test
     @Sql("classpath:lugares.sql")
-    public void obtenerTipoLugarPopular(){
+    public void obtenerTipoLugarPopularTest(){
         List<NumeroTipoLugaresPopularDTO> cantidad=lugarRepo.obtenerTipoLugarPopular();
 
         for(NumeroTipoLugaresPopularDTO l: cantidad){
             System.out.println(l);
         }
     }
-     */
 
     @Test
     @Sql("classpath:lugares.sql")
-    public void obtenerCalificacionPromedio() {
+    public void obtenerModeradorMasLugaresAprobadosTest(){
+
+        List<ModeradorLugaresAprobadosDTO>moderadores=lugarRepo.obtenerModeradorLugaresAprobados();
+
+        for(ModeradorLugaresAprobadosDTO m: moderadores){
+
+            System.out.println(m);
+        }
+    }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerCalificacionPromedioTest() {
 
         float calificacion = lugarRepo.obtenerCalificacionPromedio(3);
 
         System.out.println("La calificacion promedio es: "+calificacion);
     }
 
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void listarLugaresPublicadosTest(){
+
+        List<Object[]> lista = usuarioRepo.obtenerLugaresPublicadosUsuarios();
+
+        for(Object[] arr: lista){
+
+            System.out.println(arr[0]+"\n"+arr[1]);
+        }
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugarMayorCalificacionTest(){
+
+        List<LugarMayorCalificacionDTO>lugares=lugarRepo.obtenerLugarMayorCalificacion(1);
+
+        for(LugarMayorCalificacionDTO l:lugares){
+
+            System.out.println(l);
+        }
+    }
 
 }
