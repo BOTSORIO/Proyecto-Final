@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 
 @DataJpaTest
@@ -25,6 +26,9 @@ public class LugarTest {
 
     @Autowired
     private CiudadRepo ciudadRepo;
+
+    @Autowired
+    private TipoRepo tipoRepo;
 
 
     //================================= Metodo para registrar o crear un lugar =================================//
@@ -348,19 +352,32 @@ public class LugarTest {
         }
     }
 
-    /*
+
     @Test
     @Sql("classpath:lugares.sql")
     public void obtenerLugaresAbiertos() {
 
-        List<Lugar> lugares = lugarRepo.obtenerLugaresAbiertos("Lunes","12pm");
+        LocalTime horaActual =  LocalTime.now();
 
-        for (Lugar l : lugares) {
+        long cantidad = tipoRepo.obtenerLugaresAbiertos("Lunes", horaActual);
 
-            System.out.println(l);
-        }
+            System.out.println(cantidad);
+
     }
-     */
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugarCalificaion() {
+
+        List<TipoMayorCalificacionDTO> cantidad= tipoRepo.obtenerTipoMayorCalificacion(1);
+
+        for(TipoMayorCalificacionDTO t: cantidad){
+            System.out.println(t);
+        }
+
+    }
+
 
 
     @Test
@@ -419,4 +436,27 @@ public class LugarTest {
         }
     }
 
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugarTelefono(){
+
+        Lugar lugar = lugarRepo.obtenerLugarPorTelefono("3045994932");
+        System.out.println(lugar);
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void calcularCantiComentarios(){
+
+        long cantidad = lugarRepo.calcularCantComentarios(2);
+        System.out.println("La cantidad de comentarios con calificacion entre 1 y 5 es:" + cantidad);
+    }
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void calcularCantLugaresAprovados(){
+
+        long cantidad = ciudadRepo.obtenerLugaresAprobadosPorCiudad();
+        System.out.println("La cantidad de lugares aprobados es:" + cantidad);
+    }
 }

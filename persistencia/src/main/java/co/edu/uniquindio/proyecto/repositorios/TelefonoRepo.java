@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface TelefonoRepo extends JpaRepository<Telefono,Integer> {
 
     //================================= REPOSITORIO DE TELEFONO =================================//
+
 }

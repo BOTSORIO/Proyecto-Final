@@ -51,8 +51,6 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select new co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCiudadDTO(l.ciudad.nombre,count(l)) from Lugar l group by l.ciudad")
     List<NumeroLugaresPorCiudadDTO> obtenerCantidadLugaresPorCiudad();
 
-    @Query("select l from Lugar l join l.horarios h where h.diaSemana= :diaSemana and(h.horaInicio<:horaActual and h.horaFin > :horaActual)")
-    List<Lugar> obtenerLugaresAbiertos(String diaSemana,String horaActual);
 
     @Query("select l from Lugar l join l.horarios h where h.diaSemana= :diaSemana and :horaActual between h.horaInicio and h.horaFin")
     List<Lugar> obtenerLugaresAbiertos2(String diaSemana,Date horaActual);
@@ -71,5 +69,12 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
 
     @Query("select new co.edu.uniquindio.proyecto.dto.LugarMayorCalificacionDTO(l, avg(c.calificacion)) from Lugar l join l.comentarios c where l.estado=true and l.ciudad.id =:idCiudad group by c.calificacion order by avg(c.calificacion) desc ")
     List<LugarMayorCalificacionDTO> obtenerLugarMayorCalificacion(Integer idCiudad);
+
+    @Query("select l from Lugar l join l.telefonos t where t.telefonoLugar = :telLugar")
+    Lugar obtenerLugarPorTelefono(String telLugar);
+
+
+    @Query("select count (l) from Lugar l  join l.comentarios c where c.calificacion  < 6 and l.id= :id")
+    long calcularCantComentarios(Integer id);
 
 }
