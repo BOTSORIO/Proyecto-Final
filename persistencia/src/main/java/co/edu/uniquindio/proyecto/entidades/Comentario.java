@@ -19,7 +19,7 @@ public class Comentario implements Serializable {
     @Column(name = "calificacion", nullable = false)
     private int calificacion;
 
-    @Column(name = "respuesta", nullable = false,length = 200)
+    @Column(name = "respuesta", nullable = true,length = 200)
     private String respuesta;
 
     @Temporal(TemporalType.DATE)

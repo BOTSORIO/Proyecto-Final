@@ -27,9 +27,10 @@ insert into comentario(calificacion,comentario,fecha_comentario,respuesta,lugar_
 insert into comentario(calificacion,comentario,fecha_comentario,respuesta,lugar_id,usuario_id)values (2,"Muy buen lugar","2021/01/04","Gracias por el aporte",1,"2");
 
 
-insert into horario(dia_semana,hora_fin,hora_inicio) values ("Lunes","22:00:00.000","10:00:00.000");
-insert into horario(dia_semana,hora_fin,hora_inicio) values ("Martes","20:00:00.000","09:00:00.000");
-insert into horario(dia_semana,hora_fin,hora_inicio) values ("Miercoles","19:00:00.000","08:00:00.000");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Lunes","22:00","10:00");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Lunes","22:00","10:03");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Martes","20:00","09:00");
+insert into horario(dia_semana,hora_fin,hora_inicio) values ("Miercoles","02:00","08:00");
 
 insert into lugar_horarios(lugares_id,horarios_id) values (1,1);
 insert into lugar_horarios(lugares_id,horarios_id) values (2,2);

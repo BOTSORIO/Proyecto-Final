@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @DataJpaTest
@@ -357,12 +360,12 @@ public class LugarTest {
     @Sql("classpath:lugares.sql")
     public void obtenerLugaresAbiertos() {
 
-        LocalTime horaActual =  LocalTime.now();
+        DateTimeFormatter sdf= DateTimeFormatter.ofPattern("HH:mm");
+        String horaActual = sdf.format(LocalTime.now());
 
         long cantidad = tipoRepo.obtenerLugaresAbiertos("Lunes", horaActual);
 
-            System.out.println(cantidad);
-
+        System.out.println("La cantidad de lugares abiertos es: "+cantidad);
     }
 
 
@@ -412,6 +415,19 @@ public class LugarTest {
         System.out.println("La calificacion promedio es: "+calificacion);
     }
 
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugarMayorCalificacionTest(){
+
+        List<LugarMayorCalificacionDTO>lugares=lugarRepo.obtenerLugarMayorCalificacion(1);
+
+        for(LugarMayorCalificacionDTO l:lugares){
+
+            System.out.println(l);
+        }
+    }
+
     @Test
     @Sql("classpath:lugares.sql")
     public void listarLugaresPublicadosTest(){
@@ -426,14 +442,20 @@ public class LugarTest {
 
     @Test
     @Sql("classpath:lugares.sql")
-    public void obtenerLugarMayorCalificacionTest(){
+    public void listarComentarariosLugarTest(){
 
-        List<LugarMayorCalificacionDTO>lugares=lugarRepo.obtenerLugarMayorCalificacion(1);
+        List<Comentario> lista = lugarRepo.obtenerComentariosLugarEspecifico2(1);
 
-        for(LugarMayorCalificacionDTO l:lugares){
+        System.out.println(lista);
+    }
 
-            System.out.println(l);
-        }
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void listarComentarariosNoRespondidosTest(){
+
+        List<Comentario> lista = lugarRepo.obtenerComentariosNoRespondidosPorUnaPersona("2");
+
+        System.out.println(lista);
     }
 
     @Test
@@ -459,4 +481,31 @@ public class LugarTest {
         long cantidad = ciudadRepo.obtenerLugaresAprobadosPorCiudad();
         System.out.println("La cantidad de lugares aprobados es:" + cantidad);
     }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresCreadosPorUsuario() {
+
+        List<Lugar> lugares = lugarRepo.obtenerLugaresPorUsuario("2");
+
+        for (Lugar l : lugares) {
+
+            System.out.println(l.getNombre());
+        }
+    }
+
+
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void obtenerLugaresCreadosTest() {
+
+        List<LugarUsuarioDTO> lugares = lugarRepo.obtenerLosLugaresConSuUsuario();
+
+        for (LugarUsuarioDTO l : lugares) {
+
+            System.out.println(l);
+        }
+    }
+
 }

@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalTime;
 import java.util.*;
 
 @Repository
@@ -67,7 +68,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select avg(c.calificacion) from Lugar l join l.comentarios c where l.id= :idLugar")
     float obtenerCalificacionPromedio(Integer idLugar);
 
-    @Query("select new co.edu.uniquindio.proyecto.dto.LugarMayorCalificacionDTO(l, avg(c.calificacion)) from Lugar l join l.comentarios c where l.estado=true and l.ciudad.id =:idCiudad group by c.calificacion order by avg(c.calificacion) desc ")
+    @Query("select new co.edu.uniquindio.proyecto.dto.LugarMayorCalificacionDTO(l, avg(c.calificacion)) from Lugar l join l.comentarios c where l.estado=true and l.ciudad.id =:idCiudad group by l.id order by avg(c.calificacion) desc ")
     List<LugarMayorCalificacionDTO> obtenerLugarMayorCalificacion(Integer idCiudad);
 
     @Query("select l from Lugar l join l.telefonos t where t.telefonoLugar = :telLugar")
@@ -76,5 +77,20 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
 
     @Query("select count (l) from Lugar l  join l.comentarios c where c.calificacion  < 6 and l.id= :id")
     long calcularCantComentarios(Integer id);
+
+    @Query("select l from Lugar l where l.usuario.id= :idUsuario")
+    List<Lugar> obtenerLugaresPorUsuario(String idUsuario);
+
+    @Query("select c from Comentario  c where c.lugar.id= :idLugar ")
+    List<Comentario> obtenerComentariosLugarEspecifico(int idLugar);
+
+    @Query("select c from Lugar l join l.comentarios c where l.id= :idLugar ")
+    List<Comentario> obtenerComentariosLugarEspecifico2(int idLugar);
+
+    @Query("select c from Lugar l join l.comentarios c where l.usuario.id= :idUsuario and c.respuesta is null")
+    List<Comentario> obtenerComentariosNoRespondidosPorUnaPersona(String idUsuario);
+
+    @Query("select new co.edu.uniquindio.proyecto.dto.LugarUsuarioDTO(l.nombre, u) from Usuario u left join u.lugares l")
+    List<LugarUsuarioDTO> obtenerLosLugaresConSuUsuario();
 
 }
