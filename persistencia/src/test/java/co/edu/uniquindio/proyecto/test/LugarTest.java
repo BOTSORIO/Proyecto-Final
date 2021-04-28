@@ -476,10 +476,10 @@ public class LugarTest {
 
     @Test
     @Sql("classpath:lugares.sql")
-    public void calcularCantLugaresAprovados(){
+    public void calcularCantLugaresNoAprovados(){
 
-        long cantidad = ciudadRepo.obtenerLugaresAprobadosPorCiudad();
-        System.out.println("La cantidad de lugares aprobados es:" + cantidad);
+        long cantidad = ciudadRepo.obtenerLugaresNoAprobadosPorCiudad();
+        System.out.println("La cantidad de lugares no aprobados es:" + cantidad);
     }
 
 

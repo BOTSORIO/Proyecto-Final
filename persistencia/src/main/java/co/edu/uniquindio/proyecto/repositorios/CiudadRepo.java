@@ -17,7 +17,7 @@ public interface CiudadRepo extends JpaRepository<Ciudad,Integer>{
     @Query("select c.nombre, u from Ciudad c left join c.usuarios u")
     List<Object[]> obtenerCiudadUsuarios();
 
-    @Query("select count(l) from Ciudad c join c.lugares l  where l.estado=true ")
-    long obtenerLugaresAprobadosPorCiudad();
+    @Query("select count(l) from Ciudad c join c.lugares l  where l.estado=false ")
+    long obtenerLugaresNoAprobadosPorCiudad();
 
 }
