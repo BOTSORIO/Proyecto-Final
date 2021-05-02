@@ -363,6 +363,8 @@ public class LugarTest {
         DateTimeFormatter sdf= DateTimeFormatter.ofPattern("HH:mm");
         String horaActual = sdf.format(LocalTime.now());
 
+        System.out.println(horaActual);
+
         long cantidad = tipoRepo.obtenerLugaresAbiertos("Lunes", horaActual);
 
         System.out.println("La cantidad de lugares abiertos es: "+cantidad);

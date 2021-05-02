@@ -31,6 +31,10 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     //and o or
     Usuario findByEmailOrNombre(String email,String nombre);
 
+    Optional<Usuario> findByNickname(String nickname);
+
+    Optional<Usuario> findByEmail(String email);
+
     List<Usuario> findByNombre(String nombre);
 
     @Query("select u.ciudad.nombre from Usuario u")
