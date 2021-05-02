@@ -6,10 +6,18 @@ import java.util.List;
 
 public interface UsuarioServicio {
 
-    Usuario registrarUsuario(Usuario u) throws Exception;
+    Usuario registroUsuario(Usuario u) throws Exception;
+
     Usuario actualizarUsuario(Usuario u) throws Exception;
+
+    void eliminarUsuario(String email) throws Exception;
+
     Usuario obtenerUsuario(String id) throws Exception;
-    void eliminarUsuario(Usuario u) throws Exception;
+
+    Usuario obtenerUsuarioEmail(String email) throws Exception;
+
     List<Usuario> listarUsuarios();
+
+    //Usuario iniciarSecion(String email,String password) throws Exception;
 
 }

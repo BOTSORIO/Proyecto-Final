@@ -80,7 +80,7 @@ public class ImagenTest {
     //================================= Metodo para obtener las imagenes =================================//
     @Test
     @Sql("classpath:imagenes.sql")
-    public void listarImagenes(){
+    public void listarImagenesTest(){
         List<Imagen> lista = imagenRepo.findAll();
         System.out.println(lista);
     }

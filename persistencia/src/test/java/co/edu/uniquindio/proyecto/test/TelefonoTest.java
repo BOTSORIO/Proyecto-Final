@@ -39,13 +39,9 @@ public class TelefonoTest {
 
     //================================= Metodo para eliminar un telefono =================================//
     @Test
-    @Sql("classpath:lugares.sql")
     public void eliminarTelefonoTest() {
 
-        Lugar lugarBuscado = lugarRepo.findById(1).orElse(null);
-
         Telefono  telefonoNuevo = new Telefono("3222842423");
-        telefonoNuevo.setLugar(lugarBuscado);
 
         telefonoRepo.save(telefonoNuevo);
 
@@ -58,13 +54,9 @@ public class TelefonoTest {
 
     //================================= Metodo para actualizar o modificar un telefono =================================//
     @Test
-    @Sql("classpath:lugares.sql")
     public void actualizarTelefonoTest(){
 
-        Lugar lugarBuscado = lugarRepo.findById(1).orElse(null);
-
         Telefono  telefonoNuevo = new Telefono("3222842423");
-        telefonoNuevo.setLugar(lugarBuscado);
 
         Telefono telefonoGuardado = telefonoRepo.save(telefonoNuevo);
 
@@ -79,7 +71,7 @@ public class TelefonoTest {
     //================================= Metodo para obtener los telefonos =================================//
     @Test
     @Sql("classpath:telefonos.sql")
-    public void listarTelefonos(){
+    public void listarTelefonosTest(){
 
         List<Telefono> lista = telefonoRepo.findAll();
         System.out.println(lista);

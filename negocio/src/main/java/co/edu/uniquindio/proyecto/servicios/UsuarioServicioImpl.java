@@ -1,15 +1,12 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class UsuarioServicioImpl implements  UsuarioServicio{
+public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
 
@@ -17,31 +14,45 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
         this.usuarioRepo = usuarioRepo;
     }
 
-    public boolean estaDisponible(String email){
-        Optional usuarioEmail= usuarioRepo.findByEmail(email);
 
-        return usuarioEmail.isEmpty();
+    public boolean estaDisponible(String email){
+        Optional<Usuario> usuarioEmail = usuarioRepo.findByEmail(email);
+
+        return  usuarioEmail.isPresent();
     }
 
+
     @Override
-    public Usuario registrarUsuario(Usuario u) throws Exception {
+    public Usuario registroUsuario(Usuario u) throws Exception {
 
-        Optional usuarioNick= usuarioRepo.findByNickname(u.getNickname());
+        if (u.getId().length()>10){
+            throw new Exception("La cedula solo puede tener 10 caracteres compa");
+        }
 
+        if (u.getNickname().length()>100){
+            throw new Exception("El nickname solo puede tener 100 caracteres compa");
+        }
+
+        if (u.getEmail().length()>100){
+            throw new Exception("El correo solo puede tener 100 caracteres compa");
+        }
+
+        if (u.getNombre().length()>100){
+            throw new Exception("El nombre solo puede tener 100 caracteres compa");
+        }
+
+        if (u.getPassword().length()>100){
+            throw new Exception("La contraseña solo puede tener 100 caracteres compa");
+        }
+
+        Optional<Usuario> usuarioNick=usuarioRepo.findByNickname(u.getNickname());
         if(usuarioNick.isPresent()){
-            throw new Exception("El nickname ya existe");
+            throw new Exception("El usuario ya existe");
         }
 
-        if(u.getNickname().length()>100){
-
-            throw new Exception("El nombre solo puede tener hasta 100 caracteres");
+        if(estaDisponible(u.getEmail())){
+            throw new Exception("El usuario ya existe");
         }
-
-        if(!estaDisponible(u.getEmail())){
-
-            throw new Exception("El correo ya existe");
-        }
-
 
         return usuarioRepo.save(u);
     }
@@ -49,10 +60,42 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
     @Override
     public Usuario actualizarUsuario(Usuario u) throws Exception {
 
-        //Agregar validaciones correspondientes
-        usuarioRepo.save(u);
 
-        return null;
+        if (u.getId().length()>10){
+            throw new Exception("La cedula solo puede tener 10 caracteres compa");
+        }
+
+        if (u.getNickname().length()>100){
+            throw new Exception("El nickname solo puede tener 100 caracteres compa");
+        }
+
+        if (u.getEmail().length()>100){
+            throw new Exception("El correo solo puede tener 100 caracteres compa");
+        }
+
+        if (u.getNombre().length()>100){
+            throw new Exception("El nombre solo puede tener 100 caracteres compa");
+        }
+
+        if (u.getPassword().length()>100){
+            throw new Exception("La contraseña solo puede tener 100 caracteres compa");
+        }
+
+        return usuarioRepo.save(u);
+    }
+
+
+    @Override
+    public void eliminarUsuario(String email) throws Exception {
+
+        Usuario usuarioEncontrado = obtenerUsuarioEmail(email);
+
+        if (usuarioEncontrado != null){
+            usuarioRepo.delete(usuarioEncontrado);
+        }else{
+            throw new Exception("Usuario no encontrado :c");
+        }
+
     }
 
     @Override
@@ -61,18 +104,23 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
         Optional<Usuario> usuario = usuarioRepo.findById(id);
 
         if(usuario.isEmpty()){
-
-            throw new Exception("No existe el usuario con el id dado");
+            throw new Exception("No existe un usuario con el id dado");
         }
 
         return usuario.get();
     }
 
-    @Override
-    public void eliminarUsuario(Usuario u) throws Exception {
 
-        //validar que el usuario si exista en la base de datos (con usuarioRepo.findById se puede)
-        usuarioRepo.delete(u);
+    @Override
+    public Usuario obtenerUsuarioEmail(String email) throws Exception {
+
+        Optional<Usuario> usuario = usuarioRepo.findByEmail(email);
+
+        if(usuario.isEmpty()){
+            throw new Exception("No existe un usuario con el correo dado");
+        }
+
+        return usuario.get();
     }
 
 
@@ -80,4 +128,18 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
     public List<Usuario> listarUsuarios() {
         return usuarioRepo.findAll();
     }
+
+    /*
+    @Override
+    public Usuario iniciarSecion(String email, String password) throws Exception {
+
+        Optional<Usuario> usuario = usuarioRepo.findByEmailAndPasswordS(email,password);
+
+        if(usuario.isEmpty()){
+            throw new Exception("No existe un usuario con estos datos por lo tanto no puede ingresar");
+        }
+
+        return usuario.get();
+    }
+     */
 }

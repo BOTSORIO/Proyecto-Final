@@ -14,6 +14,7 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     Usuario findByEmailAndPassword(String email, String password);
 
+
     //================================= REPOSITORIO DE USUARIO =================================//
 
     @Query("select u from Usuario u")

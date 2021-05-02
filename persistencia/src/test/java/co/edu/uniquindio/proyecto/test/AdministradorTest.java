@@ -82,7 +82,7 @@ public class AdministradorTest {
     //================================= Metodo para obtener los administradores =================================//
     @Test
     @Sql("classpath:administradores.sql")
-    public void listarAdministradores(){
+    public void listarAdministradoresTest(){
 
         List<Administrador> lista = administradorRepo.findAll();
         System.out.println(lista);

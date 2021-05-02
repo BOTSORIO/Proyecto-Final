@@ -124,6 +124,7 @@ public class Comentario implements Serializable {
     @Override
     public String toString() {
         return "\nComentario: " + getComentario() + "\nCalificacion: " + getCalificacion() +
-                "\nRespuesta: " + getRespuesta() + "\nFecha del comentario: " + getFechaComentario() ;
+                "\nRespuesta: " + getRespuesta() + "\nFecha del comentario: " + getFechaComentario() +
+                "\nLugar: "+ getLugar().getNombre()+"\nUsuario: "+getUsuario().getNombre()+"\n";
     }
 }

@@ -47,10 +47,10 @@ public class LugarTest {
                 Ciudad ciudad= new Ciudad("Medellin");
                 Tipo tipo= new Tipo("Deporte");
                 Usuario usuario= new Usuario("24584","Sandra","sandrita","21san","san@hotmail.com");
-                Horario horario= new Horario("lunes a viernes","10am","10pm");
+                Horario horario= new Horario("lunes a viernes","10:00","22:00");
                 Imagen imagen = new Imagen("addafada.dadada");
                 Telefono telefono = new Telefono("3116310037");
-                Favorito favorito = new Favorito("xd");
+               Favorito favorito = new Favorito("xd");
 
                 Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
                 lugarNuevo.setCiudad(ciudad);
@@ -70,7 +70,6 @@ public class LugarTest {
                 moderador.getLugares().add(lugarNuevo);
 
                 Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
-
                 Assertions.assertNotNull(lugarGuardado);
 
         } catch (ParseException e) {
@@ -139,7 +138,7 @@ public class LugarTest {
             Ciudad ciudad= new Ciudad("Medellin");
             Tipo tipo= new Tipo("Deporte");
             Usuario usuario= new Usuario("24584","Sandra","sandrita","21san","san@hotmail.com");
-            Horario horario= new Horario("lunes a viernes","10am","10pm");
+            Horario horario= new Horario("lunes a viernes","10:00","22:00");
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
             Favorito favorito = new Favorito("xd");
@@ -168,8 +167,6 @@ public class LugarTest {
 
             Lugar lugarBuscado= lugarRepo.findById(1).orElse(null);
 
-            System.out.println(lugarBuscado.toString());
-
             Assertions.assertEquals("Bienvenidos",lugarBuscado.getDescripcion());
 
         } catch (ParseException e) {
@@ -180,7 +177,7 @@ public class LugarTest {
     //================================= Metodo para obtener los lugares =================================//
     @Test
     @Sql("classpath:lugares.sql")
-    public void listarLugares(){
+    public void listarLugaresTest(){
 
         List<Lugar> lista = lugarRepo.findAll();
         System.out.println(lista);

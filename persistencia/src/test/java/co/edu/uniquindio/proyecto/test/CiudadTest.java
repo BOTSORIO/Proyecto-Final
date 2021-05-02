@@ -65,7 +65,7 @@ public class CiudadTest {
     //================================= Metodo para obtener las ciudades =================================//
     @Test
     @Sql("classpath:ciudades.sql")
-    public void listarCiudades(){
+    public void listarCiudadesTest(){
 
         List<Ciudad> lista = ciudadRepo.findAll();
         System.out.println(lista);

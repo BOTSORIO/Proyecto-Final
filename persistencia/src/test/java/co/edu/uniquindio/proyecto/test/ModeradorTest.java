@@ -87,7 +87,7 @@ public class ModeradorTest {
     //================================= Metodo para obtener los moderadores =================================//
     @Test
     @Sql("classpath:moderadores.sql")
-    public void listarModeradores(){
+    public void listarModeradoresTest(){
 
         List<Moderador> lista = moderadorRepo.findAll();
         System.out.println(lista);

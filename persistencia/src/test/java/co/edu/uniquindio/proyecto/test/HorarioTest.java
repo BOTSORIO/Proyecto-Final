@@ -22,7 +22,7 @@ public class HorarioTest {
     @Test
     public void registrarHorarioTest(){
 
-        Horario horarioNuevo = new Horario("lunes a viernes","10am","10pm");
+        Horario horarioNuevo = new Horario("lunes a viernes","10:00","22:00");
 
         Horario horarioGuardado = horarioRepo.save(horarioNuevo);
 
@@ -35,7 +35,7 @@ public class HorarioTest {
     @Test
     public void eliminarHorarioTest(){
 
-        Horario horarioNuevo = new Horario("lunes a viernes","10am","10pm");
+        Horario horarioNuevo = new Horario("lunes a viernes","10:00","22:00");
 
         horarioRepo.save(horarioNuevo);
         horarioRepo.delete(horarioNuevo);
@@ -49,24 +49,24 @@ public class HorarioTest {
     @Test
     public void actualizarHorarioTest(){
 
-        Horario horarioNuevo =new Horario("lunes a viernes","10am","10pm");
+        Horario horarioNuevo =new Horario("lunes a viernes","10:00","22:00");
 
         Horario horarioGuardado = horarioRepo.save(horarioNuevo);
 
-        horarioGuardado.setHoraFin("11pm");
+        horarioGuardado.setHoraFin("23:00");
         horarioRepo.save(horarioGuardado);
 
         Horario horarioBuscado= horarioRepo.findById(1).orElse(null);
 
         System.out.println(horarioBuscado.toString());
 
-        Assertions.assertEquals("11pm",horarioBuscado.getHoraFin());
+        Assertions.assertEquals("23:00",horarioBuscado.getHoraFin());
     }
 
     //================================= Metodo para obtener los horarios =================================//
     @Test
     @Sql("classpath:horarios.sql")
-    public void listarHorarios(){
+    public void listarHorariosTest(){
 
         List<Horario> lista = horarioRepo.findAll();
         System.out.println(lista);

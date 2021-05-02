@@ -93,7 +93,7 @@ public class FavoritoTest {
     //================================= Metodo para obtener los favoritos =================================//
     @Test
     @Sql("classpath:favoritos.sql")
-    public void listarFavoritos(){
+    public void listarFavoritosTest(){
 
         List<Favorito> lista = favoritoRepo.findAll();
         System.out.println(lista);

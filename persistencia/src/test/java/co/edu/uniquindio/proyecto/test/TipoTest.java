@@ -64,7 +64,7 @@ public class TipoTest {
     //================================= Metodo para obtener los tipos =================================//
     @Test
     @Sql("classpath:tipos.sql")
-    public void listarTipos(){
+    public void listarTiposTest(){
 
         List<Tipo> lista = tipoRepo.findAll();
         System.out.println(lista);

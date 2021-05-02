@@ -48,7 +48,7 @@ public class Moderador extends Persona implements Serializable {
     //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
-        return "\nId :"+getId()+"\nNombre :"+ getNombre()+"\nNickname :"+getNickname()+"\nPassword"
-        +getPassword()+"\nEmail :"+getEmail()+"\n";
+        return "\nId: "+getId()+"\nNombre: "+ getNombre()+"\nNickname: "+getNickname()+"\nPassword: "
+        +getPassword()+"\nEmail: "+getEmail()+"\n\nAdministrador: " + getAdministrador().getNombre() +"\n";
     }
 }

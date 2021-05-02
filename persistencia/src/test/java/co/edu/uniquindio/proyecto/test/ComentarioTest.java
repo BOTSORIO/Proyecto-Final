@@ -43,8 +43,6 @@ public class ComentarioTest {
 
             Comentario comentarioGuardado = comentarioRepo.save(comentarioNuevo);
 
-            System.out.println(comentarioGuardado.toString());
-
             Assertions.assertNotNull(comentarioGuardado);
 
         } catch (ParseException e) {
@@ -54,21 +52,17 @@ public class ComentarioTest {
 
     //================================= Metodo para eliminar un comentario =================================//
     @Test
-    @Sql("classpath:lugares.sql")
-    @Sql("classpath:usuarios.sql")
     public void eliminarComentarioTest() {
 
         try {
-            Usuario usuarioBuscado = usuarioRepo.findById("1245").orElse(null);
-            Lugar lugarBuscado = lugarRepo.findById(1).orElse(null);
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaCreacion = sdf.parse("2021/01/04");
 
             Comentario comentarioNuevo = new Comentario("Cool xd", 10, "Ya sabemos :v", fechaCreacion);
-            comentarioNuevo.setUsuario(usuarioBuscado);
-            comentarioNuevo.setLugar(lugarBuscado);
 
             comentarioRepo.save(comentarioNuevo);
+
             comentarioRepo.delete(comentarioNuevo);
 
             Comentario comentarioBorrado= comentarioRepo.findById(1).orElse(null);
@@ -82,28 +76,21 @@ public class ComentarioTest {
 
     //================================= Metodo para actualizar o modificar un comentario =================================//
     @Test
-    @Sql("classpath:lugares.sql")
-    @Sql("classpath:usuarios.sql")
     public void actualizarComentarioTest() {
 
         try {
-            Usuario usuarioBuscado = usuarioRepo.findById("1245").orElse(null);
-            Lugar lugarBuscado = lugarRepo.findById(1).orElse(null);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaCreacion = sdf.parse("2021/01/04");
 
             Comentario comentarioNuevo = new Comentario("Cool xd", 10, "Ya sabemos :v", fechaCreacion);
-            comentarioNuevo.setUsuario(usuarioBuscado);
-            comentarioNuevo.setLugar(lugarBuscado);
 
             Comentario comentarioGuardado = comentarioRepo.save(comentarioNuevo);
 
             comentarioGuardado.setComentario("Ya no es cool");
             comentarioRepo.save(comentarioGuardado);
 
-            Comentario comentarioBuscado= comentarioRepo.findById(1).orElse(null);
+            Comentario comentarioBuscado = comentarioRepo.findById(1).orElse(null);
 
-            System.out.println(comentarioBuscado.toString());
 
             Assertions.assertEquals("Ya no es cool",comentarioBuscado.getComentario());
 
@@ -115,7 +102,7 @@ public class ComentarioTest {
     //================================= Metodo para obtener los comentarios =================================//
     @Test
     @Sql("classpath:comentarios.sql")
-    public void listarComentarios(){
+    public void listarComentariosTest(){
         List<Comentario> lista = comentarioRepo.findAll();
         System.out.println(lista);
     }

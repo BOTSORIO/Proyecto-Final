@@ -1,5 +1,6 @@
 insert into ciudad(nombre) values ("Calarcá");
 insert into tipo(nombre) values ("Baile");
+
 insert into administrador(id,email,nickname,nombre,password)values("10","braian@yahoo.com","Ghostbit","Braian","123braian");
 insert into moderador(id,email,nickname,nombre,password,administrador_id) values ("16","melissa@hotmail.com","Lekoon","Melissa","meli123","10");
 insert into usuario(id,email,nickname,nombre,password,ciudad_id) values ("25","sebas@gmail","Botsorio","Sebastian","sebas123",1);

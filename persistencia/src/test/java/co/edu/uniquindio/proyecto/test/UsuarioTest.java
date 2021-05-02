@@ -90,7 +90,7 @@ public class UsuarioTest {
     //================================= Metodo para obtener los usuarios =================================//
     @Test
     @Sql("classpath:usuarios.sql")
-    public void listarUsuarios(){
+    public void listarUsuariosTest(){
 
         List<Usuario> lista = usuarioRepo.findAll();
         System.out.println(lista);
@@ -100,7 +100,7 @@ public class UsuarioTest {
     //================================= Metodo para validar un inicio de secion =================================//
     @Test
     @Sql("classpath:usuarios.sql")
-    public void iniciarSeccionTest(){
+    public void iniciarSecionTest(){
         Usuario usuarioNuevo = usuarioRepo.findByEmailAndPassword("f@gmail.com","fer123") ;
 
         Assertions.assertNotNull(usuarioNuevo);
