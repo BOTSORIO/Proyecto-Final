@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UsuarioServicio {
 
-    Usuario registroUsuario(Usuario u) throws Exception;
+    Usuario registrarUsuario(Usuario u) throws Exception;
 
     Usuario actualizarUsuario(Usuario u) throws Exception;
 

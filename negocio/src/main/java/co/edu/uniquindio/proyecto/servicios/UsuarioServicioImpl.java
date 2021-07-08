@@ -23,7 +23,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public Usuario registroUsuario(Usuario u) throws Exception {
+    public Usuario registrarUsuario(Usuario u) throws Exception {
 
         if (u.getId().length()>10){
             throw new Exception("La cedula solo puede tener 10 caracteres compa");

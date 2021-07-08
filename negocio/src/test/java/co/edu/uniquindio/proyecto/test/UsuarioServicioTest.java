@@ -30,7 +30,7 @@ public class UsuarioServicioTest {
 
             Usuario usuarioNuevo= new Usuario("567","Nelson","nequi","nequi123","nequi@gmail.com");
             usuarioNuevo.setCiudad(ciudad);
-            Usuario usuarioRegistrado= usuarioServicio.registroUsuario(usuarioNuevo);
+            Usuario usuarioRegistrado= usuarioServicio.registrarUsuario(usuarioNuevo);
 
             System.out.println(usuarioRegistrado);
 
