@@ -25,6 +25,10 @@ public class LugarServicioImpl implements LugarServicio {
             throw new Exception("El nombre excede el maximo de caracteres");
         }
 
+        l.setEstado(false);
+        l.setFechaAprobacion(new Date());
+        l.setFechaCreacion(new Date());
+
         return lugarRepo.save(l);
     }
 
@@ -69,5 +73,10 @@ public class LugarServicioImpl implements LugarServicio {
     @Override
     public List<Lugar> listarLugares() {
         return lugarRepo.findAll();
+    }
+
+    @Override
+    public List<Lugar> buscarLugares(String nombre) {
+        return lugarRepo.buscarLugares(nombre);
     }
 }

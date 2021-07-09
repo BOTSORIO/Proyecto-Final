@@ -17,6 +17,9 @@
 
   <h:form>
     <h:panelGrid columns="2" cellpadding="5">
+      <p:outputLabel for="cedula_usuario" value="Cedula:" />
+      <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" />
+
       <p:outputLabel for="nombre_usuario" value="Nombre:" />
       <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" />
 
@@ -27,7 +30,7 @@
       <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" />
 
       <p:outputLabel for="contrasenia_usuario" value="Contraseña:" />
-      <p:inputText id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" />
+      <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" toggleMask="true" redisplay="true"/>
 
     </h:panelGrid>
     <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form" />

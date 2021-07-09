@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Crear nuevo lugar</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <p:outputLabel for ="nombre_lugar" value="Nombre:" />
+            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}"/>
+
+            <p:outputLabel for ="latitud_lugar" value="Latitud:" />
+            <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}"/>
+
+            <p:outputLabel for ="longitud_lugar" value="Longitud:" />
+            <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}"/>
+
+            <p:outputLabel for ="descripcion_lugar" value="Descripcion:" />
+            <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"/>
+
+        </h:panelGrid>
+        <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear nuevo lugar" update="@form"/>
+        <p:growl showDetail="true"/>
+    </h:form>
+</h:body>
+</html>

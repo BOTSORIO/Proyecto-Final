@@ -15,8 +15,29 @@
 </h:head>
 
 <h:body>
-    <h1>Hola Mundo</h1>
-    <h1>#{inicioBean.mensaje}</h1>
+
+    <div id="header">
+        <div id="menu">
+            <ul>
+                <li><h:link value="Registrarse" outcome="registrarUsuario.xhtml"/></li>
+                <li><h:link value="Crear lugar" outcome="crearLugar.xhtml"/></li>
+            </ul>
+
+        </div>
+        <div id="busqueda">
+            <h:form>
+                <div class="input-search ui-inputgroup">
+                    <p:inputText placeholder="¿Qué lugar está buscando?" required="true" value="#{busquedaBean.busqueda}" />
+                    <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
+                </div>
+            </h:form>
+        </div>
+        <div id="sesion"></div>
+    </div>
+
+    <div id="mapa">
+        <p>Aqui va el mapa</p>
+    </div>
 </h:body>
 
 </html>

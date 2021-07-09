@@ -16,4 +16,5 @@ public interface LugarServicio {
 
     List<Lugar> listarLugares();
 
+    List<Lugar> buscarLugares(String nombre);
 }

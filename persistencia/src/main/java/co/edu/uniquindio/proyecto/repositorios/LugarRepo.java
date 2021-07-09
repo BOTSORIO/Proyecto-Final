@@ -93,4 +93,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select new co.edu.uniquindio.proyecto.dto.LugarUsuarioDTO(l.nombre, u) from Usuario u left join u.lugares l")
     List<LugarUsuarioDTO> obtenerLosLugaresConSuUsuario();
 
+    //Lugares que estan aprobados
+    @Query("select l from Lugar l where l.nombre like concat('%',:nombre, '%') ")
+    List<Lugar> buscarLugares(String nombre);
 }
