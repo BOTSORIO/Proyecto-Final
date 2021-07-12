@@ -18,23 +18,32 @@
   <h:form>
     <h:panelGrid columns="2" cellpadding="5">
       <p:outputLabel for="cedula_usuario" value="Cedula:" />
-      <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" />
+      <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" style="width: 200px" />
 
       <p:outputLabel for="nombre_usuario" value="Nombre:" />
-      <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" />
+      <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 200px" />
 
       <p:outputLabel for="nickName_usuario" value="Nickname:" />
-      <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" />
+      <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 200px" />
 
       <p:outputLabel for="email_usuario" value="Email:" />
-      <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" />
+      <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 200px" />
 
       <p:outputLabel for="contrasenia_usuario" value="Contraseña:" />
-      <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" toggleMask="true" redisplay="true"/>
+      <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" toggleMask="true" redisplay="true" style="width: 200px"/>
+      
+    </h:panelGrid>
+    <p:separator/>
+
+    <h:panelGrid id="Botones" columns="2" width="250">
+
+      <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form" style="width: 100px"/>
+
+      <p:commandButton action="index.xhtml" value="Volver" update="@form" style="width: 100px"/>
+      <p:growl showDetail="true" />
 
     </h:panelGrid>
-    <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form" />
-    <p:growl showDetail="true" />
+
   </h:form>
 </h:body>
 </html>

@@ -40,7 +40,7 @@ public class LugarBean implements Serializable {
         try {
 
             lugar.setCiudad(ciudadServicio.obtenerCiudad(1));
-            lugar.setUsuario(usuarioServicio.obtenerUsuario("123"));
+            lugar.setUsuario(usuarioServicio.obtenerUsuario("1193409775"));
             lugar.setTipo(tipoServicio.obtenerTipo(1));
 
             lugarServicio.registrarLugar(lugar);

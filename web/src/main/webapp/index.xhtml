@@ -18,26 +18,52 @@
 
     <div id="header">
         <div id="menu">
-            <ul>
-                <li><h:link value="Registrarse" outcome="registrarUsuario.xhtml"/></li>
-                <li><h:link value="Crear lugar" outcome="crearLugar.xhtml"/></li>
-            </ul>
+            <p:menubar>
 
+                <p:menuitem value="Inicio" outcome="index.xhtml" icon="pi pi-fw pi-home"/>
+
+                <p:submenu label="Usuarios" icon="pi pi-fw pi-users">
+                    <p:menuitem value="Registrar" outcome="registrarUsuario.xhtml" icon="pi pi-fw pi-user-plus"/>
+                </p:submenu>
+
+                <p:submenu label="Lugares" icon="pi pi-fw pi-map-marker">
+                    <p:menuitem value="Crear lugar" outcome="crearLugar.xhtml" icon="pi pi-fw pi-plus-circle"/>
+                </p:submenu>
+
+                <p:divider layout="vertical"/>
+
+                <f:facet name="options">
+                    <h:form>
+                        <div class="input-search ui-inputgroup">
+                            <p:inputText placeholder="¿Qué lugar está buscando?" required="true" value="#{busquedaBean.busqueda}" style="width: 220px"/>
+                            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
+                        </div>
+                    </h:form>
+                </f:facet>
+            </p:menubar>
         </div>
-        <div id="busqueda">
-            <h:form>
-                <div class="input-search ui-inputgroup">
-                    <p:inputText placeholder="¿Qué lugar está buscando?" required="true" value="#{busquedaBean.busqueda}" />
-                    <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
-                </div>
-            </h:form>
+
+        <div id="mapa">
+           <h4>Aqui va el mapa</h4>
         </div>
+
+        <div class="card">
+            <h5>MP4</h5>
+            <p:video value="https://www.w3schools.com/html/mov_bbb.mp4"
+                     player="mp4"
+                     controls="true"
+                     width="600"
+                     height="400"
+                     onplay="console.log('MP4 Started Playing')"
+                     onpause="console.log('MP4 Stopped Playing')">
+                Your browser does not support the video element.
+                See: <h:outputLink value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
+            </p:video>
+        </div>
+
         <div id="sesion"></div>
     </div>
 
-    <div id="mapa">
-        <p>Aqui va el mapa</p>
-    </div>
 </h:body>
 
 </html>

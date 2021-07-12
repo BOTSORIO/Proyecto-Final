@@ -18,20 +18,27 @@
         <h:panelGrid columns="2" cellpadding="5">
 
             <p:outputLabel for ="nombre_lugar" value="Nombre:" />
-            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}"/>
+            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 200px"/>
 
             <p:outputLabel for ="latitud_lugar" value="Latitud:" />
-            <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}"/>
+            <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" style="width: 200px"/>
 
             <p:outputLabel for ="longitud_lugar" value="Longitud:" />
-            <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}"/>
+            <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}" style="width: 200px"/>
 
             <p:outputLabel for ="descripcion_lugar" value="Descripcion:" />
-            <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"/>
+            <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 200px"/>
 
         </h:panelGrid>
-        <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear nuevo lugar" update="@form"/>
-        <p:growl showDetail="true"/>
+
+        <h:panelGrid id="Botones" columns="2" width="250">
+
+            <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear" update="@form" style="width: 100px"/>
+
+            <p:commandButton action="index.xhtml" value="Volver" update="@form" style="width: 100px"/>
+            <p:growl showDetail="true" />
+
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>
