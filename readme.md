@@ -67,3 +67,4 @@ Se debe poder compartir lugares en Facebook y twitter.
 
 
 ## Diagrama Entidad-Relación
+![Screenshot](diagrama.jpg)
