@@ -11,11 +11,11 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css" />
-    <h:outputStylesheet library="css" name="mapbox-gl.css" />
-    <h:outputStylesheet library="css" name="style.css" />
-    <h:outputScript library="js" name="bootstrap.bundle.min.js" />
-    <h:outputScript library="js" name="mapbox-gl.js" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+    <h:outputScript library="js" name="mapbox-gl.js"/>
     <title>Unilocal</title>
 </h:head>
 <h:body>
@@ -24,7 +24,8 @@
         <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor02">
@@ -41,29 +42,40 @@
                     </ul>
                     <div class="d-flex">
                         <h:form class="d-flex me-2">
-                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
-                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar" action="#{busquedaBean.buscar}"  />
+                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?"
+                                         value="#{busquedaBean.busqueda}"/>
+                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
+                                             action="#{busquedaBean.buscar}"/>
                         </h:form>
-                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login" action="#{busquedaBean.buscar}"  />
+                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
+                                         action="#{busquedaBean.buscar}"/>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
 
-    <div id="content"  >
-        <div id="mapa" >
-            <div id='map' ></div>
+    <div id="content">
+        <div id="mapa">
+            <div id='map'></div>
             <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
                 var map = new mapboxgl.Map({
                     container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11'
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [-75.66, 4.52],
+                    zoom: 12
                 });
+                map.addControl(new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                }));
             </script>
         </div>
         <div class="container">
-            <div class="" >
+            <div class="">
                 <div>
                     <h2>Categorías</h2>
                 </div>
@@ -71,7 +83,7 @@
                     <p>Lista categorías</p>
                 </div>
             </div>
-            <div class="" >
+            <div class="">
                 <div>
                     <h2>Lugares más populares</h2>
                 </div>
@@ -84,8 +96,8 @@
 
     <div class="footer">
         <div class="py-4 bg-light" align="center">
-            <div class="justify-content-center" >
-                <div class="col-10" >
+            <div class="justify-content-center">
+                <div class="col-10">
                     <span>Universidad del Quindío - Programación avanzada - 2021</span>
                 </div>
             </div>

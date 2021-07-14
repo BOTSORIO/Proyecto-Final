@@ -9,87 +9,91 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
 <h:head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <h:outputStylesheet library="css" name="bootstrap.min.css" />
-  <h:outputStylesheet library="css" name="style.css" />
-  <h:outputScript library="js" name="bootstrap.bundle.min.js" />
-  <title>Registro</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+    <title>Registro</title>
 </h:head>
 <h:body>
 
-  <div id="header">
-    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor02">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="registrarUsuario.xhtml">Registrarse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <h:form class="d-flex me-2">
-              <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
-              <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar" action="#{busquedaBean.buscar}"  />
-            </h:form>
-            <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login" action="#{busquedaBean.buscar}"  />
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-
-  <h:form>
-    <h:panelGrid columns="2" cellpadding="5">
-      <p:outputLabel for="cedula_usuario" value="Cedula:" />
-      <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" style="width: 200px" />
-
-      <p:outputLabel for="nombre_usuario" value="Nombre:" />
-      <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 200px" />
-
-      <p:outputLabel for="nickName_usuario" value="Nickname:" />
-      <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 200px" />
-
-      <p:outputLabel for="email_usuario" value="Email:" />
-      <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 200px" />
-
-      <p:outputLabel for="contrasenia_usuario" value="Contraseña:" />
-      <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" toggleMask="true" redisplay="true" style="width: 200px"/>
-      
-    </h:panelGrid>
-    <p:separator/>
-
-    <h:panelGrid id="Botones" columns="2" width="250">
-
-      <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form" style="width: 100px"/>
-
-      <p:commandButton action="index.xhtml" value="Volver" update="@form" style="width: 100px"/>
-      <p:growl showDetail="true" />
-
-    </h:panelGrid>
-
-  </h:form>
-
-  <div class="footer">
-    <div class="py-4 bg-light" align="center">
-      <div class="justify-content-center" >
-        <div class="col-10" >
-          <span>Universidad del Quindío - Programación avanzada - 2021</span>
-        </div>
-      </div>
+    <div id="header">
+        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="registrarUsuario.xhtml">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <h:form class="d-flex me-2">
+                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?"
+                                         value="#{busquedaBean.busqueda}"/>
+                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
+                                             action="#{busquedaBean.buscar}"/>
+                        </h:form>
+                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
+                                         action="#{busquedaBean.buscar}"/>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-  </div>
+
+
+    <p:card style="width: 35%; margin-left: 35%; margin-top: 2%; margin-bottom: 2%">
+        <f:facet name="title">
+            ¡Regístrese!
+        </f:facet>
+
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5" width="100%">
+                <p:outputLabel for="cedula_usuario" value="Cedula:"/>
+                <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id} " style="width: 100%"/>
+
+                <p:outputLabel for="nombre_usuario" value="Nombre:"/>
+                <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%"/>
+
+                <p:outputLabel for="nickName_usuario" value="Nickname:"/>
+                <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"/>
+
+                <p:outputLabel for="email_usuario" value="Email:"/>
+                <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"/>
+
+                <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
+                <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" toggleMask="true"
+                            redisplay="true" style="width: 100%"/>
+
+            </h:panelGrid>
+            <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form"
+                             style="width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 2%"/>
+            <p:growl showDetail="true"/>
+        </h:form>
+
+    </p:card>
+
+    <div class="footer">
+        <div class="py-4 bg-light" align="center">
+            <div class="justify-content-center">
+                <div class="col-10">
+                    <span>Universidad del Quindío - Programación avanzada - 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </h:body>
