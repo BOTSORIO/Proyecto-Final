@@ -11,59 +11,86 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mi primera pagina jsf</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="mapbox-gl.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+    <h:outputScript library="js" name="mapbox-gl.js" />
+    <title>Unilocal</title>
 </h:head>
-
 <h:body>
 
     <div id="header">
-        <div id="menu">
-            <p:menubar>
+        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registrarUsuario.xhtml">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <h:form class="d-flex me-2">
+                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
+                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar" action="#{busquedaBean.buscar}"  />
+                        </h:form>
+                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login" action="#{busquedaBean.buscar}"  />
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-                <p:menuitem value="Inicio" outcome="index.xhtml" icon="pi pi-fw pi-home"/>
-
-                <p:submenu label="Usuarios" icon="pi pi-fw pi-users">
-                    <p:menuitem value="Registrar" outcome="registrarUsuario.xhtml" icon="pi pi-fw pi-user-plus"/>
-                </p:submenu>
-
-                <p:submenu label="Lugares" icon="pi pi-fw pi-map-marker">
-                    <p:menuitem value="Crear lugar" outcome="crearLugar.xhtml" icon="pi pi-fw pi-plus-circle"/>
-                </p:submenu>
-
-                <p:divider layout="vertical"/>
-
-                <f:facet name="options">
-                    <h:form>
-                        <div class="input-search ui-inputgroup">
-                            <p:inputText placeholder="¿Qué lugar está buscando?" required="true" value="#{busquedaBean.busqueda}" style="width: 220px"/>
-                            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
-                        </div>
-                    </h:form>
-                </f:facet>
-            </p:menubar>
+    <div id="content"  >
+        <div id="mapa" >
+            <div id='map' ></div>
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11'
+                });
+            </script>
         </div>
-
-        <div id="mapa">
-           <h4>Aqui va el mapa</h4>
+        <div class="container">
+            <div class="" >
+                <div>
+                    <h2>Categorías</h2>
+                </div>
+                <div>
+                    <p>Lista categorías</p>
+                </div>
+            </div>
+            <div class="" >
+                <div>
+                    <h2>Lugares más populares</h2>
+                </div>
+                <div>
+                    <p>Lista de lugares</p>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="card">
-            <h5>MP4</h5>
-            <p:video value="https://www.w3schools.com/html/mov_bbb.mp4"
-                     player="mp4"
-                     controls="true"
-                     width="600"
-                     height="400"
-                     onplay="console.log('MP4 Started Playing')"
-                     onpause="console.log('MP4 Stopped Playing')">
-                Your browser does not support the video element.
-                See: <h:outputLink value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
-            </p:video>
+    <div class="footer">
+        <div class="py-4 bg-light" align="center">
+            <div class="justify-content-center" >
+                <div class="col-10" >
+                    <span>Universidad del Quindío - Programación avanzada - 2021</span>
+                </div>
+            </div>
         </div>
-
-        <div id="sesion"></div>
     </div>
 
 </h:body>
-
 </html>
