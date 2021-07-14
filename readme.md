@@ -5,6 +5,8 @@ Este proyeto representa el codigo que desarrollamos para dar solucion al proyect
 
 #### Sebastian Quintero Osorio - Braian Camilo Piedrahita - Melissa Ortiz Perez - Fernando José Murcia
 
+## Descripción del proyecto:
+
 uniLocal es una plataforma que incentiva el comercio y la gastronomía regional, donde se busca apoyar a los pequeños comerciantes. En dicha plataforma los usuarios podrán buscar lugares como: restaurantes, cafeterías, comidas rápidas, museos y hoteles que sean de interés y que se encuentren a una distancia razonable del usuario. Para esto, se debe hacer uso de un mapa en donde se deben mostrar todos los lugares y se debe contar con un buscador para poder filtrar lugares según lo que el usuario esté buscando. Cada lugar debe tener imágenes (al menos una), una descripción, un nombre, horario, teléfonos, categoría, comentarios y calificaciones. Solo los usuarios registrados pueden comentar y calificar lugares, del usuario se requiere su nombre, nickname, email, contraseña y ciudad de residencia para crear una cuenta.
 
 Los lugares que aparecen en la plataforma son creados por los mismos usuarios, un usuario debe tener una cuenta activa para poder crear un lugar, al momento de crear el lugar se debe mostrar un mapa para que el usuario lo ubique. La plataforma debe contar con uno o varios moderadores que se encarguen de verificar que los lugares publicados sean reales y que no incumplan las normas de uso.
