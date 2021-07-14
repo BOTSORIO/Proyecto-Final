@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +14,7 @@ public class Imagen implements Serializable {
     private int id;
 
     @Column(name = "url",length = 100,nullable = false)
+    @NotBlank
     private String url;
 
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//

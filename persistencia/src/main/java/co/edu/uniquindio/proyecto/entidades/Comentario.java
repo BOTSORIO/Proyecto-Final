@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.*;
 
@@ -14,12 +17,18 @@ public class Comentario implements Serializable {
     private int id;
 
     @Column(name = "comentario", nullable = false,length = 200)
+    @NotBlank
+    @Size(max = 200, message = "El comentario no puede superar los 200 caracteres")
     private String comentario;
 
     @Column(name = "calificacion", nullable = false)
+    @NotBlank
+    @Positive
     private int calificacion;
 
     @Column(name = "respuesta", nullable = true,length = 200)
+    @NotBlank
+    @Size(max = 200, message = "La respuesta no puede superar los 200 caracteres")
     private String respuesta;
 
     @Temporal(TemporalType.DATE)

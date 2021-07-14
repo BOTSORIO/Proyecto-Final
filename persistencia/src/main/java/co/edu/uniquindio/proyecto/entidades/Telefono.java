@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +15,8 @@ public class Telefono implements Serializable {
     private int id;
 
     @Column(name = "telefono_lugar",length = 12,nullable = false)
+    @NotBlank
+    @Size(max = 12, message = "El numero de telefono no puede superar los 12 digitos")
     private String telefonoLugar;
 
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//

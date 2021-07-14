@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 //================================= RELACION DE HERENCIA =================================//
@@ -11,18 +14,29 @@ public class Persona implements Serializable {
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @Column(name = "id", length = 10)
+    @NotBlank
+    @Size(max = 10, message = "El id no puede superar los 10 digitos")
     private String id;
 
     @Column(name = "nombre",length = 100,nullable = false)
+    @NotBlank
+    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String nombre;
 
     @Column(name = "nickname",length = 100,nullable = false,unique = true)
+    @NotBlank
+    @Size(max = 100, message = "El nickname no puede superar los 100 caracteres")
     private String nickname;
 
     @Column(name = "password",length = 100,nullable = false)
+    @NotBlank
+    @Size(max = 100, message = "La contraseña no puede superar los 100 caracteres")
     private String password;
 
     @Column(name = "email",length = 100,nullable = false,unique = true)
+    @NotBlank
+    @Email
+    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String email;
 
     //================================= CONSTRUCTOR  =================================//

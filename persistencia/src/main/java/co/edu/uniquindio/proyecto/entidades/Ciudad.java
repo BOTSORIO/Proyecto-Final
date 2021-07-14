@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +14,12 @@ public class Ciudad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
+    @NotBlank
     private int id;
 
     @Column(name = "nombre",length = 100,nullable = false)
+    @NotBlank
+    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String nombre;
 
     //================================= RELACION CON LA ENTIDAD USUARIO =================================//

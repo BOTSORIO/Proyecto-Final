@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.*;
 import java.util.*;
 
@@ -11,12 +13,17 @@ public class Lugar implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
+    @NotBlank
     private int id;
 
     @Column(name = "nombre",length =100, nullable = false)
+    @NotBlank
+    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String nombre;
 
     @Column(name = "descripcion",length =200, nullable = false)
+    @NotBlank
+    @Size(max = 200, message = "La descripcion no puede superar los 200 caracteres")
     private String descripcion;
 
     @Temporal(TemporalType.DATE)
@@ -28,12 +35,15 @@ public class Lugar implements Serializable {
     private Date fechaAprobacion;
 
     @Column(name = "latitud", nullable = false)
+    @NotBlank
     private float latitud;
 
     @Column(name = "longitud", nullable = false)
+    @NotBlank
     private float longitud;
 
     @Column(name = "estado", nullable = false)
+    @NotBlank
     private Boolean estado;
 
     //================================= RELACION CON LA ENTIDAD MODERADOR =================================//

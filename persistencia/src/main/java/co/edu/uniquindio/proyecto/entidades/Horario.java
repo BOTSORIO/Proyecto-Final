@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +17,16 @@ public class Horario implements Serializable {
     private int id;
 
     @Column(name = "diaSemana",length =100,nullable = false)
+    @NotBlank
+    @Positive
     private String diaSemana;
 
     @Column(name = "horaInicio",length =100,nullable = false)
+    @NotBlank
     private String horaInicio;
 
     @Column(name = "horaFin",length =100,nullable = false)
+    @NotBlank
     private String horaFin;
 
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//
