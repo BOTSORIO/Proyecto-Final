@@ -3,10 +3,7 @@ Este proyeto representa el codigo que desarrollamos para dar solucion al proyect
 
 ## Los integrantes del grupo son:
 
-Sebastian Quintero Osorio 
-Braian Camilo Piedrahita 
-Melissa Ortiz Perez
-Fernando José Murcia
+#### Sebastian Quintero Osorio - Braian Camilo Piedrahita - Melissa Ortiz Perez - Fernando José Murcia
 
 uniLocal es una plataforma que incentiva el comercio y la gastronomía regional, donde se busca apoyar a los pequeños comerciantes. En dicha plataforma los usuarios podrán buscar lugares como: restaurantes, cafeterías, comidas rápidas, museos y hoteles que sean de interés y que se encuentren a una distancia razonable del usuario. Para esto, se debe hacer uso de un mapa en donde se deben mostrar todos los lugares y se debe contar con un buscador para poder filtrar lugares según lo que el usuario esté buscando. Cada lugar debe tener imágenes (al menos una), una descripción, un nombre, horario, teléfonos, categoría, comentarios y calificaciones. Solo los usuarios registrados pueden comentar y calificar lugares, del usuario se requiere su nombre, nickname, email, contraseña y ciudad de residencia para crear una cuenta.
 
