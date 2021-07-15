@@ -29,7 +29,7 @@ public class ComentarioServicioTest {
             Usuario usuario= new Usuario("0655","Jose","kuro","kuro123","k@gmail.com");
             Lugar lugar = new Lugar("no je","xd",fechaCreacion,fechaCreacion,12,12,true);
 
-            Comentario comentarioNuevo= new Comentario("hola",1,"bai",fechaCreacion);
+            Comentario comentarioNuevo= new Comentario("hola",1,lugar,usuario);
             comentarioNuevo.setLugar(lugar);
             comentarioNuevo.setUsuario(usuario);
 

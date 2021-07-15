@@ -9,21 +9,17 @@ import java.util.*;
 public class LugarServicioImpl implements LugarServicio {
 
     private final LugarRepo lugarRepo;
+    private final ComentarioRepo comentarioRepo;
 
-    public LugarServicioImpl(LugarRepo lugarRepo) {
+
+    public LugarServicioImpl(LugarRepo lugarRepo, ComentarioRepo comentarioRepo) {
         this.lugarRepo = lugarRepo;
+        this.comentarioRepo = comentarioRepo;
     }
 
     @Override
     public Lugar registrarLugar(Lugar l) throws Exception {
 
-        if(l.getDescripcion().length() > 200){
-            throw new Exception("La descripcion excede el maximo de caracteres");
-        }
-
-        if(l.getNombre().length() > 100){
-            throw new Exception("El nombre excede el maximo de caracteres");
-        }
 
         l.setEstado(false);
         l.setFechaAprobacion(new Date());
@@ -79,4 +75,27 @@ public class LugarServicioImpl implements LugarServicio {
     public List<Lugar> buscarLugares(String nombre) {
         return lugarRepo.buscarLugares(nombre);
     }
+
+    @Override
+    public List<Comentario> listarComentarios(Integer idLugar) {
+        return lugarRepo.obtenerComentariosLugarEspecifico(idLugar);
+    }
+
+    @Override
+    public List<Horario> listarHorarios(Integer idLugar) {
+        return lugarRepo.obtenerHorariosLugarEspecifico(idLugar);
+    }
+
+
+    @Override
+    public void registrarComentario(Comentario c) throws Exception {
+
+        try{
+            c.setFechaComentario(new Date());
+            comentarioRepo.save(c);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }

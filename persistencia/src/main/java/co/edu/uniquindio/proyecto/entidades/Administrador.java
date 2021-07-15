@@ -1,11 +1,18 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Administrador extends Persona implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
@@ -13,22 +20,9 @@ public class Administrador extends Persona implements Serializable {
     private List<Moderador> moderadores;
 
     //================================= CONSTRUCTOR  =================================//
-    public Administrador() {
-        super();
-        moderadores = new ArrayList<Moderador>();
-    }
-
     public Administrador(String id, String nombre, String nickname, String password, String email) {
         super(id, nombre, nickname, password, email);
-    }
-
-    //================================= SETS Y GETS =================================//
-    public List<Moderador> getModeradores() {
-        return moderadores;
-    }
-
-    public void setModeradores(List<Moderador> moderadores) {
-        this.moderadores = moderadores;
+        moderadores = new ArrayList<Moderador>();
     }
 
 

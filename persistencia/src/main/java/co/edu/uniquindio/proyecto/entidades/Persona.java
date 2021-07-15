@@ -1,7 +1,11 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -9,104 +13,40 @@ import java.io.Serializable;
 //================================= RELACION DE HERENCIA =================================//
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Persona implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @Column(name = "id", length = 10)
-    @NotBlank
-    @Size(max = 10, message = "El id no puede superar los 10 digitos")
+    @Size(max = 10,message = "El valor ingresado excede los 10 caracteres")
+    @EqualsAndHashCode.Include
     private String id;
 
     @Column(name = "nombre",length = 100,nullable = false)
     @NotBlank
-    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
+    @Size(max = 100,message = "El valor ingresado excede los 100 caracteres")
     private String nombre;
 
     @Column(name = "nickname",length = 100,nullable = false,unique = true)
-    @NotBlank
-    @Size(max = 100, message = "El nickname no puede superar los 100 caracteres")
     private String nickname;
 
     @Column(name = "password",length = 100,nullable = false)
-    @NotBlank
-    @Size(max = 100, message = "La contraseña no puede superar los 100 caracteres")
     private String password;
 
     @Column(name = "email",length = 100,nullable = false,unique = true)
-    @NotBlank
-    @Email
-    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String email;
 
     //================================= CONSTRUCTOR  =================================//
-    public Persona() {
-        super();
-    }
-
     public Persona(String id, String nombre, String nickname, String password, String email) {
         this.id = id;
         this.nombre = nombre;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
-    }
-
-    //================================= SETS Y GETS =================================//
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    //================================= EQUALS Y HASHCODE =================================//
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Persona persona = (Persona) o;
-
-        return id != null ? id.equals(persona.id) : persona.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
     }
 
 

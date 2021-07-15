@@ -61,27 +61,39 @@
             ¡Regístrese su lugar!
         </f:facet>
         <h:form>
-            <h:panelGrid columns="3" cellpadding="5" width="100%">
+            <h:panelGrid columns="2" cellpadding="5" width="100%">
 
                 <p:outputLabel for="nombre_lugar" value="Nombre:"/>
                 <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%" required="true"
                              requiredMessage="El nombre de usuario es obligatorio"/>
-                <p:message for="nombre_lugar"/>
+
+                <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
+                <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudad}" converter="#{ciudadConverter}"
+                                 redisplay="true" style="width: 100%" required="true"
+                                 requiredMessage="Ups! olvidaste seleccionar la ciudad">
+                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="tipo_lugar" value="Tipo:"/>
+                <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipo}" converter="#{tipoConverter}"
+                                 redisplay="true" style="width: 100%" required="true"
+                                 requiredMessage="Ups! olvidaste seleccionar un tipo">
+                    <f:selectItem itemLabel="Seleccione un tipo para el lugar" noSelectionOption="true"/>
+                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
+                </p:selectOneMenu>
 
                 <p:outputLabel for="latitud_lugar" value="Latitud:"/>
                 <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" style="width: 100%" required="true"
                              requiredMessage="La latitud es obligatoria"/>
-                <p:message for="latitud_lugar"/>
 
                 <p:outputLabel for="longitud_lugar" value="Longitud:"/>
                 <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}" style="width: 100%" required="true"
                              requiredMessage="La latitud es obligatoria"/>
-                <p:message for="longitud_lugar"/>
 
                 <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
                 <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 100%"
                                  required="true" requiredMessage="La descripcion es obligatoria"/>
-                <p:message for="descripcion_lugar"/>
 
 
             </h:panelGrid>

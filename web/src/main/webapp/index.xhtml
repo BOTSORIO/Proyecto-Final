@@ -88,7 +88,39 @@
                     <h2>Lugares más populares</h2>
                 </div>
                 <div>
-                    <p>Lista de lugares</p>
+                    <h:form id="form">
+                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large">
+
+                            <p:dataViewGridItem>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="" class="card-img-top" alt="..." />
+                                    <div class="card-body">
+                                        <h5 class="card-title">#{lugar.nombre}</h5>
+                                        <p class="card-text">#{lugar.descripcion}</p>
+                                        <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                    </div>
+                                </div>
+                            </p:dataViewGridItem>
+
+                            <p:dataViewListItem>
+                                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                    <p:graphicImage  styleClass="imagen-lugar" />
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Nombre:" />
+                                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
+                                            <h:outputText value="Tipo:" />
+                                            <h:outputText value="#{lugar.tipo.nombre}" />
+                                            <h:outputText value="Descripción:" />
+                                            <h:outputText value="#{lugar.descripcion}" />
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
+                                </h:panelGrid>
+                            </p:dataViewListItem>
+
+                        </p:dataView>
+                    </h:form>
                 </div>
             </div>
         </div>

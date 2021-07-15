@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -7,23 +9,27 @@ import java.io.*;
 import java.util.*;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Lugar implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
-    @NotBlank
+    @EqualsAndHashCode.Include
     private int id;
 
     @Column(name = "nombre",length =100, nullable = false)
     @NotBlank
-    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
+    @Size(max = 100)
     private String nombre;
 
     @Column(name = "descripcion",length =200, nullable = false)
     @NotBlank
-    @Size(max = 200, message = "La descripcion no puede superar los 200 caracteres")
+    @Size(max = 200)
     private String descripcion;
 
     @Temporal(TemporalType.DATE)
@@ -35,15 +41,12 @@ public class Lugar implements Serializable {
     private Date fechaAprobacion;
 
     @Column(name = "latitud", nullable = false)
-    @NotBlank
     private float latitud;
 
     @Column(name = "longitud", nullable = false)
-    @NotBlank
     private float longitud;
 
     @Column(name = "estado", nullable = false)
-    @NotBlank
     private Boolean estado;
 
     //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
@@ -83,15 +86,7 @@ public class Lugar implements Serializable {
     private List<Horario> horarios;
 
     //================================= CONSTRUCTOR  =================================//
-    public Lugar() {
-        super();
-        horarios=new ArrayList<>();
-        telefonos= new ArrayList<>();
-        imagenes = new ArrayList<>();
-        favoritos = new ArrayList<>();
-        comentarios = new ArrayList<>();
-    }
-
+    @Builder
     public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud, Boolean estado) {
 
         this.nombre = nombre;
@@ -101,166 +96,28 @@ public class Lugar implements Serializable {
         this.latitud = latitud;
         this.longitud = longitud;
         this.estado = estado;
-        horarios=new ArrayList<>();
-        telefonos= new ArrayList<>();
-        imagenes = new ArrayList<>();
-        favoritos = new ArrayList<>();
-        comentarios = new ArrayList<>();
+        this.horarios=new ArrayList<>();
+        this.telefonos= new ArrayList<>();
+        this.imagenes = new ArrayList<>();
+        this.favoritos = new ArrayList<>();
+        this.comentarios = new ArrayList<>();
     }
 
+    @Builder
+    public Lugar(String nombre1, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud,Ciudad ciudad,Usuario usuarioCreador,List<Imagen>imagenes,List<Horario>horarios,Tipo tipo) {
 
-    //================================= SETS Y GETS =================================//
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
+        this.nombre = nombre1;
         this.descripcion = descripcion;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaAprobacion() {
-        return fechaAprobacion;
-    }
-
-    public void setFechaAprobacion(Date fechaAprobacion) {
         this.fechaAprobacion = fechaAprobacion;
-    }
-
-    public float getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(float latitud) {
         this.latitud = latitud;
-    }
-
-    public float getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(float longitud) {
         this.longitud = longitud;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    public Moderador getModerador() {
-        return moderador;
-    }
-
-    public void setModerador(Moderador moderador) {
-        this.moderador = moderador;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Ciudad getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
-    }
-
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(List<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(List<Imagen> imagenes) {
-        this.imagenes = imagenes;
-    }
-
-    public List<Telefono> getTelefonos() {
-        return telefonos;
-    }
-
-    public void setTelefonos(List<Telefono> telefonos) {
-        this.telefonos = telefonos;
-    }
-
-    public List<Horario> getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
-    }
+        this.imagenes = imagenes;
+        this.usuario  = usuarioCreador;
+        this.tipo = tipo;
 
-    public List<Favorito> getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(List<Favorito> favoritos) {
-        this.favoritos = favoritos;
-    }
-
-
-    //================================= EQUALS Y HASHCODE =================================//
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Lugar lugar = (Lugar) o;
-
-        return id == lugar.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
     }
 
 

@@ -142,14 +142,14 @@ public class LugarTest {
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
             Favorito favorito = new Favorito("xd");
-            Comentario comentario = new Comentario("hola",10,"uwu",fechaCreacion);
+
 
             Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
             lugarNuevo.setCiudad(ciudad);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);
             lugarNuevo.setTipo(tipo);
-            lugarNuevo.getComentarios().add(comentario);
+
 
             lugarNuevo.getImagenes().add(imagen);
             lugarNuevo.getHorarios().add(horario);
@@ -443,7 +443,7 @@ public class LugarTest {
     @Sql("classpath:lugares.sql")
     public void listarComentarariosLugarTest(){
 
-        List<Comentario> lista = lugarRepo.obtenerComentariosLugarEspecifico2(1);
+        List<Comentario> lista = lugarRepo.obtenerComentariosLugarEspecifico(1);
 
         System.out.println(lista);
     }

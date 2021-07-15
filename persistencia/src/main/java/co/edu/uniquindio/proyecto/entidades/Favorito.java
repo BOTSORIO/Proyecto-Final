@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.*;
 
 @Entity
@@ -11,11 +10,9 @@ public class Favorito implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
-    @NotBlank
     private int id;
 
     @Column(name = "aporte",nullable = false)
-    @NotBlank
     private String aporte;
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//
     @ManyToOne

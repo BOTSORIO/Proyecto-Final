@@ -3,6 +3,8 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,16 +19,13 @@ public class ComentarioServicioImpl implements ComentarioServicio{
 
     @Override
     public Comentario registrarComentario(Comentario c) throws Exception {
+       try {
+           c.setFechaComentario(new Date());
+           return comentarioRepo.save(c);
+       }catch (Exception e){
+           throw new Exception(e.getMessage());
+       }
 
-        if(c.getComentario().length() > 200){
-            throw  new Exception("No se pueden exceder los 200 caracteres");
-        }
-
-        if(c.getRespuesta().length() > 200){
-            throw  new Exception("No se pueden exceder los 200 caracteres");
-        }
-
-        return comentarioRepo.save(c);
     }
 
     @Override
