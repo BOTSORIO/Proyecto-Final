@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Component
 @RequestScope
-public class UsuarioBean implements Serializable{
+public class UsuarioBean implements Serializable {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
@@ -22,14 +22,14 @@ public class UsuarioBean implements Serializable{
     private Usuario usuario;
 
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         usuario = new Usuario();
     }
 
-    public void registrarUsuario(){
+    public void registrarUsuario() {
         try {
             usuarioServicio.registrarUsuario(usuario);
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta","Registro exitoso");
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! te registramos correctamente");
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
         } catch (Exception e) {

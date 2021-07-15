@@ -4,22 +4,28 @@
     background: none;
 }
 
-#header .btn-buscar.ui-state-hover{
+#header .btn-buscar.ui-state-hover {
     color: black;
     background: white;
 }
 
-.input-search{
+.input-search {
     width: 250px;
 }
 
-#map{
+#map {
     width: 100%;
     height: 600px;
 }
 
 @media only screen and (max-width: 768px) {
-    .input-search{
+    .input-search {
         width: 100%;
     }
+
+    .ui-card {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+
 }

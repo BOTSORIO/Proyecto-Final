@@ -16,7 +16,7 @@
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <title>Registro</title>
 </h:head>
-<h:body>
+<h:body style="background-image: url('resources/img/fondo.jpg')">
 
     <div id="header">
         <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
@@ -53,41 +53,45 @@
         </nav>
     </div>
 
-
-    <p:card style="width: 35%; margin-left: 35%; margin-top: 2%; margin-bottom: 2%">
+    <p:card styleClass="card"
+            style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
         <f:facet name="title">
             ¡Regístrese!
         </f:facet>
 
+        <p>Hola! en el siguiente formulario puedes indicarnos tus datos para poder registrarte y poder disfrutar de todo lo que te ofrecemos.</p>
+
         <h:form>
-            <h:panelGrid columns="3" cellpadding="5" width="100%">
+            <h:panelGrid columns="2" cellpadding="5" width="100%">
                 <p:outputLabel for="cedula_usuario" value="Cedula:"/>
-                <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id} " style="width: 100%" required="true" requiredMessage="El id es obligatorio"/>
-                <p:message for="cedula_usuario"/>
+                <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id} " style="width: 100%"
+                             required="true"
+                             requiredMessage="Ups! olvidaste el id"/>
 
                 <p:outputLabel for="nombre_usuario" value="Nombre:"/>
-                <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%" required="true" requiredMessage="El nombre de usuario es obligatorio"/>
-                <p:message for="nombre_usuario"/>
+                <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%"
+                             required="true" requiredMessage="Ups! olvidaste el nombre de usuario"/>
+
 
                 <p:outputLabel for="nickName_usuario" value="Nickname:"/>
-                <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%" required="true" requiredMessage="El nickname es obligario"/>
-                <p:message for="nickName_usuario"/>
+                <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"
+                             required="true" requiredMessage="Ups! olvidaste el nickname"/>
 
                 <p:outputLabel for="email_usuario" value="Email:"/>
-                <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%" required="true" requiredMessage="El email es obligario"/>
-                <p:message for="email_usuario"/>
+                <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                             required="true"
+                             requiredMessage="Ups! olvidaste el email"/>
 
                 <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
-                <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" toggleMask="true"
-                            redisplay="true" style="width: 100%" required="true"  requiredMessage="La contraseña es obligaria"/>
-                <p:message for="contrasenia_usuario"/>
+                <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}"
+                            redisplay="true" style="width: 100%" required="true"
+                            requiredMessage="Ups! olvidaste la contraseña"/>
 
             </h:panelGrid>
             <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form"
                              style="width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 2%"/>
-            <p:growl for="mensajePersonalizado" showDetail="true"/>
+            <p:growl showDetail="true"/>
         </h:form>
-
     </p:card>
 
     <div class="footer">

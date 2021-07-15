@@ -18,7 +18,7 @@
     <h:outputScript library="js" name="mapbox-gl.js"/>
     <title>Crear nuevo lugar</title>
 </h:head>
-<h:body>
+<h:body style="background-image: url('resources/img/fondo.jpg')">
 
     <div id="header">
         <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
@@ -55,7 +55,8 @@
         </nav>
     </div>
 
-    <p:card style="min-width: 35%; margin-left: 35%; margin-right: 35%; margin-top: 2%; margin-bottom: 2%">
+    <p:card styleClass="card"
+            style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
         <f:facet name="title">
             ¡Regístrese su lugar!
         </f:facet>
@@ -63,21 +64,24 @@
             <h:panelGrid columns="3" cellpadding="5" width="100%">
 
                 <p:outputLabel for="nombre_lugar" value="Nombre:"/>
-                <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%"  required="true" requiredMessage="El nombre de usuario es obligatorio"/>
+                <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%" required="true"
+                             requiredMessage="El nombre de usuario es obligatorio"/>
                 <p:message for="nombre_lugar"/>
 
                 <p:outputLabel for="latitud_lugar" value="Latitud:"/>
-                <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" style="width: 100%"  required="true"  requiredMessage="La latitud es obligatoria"/>
+                <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" style="width: 100%" required="true"
+                             requiredMessage="La latitud es obligatoria"/>
                 <p:message for="latitud_lugar"/>
 
                 <p:outputLabel for="longitud_lugar" value="Longitud:"/>
-                <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}" style="width: 100%" required="true"  requiredMessage="La latitud es obligatoria"/>
+                <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}" style="width: 100%" required="true"
+                             requiredMessage="La latitud es obligatoria"/>
                 <p:message for="longitud_lugar"/>
 
                 <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
-                <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 100%" required="true"  requiredMessage="La descripcion es obligatoria"/>
+                <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 100%"
+                                 required="true" requiredMessage="La descripcion es obligatoria"/>
                 <p:message for="descripcion_lugar"/>
-
 
 
             </h:panelGrid>
