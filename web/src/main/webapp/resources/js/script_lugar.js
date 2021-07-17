@@ -10,6 +10,7 @@ window.onload = function (){
         zoom: 4.5
     });
 
+    //Añade un control de geolocalizacion al mapa en la ventana de la creacion del lugar
     map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
             enableHighAccuracy:true
@@ -17,8 +18,10 @@ window.onload = function (){
         trackUserLocation: true
     }));
 
+    //Añade varios controles al mapa
     map.addControl(new mapboxgl.NavigationControl());
 
+    //Nos ubica en la localizacion actual en el mapa
     map.on("load", function (e){
         if ("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(position => {
@@ -30,6 +33,7 @@ window.onload = function (){
         }
     })
 
+    //Obtiene la latitud y longitud para mandarlo al xhtml
     map.on("click", function (e) {
         if (enable) {
             setLtnLng(e.lngLat.lat,e.lngLat.lng)
@@ -49,6 +53,7 @@ window.onload = function (){
 
 }
 
+//Asigna la longitud y la latitud en el xhtml para ser usados en el bean
 function setLtnLng(lat, lng){
     document.getElementById("crear-lugar:lat-lugar").value  = lat
     document.getElementById("crear-lugar:long-lugar").value = lng

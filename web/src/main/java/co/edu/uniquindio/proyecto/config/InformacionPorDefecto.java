@@ -67,13 +67,15 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
         if (lugarServicio.listarLugares().isEmpty()){
 
+            //Los arrayList vacios que se mandan en el contructor son las imagenes y los horarios
+
             Lugar lugar1 = new Lugar("El castillo","Lugar bonito",new Date(),new Date(),
-                            1.2222F,1.3334F,ciudadServicio.obtenerCiudad(2),
+                    4.52009964502443F,-75.7124921956696F,ciudadServicio.obtenerCiudad(2),
                             usuarioServicio.obtenerUsuario("1193409775"),new ArrayList<>(),
                             new ArrayList<>(),tipoServicio.obtenerTipo(2));
 
             Lugar lugar2 = new Lugar("Selva negra","Cafe central",new Date(),new Date(),
-                    1.432222F,1.213334F,ciudadServicio.obtenerCiudad(2),
+                    4.543038953770576F,-75.68641861978931F,ciudadServicio.obtenerCiudad(2),
                     usuarioServicio.obtenerUsuario("1193409775"),new ArrayList<>(),
                     new ArrayList<>(),tipoServicio.obtenerTipo(3));
 
@@ -81,18 +83,20 @@ public class InformacionPorDefecto implements CommandLineRunner {
             lugarServicio.registrarLugar(lugar2);
         }
 
+        if(comentarioServicio.listarComentarios().isEmpty()){
 
-        /*Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
-                                .calificacion(4).lugar(lugarServicio.obtenerLugar(10))
-                                .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
+            Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
+                    .calificacion(4).lugar(lugarServicio.obtenerLugar(4))
+                    .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
 
-        Comentario comentario2= Comentario.builder().comentario("Que buen lugar")
-                                .calificacion(4).lugar(lugarServicio.obtenerLugar(11))
-                                .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
+            Comentario comentario2= Comentario.builder().comentario("Que buen lugar")
+                    .calificacion(4).lugar(lugarServicio.obtenerLugar(5))
+                    .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
 
-        lugarServicio.registrarComentario(comentario1);
-        lugarServicio.registrarComentario(comentario2);
-         */
+            lugarServicio.registrarComentario(comentario1);
+            lugarServicio.registrarComentario(comentario2);
+
+        }
 
     }
 }

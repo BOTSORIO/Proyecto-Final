@@ -16,6 +16,7 @@
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputScript library="js" name="mapbox-gl.js"/>
+    <h:outputScript library="js" name="script-home.js"/>
     <title>Unilocal</title>
 </h:head>
 <h:body>
@@ -58,21 +59,6 @@
     <div id="content">
         <div id="mapa">
             <div id='map'></div>
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [-75.66, 4.52],
-                    zoom: 12
-                });
-                map.addControl(new mapboxgl.GeolocateControl({
-                    positionOptions: {
-                        enableHighAccuracy: true
-                    },
-                    trackUserLocation: true
-                }));
-            </script>
         </div>
         <div class="container">
             <div class="">
@@ -93,7 +79,7 @@
 
                             <p:dataViewGridItem>
                                 <div class="card" style="width: 18rem;">
-                                    <img src="" class="card-img-top" alt="..." />
+                                    <!--<img src="" class="card-img-top" alt="..." />-->
                                     <div class="card-body">
                                         <h5 class="card-title">#{lugar.nombre}</h5>
                                         <p class="card-text">#{lugar.descripcion}</p>
