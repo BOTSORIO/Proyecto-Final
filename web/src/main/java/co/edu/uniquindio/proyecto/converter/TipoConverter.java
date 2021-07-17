@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.converter;
 
 import co.edu.uniquindio.proyecto.entidades.Tipo;
-import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import co.edu.uniquindio.proyecto.servicios.TipoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,8 @@ public class TipoConverter implements Converter<Tipo>, Serializable {
     public Tipo getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
 
         try{
-            if (s!=null && "".equals(s)){
+            if (s!=null && !"".equals(s)){
+
                 int id= Integer.parseInt(s);
                 return tipoServicio.obtenerTipo(id);
             }

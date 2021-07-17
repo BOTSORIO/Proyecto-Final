@@ -30,7 +30,6 @@ public class CiudadConverter implements Converter<Ciudad>, Serializable {
             e.printStackTrace();
         }
 
-
         return null;
     }
 

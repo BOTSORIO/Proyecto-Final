@@ -98,11 +98,18 @@
                             requiredMessage="Ups! olvidaste la contraseña"/>
 
             </h:panelGrid>
-            <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Registrar" update="@form"
+            <p:commandButton action="#{usuarioBean.registrarUsuario}" onclick="PF('dlg').show()" value="Registrar" update="@form"
                              style="width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 2%"/>
             <p:growl showDetail="true"/>
         </h:form>
     </p:card>
+
+    <p:dialog header="Aviso" widgetVar="dlg" minHeight="30" width="300" showEffect="fade" >
+        <p class="p-n-0" style="font-family: 'Britannic Bold'">¡Registro exitoso!</p>
+        <f:facet name="footer">
+            <a class="nav-link" href="index.xhtml" style="round-clip: true">Aceptar</a>
+        </f:facet>
+    </p:dialog>
 
     <div class="footer">
         <div class="py-4 bg-light" align="center">

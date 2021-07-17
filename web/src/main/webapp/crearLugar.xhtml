@@ -16,6 +16,7 @@
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputScript library="js" name="mapbox-gl.js"/>
+    <h:outputScript library="js" name="script_lugar.js"/>
     <title>Crear nuevo lugar</title>
 </h:head>
 <h:body style="background-image: url('resources/img/fondo.jpg')">
@@ -55,60 +56,51 @@
         </nav>
     </div>
 
-    <p:card styleClass="card"
-            style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
-        <f:facet name="title">
-            ¡Regístrese su lugar!
-        </f:facet>
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="5" width="100%">
+    <h:form id="crear-lugar">
 
-                <p:outputLabel for="nombre_lugar" value="Nombre:"/>
-                <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%" required="true"
-                             requiredMessage="El nombre de usuario es obligatorio"/>
+        <div id="mapa" style="width: 400px;height:400px"></div>
+        <h:inputHidden id="lat-lugar"  value="#{lugarBean.lugar.latitud}"/>
+        <h:inputHidden id="long-lugar" value="#{lugarBean.lugar.longitud}"/>
 
-                <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
-                <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudad}" converter="#{ciudadConverter}"
-                                 redisplay="true" style="width: 100%" required="true"
-                                 requiredMessage="Ups! olvidaste seleccionar la ciudad">
-                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
-                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
-                </p:selectOneMenu>
+        <p:card styleClass="card"
+                style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
+            <f:facet name="title">
+                ¡Regístrese su lugar!
+            </f:facet>
 
-                <p:outputLabel for="tipo_lugar" value="Tipo:"/>
-                <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipo}" converter="#{tipoConverter}"
-                                 redisplay="true" style="width: 100%" required="true"
-                                 requiredMessage="Ups! olvidaste seleccionar un tipo">
-                    <f:selectItem itemLabel="Seleccione un tipo para el lugar" noSelectionOption="true"/>
-                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
-                </p:selectOneMenu>
+                <h:panelGrid columns="2" cellpadding="5" width="100%">
 
-                <p:outputLabel for="latitud_lugar" value="Latitud:"/>
-                <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" style="width: 100%" required="true"
-                             requiredMessage="La latitud es obligatoria"/>
+                    <p:outputLabel for="nombre_lugar" value="Nombre:"/>
+                    <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%" required="true"
+                                 requiredMessage="El nombre de usuario es obligatorio"/>
 
-                <p:outputLabel for="longitud_lugar" value="Longitud:"/>
-                <p:inputText id="longitud_lugar" value="#{lugarBean.lugar.longitud}" style="width: 100%" required="true"
-                             requiredMessage="La latitud es obligatoria"/>
+                    <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
+                    <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudad}" converter="#{ciudadConverter}"
+                                     redisplay="true" style="width: 100%" required="true"
+                                     requiredMessage="Ups! olvidaste seleccionar la ciudad">
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
+                    </p:selectOneMenu>
 
-                <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
-                <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 100%"
-                                 required="true" requiredMessage="La descripcion es obligatoria"/>
+                    <p:outputLabel for="tipo_lugar" value="Tipo:"/>
+                    <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipo}" converter="#{tipoConverter}"
+                                     style="width: 100%" required="true"
+                                     requiredMessage="Ups! olvidaste seleccionar un tipo">
+                        <f:selectItem itemLabel="Seleccione un tipo para el lugar" noSelectionOption="true"/>
+                        <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
+                    </p:selectOneMenu>
 
+                    <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
+                    <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 100%"
+                                     required="true" requiredMessage="La descripcion es obligatoria"/>
 
-            </h:panelGrid>
-
-            <h:panelGrid id="Botones" columns="2" width="100%" style="margin-top: 2%">
-
+                </h:panelGrid>
                 <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear" update="@form"
-                                 style="width: 100%"/>
-                <p:commandButton action="index.xhtml" value="Volver" update="@form" style="width: 100%"/>
+                                     style="width: 50%"/>
                 <p:growl showDetail="true"/>
-            </h:panelGrid>
 
-        </h:form>
-
-    </p:card>
+        </p:card>
+    </h:form>
 
 
     <div class="footer">

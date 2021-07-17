@@ -10,16 +10,17 @@ import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
+
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Component
-@RequestScope
+@ViewScoped
 public class LugarBean implements Serializable {
 
     private final LugarServicio lugarServicio;
@@ -54,22 +55,23 @@ public class LugarBean implements Serializable {
     public String registrarLugar(){
 
         try {
+            if(lugar.getLatitud()!=0 && lugar.getLongitud()!=0){
 
-            lugar.setCiudad(ciudadServicio.obtenerCiudad(2));
-            lugar.setUsuario(usuarioServicio.obtenerUsuario("1193409775"));
-            lugar.setTipo(tipoServicio.obtenerTipo(1));
+                lugar.setUsuario(usuarioServicio.obtenerUsuario("1193409775"));
 
-            lugarServicio.registrarLugar(lugar);
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                lugarServicio.registrarLugar(lugar);
 
-            //return "lugarCreado?faces-redirect=true";
-
+                return "lugarCreado?faces-redirect=true";
+                //FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
+                //FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }else{
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario ubicar el lugar dentro del mapa");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
         }catch (Exception e){
 
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_INFO,"Alerta",e.getMessage());
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null,msg);
-
         }
 
         return null;

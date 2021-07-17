@@ -82,7 +82,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
         }
 
 
-        Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
+        /*Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
                                 .calificacion(4).lugar(lugarServicio.obtenerLugar(10))
                                 .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
 
@@ -92,6 +92,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
         lugarServicio.registrarComentario(comentario1);
         lugarServicio.registrarComentario(comentario2);
+         */
 
     }
 }
