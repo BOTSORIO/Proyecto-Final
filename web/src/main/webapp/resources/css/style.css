@@ -28,4 +28,17 @@
         margin-right: 5% !important;
     }
 
+    .row {
+        display: list-item;
+    }
+
+    .tarjeta {
+        width: 90% !important;
+    }
+
+    .mapa {
+        margin: 3% 10% 10% 10%;
+        width: 100%;
+    }
+
 }

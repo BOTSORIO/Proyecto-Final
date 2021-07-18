@@ -66,47 +66,35 @@
         </nav>
     </div>
 
-    <div id="content">
-        <div id="mapa">
-            <div id='map' style="visibility: hidden"></div>
-        </div>
-        <div class="container">
-            <div class="">
-                <div>
-                    <h2>Categorías</h2>
-                </div>
-                <div>
-                    <p>Lista categorías</p>
-                </div>
-            </div>
-            <div class="">
-                <div>
-                    <h2>Lugares más populares</h2>
-                </div>
-                <div>
-                    <h:form id="form">
-                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true"
-                                    gridIcon="pi pi-th-large">
 
-                            <p:dataViewGridItem>
-                                <div class="card" style="width: 18rem;">
-                                    <!--<img src="" class="card-img-top" alt="..." />-->
-                                    <div class="card-body">
-                                        <h5 class="card-title">#{lugar.nombre}</h5>
-                                        <p class="card-text">#{lugar.descripcion}</p>
-                                        <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
-                                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
-                                                         iconPos="right"/>
-                                    </div>
-                                </div>
-                            </p:dataViewGridItem>
+    <p:card styleClass="card"
+            style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
+        <f:facet name="title">
+            Lamentamos que te vayas
+        </f:facet>
 
-                        </p:dataView>
-                    </h:form>
-                </div>
-            </div>
-        </div>
-    </div>
+        <p>Por favor ingresa tu email para eliminar tu cuenta.</p>
+
+        <h:form>
+            <p:outputLabel for="email_usuario" value="Email:"/>
+            <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                         required="true"
+                         requiredMessage="Ups! olvidaste el email"/>
+            <h:panelGrid id="Botones" columns="2" width="100%">
+
+                <p:commandButton action="#{usuarioBean.eliminarUsuario}" value="Eliminar"
+                                 update="@form"
+                                 style="width: 100px; margin-left: 40%; margin-top: 5%"/>
+
+                <p:button href="index.xhtml" value="Volver" style="width: 100px; margin-left: 20%; margin-top: 5%"/>
+
+                <p:growl showDetail="true"/>
+
+            </h:panelGrid>
+
+        </h:form>
+
+    </p:card>
 
     <div class="footer">
         <div class="py-4 bg-light" align="center">
@@ -117,6 +105,7 @@
             </div>
         </div>
     </div>
+
 
 </h:body>
 </html>

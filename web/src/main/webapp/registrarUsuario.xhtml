@@ -29,11 +29,21 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="registrarUsuario.xhtml">Registrarse</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="registrarUsuario.xhtml">Registrarse</a></li>
+                                <li><a class="dropdown-item" href="eliminarUsuario.xhtml">Eliminar</a></li>
+                                <li><a class="dropdown-item" href="actualizarUsuario.xhtml">Actualizar</a></li>
+                            </ul>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
                         </li>
@@ -84,9 +94,10 @@
 
 
                 <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
-                <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}" converter="#{ciudadConverter}"
-                            redisplay="true" style="width: 100%" required="true"
-                            requiredMessage="Ups! olvidaste seleccionar la ciudad">
+                <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}"
+                                 converter="#{ciudadConverter}"
+                                 redisplay="true" style="width: 100%" required="true"
+                                 requiredMessage="Ups! olvidaste seleccionar la ciudad">
                     <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
                     <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
                 </p:selectOneMenu>
@@ -100,7 +111,9 @@
             </h:panelGrid>
             <h:panelGrid id="Botones" columns="2" width="100%">
 
-                <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear" update="@form" style="width: 100px; margin-left: 40%; margin-top: 5%"/>
+                <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear"
+                                 update="@form"
+                                 style="width: 100px; margin-left: 40%; margin-top: 5%"/>
 
                 <p:button href="index.xhtml" value="Volver" style="width: 100px; margin-left: 20%; margin-top: 5%"/>
 
@@ -109,7 +122,6 @@
             </h:panelGrid>
 
         </h:form>
-
 
     </p:card>
 

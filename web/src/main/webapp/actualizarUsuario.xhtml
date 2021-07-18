@@ -12,14 +12,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
-    <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputScript library="js" name="script-home.js"/>
-    <title>Unilocal</title>
+    <title>Registro</title>
 </h:head>
-<h:body>
+<h:body style="background-image: url('resources/img/fondo.jpg')">
 
     <div id="header">
         <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
@@ -66,47 +63,77 @@
         </nav>
     </div>
 
-    <div id="content">
-        <div id="mapa">
-            <div id='map' style="visibility: hidden"></div>
-        </div>
-        <div class="container">
-            <div class="">
-                <div>
-                    <h2>Categorías</h2>
-                </div>
-                <div>
-                    <p>Lista categorías</p>
-                </div>
-            </div>
-            <div class="">
-                <div>
-                    <h2>Lugares más populares</h2>
-                </div>
-                <div>
-                    <h:form id="form">
-                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true"
-                                    gridIcon="pi pi-th-large">
+    <p:card styleClass="card"
+            style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
+        <f:facet name="title">
+            ¡Actualice sus datos!
+        </f:facet>
 
-                            <p:dataViewGridItem>
-                                <div class="card" style="width: 18rem;">
-                                    <!--<img src="" class="card-img-top" alt="..." />-->
-                                    <div class="card-body">
-                                        <h5 class="card-title">#{lugar.nombre}</h5>
-                                        <p class="card-text">#{lugar.descripcion}</p>
-                                        <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
-                                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
-                                                         iconPos="right"/>
-                                    </div>
-                                </div>
-                            </p:dataViewGridItem>
+        <p>Hola! en el siguiente formulario puedes indicarnos tus datos y actualizar tu usuario.</p>
 
-                        </p:dataView>
-                    </h:form>
-                </div>
-            </div>
-        </div>
-    </div>
+        <h:form>
+
+
+            <p>Ingrese el correo del usuario que desee modificar.</p>
+            <h:panelGrid columns="2" cellpadding="5" width="100%">
+
+                <p:outputLabel for="email_usuario" value="Email:"/>
+                <p:inputText id="email_usuario_busquedad" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                             required="true"
+                             requiredMessage="Ups! olvidaste el email"/>
+
+
+                <p:outputLabel for="cedula_usuario" value="Cedula:"/>
+                <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" style="width: 100%"
+                             required="true"
+                             requiredMessage="Ups! olvidaste el id"/>
+
+                <p:outputLabel for="nombre_usuario" value="Nombre:"/>
+                <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%"
+                             required="true" requiredMessage="Ups! olvidaste el nombre de usuario"/>
+
+
+                <p:outputLabel for="nickName_usuario" value="Nickname:"/>
+                <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"
+                             required="true" requiredMessage="Ups! olvidaste el nickname"/>
+
+                <p:outputLabel for="email_usuario" value="Email:"/>
+                <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                             required="true"
+                             requiredMessage="Ups! olvidaste el email"/>
+
+
+                <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
+                <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}"
+                                 converter="#{ciudadConverter}"
+                                 redisplay="true" style="width: 100%" required="true"
+                                 requiredMessage="Ups! olvidaste seleccionar la ciudad">
+                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
+                </p:selectOneMenu>
+
+
+                <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
+                <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}"
+                            redisplay="true" style="width: 100%" required="true"
+                            requiredMessage="Ups! olvidaste la contraseña"/>
+
+            </h:panelGrid>
+            <h:panelGrid id="Botones" columns="2" width="100%">
+
+                <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Actualizar"
+                                 update="@form"
+                                 style="width: 50%; margin-left: 40%; margin-top: 5%"/>
+
+                <p:button href="index.xhtml" value="Volver" style="width: 50%; margin-left: 20%; margin-top: 5%"/>
+
+                <p:growl showDetail="true"/>
+
+            </h:panelGrid>
+
+        </h:form>
+
+    </p:card>
 
     <div class="footer">
         <div class="py-4 bg-light" align="center">
@@ -117,6 +144,7 @@
             </div>
         </div>
     </div>
+
 
 </h:body>
 </html>

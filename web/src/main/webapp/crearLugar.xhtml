@@ -34,9 +34,19 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="registrarUsuario.xhtml">Registrarse</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="registrarUsuario.xhtml">Registrarse</a></li>
+                                <li><a class="dropdown-item" href="eliminarUsuario.xhtml">Eliminar</a></li>
+                                <li><a class="dropdown-item" href="actualizarUsuario.xhtml">Actualizar</a></li>
+                            </ul>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link active" href="crearLugar.xhtml">Crear Lugar</a>
                         </li>
@@ -58,17 +68,22 @@
 
     <div class="row">
         <div class="col">
-            <div id="mapa" style="margin-left: 15%; margin-right: 20%; margin-top: 10%; margin-bottom: 2%; width: 80%;height:440px"></div>
+            <div class="mapa"
+                 style="margin-left: 8%; margin-right: 20%; margin-top: 10%; margin-bottom: 2%; width: 100%">
+                <h3>Selecione la ubicación</h3>
+                <div id="mapa"
+                     style="width: 80%;height:400px"></div>
+            </div>
         </div>
 
         <div class="col">
 
             <h:form id="crear-lugar">
 
-                <h:inputHidden id="lat-lugar"  value="#{lugarBean.lugar.latitud}"/>
+                <h:inputHidden id="lat-lugar" value="#{lugarBean.lugar.latitud}"/>
                 <h:inputHidden id="long-lugar" value="#{lugarBean.lugar.longitud}"/>
 
-                <p:card styleClass="card"
+                <p:card styleClass="tarjeta"
                         style="margin-left: 8%; margin-right: 20%; margin-top: 10%; margin-bottom: 2%; width: 80%;">
                     <f:facet name="title">
                         ¡Regístrese su lugar!
@@ -77,11 +92,13 @@
                     <h:panelGrid columns="2" cellpadding="5" width="100%">
 
                         <p:outputLabel for="nombre_lugar" value="Nombre:"/>
-                        <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%" required="true"
+                        <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%"
+                                     required="true"
                                      requiredMessage="El nombre de usuario es obligatorio"/>
 
                         <p:outputLabel for="ciudad_lugar" value="Ciudad:"/>
-                        <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudad}" converter="#{ciudadConverter}"
+                        <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudad}"
+                                         converter="#{ciudadConverter}"
                                          redisplay="true" style="width: 100%" required="true"
                                          requiredMessage="Ups! olvidaste seleccionar la ciudad">
                             <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
@@ -97,20 +114,22 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
-                        <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}" style="width: 100%"
+                        <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
+                                         style="width: 100%"
                                          required="true" requiredMessage="La descripcion es obligatoria"/>
 
-                    </h:panelGrid >
+                    </h:panelGrid>
 
                     <h:panelGrid columns="2" cellpadding="5" width="100%">
 
-                    <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear" update="@form"
-                                     style="width: 50%; margin-left: 30%;margin-top: 5%"/>
+                        <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear" update="@form"
+                                         style="width: 50%; margin-left: 30%;margin-top: 5%"/>
 
-                        <p:button href="index.xhtml" value="Volver" style="width: 50%; margin-left: 20%;margin-top: 5%"/>
+                        <p:button href="index.xhtml" value="Volver"
+                                  style="width: 50%; margin-left: 20%;margin-top: 5%"/>
 
-                    <p:growl showDetail="true"/>
-                    </h:panelGrid >
+                        <p:growl showDetail="true"/>
+                    </h:panelGrid>
                 </p:card>
             </h:form>
 
