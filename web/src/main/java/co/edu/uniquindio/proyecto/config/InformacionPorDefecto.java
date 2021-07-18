@@ -86,11 +86,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
         if(comentarioServicio.listarComentarios().isEmpty()){
 
             Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
-                    .calificacion(4).lugar(lugarServicio.obtenerLugar(4))
+                    .calificacion(4).lugar(lugarServicio.obtenerLugar(1))
                     .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
 
             Comentario comentario2= Comentario.builder().comentario("Que buen lugar")
-                    .calificacion(4).lugar(lugarServicio.obtenerLugar(5))
+                    .calificacion(4).lugar(lugarServicio.obtenerLugar(2))
                     .usuario(usuarioServicio.obtenerUsuario("1193409775")).build();
 
             lugarServicio.registrarComentario(comentario1);

@@ -61,9 +61,9 @@ public class LugarBean implements Serializable {
 
                 lugarServicio.registrarLugar(lugar);
 
-                return "lugarCreado?faces-redirect=true";
-                //FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
-                //FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+               // return "lugarCreado?faces-redirect=true";
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
             }else{
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario ubicar el lugar dentro del mapa");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);

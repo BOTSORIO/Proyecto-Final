@@ -62,7 +62,7 @@
         <p>Hola! en el siguiente formulario puedes indicarnos tus datos para poder registrarte y poder disfrutar de todo lo que te ofrecemos.</p>
 
         <h:form>
-            <h:panelGrid columns="2" cellpadding="6" width="100%">
+            <h:panelGrid columns="2" cellpadding="5" width="100%">
                 <p:outputLabel for="cedula_usuario" value="Cedula:"/>
                 <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" style="width: 100%"
                              required="true"
@@ -98,18 +98,21 @@
                             requiredMessage="Ups! olvidaste la contraseña"/>
 
             </h:panelGrid>
-            <p:commandButton action="#{usuarioBean.registrarUsuario}" onclick="PF('dlg').show()" value="Registrar" update="@form"
-                             style="width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 2%"/>
-            <p:growl showDetail="true"/>
+            <h:panelGrid id="Botones" columns="2" width="100%">
+
+                <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear" update="@form" style="width: 100px; margin-left: 40%; margin-top: 5%"/>
+<!--
+              <p:commandButton action="index.xhtml"  value="Volver" update="@form" style="width: 100px"/>
+-->
+                <a class="nav-link" href="index.xhtml" style="round-clip: true">Volver</a>
+
+                <p:growl showDetail="true"/>
+
+            </h:panelGrid>
+
+
         </h:form>
     </p:card>
-
-    <p:dialog header="Aviso" widgetVar="dlg" minHeight="30" width="300" showEffect="fade" >
-        <p class="p-n-0" style="font-family: 'Britannic Bold'">¡Registro exitoso!</p>
-        <f:facet name="footer">
-            <a class="nav-link" href="index.xhtml" style="round-clip: true">Aceptar</a>
-        </f:facet>
-    </p:dialog>
 
     <div class="footer">
         <div class="py-4 bg-light" align="center">
