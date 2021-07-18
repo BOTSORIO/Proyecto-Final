@@ -101,17 +101,16 @@
             <h:panelGrid id="Botones" columns="2" width="100%">
 
                 <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear" update="@form" style="width: 100px; margin-left: 40%; margin-top: 5%"/>
-<!--
-              <p:commandButton action="index.xhtml"  value="Volver" update="@form" style="width: 100px"/>
--->
-                <a class="nav-link" href="index.xhtml" style="round-clip: true">Volver</a>
+
+                <p:button href="index.xhtml" value="Volver" style="width: 100px; margin-left: 20%; margin-top: 5%"/>
 
                 <p:growl showDetail="true"/>
 
             </h:panelGrid>
 
-
         </h:form>
+
+
     </p:card>
 
     <div class="footer">

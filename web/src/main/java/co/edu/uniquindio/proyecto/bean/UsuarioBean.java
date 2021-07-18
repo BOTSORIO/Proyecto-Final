@@ -54,5 +54,4 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
     }
-
 }
