@@ -69,13 +69,13 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             //Los arrayList vacios que se mandan en el contructor son las imagenes y los horarios
 
-            Lugar lugar1 = new Lugar("El castillo","Lugar bonito",new Date(),new Date(),
-                    4.52009964502443F,-75.7124921956696F,ciudadServicio.obtenerCiudad(2),
+            Lugar lugar1 = new Lugar("El castillo","Lugar bonito",new Date(),new Date(),4.52009964502443F,
+                    -75.7124921956696F,ciudadServicio.obtenerCiudad(2),
                             usuarioServicio.obtenerUsuario("1193409775"),new ArrayList<>(),
                             new ArrayList<>(),tipoServicio.obtenerTipo(2));
 
-            Lugar lugar2 = new Lugar("Selva negra","Cafe central",new Date(),new Date(),
-                    4.543038953770576F,-75.68641861978931F,ciudadServicio.obtenerCiudad(2),
+            Lugar lugar2 = new Lugar("Selva negra","Cafe central",new Date(),new Date(),4.543038953770576F,
+                    -75.68641861978931F,ciudadServicio.obtenerCiudad(2),
                     usuarioServicio.obtenerUsuario("1193409775"),new ArrayList<>(),
                     new ArrayList<>(),tipoServicio.obtenerTipo(3));
 
@@ -83,6 +83,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
             lugarServicio.registrarLugar(lugar2);
         }
 
+        /*
         if(comentarioServicio.listarComentarios().isEmpty()){
 
             Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
@@ -97,6 +98,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             lugarServicio.registrarComentario(comentario2);
 
         }
+
+         */
 
     }
 }

@@ -18,6 +18,6 @@ public interface UsuarioServicio {
 
     List<Usuario> listarUsuarios();
 
-    //Usuario iniciarSecion(String email,String password) throws Exception;
+    Usuario iniciarSesion(String email,String password) throws Exception;
 
 }

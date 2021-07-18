@@ -54,4 +54,33 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
     }
+
+
+    public void eliminarUsuario(){
+
+        try {
+            usuarioServicio.eliminarUsuario(usuario.getEmail());
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+        }catch (Exception e) {
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+    }
+
+    public void actualizarUsuario(){
+
+        try{
+            usuarioServicio.actualizarUsuario(usuario);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario se actualizo con exito");
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+        }catch(Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+        }
+    }
+
 }

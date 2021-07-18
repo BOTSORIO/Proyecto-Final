@@ -12,8 +12,6 @@ import java.util.*;
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
-    Usuario findByEmailAndPassword(String email, String password);
-
 
     //================================= REPOSITORIO DE USUARIO =================================//
 
@@ -31,6 +29,8 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     //and o or
     Usuario findByEmailOrNombre(String email,String nombre);
+
+    Usuario findByEmailAndPassword(String email,String password);
 
     Optional<Usuario> findByNickname(String nickname);
 

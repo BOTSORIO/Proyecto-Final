@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.NegocioApplication;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
+import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,6 +55,25 @@ public class UsuarioServicioTest {
             Usuario usuarioEliminado = usuarioServicio.obtenerUsuarioEmail("m@gmail.com");;
 
             Assertions.assertNull(usuarioEliminado);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void inisiarSesionUsuarioTest(){
+
+        try {
+
+            Usuario usuario = usuarioServicio.iniciarSesion("f@gmail.com","fer123");
+
+
+            Assertions.assertNotNull(usuario);
+
 
         }catch (Exception e){
             e.printStackTrace();

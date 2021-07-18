@@ -61,25 +61,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public Usuario actualizarUsuario(Usuario u) throws Exception {
 
 
-        if (u.getId().length()>10){
-            throw new Exception("La cedula solo puede tener 10 caracteres compa");
-        }
-
-        if (u.getNickname().length()>100){
-            throw new Exception("El nickname solo puede tener 100 caracteres compa");
-        }
-
-        if (u.getEmail().length()>100){
-            throw new Exception("El correo solo puede tener 100 caracteres compa");
-        }
-
-        if (u.getNombre().length()>100){
-            throw new Exception("El nombre solo puede tener 100 caracteres compa");
-        }
-
-        if (u.getPassword().length()>100){
-            throw new Exception("La contraseña solo puede tener 100 caracteres compa");
-        }
 
         return usuarioRepo.save(u);
     }
@@ -123,10 +104,22 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.get();
     }
 
-
     @Override
     public List<Usuario> listarUsuarios() {
         return usuarioRepo.findAll();
+    }
+
+    @Override
+    public Usuario iniciarSesion(String email, String password) throws Exception {
+
+        Usuario usuario = usuarioRepo.findByEmailAndPassword(email,password);
+
+        if(usuario == null){
+
+            throw new Exception("¡Ups! No te hemos podido encontrar");
+        }
+
+        return usuario;
     }
 
     /*
