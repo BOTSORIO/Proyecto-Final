@@ -16,13 +16,136 @@
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputScript library="js" name="mapbox-gl.js"/>
-    <title>Unilocal | Detalle lugar</title>
+    <h:outputScript library="js" name="script-home.js"/>
+    <title>Unilocal</title>
 </h:head>
 <h:body>
-    <p>#{detalleLugarBean.lugar}</p>
 
-    <p>#{detalleLugarBean.comentarios}</p>
+    <div id="header">
+        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
 
-    <p>#{detalleLugarBean.horarios}</p>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="registrarUsuario.xhtml">Registrarse</a></li>
+                                <li><a class="dropdown-item" href="eliminarUsuario.xhtml">Eliminar</a></li>
+                                <li><a class="dropdown-item" href="actualizarUsuario.xhtml">Actualizar</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <h:form class="d-flex me-2">
+                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?"
+                                         value="#{busquedaBean.busqueda}"/>
+                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
+                                             action="#{busquedaBean.buscar}"/>
+                        </h:form>
+                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
+                                         onclick="PF('dlg1').show()"/>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
+              closeOnEscape="true">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h5>Correo electronico</h5>
+                <p:inputText id="username1" styleClass="p-d-block" style="width: 100%"/>
+
+                <h5>Contraseña</h5>
+                <p:password id="nonFeedback" value="#{passwordView.password1}" style="width: 100%"/>
+            </div>
+
+            <div class="col-2">
+                <div id="fotox">
+                    <img src="resources/img/user.png" alt=""/>
+                </div>
+            </div>
+
+        </div>
+
+
+        <f:facet name="footer">
+            <p:button style="min-width: 30%" value="Iniciar"
+                      styleClass="ui-button-raised ui-button-success ui-button-flat"
+                      href="index.xhtml"/>
+            <p:button style="min-width: 30%" value="Registrarse"
+                      styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+                      href="registrarUsuario.xhtml"/>
+        </f:facet>
+    </p:dialog>
+
+
+    <div class="row">
+        <div style="margin-top: 2%; margin-left: 10%" class="col">
+            <img alt="user header" src="resources/img/ruta.png" width="400"/>
+        </div>
+        <div style="margin-top: 5%" class="col">
+            <p:card style="width: 25rem; margin-bottom: 2em">
+                <f:facet name="title">
+                    <h1> #{detalleLugarBean.lugar.nombre} </h1>
+                </f:facet>
+                <h6> información: </h6>
+                #{detalleLugarBean.lugar.descripcion}
+                <br></br>
+                Tipo de lugar:    #{detalleLugarBean.lugar.tipo.nombre}
+                <br></br>
+                Telefonos:        #{detalleLugarBean.lugar.telefonos}
+                <br></br>
+                Ubicada en:       #{detalleLugarBean.lugar.ciudad.nombre}
+                <p:divider/>
+                <h6> Comentarios: </h6>
+                #{detalleLugarBean.comentarios}
+                <h6> Calificaló: </h6>
+                <h:panelGrid columns="1" style="margin-bottom: 10px">
+                    <p:inputText id="sliderTxtMax" value="5"/>
+                    <p:slider for="sliderTxtMax" range="3" maxValue="5"/>
+                </h:panelGrid>
+
+                <f:facet name="footer">
+                    <p:commandButton icon="pi pi-check" value="Save"/>
+                    <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary"
+                                     style="margin-left: .5em"/>
+                </f:facet>
+
+            </p:card>
+        </div>
+
+
+        <div class="footer">
+            <div class="py-4 bg-light" align="center">
+                <div class="justify-content-center">
+                    <div class="col-10">
+                        <span>Universidad del Quindío - Programación avanzada - 2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </h:body>
 </html>

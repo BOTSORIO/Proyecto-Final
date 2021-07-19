@@ -59,12 +59,46 @@
                                              action="#{busquedaBean.buscar}"/>
                         </h:form>
                         <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
-                                         action="#{busquedaBean.buscar}"/>
+                                         onclick="PF('dlg1').show()"/>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
+
+
+    <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
+              closeOnEscape="true">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h5>Correo electronico</h5>
+                <p:inputText id="username1" styleClass="p-d-block" style="width: 100%"/>
+
+                <h5>Contraseña</h5>
+                <p:password id="nonFeedback" value="#{passwordView.password1}" style="width: 100%"/>
+            </div>
+
+            <div class="col-2">
+                <div id="fotox">
+                    <img src="resources/img/user.png" alt=""/>
+                </div>
+            </div>
+
+        </div>
+
+
+        <f:facet name="footer">
+            <p:button style="min-width: 30%" value="Iniciar"
+                      styleClass="ui-button-raised ui-button-success ui-button-flat"
+                      href="index.xhtml"/>
+            <p:button style="min-width: 30%" value="Registrarse"
+                      styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+                      href="registrarUsuario.xhtml"/>
+        </f:facet>
+    </p:dialog>
+
 
     <div class="row">
         <div class="col">

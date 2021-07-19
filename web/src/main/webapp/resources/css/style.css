@@ -41,4 +41,13 @@
         width: 100%;
     }
 
+    #dialogo {
+        width: 90% !important;
+        margin-left: -25%;
+    }
+
+    #fotox {
+        margin-top: 50%;
+        margin-left: 270%;
+    }
 }
