@@ -71,14 +71,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             usuarioEncontrado.setEmail(u.getEmail());
         }
 
-        //return usuarioRepo.save(u);
     }
 
 
     @Override
-    public void eliminarUsuario(String email) throws Exception {
+    public void eliminarUsuario(String email,String password) throws Exception {
 
-        Usuario usuarioEncontrado = obtenerUsuarioEmail(email);
+        Usuario usuarioEncontrado = obtenerUsuarioEliminar(email,password) ;
 
         if (usuarioEncontrado != null){
             usuarioRepo.delete(usuarioEncontrado);
@@ -102,21 +101,23 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public Usuario obtenerUsuarioEmail(String email) throws Exception {
+    public Usuario obtenerUsuarioEliminar(String email,String password) throws Exception {
 
-        Optional<Usuario> usuario = usuarioRepo.findByEmail(email);
+        Usuario usuario = usuarioRepo.findByEmailAndPassword(email,password);
 
-        if(usuario.isEmpty()){
+        if(usuario==null){
             throw new Exception("No existe un usuario con el correo dado");
         }
 
-        return usuario.get();
+        return usuario;
     }
+
 
     @Override
     public List<Usuario> listarUsuarios() {
         return usuarioRepo.findAll();
     }
+
 
     @Override
     public Usuario iniciarSesion(String email, String password) throws Exception {

@@ -48,11 +48,11 @@ public class UsuarioServicioTest {
 
         try {
 
-            Usuario usuario = usuarioServicio.obtenerUsuarioEmail("m@gmail.com");
+            Usuario usuario = usuarioServicio.obtenerUsuarioEliminar("m@gmail.com","manu123");
 
-            usuarioServicio.eliminarUsuario(usuario.getEmail());
+            usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
 
-            Usuario usuarioEliminado = usuarioServicio.obtenerUsuarioEmail("m@gmail.com");;
+            Usuario usuarioEliminado = usuarioServicio.obtenerUsuarioEliminar("m@gmail.com","manu123");;
 
             Assertions.assertNull(usuarioEliminado);
 

@@ -35,6 +35,9 @@ public class UsuarioBean implements Serializable {
     @Getter @Setter
     private Usuario usuarioLogeado;
 
+    //@Getter @Setter
+   // private Usuario usuarioAux;
+
     @Getter @Setter
     private Ciudad ciudad;
 
@@ -44,7 +47,8 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
-        this.usuarioLogeado = new Usuario();
+        // this.usuarioAux = new Usuario();
+        this.usuarioLogeado =  new Usuario();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -64,7 +68,7 @@ public class UsuarioBean implements Serializable {
     public void eliminarUsuario(){
 
         try {
-            usuarioServicio.eliminarUsuario(usuario.getEmail());
+            usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
@@ -75,6 +79,8 @@ public class UsuarioBean implements Serializable {
     }
 
     public void actualizarUsuario(){
+
+        usuarioLogeado = iniciarSesion();
 
         try{
 
@@ -92,18 +98,23 @@ public class UsuarioBean implements Serializable {
         }
     }
 
-    public void iniciarSesion(){
+
+    public Usuario iniciarSesion(){
+
+        Usuario aux;
 
         try {
 
-            usuarioLogeado = usuarioServicio.iniciarSesion(usuario.getEmail(),usuario.getPassword());
+            aux = usuarioServicio.iniciarSesion(usuario.getEmail(),usuario.getPassword());
 
-            System.out.println(usuarioLogeado);
+            System.out.println(aux);
 
-            if (usuarioLogeado != null){
+            if (aux != null){
 
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! ingreso correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+                return aux;
 
             }else{
 
@@ -116,6 +127,7 @@ public class UsuarioBean implements Serializable {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
+        return null;
     }
 
 }

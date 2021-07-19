@@ -19,7 +19,6 @@ public class TipoServicioImpl implements TipoServicio{
     @Override
     public Tipo registrarTipo(Tipo t) throws Exception {
 
-
       if (t.getNombre().length()>100){
           throw new Exception("El nombre no puede exceder los 100 caracteres");
       }
@@ -37,6 +36,7 @@ public class TipoServicioImpl implements TipoServicio{
         return tipoRepo.save(t);
 
     }
+
 
     @Override
     public void eliminarTipo(int id) throws Exception {

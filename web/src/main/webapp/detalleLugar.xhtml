@@ -47,8 +47,16 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Lugares
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
+                                <li><a class="dropdown-item" href="crearLugar.xhtml">Crear</a></li>
+                                <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                <li><a class="dropdown-item" href="#">Actualizar</a></li>
+                            </ul>
                         </li>
                     </ul>
                     <div class="d-flex">
@@ -67,37 +75,42 @@
     </div>
 
 
-    <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
-              closeOnEscape="true">
+    <h:form>
+        <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
+                  closeOnEscape="true">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-8">
-                <h5>Correo electronico</h5>
-                <p:inputText id="username1" value="#{usuarioBean.usuario.email}" styleClass="p-d-block" style="width: 100%"/>
+                <div class="col-md-8">
+                    <h5>Correo electronico</h5>
+                    <p:inputText id="username1" value="#{usuarioBean.usuario.email}" styleClass="p-d-block" style="width: 100%"
+                                 required="true" requiredMessage="¡Ups! olvidaste el email"/>
 
-                <h5>Contraseña</h5>
-                <p:password id="nonFeedback" value="#{usuarioBean.usuario.password}" style="width: 100%"/>
-            </div>
-
-            <div class="col-2">
-                <div id="fotox">
-                    <img src="resources/img/user.png" alt=""/>
+                    <h5>Contraseña</h5>
+                    <p:password id="nonFeedback" value="#{usuarioBean.usuario.password}" style="width: 100%"
+                                required="true" requiredMessage="¡Ups! olvidaste la contraseña"/>
                 </div>
+
+                <div class="col-2">
+                    <div id="fotox">
+                        <img src="resources/img/user.png" alt=""/>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
 
-
-        <f:facet name="footer">
-            <p:commandButton style="min-width: 30%" value="Iniciar" action="#{usuarioBean.iniciarSesion}"
-                             styleClass="ui-button-raised ui-button-success ui-button-flat"
-                             href="index.xhtml"/>
-            <p:button style="min-width: 30%" value="Registrarse"
-                      styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-                      href="registrarUsuario.xhtml"/>
-        </f:facet>
-    </p:dialog>
+            <f:facet name="footer">
+                <p:commandButton style="min-width: 30%" value="Iniciar" action="#{usuarioBean.iniciarSesion}"
+                                 styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                 update="@form" href="index.xhtml"/>
+                <p:button style="min-width: 30%" value="Registrarse"
+                          styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                          href="registrarUsuario.xhtml"/>
+                <p:growl showDetail="true"/>
+            </f:facet>
+        </p:dialog>
+    </h:form>
 
 
     <div class="row">
