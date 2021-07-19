@@ -74,10 +74,10 @@
 
             <div class="col-md-8">
                 <h5>Correo electronico</h5>
-                <p:inputText id="username1" styleClass="p-d-block" style="width: 100%"/>
+                <p:inputText id="username1" value="#{usuarioBean.usuario.email}" styleClass="p-d-block" style="width: 100%"/>
 
                 <h5>Contraseña</h5>
-                <p:password id="nonFeedback" value="#{passwordView.password1}" style="width: 100%"/>
+                <p:password id="nonFeedback" value="#{usuarioBean.usuario.password}" style="width: 100%"/>
             </div>
 
             <div class="col-2">
@@ -90,9 +90,9 @@
 
 
         <f:facet name="footer">
-            <p:button style="min-width: 30%" value="Iniciar"
-                      styleClass="ui-button-raised ui-button-success ui-button-flat"
-                      href="index.xhtml"/>
+            <p:commandButton style="min-width: 30%" value="Iniciar" action="#{usuarioBean.iniciarSesion}"
+                             styleClass="ui-button-raised ui-button-success ui-button-flat"
+                             href="index.xhtml"/>
             <p:button style="min-width: 30%" value="Registrarse"
                       styleClass="ui-button-raised ui-button-secondary ui-button-flat"
                       href="registrarUsuario.xhtml"/>

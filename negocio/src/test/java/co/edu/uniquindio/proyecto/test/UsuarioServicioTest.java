@@ -90,7 +90,7 @@ public class UsuarioServicioTest {
             Usuario usuarioGuardado= usuarioServicio.obtenerUsuario("123");
 
             usuarioGuardado.setNickname("neq");
-            usuarioServicio.actualizarUsuario(usuarioGuardado);
+            //usuarioServicio.actualizarUsuario(usuarioGuardado);
 
             Usuario usuarioBuscado = usuarioServicio.obtenerUsuario("123");
 
@@ -114,14 +114,14 @@ public class UsuarioServicioTest {
     }
 
 
-    /*
+
     @Test
     @Sql("classpath:usuarios.sql")
     public void iniciarSecionTest(){
 
         try {
 
-            Usuario usuarioBuscado = usuarioServicio.iniciarSecion("m@gmail.com","manu123");
+            Usuario usuarioBuscado = usuarioServicio.iniciarSesion("m@gmail.com","manu123");
 
             System.out.println(usuarioBuscado);
 
@@ -131,5 +131,5 @@ public class UsuarioServicioTest {
             e.printStackTrace();
         }
     }
-     */
+
 }

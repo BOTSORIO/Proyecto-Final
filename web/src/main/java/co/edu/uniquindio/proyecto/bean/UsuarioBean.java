@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -32,6 +33,9 @@ public class UsuarioBean implements Serializable {
     private Usuario usuario;
 
     @Getter @Setter
+    private Usuario usuarioLogeado;
+
+    @Getter @Setter
     private Ciudad ciudad;
 
     @Getter @Setter
@@ -40,6 +44,7 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
+        this.usuarioLogeado = new Usuario();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -72,14 +77,44 @@ public class UsuarioBean implements Serializable {
     public void actualizarUsuario(){
 
         try{
-            usuarioServicio.actualizarUsuario(usuario);
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario se actualizo con exito");
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            if(usuarioLogeado!=null){
+
+                usuarioServicio.actualizarUsuario(usuarioLogeado.getEmail(),usuarioLogeado.getPassword(), usuario);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario se actualizo con exito");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
 
         }catch(Exception e){
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
+        }
+    }
+
+    public void iniciarSesion(){
+
+        try {
+
+            usuarioLogeado = usuarioServicio.iniciarSesion(usuario.getEmail(),usuario.getPassword());
+
+            System.out.println(usuarioLogeado);
+
+            if (usuarioLogeado != null){
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! ingreso correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }else{
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "¡Lo sentimos!no se encuentra registrado en la pagina");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+
+        }catch (Exception e) {
+
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
     }
 

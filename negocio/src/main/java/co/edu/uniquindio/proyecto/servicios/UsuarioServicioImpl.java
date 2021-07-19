@@ -58,11 +58,20 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario actualizarUsuario(Usuario u) throws Exception {
+    public void actualizarUsuario(String email, String password,Usuario u) throws Exception {
 
+        Usuario usuarioEncontrado = iniciarSesion(email,password);
 
+        if(usuarioEncontrado!=null){
 
-        return usuarioRepo.save(u);
+            usuarioEncontrado.setNombre(u.getNombre());
+            usuarioEncontrado.setNickname(u.getNickname());
+            usuarioEncontrado.setPassword(u.getPassword());
+            usuarioEncontrado.setCiudad(u.getCiudad());
+            usuarioEncontrado.setEmail(u.getEmail());
+        }
+
+        //return usuarioRepo.save(u);
     }
 
 
@@ -122,17 +131,4 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario;
     }
 
-    /*
-    @Override
-    public Usuario iniciarSecion(String email, String password) throws Exception {
-
-        Optional<Usuario> usuario = usuarioRepo.findByEmailAndPasswordS(email,password);
-
-        if(usuario.isEmpty()){
-            throw new Exception("No existe un usuario con estos datos por lo tanto no puede ingresar");
-        }
-
-        return usuario.get();
-    }
-     */
 }

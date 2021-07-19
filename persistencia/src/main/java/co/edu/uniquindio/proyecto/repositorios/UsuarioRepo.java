@@ -64,5 +64,4 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     @Query("select u from Usuario u where u.email like concat('%',:dominio,'%')")
     List<Usuario> obtenerUsuariosDeDominio2(String dominio);
 
-
 }

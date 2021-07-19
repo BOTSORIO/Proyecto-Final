@@ -8,7 +8,7 @@ public interface UsuarioServicio {
 
     Usuario registrarUsuario(Usuario u) throws Exception;
 
-    Usuario actualizarUsuario(Usuario u) throws Exception;
+    void actualizarUsuario(String email, String password, Usuario u) throws Exception;
 
     void eliminarUsuario(String email) throws Exception;
 
