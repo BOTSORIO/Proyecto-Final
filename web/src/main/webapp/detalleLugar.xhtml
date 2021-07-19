@@ -17,7 +17,56 @@
 
         <div class="row">
             <div style="margin-top: 2%; margin-left: 10%" class="col">
-                <img alt="user header" src="resources/img/ruta.png" width="400"/>
+                <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313"
+                            showCaption="true">
+                    <p:graphicImage name="demo/images/nature/#{image}" alt="Image Description for #{image}"
+                                    title="#{image}"/>
+                </p:galleria>
+
+                <p:card style="width: 100%; margin-bottom: 2em">
+                    <f:facet name="title">
+                        <h1> Comentarios </h1>
+                    </f:facet>
+
+                    <p:dataViewGridItem>
+                        <div class="card" style="width: 18rem;">
+                            <!--<img src="" class="card-img-top" alt="..." />-->
+                            <div class="card-body">
+                                <h5 class="card-title">#{detalleLugarBean.comentarios.get(0).usuario.nombre}</h5>
+                                <i class="pi pi-comments"/><span
+                                    class="product-category"> #{detalleLugarBean.comentarios.get(0).comentario}</span>
+                                <p:divider/>
+                                <i class="pi pi-star-o"/><span
+                                    class="product-category"> #{detalleLugarBean.comentarios.get(0).calificacion}</span>
+                            </div>
+                        </div>
+                    </p:dataViewGridItem>
+
+                    <div class="row" style="margin-top: 2%">
+                        <div class="col">
+                            <p:card style="margin-top: 2%">
+                                <f:facet name="title">
+                                    Añade tu comentario
+                                </f:facet>
+                                <p:inputTextarea rows="2" cols="30"/>
+                            </p:card>
+                        </div>
+                        <div class="col" style="margin-top: 5%">
+                            <h6> Calificaló: </h6>
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <p:inputText id="sliderTxtMax" value="5"/>
+                                <p:slider for="sliderTxtMax" range="3" maxValue="5"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Guardar" style="margin-left: 7%; width: 40%"/>
+                        <p:button icon="pi pi-undo" value="Volver" styleClass="ui-button-secondary"
+                                  style="margin-left: .5em; width: 40%" href="/index.xhtml"/>
+                    </f:facet>
+                </p:card>
+
             </div>
             <div style="margin-top: 5%" class="col">
                 <p:card style="width: 25rem; margin-bottom: 2em">
@@ -32,24 +81,14 @@
                     Telefonos:        #{detalleLugarBean.lugar.telefonos}
                     <br></br>
                     Ubicada en:       #{detalleLugarBean.lugar.ciudad.nombre}
-                    <p:divider/>
-                    <h6> Comentarios: </h6>
-                    #{detalleLugarBean.comentarios}
-                    <h6> Calificaló: </h6>
-                    <h:panelGrid columns="1" style="margin-bottom: 10px">
-                        <p:inputText id="sliderTxtMax" value="5"/>
-                        <p:slider for="sliderTxtMax" range="3" maxValue="5"/>
-                    </h:panelGrid>
 
-                    <f:facet name="footer">
-                        <p:commandButton icon="pi pi-check" value="Save"/>
-                        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary"
-                                         style="margin-left: .5em"/>
-                    </f:facet>
+                    <div id="mapa"
+                         style="width: 80%;height:400px"></div>
 
                 </p:card>
             </div>
         </div>
+
     </ui:define>
 </ui:composition>
 </html>
