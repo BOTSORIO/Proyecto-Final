@@ -8,113 +8,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
-    <h:outputStylesheet library="css" name="style.css"/>
-    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
-    <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputScript library="js" name="script-home.js"/>
-    <title>Unilocal</title>
-</h:head>
-<h:body>
 
-    <div id="header">
-        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                        </li>
+<ui:composition template="/WEB-INF/plantilla.xhtml">
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Usuarios
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="registrarUsuario.xhtml">Registrarse</a></li>
-                                <li><a class="dropdown-item" href="eliminarUsuario.xhtml">Eliminar</a></li>
-                                <li><a class="dropdown-item" href="actualizarUsuario.xhtml">Actualizar</a></li>
-                            </ul>
-                        </li>
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+        <h:outputScript library="js" name="mapbox-gl.js"/>
+        <h:outputScript library="js" name="script-home.js"/>
+    </ui:define>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Lugares
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                <li><a class="dropdown-item" href="crearLugar.xhtml">Crear</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                                <li><a class="dropdown-item" href="#">Actualizar</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                    <div class="d-flex">
-                        <h:form class="d-flex me-2">
-                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?"
-                                         value="#{busquedaBean.busqueda}"/>
-                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
-                                             action="#{busquedaBean.buscar}"/>
-                        </h:form>
-                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
-                                         onclick="PF('dlg1').show()"/>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-
-    <h:form>
-        <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
-                  closeOnEscape="true">
-
-            <div class="row">
-
-                <div class="col-md-8">
-                    <h5>Correo electronico</h5>
-                    <p:inputText id="username1" value="#{usuarioBean.usuario.email}" styleClass="p-d-block" style="width: 100%"
-                        required="true" requiredMessage="¡Ups! olvidaste el email"/>
-
-                    <h5>Contraseña</h5>
-                    <p:password id="nonFeedback" value="#{usuarioBean.usuario.password}" style="width: 100%"
-                        required="true" requiredMessage="¡Ups! olvidaste la contraseña"/>
-                </div>
-
-                <div class="col-2">
-                    <div id="fotox">
-                        <img src="resources/img/user.png" alt=""/>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <f:facet name="footer">
-                <p:commandButton style="min-width: 30%" value="Iniciar" action="#{usuarioBean.iniciarSesion}"
-                                 styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                 update="@form" href="index.xhtml"/>
-                <p:button style="min-width: 30%" value="Registrarse"
-                          styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
-                          href="registrarUsuario.xhtml"/>
-                <p:growl showDetail="true"/>
-            </f:facet>
-        </p:dialog>
-    </h:form>
-
-
-    <div id="content">
+    <ui:define name="title">Unilocal</ui:define>
+    <ui:define name="content">
         <div id="mapa">
             <div id='map' style="visibility: hidden"></div>
         </div>
@@ -154,17 +58,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="footer">
-        <div class="py-4 bg-light" align="center">
-            <div class="justify-content-center">
-                <div class="col-10">
-                    <span>Universidad del Quindío - Programación avanzada - 2021</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</h:body>
+    </ui:define>
+</ui:composition>
 </html>
