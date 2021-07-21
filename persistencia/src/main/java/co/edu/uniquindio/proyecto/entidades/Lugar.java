@@ -120,6 +120,16 @@ public class Lugar implements Serializable {
 
     }
 
+    public String getImagenPrincipal(){
+
+        if(imagenes!=null && !imagenes.isEmpty()){
+
+            return imagenes.get(0).getUrl();
+        }
+
+        return "default.jpg";
+    }
+
 
     //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
