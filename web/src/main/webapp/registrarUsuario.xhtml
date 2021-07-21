@@ -57,21 +57,22 @@
                     <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
                     <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" feedback="true"
                                 promptLabel="Ingresa tu contraseña" weakLabel="Débil"
-                                goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%" required="true"
+                                goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%"
+                                required="true"
                                 requiredMessage="Ups! olvidaste la contraseña"/>
 
                 </h:panelGrid>
-                <h:panelGrid id="Botones" columns="2" width="100%">
 
-                    <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear"
-                                     update="@form"
-                                     style="width: 100px; margin-left: 40%; margin-top: 5%"/>
-
-                    <p:button href="/index.xhtml" value="Volver" style="width: 100px; margin-left: 20%; margin-top: 5%"/>
-
-                    <p:growl showDetail="true"/>
-
-                </h:panelGrid>
+                <div class="form-group row justify-content-center" style="margin: 5%">
+                    <div class="col">
+                        <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear"
+                                         update="@form"
+                                         style="width: 90%"/>
+                    </div>
+                    <div class="col">
+                        <p:button href="/index.xhtml" value="Volver"  style="width: 90%"/>
+                    </div>
+                </div>
 
             </h:form>
 
