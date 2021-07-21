@@ -32,6 +32,10 @@
         display: list-item;
     }
 
+    .col {
+        margin-top: 5%;
+    }
+
     .tarjeta {
         width: 90% !important;
     }
@@ -49,5 +53,10 @@
     #fotox {
         margin-top: 50%;
         margin-left: 270%;
+    }
+
+    .tarjetaUnica {
+        width: 90% !important;
+        margin: 5% !important;
     }
 }
