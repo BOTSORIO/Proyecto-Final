@@ -7,6 +7,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xml:lang="en" lang="en">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -44,20 +45,20 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="/registrarUsuario.xhtml">Registrarse</a></li>
-                                        <li><a class="dropdown-item" href="/eliminarUsuario.xhtml">Eliminar</a></li>
-                                        <li><a class="dropdown-item" href="/actualizarUsuario.xhtml">Actualizar</a></li>
+                                        <li><a class="dropdown-item" href="/eliminarUsuario.xhtml" jsf:rendered="#{seguridadBean.autenticado}">Eliminar</a></li>
+                                        <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml" jsf:rendered="#{seguridadBean.autenticado}">Actualizar</a></li>
                                     </ul>
                                 </li>
 
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         Lugares
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                        <li><a class="dropdown-item" href="crearLugar.xhtml">Crear</a></li>
-                                        <li><a class="dropdown-item" href="eliminarLugar.xhtml">Eliminar</a></li>
-                                        <li><a class="dropdown-item" href="actualizarLugar.xhtml">Actualizar</a></li>
+                                        <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml">Crear</a></li>
+                                        <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml">Eliminar</a></li>
+                                        <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml">Actualizar</a></li>
                                     </ul>
                                 </li>
 
@@ -70,7 +71,8 @@
                                                      action="#{busquedaBean.buscar}"/>
                                 </h:form>
                                 <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
-                                                 onclick="PF('dlg1').show()"/>
+                                                 onclick="PF('dlg1').show()" icon="pi pi-sign-in" iconPos="left" rendered="#{!seguridadBean.autenticado}"/>
+                                <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Logout" action="#{seguridadBean.cerrarSesion}" rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out" iconPos="left"/>
                             </div>
                         </div>
                     </div>
@@ -78,17 +80,16 @@
 
             <h:form>
                 <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
-                          closeOnEscape="true">
+                          closeOnEscape="true" rendered="#{!seguridadBean.autenticado}">
 
                     <div class="row">
-
                         <div class="col-md-8">
                             <h5>Correo electronico</h5>
-                            <p:inputText id="username1" value="#{usuarioBean.usuario.email}" styleClass="p-d-block" style="width: 100%"
+                            <p:inputText id="username1" value="#{seguridadBean.email}" styleClass="p-d-block" style="width: 100%"
                                          required="true" requiredMessage="¡Ups! olvidaste el email"/>
 
                             <h5>Contraseña</h5>
-                            <p:password id="nonFeedback" value="#{usuarioBean.usuario.password}" style="width: 100%"
+                            <p:password id="nonFeedback" value="#{seguridadBean.password}" style="width: 100%"
                                         required="true" requiredMessage="¡Ups! olvidaste la contraseña"/>
                         </div>
 
@@ -97,19 +98,18 @@
                                 <img src="resources/img/user.png" alt=""/>
                             </div>
                         </div>
-
                     </div>
 
 
                     <f:facet name="footer">
-                        <p:commandButton style="min-width: 30%" value="Iniciar" action="#{usuarioBean.iniciarSesion}"
+                        <p:commandButton style="min-width: 30%" value="Iniciar" action="#{seguridadBean.iniciarSesion}"
                                          styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                         update="@form" href="/index.xhtml"/>
+                                         update="@form" href="/index.xhtml" icon="pi pi-sign-in" iconPos="left"/>
                         <p:button style="min-width: 30%" value="Registrarse"
                                   styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
                                   href="
                                   /registrarUsuario.xhtml"/>
-                        <p:growl showDetail="true"/>
+                        <p:growl showDetail="true" for="login-bean"/>
                     </f:facet>
                 </p:dialog>
             </h:form>

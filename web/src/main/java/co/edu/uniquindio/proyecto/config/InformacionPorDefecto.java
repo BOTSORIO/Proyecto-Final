@@ -32,7 +32,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception{
-        /*
+
         if (administradorServicio.listarAdministradores().isEmpty()){
 
             Administrador admin1= new Administrador("1010017812","Melissa","DiosaNeko","Meli123","mortiz@gmail,com");
@@ -97,7 +97,5 @@ public class InformacionPorDefecto implements CommandLineRunner {
             lugarServicio.registrarComentario(comentario2);
 
         }
-
-         */
     }
 }

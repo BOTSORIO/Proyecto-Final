@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.entidades.Ciudad;
-import co.edu.uniquindio.proyecto.entidades.Imagen;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
-import co.edu.uniquindio.proyecto.entidades.Tipo;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +44,15 @@ public class LugarBean implements Serializable {
     @Getter @Setter
     private List<Tipo> tipos;
 
+    @Getter @Setter
+    private List<Horario> horarios;
+
+    @Getter @Setter
+    private Horario horario;
+
+    @Value(value = "#{seguridadBean.persona}")
+    private Persona personaLogin;
+
 
     public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio) {
         this.lugarServicio = lugarServicio;
@@ -67,29 +73,32 @@ public class LugarBean implements Serializable {
     public String registrarLugar(){
 
         try {
-            if(lugar.getLatitud()!=0 && lugar.getLongitud()!=0 && !imagenes.isEmpty()){
 
-                lugar.setUsuario(usuarioServicio.obtenerUsuario("1193409775"));
+            if (personaLogin!=null) {
+                if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty()) {
 
-                for(Imagen i:imagenes){
+                    lugar.setUsuario((Usuario) personaLogin);
 
-                    i.setLugar(lugar);
+                    for (Imagen i : imagenes) {
+
+                        i.setLugar(lugar);
+                    }
+
+                    lugar.setImagenes(imagenes);
+                    lugarServicio.registrarLugar(lugar);
+
+                    for (Imagen i : imagenes) {
+
+                        imagenServicio.registrarImagen(i);
+                    }
+
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+                } else {
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario ubicar el lugar dentro del mapa");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
                 }
-
-                lugar.setImagenes(imagenes);
-                lugarServicio.registrarLugar(lugar);
-
-                for(Imagen i:imagenes){
-
-                    imagenServicio.registrarImagen(i);
-                }
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-            }else{
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario ubicar el lugar dentro del mapa");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
             }
         }catch (Exception e){
 

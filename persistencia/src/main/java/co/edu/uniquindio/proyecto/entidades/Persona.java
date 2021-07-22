@@ -11,12 +11,13 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 //================================= RELACION DE HERENCIA =================================//
-@MappedSuperclass
+
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class Persona implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//

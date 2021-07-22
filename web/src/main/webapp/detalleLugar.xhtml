@@ -44,16 +44,16 @@
 
                     <div class="row" style="margin-top: 2%">
                         <div class="col">
-                            <p:card style="margin-top: 2%">
-                                <f:facet name="title">
+                            <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
+                                <f:facet name="title" >
                                     Añade tu comentario
                                 </f:facet>
                                 <p:inputTextarea rows="2" cols="30"/>
                             </p:card>
                         </div>
-                        <div class="col" style="margin-top: 5%">
-                            <h6> Calificaló: </h6>
-                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                        <div class="col" style="margin-top: 5%" >
+                            <h:panelGrid columns="1" style="margin-bottom: 10px" rendered="#{seguridadBean.autenticado}">
+                                <h6> Calificaló: </h6>
                                 <p:inputText id="sliderTxtMax" value="5"/>
                                 <p:slider for="sliderTxtMax" range="3" maxValue="5"/>
                             </h:panelGrid>

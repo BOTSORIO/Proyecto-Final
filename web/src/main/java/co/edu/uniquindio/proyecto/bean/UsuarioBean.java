@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.entidades.Persona;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -32,11 +34,8 @@ public class UsuarioBean implements Serializable {
     @Getter @Setter
     private Usuario usuario;
 
-    @Getter @Setter
-    private Usuario usuarioLogeado;
-
-    //@Getter @Setter
-   // private Usuario usuarioAux;
+    @Value(value = "#{seguridadBean.persona}")
+    private Persona personaLogin;
 
     @Getter @Setter
     private Ciudad ciudad;
@@ -47,8 +46,6 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
-        // this.usuarioAux = new Usuario();
-        this.usuarioLogeado =  new Usuario();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -80,13 +77,11 @@ public class UsuarioBean implements Serializable {
 
     public void actualizarUsuario(){
 
-        usuarioLogeado = iniciarSesion();
-
         try{
 
-            if(usuarioLogeado!=null){
+            if(personaLogin!=null){
 
-                usuarioServicio.actualizarUsuario(usuarioLogeado.getEmail(),usuarioLogeado.getPassword(), usuario);
+                usuarioServicio.actualizarUsuario(personaLogin.getEmail(),personaLogin.getPassword(), usuario);
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario se actualizo con exito");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
             }
@@ -96,38 +91,6 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
         }
-    }
-
-
-    public Usuario iniciarSesion(){
-
-        Usuario aux;
-
-        try {
-
-            aux = usuarioServicio.iniciarSesion(usuario.getEmail(),usuario.getPassword());
-
-            System.out.println(aux);
-
-            if (aux != null){
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! ingreso correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-                return aux;
-
-            }else{
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "¡Lo sentimos!no se encuentra registrado en la pagina");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-            }
-
-        }catch (Exception e) {
-
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-        return null;
     }
 
 }

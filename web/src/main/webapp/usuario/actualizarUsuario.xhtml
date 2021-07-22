@@ -59,7 +59,7 @@
                 </h:panelGrid>
                 <div class="form-group row justify-content-center" style="margin: 5%">
                     <div class="col">
-                        <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear"
+                        <p:commandButton action="#{usuarioBean.actualizarUsuario}" value="Actualizar"
                                          update="@form"
                                          style="width: 90%"/>
                     </div>
@@ -67,7 +67,7 @@
                         <p:button href="/index.xhtml" value="Volver" style="width: 90%"/>
                     </div>
                 </div>
-
+                <p:growl showDetail="true"/>
             </h:form>
 
         </p:card>

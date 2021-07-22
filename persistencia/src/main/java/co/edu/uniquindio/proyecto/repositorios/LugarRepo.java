@@ -95,4 +95,11 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     //Lugares que estan aprobados
     @Query("select l from Lugar l where l.nombre like concat('%',:nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
+
+
+    //A implementar
+
+    @Query("select avg(c.calificacion) from Comentario c where c.lugar.id = :idLugar")
+    int obtenerCalificacion(Integer idLugar);
+
 }
