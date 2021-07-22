@@ -70,7 +70,7 @@ public class Lugar implements Serializable {
     private Tipo tipo;
 
     //================================= RELACION CON LA ENTIDAD IMAGEN =================================//
-    @OneToMany(mappedBy = "lugar")
+    @OneToMany(mappedBy = "lugar",fetch=FetchType.EAGER)
     private List<Imagen> imagenes;
 
     //================================= RELACION CON LA ENTIDAD TELEFONO =================================//

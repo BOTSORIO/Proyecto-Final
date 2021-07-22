@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface ImagenRepo extends JpaRepository<Imagen,Integer>{
 
     //================================= REPOSITORIO DE IMAGEN =================================//
+
+    @Query("select i.url from Imagen i where i.lugar.id=:idLugar")
+    String obtenerUrlImagen(Integer idLugar);
 }

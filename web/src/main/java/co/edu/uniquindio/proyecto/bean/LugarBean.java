@@ -40,7 +40,6 @@ public class LugarBean implements Serializable {
     @Value("${upload.url}")
     private String urlImagenes;
     private ArrayList<Imagen>imagenes;
-    private Imagen foto;
 
     @Getter @Setter
     private List<Ciudad> ciudades;
@@ -108,7 +107,7 @@ public class LugarBean implements Serializable {
 
         if(nombreImagen!=null){
 
-            foto = new Imagen(nombreImagen);
+           Imagen foto = new Imagen(nombreImagen);
 
             imagenes.add(foto);
         }
