@@ -26,13 +26,16 @@ public class TelefonoServicioImpl implements TelefonoServicio{
     }
 
     @Override
-    public Telefono actualizarTelefono(Telefono t) throws Exception {
+    public void actualizarTelefono(Telefono t, int codigoTelefono) throws Exception {
 
-        if(t.getTelefonoLugar().length() > 12){
-            throw new Exception("No puede superar los 12 caracteres");
+        Telefono telefono = obtenerTelefono(codigoTelefono);
+
+        if (telefono != null){
+
+            telefono.setTelefonoLugar(t.getTelefonoLugar());
+
+            telefonoRepo.save(telefono);
         }
-
-        return telefonoRepo.save(t);
     }
 
     @Override

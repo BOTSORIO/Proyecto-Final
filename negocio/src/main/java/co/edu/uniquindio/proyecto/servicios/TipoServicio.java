@@ -8,7 +8,7 @@ public interface TipoServicio {
 
     Tipo registrarTipo(Tipo t) throws Exception;
 
-    Tipo actualizarTipo(Tipo t) throws Exception;
+    void  actualizarTipo(Tipo t, int codigoTipo) throws Exception;
 
     void eliminarTipo(int id) throws  Exception;
 

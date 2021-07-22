@@ -57,29 +57,21 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
-    public Moderador actualizarModerador(Moderador m) throws Exception {
+    public void actualizarModerador(Moderador m,String email,String password) throws Exception {
 
-        if (m.getId().length()>10){
-            throw new Exception("La cedula solo puede tener 10 caracteres");
-        }
+      Moderador moderadorObtenido = obtenerEmailPassword(email,password);
 
-        if (m.getNickname().length()>100){
-            throw new Exception("El nickname solo puede tener 100 caracteres compa");
-        }
+      if(moderadorObtenido != null){
+          moderadorObtenido.setId(m.getId());
+          moderadorObtenido.setNombre(m.getNombre());
+          moderadorObtenido.setNickname(m.getNickname());
+          moderadorObtenido.setEmail(m.getEmail());
+          moderadorObtenido.setPassword(m.getPassword());
+          moderadorObtenido.setAdministrador(m.getAdministrador());
+          moderadorObtenido.setLugares(m.getLugares());
 
-        if (m.getEmail().length()>100){
-            throw new Exception("El correo solo puede tener 100 caracteres compa");
-        }
-
-        if (m.getNombre().length()>100){
-            throw new Exception("El nombre solo puede tener 100 caracteres compa");
-        }
-
-        if (m.getPassword().length()>100){
-            throw new Exception("La contraseña solo puede tener 100 caracteres compa");
-        }
-
-        return moderadorRepo.save(m);
+          moderadorRepo.save(moderadorObtenido);
+      }
     }
 
     @Override
@@ -124,4 +116,16 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         return moderadorRepo.findAll();
     }
 
+    @Override
+    public Moderador obtenerEmailPassword(String email, String password) throws Exception {
+
+        Moderador moderador = moderadorRepo.findByEmailAndPassword(email,password);
+
+        if(moderador == null){
+
+            throw new Exception("¡Ups! No te hemos podido encontrar");
+        }
+
+        return moderador;
+    }
 }

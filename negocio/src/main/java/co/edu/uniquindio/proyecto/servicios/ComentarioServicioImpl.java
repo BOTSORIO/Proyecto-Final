@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class ComentarioServicioImpl implements ComentarioServicio{
 
     private final ComentarioRepo comentarioRepo;
+    private final UsuarioRepo usuarioRepo;
 
-    public ComentarioServicioImpl(ComentarioRepo comentarioRepo) {
+    public ComentarioServicioImpl(ComentarioRepo comentarioRepo, UsuarioRepo usuarioRepo) {
         this.comentarioRepo = comentarioRepo;
+        this.usuarioRepo = usuarioRepo;
     }
 
     @Override
@@ -29,17 +32,18 @@ public class ComentarioServicioImpl implements ComentarioServicio{
     }
 
     @Override
-    public Comentario actualizarComentario(Comentario c) throws Exception {
+    public void actualizarComentario(Comentario c,int codigoComentario) throws Exception {
 
-        if(c.getComentario().length() > 200){
-            throw  new Exception("No se pueden exceder los 200 caracteres");
+        Comentario comentarioObtenido = obtenerComentario(codigoComentario);
+
+        if(comentarioObtenido != null){
+            comentarioObtenido.setComentario(c.getComentario());
+            comentarioObtenido.setFechaComentario(c.getFechaComentario());
+            comentarioObtenido.setCalificacion(c.getCalificacion());
+
+            comentarioRepo.save(comentarioObtenido);
         }
 
-        if(c.getRespuesta().length() > 200){
-            throw  new Exception("No se pueden exceder los 200 caracteres");
-        }
-
-        return comentarioRepo.save(c);
     }
 
     @Override

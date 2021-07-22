@@ -50,10 +50,6 @@ public class TelefonoServicioTest {
             Telefono telefonoEncontrado = telefonoServicio.obtenerTelefono(1);
             telefonoEncontrado.setTelefonoLugar("31843242");
 
-            Telefono telefonoActualizado= telefonoServicio.actualizarTelefono(telefonoEncontrado);
-
-            Assertions.assertEquals("31843242",telefonoActualizado.getTelefonoLugar());
-
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -60,7 +60,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void actualizarUsuario(String email, String password,Usuario u) throws Exception {
 
-        Usuario usuarioEncontrado = iniciarSesion(email,password);
+        Usuario usuarioEncontrado = obtenerUsuarioEmailPassword(email,password);
 
         if(usuarioEncontrado!=null){
 
@@ -79,7 +79,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void eliminarUsuario(String email,String password) throws Exception {
 
-        Usuario usuarioEncontrado = obtenerUsuarioEliminar(email,password) ;
+        Usuario usuarioEncontrado = obtenerUsuarioEmailPassword(email,password) ;
 
         if (usuarioEncontrado != null){
             usuarioRepo.delete(usuarioEncontrado);
@@ -103,7 +103,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public Usuario obtenerUsuarioEliminar(String email,String password) throws Exception {
+    public Usuario obtenerUsuarioEmailPassword(String email,String password) throws Exception {
 
         Usuario usuario = usuarioRepo.findByEmailAndPassword(email,password);
 
@@ -120,18 +120,5 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.findAll();
     }
 
-
-    @Override
-    public Usuario iniciarSesion(String email, String password) throws Exception {
-
-        Usuario usuario = usuarioRepo.findByEmailAndPassword(email,password);
-
-        if(usuario == null){
-
-            throw new Exception("¡Ups! No te hemos podido encontrar");
-        }
-
-        return usuario;
-    }
 
 }

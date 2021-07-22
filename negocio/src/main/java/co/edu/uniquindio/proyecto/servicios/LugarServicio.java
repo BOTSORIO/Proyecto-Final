@@ -10,7 +10,7 @@ public interface LugarServicio {
 
     Lugar registrarLugar(Lugar l) throws Exception;
 
-    Lugar actualizarLugar(Lugar l) throws Exception;
+    void  actualizarLugar(Lugar l, int codigoLugar) throws Exception;
 
     void eliminarLugar(int id) throws Exception;
 

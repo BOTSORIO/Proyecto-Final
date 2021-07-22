@@ -14,4 +14,6 @@ public interface ModeradorRepo extends JpaRepository<Moderador,String> {
     Optional<Moderador> findByEmail(String email);
 
     Optional<Moderador> findByNickname(String nickname);
+
+    Moderador findByEmailAndPassword(String email,String password);
 }

@@ -57,28 +57,20 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public Administrador actualizarAdministrador(Administrador a) throws Exception {
+    public void actualizarAdministrador(Administrador a,String email, String password) throws Exception {
 
-        if (a.getId().length()>10){
-            throw new Exception("La cedula solo puede tener 10 caracteres");
-        }
+        Administrador administradorObtenido = obtenerEmailPassword(email,password);
 
-        if (a.getNickname().length()>100){
-            throw new Exception("El nickname solo puede tener 100 caracteres compa");
-        }
+        if(administradorObtenido!= null){
+            administradorObtenido.setId(a.getId());
+            administradorObtenido.setEmail(a.getEmail());
+            administradorObtenido.setNickname(a.getNickname());
+            administradorObtenido.setNombre(a.getNombre());
+            administradorObtenido.setPassword(a.getPassword());
+            administradorObtenido.setModeradores(a.getModeradores());
 
-        if (a.getEmail().length()>100){
-            throw new Exception("El correo solo puede tener 100 caracteres compa");
+            administradorRepo.save(administradorObtenido);
         }
-
-        if (a.getNombre().length()>100){
-            throw new Exception("El nombre solo puede tener 100 caracteres compa");
-        }
-
-        if (a.getPassword().length()>100){
-            throw new Exception("La contraseña solo puede tener 100 caracteres compa");
-        }
-        return administradorRepo.save(a);
     }
 
     @Override
@@ -118,5 +110,18 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     @Override
     public List<Administrador> listarAdministradores() {
         return administradorRepo.findAll();
+    }
+
+    @Override
+    public Administrador obtenerEmailPassword(String email, String password) throws Exception {
+
+        Administrador administrador =administradorRepo.findByEmailAndPassword(email, password);
+
+        if(administrador == null){
+
+            throw new Exception("¡Ups! No te hemos podido encontrar");
+        }
+
+        return administrador;
     }
 }

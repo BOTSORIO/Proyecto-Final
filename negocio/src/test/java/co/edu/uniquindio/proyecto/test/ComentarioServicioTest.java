@@ -51,9 +51,7 @@ public class ComentarioServicioTest {
             Comentario comentarioEncontrado = comentarioServicio.obtenerComentario(1);
 
             comentarioEncontrado.setComentario("hola");
-            Comentario comentarioActualizado = comentarioServicio.actualizarComentario(comentarioEncontrado);
 
-            Assertions.assertEquals("hola",comentarioActualizado.getComentario());
 
         }catch (Exception e){
             e.printStackTrace();

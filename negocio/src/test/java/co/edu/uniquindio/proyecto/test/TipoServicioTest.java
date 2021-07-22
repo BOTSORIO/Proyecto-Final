@@ -42,11 +42,7 @@ public class TipoServicioTest {
             Tipo tipoBuscado = tipoServicio.obtenerTipo(1);
 
             tipoBuscado.setNombre("Shango");
-            Tipo tipoActualizado = tipoServicio.actualizarTipo(tipoBuscado);
 
-            System.out.println(tipoActualizado);
-
-            Assertions.assertEquals("Shango",tipoActualizado.getNombre());
 
         } catch (Exception e){
             e.printStackTrace();

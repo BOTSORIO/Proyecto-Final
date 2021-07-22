@@ -24,12 +24,15 @@ public class FavoritoServicioImpl implements FavoritoServicio {
     }
 
     @Override
-    public Favorito actualizarFavorito(Favorito f) throws Exception {
+    public void actualizarFavorito(Favorito f,int codigoFavorito) throws Exception {
 
-        if(f.getAporte().length()>255){
-            throw new Exception("No puede ingresar un aporte que supere 255 caracteres");
+        Favorito favorito = obtenerFavorito(codigoFavorito);
+
+        if (favorito != null) {
+            favorito.setAporte(f.getAporte());
+
+            favoritoRepo.save(favorito);
         }
-        return favoritoRepo.save(f);
     }
 
     @Override

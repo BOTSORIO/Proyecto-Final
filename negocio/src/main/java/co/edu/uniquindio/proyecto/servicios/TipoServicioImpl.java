@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Tipo;
 
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +28,16 @@ public class TipoServicioImpl implements TipoServicio{
     }
 
     @Override
-    public Tipo actualizarTipo(Tipo t) throws Exception {
+    public void  actualizarTipo(Tipo t, int codigoTipo) throws Exception {
 
-        if (t.getNombre().length()>100){
-            throw new Exception("El nombre no puede exceder los 100 caracteres");
+        Tipo tipo= obtenerTipo(codigoTipo);
+
+        if (tipo != null){
+
+            tipo.setNombre(t.getNombre());
+
+            tipoRepo.save(tipo);
         }
-
-        return tipoRepo.save(t);
 
     }
 
@@ -67,4 +71,6 @@ public class TipoServicioImpl implements TipoServicio{
     public List<Tipo> listarTipos() {
         return tipoRepo.findAll();
     }
+
+
 }

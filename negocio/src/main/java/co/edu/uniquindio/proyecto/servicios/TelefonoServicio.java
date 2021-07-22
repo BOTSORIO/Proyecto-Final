@@ -8,7 +8,7 @@ public interface TelefonoServicio {
 
     Telefono registrarTelefono (Telefono t) throws Exception;
 
-    Telefono actualizarTelefono (Telefono t) throws Exception;
+    void actualizarTelefono (Telefono t, int codigoTelefono) throws Exception;
 
     void eliminarTelefono(int id) throws Exception;
 

@@ -29,17 +29,22 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public Lugar actualizarLugar(Lugar l) throws Exception {
+    public void actualizarLugar(Lugar l,int codigoLugar) throws Exception {
 
-        if(l.getDescripcion().length() > 200){
-            throw new Exception("La descripcion excede el maximo de caracteres");
+        Lugar lugar = obtenerLugar(codigoLugar);
+
+        if(lugar != null){
+            lugar.setNombre(l.getNombre());
+            lugar.setEstado(l.getEstado());
+            lugar.setDescripcion(l.getDescripcion());
+            lugar.setCiudad(l.getCiudad());
+            lugar.setHorarios(l.getHorarios());
+            lugar.setLatitud(l.getLatitud());
+            lugar.setLongitud(l.getLongitud());
+            lugar.setTipo(l.getTipo());
+
+            lugarRepo.save(lugar);
         }
-
-        if(l.getNombre().length() > 100){
-            throw new Exception("El nombre excede el maximo de caracteres");
-        }
-
-        return lugarRepo.save(l);
     }
 
     @Override

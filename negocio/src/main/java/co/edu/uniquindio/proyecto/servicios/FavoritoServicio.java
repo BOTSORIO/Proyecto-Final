@@ -8,7 +8,7 @@ public interface FavoritoServicio {
 
     Favorito registrarFavorito(Favorito f) throws Exception;
 
-    Favorito actualizarFavorito(Favorito f) throws Exception;
+    void actualizarFavorito(Favorito f, int codigoFavorito) throws Exception;
 
     void eliminarFavorito(int id) throws Exception;
 

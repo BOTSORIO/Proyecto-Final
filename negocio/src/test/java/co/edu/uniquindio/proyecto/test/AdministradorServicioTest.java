@@ -45,11 +45,7 @@ public class AdministradorServicioTest {
             Administrador administradorEncontrado = administradorServicio.obtenerAdministrador("5");
 
             administradorEncontrado.setPassword("contrasenia123");
-            Administrador admministradorActualizado = administradorServicio.actualizarAdministrador(administradorEncontrado);
 
-            System.out.println(admministradorActualizado);
-
-            Assertions.assertEquals("contrasenia123",administradorEncontrado.getPassword());
 
         }catch (Exception e){
             e.printStackTrace();

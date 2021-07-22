@@ -8,7 +8,7 @@ public interface ModeradorServicio {
 
     Moderador registrarModerador(Moderador m) throws Exception;
 
-    Moderador actualizarModerador(Moderador m) throws Exception;
+    void actualizarModerador(Moderador m, String email,String password) throws Exception;
 
     void eliminarModerador(String email) throws Exception;
 
@@ -17,4 +17,6 @@ public interface ModeradorServicio {
     Moderador obtenerModeradorEmail(String email) throws Exception;
 
     List<Moderador> listarModeradores();
+
+    Moderador obtenerEmailPassword(String email, String password) throws Exception;
 }
