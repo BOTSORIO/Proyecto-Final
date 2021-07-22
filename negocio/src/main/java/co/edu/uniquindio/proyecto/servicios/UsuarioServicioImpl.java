@@ -69,6 +69,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             usuarioEncontrado.setPassword(u.getPassword());
             usuarioEncontrado.setCiudad(u.getCiudad());
             usuarioEncontrado.setEmail(u.getEmail());
+
+            usuarioRepo.save(usuarioEncontrado);
         }
 
     }

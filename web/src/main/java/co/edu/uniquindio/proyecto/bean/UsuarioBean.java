@@ -62,20 +62,27 @@ public class UsuarioBean implements Serializable {
     }
 
 
-    public void eliminarUsuario(){
+    public String eliminarUsuario(){
 
         try {
-            usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            if (personaLogin!=null) {
+                usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+                FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+                return "/index?faces-redirect=true";
+            }
 
         }catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
+
+        return null;
     }
 
-    public void actualizarUsuario(){
+    public String actualizarUsuario(){
 
         try{
 
@@ -84,6 +91,9 @@ public class UsuarioBean implements Serializable {
                 usuarioServicio.actualizarUsuario(personaLogin.getEmail(),personaLogin.getPassword(), usuario);
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario se actualizo con exito");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+                FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+                return "/index?faces-redirect=true";
             }
 
         }catch(Exception e){
@@ -91,6 +101,8 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
         }
+
+        return null;
     }
 
 }
