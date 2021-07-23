@@ -45,7 +45,7 @@
         width: 100%;
     }
 
-    #dialogo {
+    .ui-dialog {
         width: 90% !important;
         margin-left: -25%;
     }

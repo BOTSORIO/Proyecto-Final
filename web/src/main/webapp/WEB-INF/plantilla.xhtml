@@ -25,58 +25,84 @@
 <h:body>
     <div id="header">
         <ui:insert name="header">
-                <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-primary">
-                    <div class="container">
-                        <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarColor02">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                                </li>
+            <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-primary">
+                <div class="container">
+                    <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarColor02"
+                            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarColor02">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                            </li>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        Usuarios
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="/registrarUsuario.xhtml">Registrarse</a></li>
-                                        <li><a class="dropdown-item" href="/eliminarUsuario.xhtml" jsf:rendered="#{seguridadBean.autenticado}">Eliminar</a></li>
-                                        <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml" jsf:rendered="#{seguridadBean.autenticado}">Actualizar</a></li>
-                                    </ul>
-                                </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Usuarios
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="/registrarUsuario.xhtml">Registrarse</a></li>
+                                    <li><a class="dropdown-item" href="/eliminarUsuario.xhtml"
+                                           jsf:rendered="#{seguridadBean.autenticado}">Eliminar</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml"
+                                           jsf:rendered="#{seguridadBean.autenticado}">Actualizar</a></li>
+                                </ul>
+                            </li>
 
-                                <li class="nav-item dropdown" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        Lugares
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                        <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml">Crear</a></li>
-                                        <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml">Eliminar</a></li>
-                                        <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml">Actualizar</a></li>
-                                    </ul>
-                                </li>
+                            <li class="nav-item dropdown"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Lugares
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
+                                    <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml">Crear</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml">Eliminar</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml">Actualizar</a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                            </ul>
-                            <div class="d-flex">
-                                <h:form class="d-flex me-2">
-                                    <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?"
-                                                 value="#{busquedaBean.busqueda}"/>
-                                    <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
-                                                     action="#{busquedaBean.buscar}"/>
-                                </h:form>
-                                <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Login"
-                                                 onclick="PF('dlg1').show()" icon="pi pi-sign-in" iconPos="left" rendered="#{!seguridadBean.autenticado}"/>
-                                <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Logout" action="#{seguridadBean.cerrarSesion}" rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out" iconPos="left"/>
-                            </div>
+                            <li class="nav-item dropdown"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Moderadores
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
+                                    <li><a class="dropdown-item" href="/administrador/crearModerador.xhtml">Crear</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                           href="/administrador/eliminarModerador.xhtml">Eliminar</a></li>
+                                    <li><a class="dropdown-item"
+                                           href="/administrador/actualizarModerador.xhtml">Actualizar</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="d-flex">
+                            <h:form class="d-flex me-2">
+                                <p:inputText styleClass="form-control me-2 input-search"
+                                             placeholder="¿Qué está buscando?"
+                                             value="#{busquedaBean.busqueda}"/>
+                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
+                                                 action="#{busquedaBean.buscar}"/>
+                            </h:form>
+                            <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Login"
+                                             onclick="PF('dlg1').show()" icon="pi pi-sign-in" iconPos="left"
+                                             rendered="#{!seguridadBean.autenticado}"/>
+                            <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Logout"
+                                             action="#{seguridadBean.cerrarSesion}"
+                                             rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out"
+                                             iconPos="left"/>
                         </div>
                     </div>
-                </nav>
+                </div>
+            </nav>
 
             <h:form>
                 <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
@@ -85,7 +111,8 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h5>Correo electronico</h5>
-                            <p:inputText id="username1" value="#{seguridadBean.email}" styleClass="p-d-block" style="width: 100%"
+                            <p:inputText id="username1" value="#{seguridadBean.email}" styleClass="p-d-block"
+                                         style="width: 100%"
                                          required="true" requiredMessage="¡Ups! olvidaste el email"/>
 
                             <h5>Contraseña</h5>
@@ -126,13 +153,13 @@
 
     <div id="footer" class="footer">
         <ui:insert name="footer">
-                <div class="py-4 bg-light" align="center">
-                    <div class="justify-content-center">
-                        <div class="col-10">
-                            <span>Universidad del Quindío - Programación avanzada - 2021</span>
-                        </div>
+            <div class="py-4 bg-light" align="center">
+                <div class="justify-content-center">
+                    <div class="col-10">
+                        <span>Universidad del Quindío - Programación avanzada - 2021</span>
                     </div>
                 </div>
+            </div>
         </ui:insert>
     </div>
 </h:body>
