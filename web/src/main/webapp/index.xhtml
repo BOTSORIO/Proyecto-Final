@@ -38,23 +38,28 @@
                 </div>
                 <div>
                     <h:form id="form">
-                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true"
-                                    gridIcon="pi pi-th-large">
 
-                            <p:dataViewGridItem>
-                                <div class="card" style="width: 18rem;">
-                                    <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="card-title">#{lugar.nombre}</h5>
-                                        <p class="card-text">#{lugar.descripcion}</p>
+                        <p:carousel value="#{inicioBean.lugares}" var="lugar" responsive="true" itemStyle="text-align:center">
+                            <div class="product">
+                                <div class="product-grid-item p-p-5">
+                                    <div class="product-grid-item-top">
+                                        <div class="product-name"><h2>#{lugar.nombre}</h2></div>
+                                        <div>
+                                            <i class="pi pi-map-marker product-category-icon"/>
+                                            <span class="product-category">#{lugar.tipo.nombre}</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-grid-item-content">
+                                        <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."/>
+                                        <div class="product-description">#{lugar.descripcion}</div>
                                         <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
                                                          styleClass="ui-button-raised" icon="pi pi-arrow-right"
                                                          iconPos="right"/>
                                     </div>
                                 </div>
-                            </p:dataViewGridItem>
+                            </div>
+                        </p:carousel>
 
-                        </p:dataView>
                     </h:form>
                 </div>
             </div>

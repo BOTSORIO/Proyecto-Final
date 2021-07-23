@@ -28,31 +28,38 @@
                         <h1> Comentarios </h1>
                     </f:facet>
 
-                    <p:dataViewGridItem>
-                        <div class="card" style="width: 18rem;">
-                            <!--<img src="" class="card-img-top" alt="..." />-->
-                            <div class="card-body">
-                                <h5 class="card-title">#{detalleLugarBean.comentarios.get(0).usuario.nombre}</h5>
-                                <i class="pi pi-comments"/><span
-                                    class="product-category"> #{detalleLugarBean.comentarios.get(0).comentario}</span>
-                                <p:divider/>
-                                <i class="pi pi-star-o"/><span
-                                    class="product-category"> #{detalleLugarBean.comentarios.get(0).calificacion}</span>
-                            </div>
-                        </div>
-                    </p:dataViewGridItem>
+                    <h5>#{detalleLugarBean.comentarios}</h5>
+
+                    <div>
+                        <h:form id="form">
+                            <p:dataView var="comentario" value="#{detalleLugarBean.comentarios}"
+                                        gridIcon="pi pi-th-large">
+
+                                <p:dataViewGridItem>
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">#{comentario.nombre}</h5>
+                                            <p class="card-text">#{comentario.descripcion}</p>
+                                        </div>
+                                    </div>
+                                </p:dataViewGridItem>
+
+                            </p:dataView>
+                        </h:form>
+                    </div>
 
                     <div class="row" style="margin-top: 2%">
                         <div class="col">
                             <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
-                                <f:facet name="title" >
+                                <f:facet name="title">
                                     Añade tu comentario
                                 </f:facet>
                                 <p:inputTextarea rows="2" cols="30"/>
                             </p:card>
                         </div>
-                        <div class="col" style="margin-top: 5%" >
-                            <h:panelGrid columns="1" style="margin-bottom: 10px" rendered="#{seguridadBean.autenticado}">
+                        <div class="col" style="margin-top: 5%">
+                            <h:panelGrid columns="1" style="margin-bottom: 10px"
+                                         rendered="#{seguridadBean.autenticado}">
                                 <h6> Calificaló: </h6>
                                 <p:inputText id="sliderTxtMax" value="5"/>
                                 <p:slider for="sliderTxtMax" range="3" maxValue="5"/>
