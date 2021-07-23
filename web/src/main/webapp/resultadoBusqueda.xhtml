@@ -21,11 +21,34 @@
     <ui:define name="title">Lugar | Busqueda</ui:define>
     <ui:define name="content">
 
-    <div id="mapa">
-        <div id='map' style="visibility: hidden"></div>
-    </div>
-
-        <p>#{busquedaBean.lugares}</p>
+        <div class="row">
+            <div class="col">
+                <div id="mapa">
+                    <div id='map' style="visibility: hidden; width: 90%;height: 536px; margin: 5%"></div>
+                </div>
+            </div>
+            <div class="col">
+                <p:carousel id="carusel" value="#{busquedaBean.lugares}" var="lugar"
+                            itemStyle="text-align:center" numVisible="1" easing="easeOutBounce"
+                            style="width: 500px;margin: 5%" circular="true">
+                    <div class="product">
+                        <div class="product-grid-item p-p-5">
+                            <div class="product-grid-item-content" style="margin: 5%">
+                                <div class="product-name"> <h2>#{lugar.nombre}</h2></div>
+                                <i class="pi pi-map-marker product-category-icon"/>
+                                <span class="product-category">#{lugar.tipo.nombre}</span>
+                                <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."
+                                     height="300"/>
+                                <div class="product-description">#{lugar.descripcion}</div>
+                                <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
+                                                 styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                 iconPos="right"/>
+                            </div>
+                        </div>
+                    </div>
+                </p:carousel>
+            </div>
+        </div>
 
     </ui:define>
 </ui:composition>

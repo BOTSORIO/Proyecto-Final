@@ -49,8 +49,8 @@
                                             <span class="product-category">#{lugar.tipo.nombre}</span>
                                         </div>
                                     </div>
-                                    <div class="product-grid-item-content">
-                                        <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."/>
+                                    <div class="product-grid-item-content" style="margin: 5%">
+                                        <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..." height="300"/>
                                         <div class="product-description">#{lugar.descripcion}</div>
                                         <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
                                                          styleClass="ui-button-raised" icon="pi pi-arrow-right"

@@ -70,7 +70,7 @@
                                     <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
                                                      action="#{busquedaBean.buscar}"/>
                                 </h:form>
-                                <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login"
+                                <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Login"
                                                  onclick="PF('dlg1').show()" icon="pi pi-sign-in" iconPos="left" rendered="#{!seguridadBean.autenticado}"/>
                                 <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Logout" action="#{seguridadBean.cerrarSesion}" rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out" iconPos="left"/>
                             </div>

@@ -50,6 +50,10 @@
         margin-left: -25%;
     }
 
+    #carusel {
+        width: 90% !important;
+    }
+
     #fotox {
         margin-top: 50%;
         margin-left: 270%;
