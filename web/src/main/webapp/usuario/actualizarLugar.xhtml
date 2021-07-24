@@ -68,9 +68,9 @@
               </p:selectOneMenu>
 
               <p:outputLabel for="imagenes_lugar" value="Imagenes: " />
-              <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced"
+              <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="simple"
                             multiple="true" sizeLimit="1000000" fileLimit="5"
-                            allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
+                            allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
 
               <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
               <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"

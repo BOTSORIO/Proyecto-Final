@@ -46,7 +46,7 @@ public class SeguridadFilter implements Filter {
                 SeguridadBean userManager = (SeguridadBean) request.getSession().getAttribute("seguridadBean");
 
                 if (userManager != null) {
-                    if (userManager.isAutenticado() && userManager.getRol().equals("usuario")) {
+                    if (userManager.isAutenticado() && userManager.getRol().equals("admin")) {
                         //El usuario está logueado entonces si puede ver la página solicitada
                         filterChain.doFilter(servletRequest, servletResponse);
                     } else {
