@@ -30,6 +30,7 @@ public class LugarBean implements Serializable {
     private final UsuarioServicio usuarioServicio;
     private final TipoServicio tipoServicio;
     private final ImagenServicio imagenServicio;
+    private final HorarioServicio horarioServicio;
 
     @Getter @Setter
     private Lugar lugar;
@@ -53,21 +54,28 @@ public class LugarBean implements Serializable {
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
+    @Getter @Setter
+    private ArrayList<String>dias;
 
-    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio) {
+    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio) {
         this.lugarServicio = lugarServicio;
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
         this.tipoServicio = tipoServicio;
         this.imagenServicio = imagenServicio;
+        this.horarioServicio = horarioServicio;
     }
 
     @PostConstruct
     public void inicializar(){
         this.lugar= new Lugar();
+        this.horario = new Horario();
         this.ciudades = ciudadServicio.listarCiudades();
         this.tipos = tipoServicio.listarTipos();
         this.imagenes = new ArrayList<>();
+        this.horarios = new ArrayList<>();
+        this.dias = new ArrayList<>();
+        llenarDias();
     }
 
     public String registrarLugar(){
@@ -84,12 +92,22 @@ public class LugarBean implements Serializable {
                         i.setLugar(lugar);
                     }
 
+                    for (Horario h : horarios) {
+                        h.getLugares().add(lugar);
+                    }
+
+                    lugar.setHorarios(horarios);
                     lugar.setImagenes(imagenes);
                     lugarServicio.registrarLugar(lugar);
 
                     for (Imagen i : imagenes) {
 
                         imagenServicio.registrarImagen(i);
+                    }
+
+                    for(Horario h:horarios){
+
+                        horarioServicio.registrarHorario(h);
                     }
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
@@ -150,4 +168,42 @@ public class LugarBean implements Serializable {
     public void setLugar(Lugar lugar) {
         this.lugar = lugar;
     }
+
+    public void llenarDias() {
+        this.dias = new ArrayList<>();
+        this.dias.add("Lunes");
+        this.dias.add("Martes");
+        this.dias.add("Miercoles");
+        this.dias.add("Jueves");
+        this.dias.add("Viernes");
+        this.dias.add("Sabado");
+        this.dias.add("Domingo");
+    }
+    public void nuevoHorario() {
+        System.out.println("Nuevo Horario");
+        this.horario = new Horario();
+
+    }
+
+    public void crearHorario() {
+        System.out.println("Creando horario");
+        System.out.println(this.horario.getDiaSemana());
+        System.out.println("Hora apertura" + this.horario.getHoraInicio());
+        System.out.println("Hora cierre" + this.horario.getHoraFin());
+        try {
+            this.horarios.add(horario);
+            nuevoHorario();
+            for (Horario h : this.horarios) {
+                System.out.println(h);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarHorario() {
+        this.horarios.remove(this.horario);
+        nuevoHorario();
+    }
+
 }

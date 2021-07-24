@@ -41,8 +41,46 @@ public class UsuarioServicioTest {
             e.printStackTrace();
         }
     }
+    /*
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void eliminarUsuarioTest(){
+
+        try {
+
+            Usuario usuario = usuarioServicio.obtenerUsuarioEliminar("m@gmail.com","manu123");
+
+            usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
+
+            Usuario usuarioEliminado = usuarioServicio.obtenerUsuarioEliminar("m@gmail.com","manu123");;
+
+            Assertions.assertNull(usuarioEliminado);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    */
+    /*
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void inisiarSesionUsuarioTest(){
+
+        try {
+
+            Usuario usuario = usuarioServicio.iniciarSesion("f@gmail.com","fer123");
 
 
+            Assertions.assertNotNull(usuario);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    */
     @Test
     @Sql("classpath:usuarios.sql")
     public void actualizarUsuarioTest(){
@@ -76,7 +114,22 @@ public class UsuarioServicioTest {
     }
 
 
+    /*
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void iniciarSecionTest(){
 
+        try {
 
+            Usuario usuarioBuscado = usuarioServicio.iniciarSesion("m@gmail.com","manu123");
 
+            System.out.println(usuarioBuscado);
+
+            Assertions.assertNotNull(usuarioBuscado);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    */
 }

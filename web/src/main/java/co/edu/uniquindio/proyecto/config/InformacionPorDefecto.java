@@ -82,7 +82,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
             lugarServicio.registrarLugar(lugar1);
             lugarServicio.registrarLugar(lugar2);
         }
-
+        /*
         if(comentarioServicio.listarComentarios().isEmpty()){
 
             Comentario comentario1= Comentario.builder().comentario("Que buen lugar")
@@ -97,5 +97,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
             lugarServicio.registrarComentario(comentario2);
 
         }
+        */
     }
 }

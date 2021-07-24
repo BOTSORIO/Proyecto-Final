@@ -7,6 +7,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions"
       xml:lang="en" lang="en">
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
@@ -67,13 +68,112 @@
                             <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
                         </p:selectOneMenu>
 
-                        <p:outputLabel for="imagenes_lugar" value="Imagenes: " />
-                        <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="simple"
-                                      multiple="true" sizeLimit="1000000" fileLimit="5"
-                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
+                            <p:outputLabel for="imagenes_lugar" value="Imagenes: " />
+                            <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced"
+                                          multiple="true" sizeLimit="1000000" fileLimit="5"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
+
+                        <p:commandButton value="Horario" action="#{lugarBean.nuevoHorario}"
+
+                                         onclick="PF('Horarios').show()">
+
+                        </p:commandButton>
+
+                        <p:dataTable id="dt-products" widgetVar="dtProducts" var="horario"
+                                     value="#{lugarBean.horarios}"
+                                     reflow="true" styleClass="products-table"
+                                     selection="#{lugarBean.horario}"
+                                     rows="10">
+                            <p:autoUpdate/>
+                            <f:facet name="header">
+                                <div class="products-table-header">
+                                    <span style="font-weight: bold">Horarios</span>
+                                </div>
+                            </f:facet>
+
+
+                            <p:column headerText="Dia"
+                            >
+                                <h:outputText value="#{horario.diaSemana}"/>
+                            </p:column>
+                            <p:column headerText="Abre"
+                            >
+                                <h:outputText value="#{horario.horaInicio}"/>
+                            </p:column>
+
+                            <p:column headerText="Cierre"
+                            >
+                                <h:outputText value="#{horario.horaFin}"/>
+                            </p:column>
+                            <p:column headerText="Borrar">
+                                <p:commandButton icon="pi pi-trash"
+                                                 actionListener="#{lugarBean.eliminarHorario}"
+                                                 process="@this"
+                                />
+
+                            </p:column>
+
+                        </p:dataTable>
+
+
+                        <p:dialog header="Horarios" showEffect="fade"
+                                  widgetVar="Horarios" modal="true"
+                                  styleClass="">
+
+                            <p:outputPanel id="panel">
+                                <p:selectOneMenu styleClass="w-100" id="dias"
+                                                 value="#{lugarBean.horario.diaSemana}"
+
+
+                                >
+                                    <f:selectItem itemLabel="Seleccione un Dia"
+                                                  noSelectionOption="true"/>
+                                    <f:selectItems var="dia" itemLabel="#{dia}"
+                                                   value="#{lugarBean.dias}"/>
+                                </p:selectOneMenu>
+
+                                <p>
+                                    <!--Hora de apertura-->
+                                    <!--<pe:timePicker value="#{lugarBean.horario.horaInicio}"
+                                                   mode="popup"
+                                                   widgetVar="popupTimeWidget2"
+                                                   label="Popup time picker"/>-->
+
+                                    <p:outputLabel for="hora_apertura" value="Apertura:"/>
+                                    <p:inputText id="hora_apertura" value="#{lugarBean.horario.horaInicio}" style="width: 100%"
+                                                 required="true"
+                                                 requiredMessage="La hora de apertura es obligatoria"/>
+                                </p>
+
+
+                                <p>
+                                    <!--Hora de cierre-->
+                                    <!--<pe:timePicker value="#{lugarBean.horario.horaFin}" mode="popup"
+                                                   widgetVar="popupTimeWidget"
+                                                   label="Popup time picker"/>-->
+
+                                    <p:outputLabel for="hora_cierre" value="Cierre:"/>
+                                    <p:inputText id="hora_cierre" value="#{lugarBean.horario.horaInicio}" style="width: 100%"
+                                                 required="true"
+                                                 requiredMessage="La hora de cierre es obligatoria"/>
+                                </p>
+                            </p:outputPanel>
+                            <f:facet name="footer">
+                                <p:commandButton
+                                        styleClass="mt-3 ui-button-raised ui-button-warning fw-bold "
+                                        value="Guardar"
+                                        update="panel,dt-products"
+                                        process="panel,dt-products, @this"
+                                        onclick="PF('Horarios').hide()"
+                                        action="#{lugarBean.crearHorario}">
+
+                                </p:commandButton>
+                            </f:facet>
+
+                        </p:dialog>
 
                         <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
-                        <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
+                        <p:inputText id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
                                          style="width: 100%"
                                          required="true" requiredMessage="La descripcion es obligatoria"/>
 
@@ -81,7 +181,7 @@
 
                     <h:panelGrid columns="2" cellpadding="5" width="100%">
 
-                        <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear" update="@form"
+                        <p:commandButton action="#" value="Crear" update="@form"
                                          style="width: 50%; margin-left: 30%;margin-top: 5%"/>
 
                         <p:button href="/index.xhtml" value="Volver"
