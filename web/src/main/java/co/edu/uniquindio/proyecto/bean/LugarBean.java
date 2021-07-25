@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -34,6 +35,12 @@ public class LugarBean implements Serializable {
 
     @Getter @Setter
     private Lugar lugar;
+
+    @Getter @Setter
+    private Date horaInicio;
+
+    @Getter @Setter
+    private Date horaFin;
 
     @Value("${upload.url}")
     private String urlImagenes;
@@ -191,6 +198,11 @@ public class LugarBean implements Serializable {
         System.out.println("Hora apertura" + this.horario.getHoraInicio());
         System.out.println("Hora cierre" + this.horario.getHoraFin());
         try {
+            String inicio =this.horaInicio.toString().split(" ")[3].substring(0,5);
+            String fin = this.horaFin.toString().split(" ")[3].substring(0,5);
+
+            horario.setHoraInicio(inicio);
+            horario.setHoraFin(fin);
             this.horarios.add(horario);
             nuevoHorario();
             for (Horario h : this.horarios) {

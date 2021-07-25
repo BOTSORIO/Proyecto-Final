@@ -84,7 +84,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if (usuarioEncontrado != null){
             usuarioRepo.delete(usuarioEncontrado);
         }else{
-            throw new Exception("Usuario no encontrado :c");
+            throw new Exception("Usuario no encontrado ");
         }
 
     }
