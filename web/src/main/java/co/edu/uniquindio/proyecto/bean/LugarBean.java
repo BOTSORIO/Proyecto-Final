@@ -36,6 +36,7 @@ public class LugarBean implements Serializable {
     @Getter @Setter
     private Lugar lugar;
 
+    //Ya tenían las variables acá, estas si se pueden usar porque son Date
     @Getter @Setter
     private Date horaInicio;
 
@@ -83,13 +84,9 @@ public class LugarBean implements Serializable {
         this.horarios = new ArrayList<>();
         this.dias = new ArrayList<>();
         llenarDias();
+
     }
 
-    /*
-    Acá el error era el orden de los registros, primero se deben crear los horarios, para poder asignarlos al lugar, y con las imágenes pasa lo contrario
-    primero se debe crear el lugar para luego asignarselo a las imágenes. Eso por el tipo de relación que usted tiene
-    listo profe , muchas gracias listo, cualquier cosa me escribe
-     */
     public String registrarLugar(){
         try {
             if (personaLogin!=null) {
@@ -177,6 +174,8 @@ public class LugarBean implements Serializable {
         this.dias.add("Viernes");
         this.dias.add("Sabado");
         this.dias.add("Domingo");
+        this.horaInicio = new Date();
+        this.horaFin = new Date();
     }
     public void nuevoHorario() {
         System.out.println("Nuevo Horario");
@@ -184,32 +183,20 @@ public class LugarBean implements Serializable {
 
     }
 
-    /**
-     * Ya está funcionando, el problema que tenía era que él dialog tiene por dentro un form y usted tenía el dialog dentro del otro form
-     * y un form NO puede ir dentro de otro form porque se daña
-     *
-     * listo profe ,gracias
-     * profe otra duda, al ser una reclacion de muchos a muchos y forma problema al agregar al lugar, no se como podria hacerse esto.
-     *
-     * Muchos a muchos entre el lugar y el horario? si, asi estaba
-     *
-     * Lo que pasa es que primero debe registrar el horario en la bd antes de asignárselo al Lugar
-     */
     public void crearHorario() {
-        System.out.println("Creando horario");
-        System.out.println(this.horario.getDiaSemana());
-        System.out.println("Hora apertura" + this.horario.getHoraInicio());
-        System.out.println("Hora cierre" + this.horario.getHoraFin());
         try {
-            String inicio =this.horaInicio.toString().split(" ")[3].substring(0,5);
-            String fin = this.horaFin.toString().split(" ")[3].substring(0,5);
-
-            horario.setHoraInicio(inicio);
-            horario.setHoraFin(fin);
-            this.horarios.add(horario);
-            nuevoHorario();
-            for (Horario h : this.horarios) {
-                System.out.println(h);
+            //acá está el casting, pero, value="#{lugarBean.horario.horaInicio}" acá lo asignan directamente, una solución e primero guardarlo en una variable acá en el bean
+            if(horaInicio!=null && horaFin!=null) {
+                String inicio = this.horaInicio.toString().split(" ")[3].substring(0, 5);
+                String fin = this.horaFin.toString().split(" ")[3].substring(0, 5);
+                horario.setHoraInicio(inicio);
+                horario.setHoraFin(fin);
+                System.out.println(horario);
+                this.horarios.add(horario);
+                nuevoHorario();
+            }else{
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","Asigne un horario");
+                FacesContext.getCurrentInstance().addMessage(null,msg);
             }
         } catch (Exception e) {
             e.printStackTrace();

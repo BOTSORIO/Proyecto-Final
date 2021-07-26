@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +68,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             Horario h1 = new Horario("Lunes", "10:00", "16:00");
             Horario h2 = new Horario("Martes", "10:00", "16:00");
-
+ // profe, en lugar bean en crear horario se esta tomando la hora del date  y se guardsa en un string, ok, pero no lo pueden hacer directamente en el objeto de Horario, espereme reviso
             horarioServicio.registrarHorario(h1);
             horarioServicio.registrarHorario(h2);
 

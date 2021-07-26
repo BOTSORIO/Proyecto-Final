@@ -32,7 +32,7 @@ public class Horario implements Serializable {
 
     @Column(name = "horaInicio",length =100,nullable = false)
     @NotBlank
-    private String horaInicio;
+    private String horaInicio; //El problema es que el componente de primefaces devuelve un Date, y acá ustedes tienen un String, entonces lanza un error de casting
 
     @Column(name = "horaFin",length =100,nullable = false)
     @NotBlank
