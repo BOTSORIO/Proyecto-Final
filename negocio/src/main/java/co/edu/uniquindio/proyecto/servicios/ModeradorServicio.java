@@ -10,11 +10,9 @@ public interface ModeradorServicio {
 
     void actualizarModerador(Moderador m, String email,String password) throws Exception;
 
-    void eliminarModerador(String email) throws Exception;
+    void eliminarModerador(String email,String password) throws Exception;
 
     Moderador obtenerModerador(String id) throws Exception;
-
-    Moderador obtenerModeradorEmail(String email) throws Exception;
 
     List<Moderador> listarModeradores();
 

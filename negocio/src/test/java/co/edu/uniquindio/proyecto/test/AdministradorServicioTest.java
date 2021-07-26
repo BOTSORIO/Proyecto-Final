@@ -42,9 +42,14 @@ public class AdministradorServicioTest {
 
         try{
 
-            Administrador administradorEncontrado = administradorServicio.obtenerAdministrador("5");
+            Administrador aux = new Administrador();
 
-            administradorEncontrado.setPassword("contrasenia123");
+            aux.setPassword("contrasenia123");
+
+            administradorServicio.actualizarAdministrador(aux,"meli@gmail.com","meli123");
+
+            Administrador administradorEncontrado = administradorServicio.obtenerAdministrador("5");
+            Assertions.assertEquals("contrasenia123",administradorEncontrado.getPassword());
 
 
         }catch (Exception e){

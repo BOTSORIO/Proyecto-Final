@@ -52,10 +52,15 @@ public class ModeradorServicioTest {
 
         try{
 
+            Moderador aux= new Moderador();
+
+            aux.setNickname("TUBBCITA");
+
+            moderadorServicio.actualizarModerador(aux,"f@gmail.com","fer123");
+
             Moderador moderadorEncontrado = moderadorServicio.obtenerModerador("123");
 
-            moderadorEncontrado.setNickname("TUBBCITA");
-
+            Assertions.assertEquals("TUBBCITA",moderadorEncontrado.getNickname());
 
         }catch (Exception e){
             e.printStackTrace();
@@ -71,7 +76,7 @@ public class ModeradorServicioTest {
 
             Moderador moderadorEncontrado = moderadorServicio.obtenerModerador("123");
 
-            moderadorServicio.eliminarModerador(moderadorEncontrado.getEmail());
+            moderadorServicio.eliminarModerador(moderadorEncontrado.getEmail(),moderadorEncontrado.getPassword());
             Moderador moderadorBorrado= moderadorServicio.obtenerModerador("123");
 
             Assertions.assertNull(moderadorBorrado);

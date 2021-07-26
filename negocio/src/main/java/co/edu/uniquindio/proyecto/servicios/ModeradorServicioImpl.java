@@ -75,9 +75,9 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
-    public void eliminarModerador(String email) throws Exception {
+    public void eliminarModerador(String email,String password) throws Exception {
 
-        Moderador moderadorEncontrado = obtenerModeradorEmail(email);
+        Moderador moderadorEncontrado = obtenerEmailPassword(email,password);
 
         if (moderadorEncontrado != null){
             moderadorRepo.delete(moderadorEncontrado);
@@ -98,23 +98,6 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         return moderador.get();
     }
 
-    @Override
-    public Moderador obtenerModeradorEmail(String email) throws Exception {
-
-        Optional<Moderador> moderador = moderadorRepo.findByEmail(email);
-
-        if(moderador.isEmpty()){
-            throw new Exception("No existe un moderador con el correo dado");
-        }
-
-        return moderador.get();
-    }
-
-    @Override
-    public List<Moderador> listarModeradores() {
-
-        return moderadorRepo.findAll();
-    }
 
     @Override
     public Moderador obtenerEmailPassword(String email, String password) throws Exception {
@@ -125,7 +108,12 @@ public class ModeradorServicioImpl implements ModeradorServicio{
 
             throw new Exception("¡Ups! No te hemos podido encontrar");
         }
-
         return moderador;
+    }
+
+    @Override
+    public List<Moderador> listarModeradores() {
+
+        return moderadorRepo.findAll();
     }
 }

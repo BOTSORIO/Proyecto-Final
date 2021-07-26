@@ -22,7 +22,7 @@
     <title><ui:insert name="title">Título</ui:insert></title>
 </h:head>
 
-<h:body style="background-image: url('resources/img/opcion2.jpg'); background-size: cover" >
+<h:body style="background-image: url('resources/img/fondo.jpg'); background-size: cover" >
 
     <div id="header">
         <ui:insert name="header">
@@ -43,27 +43,29 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="pi pi-user"/>
                                     Usuarios
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="/registrarUsuario.xhtml">Registrarse</a></li>
+                                    <li><a class="dropdown-item" href="/registrarUsuario.xhtml"><i class="pi pi-user-plus" style="margin-right: 10px"/>Registrarse</a></li>
                                     <li><a class="dropdown-item" href="/eliminarUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}">Eliminar</a></li>
+                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus" style="margin-right: 15px"/>Eliminar</a></li>
                                     <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}">Actualizar</a></li>
+                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit" style="margin-right: 15px"/>Actualizar</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item dropdown"
                                 jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
+                                <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown_lugar" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="pi pi-map-marker"/>
                                     Lugares
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml">Crear</a></li>
-                                    <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml">Eliminar</a></li>
-                                    <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml">Actualizar</a>
+                                    <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml"><i class="pi pi-plus-circle" style="margin-right: 15px"/>Crear</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml"><i class="pi pi-minus-circle" style="margin-right: 15px"/>Eliminar</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml"><i class="pi pi-pencil" style="margin-right: 15px"/>Actualizar</a>
                                     </li>
                                 </ul>
                             </li>
@@ -72,15 +74,16 @@
                                 jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="pi pi-user"/>
                                     Moderadores
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/administrador/crearModerador.xhtml">Crear</a>
+                                    <li><a class="dropdown-item" href="/administrador/crearModerador.xhtml"><i class="pi pi-user-plus" style="margin-right: 15px"/>Crear</a>
                                     </li>
                                     <li><a class="dropdown-item"
-                                           href="/administrador/eliminarModerador.xhtml">Eliminar</a></li>
+                                           href="/administrador/eliminarModerador.xhtml"><i class="pi pi-user-minus" style="margin-right: 15px"/>Eliminar</a></li>
                                     <li><a class="dropdown-item"
-                                           href="/administrador/actualizarModerador.xhtml">Actualizar</a>
+                                           href="/administrador/actualizarModerador.xhtml"><i class="pi pi-user-edit" style="margin-right: 15px"/>Actualizar</a>
                                     </li>
                                 </ul>
                             </li>

@@ -21,30 +21,28 @@
         Lamentamos que te vayas
       </f:facet>
 
-      <p>Por favor ingresa tu email para eliminar tu cuenta.</p>
+      <p>Por favor ingresa el email y contraseña del moderador que desea eliminar.</p>
 
       <h:form>
-        <p:outputLabel for="email_usuario" value="Email:"/>
-        <p:inputText id="email_usuario" value="#" style="width: 100%"
+        <p:outputLabel for="email_moderador" value="Email:"/>
+        <p:inputText id="email_moderador" value="#{administradorBean.moderador.email}" style="width: 100%"
                      required="true"
                      requiredMessage="Ups! olvidaste el email"/>
 
-        <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
-        <p:password id="contrasenia_usuario" value="#" feedback="true"
+        <p:outputLabel for="contrasenia_moderador" value="Contraseña:"/>
+        <p:password id="contrasenia_moderador" value="#{administradorBean.moderador.password}" feedback="true"
                     promptLabel="Ingresa tu contraseña" weakLabel="Débil"
                     goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%" required="true"
                     requiredMessage="Ups! olvidaste la contraseña"/>
 
         <h:panelGrid id="Botones" columns="2" width="100%">
-          <p:commandButton action="#" value="Eliminar"
+          <p:commandButton action="#{administradorBean.eliminarModerador}" value="Eliminar"
                            update="@form"
                            style="width: 100px; margin-left: 40%; margin-top: 5%"/>
           <p:button href="/index.xhtml" value="Volver" style="width: 100px; margin-left: 20%; margin-top: 5%"/>
           <p:growl showDetail="true"/>
         </h:panelGrid>
-
       </h:form>
-
     </p:card>
 
   </ui:define>

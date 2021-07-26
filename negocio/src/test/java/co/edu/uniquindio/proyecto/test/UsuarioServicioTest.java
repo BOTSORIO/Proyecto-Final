@@ -43,6 +43,22 @@ public class UsuarioServicioTest {
     }
 
 
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void eliminarUsuarioTest(){
+
+        try {
+            Usuario usuario= usuarioServicio.obtenerUsuario("123");
+
+            usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
+
+            Usuario usuarioBorrado= usuarioServicio.obtenerUsuario("123");
+            Assertions.assertNull(usuarioBorrado);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Test
     @Sql("classpath:usuarios.sql")
@@ -50,14 +66,13 @@ public class UsuarioServicioTest {
 
         try {
 
-            Usuario usuarioGuardado= usuarioServicio.obtenerUsuario("123");
+            Usuario aux= new Usuario();
 
-            usuarioGuardado.setNickname("neq");
-            //usuarioServicio.actualizarUsuario(usuarioGuardado);
+            aux.setNickname("neq");
+
+            usuarioServicio.actualizarUsuario("f@gmail.com","fer123",aux);
 
             Usuario usuarioBuscado = usuarioServicio.obtenerUsuario("123");
-
-            System.out.println(usuarioBuscado);
 
             Assertions.assertEquals("neq",usuarioBuscado.getNickname());
 

@@ -71,9 +71,14 @@ public class LugarServicioTest {
 
         try {
 
-            Lugar lugarEncontrado = lugarServicio.obtenerLugar(1);
+            Lugar aux = new Lugar();
 
-            lugarEncontrado.setEstado(false);
+            aux.setEstado(false);
+
+            lugarServicio.actualizarLugar(aux,1);
+
+            Lugar lugarEncontrado = lugarServicio.obtenerLugar(1);
+            Assertions.assertEquals(false,lugarEncontrado.getEstado());
 
         }catch (Exception e){
             e.printStackTrace();

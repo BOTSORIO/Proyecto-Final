@@ -48,10 +48,15 @@ public class ComentarioServicioTest {
 
         try {
 
+            Comentario aux= new Comentario();
+
+            aux.setComentario("XD");
+
+            comentarioServicio.actualizarComentario(aux,1);
+
             Comentario comentarioEncontrado = comentarioServicio.obtenerComentario(1);
 
-            comentarioEncontrado.setComentario("hola");
-
+            Assertions.assertEquals("XD",comentarioEncontrado.getComentario());
 
         }catch (Exception e){
             e.printStackTrace();
