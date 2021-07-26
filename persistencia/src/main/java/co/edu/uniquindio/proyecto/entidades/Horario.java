@@ -27,8 +27,7 @@ public class Horario implements Serializable {
     private int id;
 
     @Column(name = "diaSemana",length =100,nullable = false)
-    @NotBlank
-    @Positive
+    @NotBlank //Positive solo es para los números, no String
     private String diaSemana;
 
     @Column(name = "horaInicio",length =100,nullable = false)

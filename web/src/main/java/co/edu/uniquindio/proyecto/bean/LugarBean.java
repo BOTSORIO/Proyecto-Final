@@ -85,36 +85,28 @@ public class LugarBean implements Serializable {
         llenarDias();
     }
 
+    /*
+    Acá el error era el orden de los registros, primero se deben crear los horarios, para poder asignarlos al lugar, y con las imágenes pasa lo contrario
+    primero se debe crear el lugar para luego asignarselo a las imágenes. Eso por el tipo de relación que usted tiene
+    listo profe , muchas gracias listo, cualquier cosa me escribe
+     */
     public String registrarLugar(){
-
         try {
-
             if (personaLogin!=null) {
                 if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty()) {
 
-                    lugar.setUsuario((Usuario) personaLogin);
-
-                    for (Imagen i : imagenes) {
-
-                        i.setLugar(lugar);
-                    }
-
-                    for (Horario h : horarios) {
-                        h.getLugares().add(lugar);
-                    }
-
-                    lugar.setHorarios(horarios);
-                    lugar.setImagenes(imagenes);
-                    lugarServicio.registrarLugar(lugar);
-
-                    for (Imagen i : imagenes) {
-
-                        imagenServicio.registrarImagen(i);
-                    }
-
                     for(Horario h:horarios){
-
                         horarioServicio.registrarHorario(h);
+                    }
+
+                    lugar.setUsuario((Usuario) personaLogin);
+                    lugar.setHorarios(horarios);
+
+                    Lugar lugarCreado = lugarServicio.registrarLugar(lugar);
+
+                    for (Imagen i : imagenes) {
+                        i.setLugar(lugarCreado);
+                        imagenServicio.registrarImagen(i);
                     }
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
@@ -126,7 +118,7 @@ public class LugarBean implements Serializable {
                 }
             }
         }catch (Exception e){
-
+            e.printStackTrace();
             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null,msg);
         }
@@ -192,6 +184,17 @@ public class LugarBean implements Serializable {
 
     }
 
+    /**
+     * Ya está funcionando, el problema que tenía era que él dialog tiene por dentro un form y usted tenía el dialog dentro del otro form
+     * y un form NO puede ir dentro de otro form porque se daña
+     *
+     * listo profe ,gracias
+     * profe otra duda, al ser una reclacion de muchos a muchos y forma problema al agregar al lugar, no se como podria hacerse esto.
+     *
+     * Muchos a muchos entre el lugar y el horario? si, asi estaba
+     *
+     * Lo que pasa es que primero debe registrar el horario en la bd antes de asignárselo al Lugar
+     */
     public void crearHorario() {
         System.out.println("Creando horario");
         System.out.println(this.horario.getDiaSemana());
