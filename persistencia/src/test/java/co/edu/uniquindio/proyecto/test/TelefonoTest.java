@@ -25,16 +25,7 @@ public class TelefonoTest {
     @Sql("classpath:lugares.sql")
     public void registrarTelefonoTest(){
 
-        Lugar lugarBuscado = lugarRepo.findById(1).orElse(null);
 
-        Telefono  telefonoNuevo = new Telefono("3222842423");
-        telefonoNuevo.setLugar(lugarBuscado);
-
-        Telefono telefonoGuardado = telefonoRepo.save(telefonoNuevo);
-
-        System.out.println(telefonoGuardado.toString());
-
-        Assertions.assertNotNull(telefonoGuardado);
     }
 
     //================================= Metodo para eliminar un telefono =================================//

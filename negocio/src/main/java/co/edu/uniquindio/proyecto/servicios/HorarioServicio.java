@@ -12,6 +12,8 @@ public interface HorarioServicio {
 
     void eliminarHorario(int id) throws Exception;
 
+    List<Horario> obtenerHorariosLugar(int idLugar) throws Exception;
+
     Horario obtenerHorario(int id) throws Exception;
 
     List<Horario> listarHorarios();

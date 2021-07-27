@@ -96,6 +96,20 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l from Lugar l where l.nombre like concat('%',:nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
 
+    @Query("select l from Lugar  l where l.id = :idLugar")
+    Lugar obtenerLugar(int idLugar);
+
+
+    //Eliminar
+    @Query("select t from Lugar l join l.telefonos t where l.id = :idLugar")
+    List<Telefono> obtenerTelefonos(int idLugar);
+
+    @Query("select i from Lugar l join l.imagenes i where l.id = :idLugar")
+    List<Imagen> obtenerImagenees(int idLugar);
+
+    @Query("select h from Lugar l join l.horarios h where l.id = :idLugar")
+    List<Horario> obtenerHorarios(int idLugar);
+
 
     //A implementar
 

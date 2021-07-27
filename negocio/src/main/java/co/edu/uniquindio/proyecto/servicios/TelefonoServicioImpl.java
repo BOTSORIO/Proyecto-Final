@@ -9,9 +9,11 @@ import java.util.*;
 public class TelefonoServicioImpl implements TelefonoServicio{
 
    private final TelefonoRepo telefonoRepo;
+   private final LugarRepo lugarRepo;
 
-    public TelefonoServicioImpl(TelefonoRepo telefonoRepo) {
+    public TelefonoServicioImpl(TelefonoRepo telefonoRepo, LugarRepo lugarRepo) {
         this.telefonoRepo = telefonoRepo;
+        this.lugarRepo = lugarRepo;
     }
 
 
@@ -48,6 +50,18 @@ public class TelefonoServicioImpl implements TelefonoServicio{
         } else {
             throw new Exception("No se encontro el telefono");
         }
+    }
+
+    @Override
+    public List<Telefono> obtenerTelefonosLugar(int idLugar) throws Exception {
+
+        List<Telefono> telefonos = lugarRepo.obtenerTelefonos(idLugar) ;
+
+        if(telefonos ==null){
+            throw new Exception("No se encontro el telefono");
+        }
+
+        return telefonos;
     }
 
     @Override

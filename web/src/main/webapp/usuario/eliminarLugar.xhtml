@@ -29,24 +29,20 @@
                         </f:facet>
 
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
-
-                            <p:outputLabel for="nombre_lugar" value="Nombre:"/>
-                            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%"
+                            <p:outputLabel for="id_lugar" value="Codigo:"/>
+                            <p:inputText id="id_lugar" value="#{lugarBean.lugar.id}" style="width: 100%"
                                          required="true"
-                                         requiredMessage="El nombre de usuario es obligatorio"/>
-
+                                         requiredMessage="El id del lugar es obligatorio"/>
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
-
                             <p:commandButton action="#{lugarBean.eliminarLugar}" value="Eliminar" update="@form"
                                              style="width: 50%; margin-left: 30%;margin-top: 5%"/>
-
                             <p:button href="/index.xhtml" value="Volver"
                                       style="width: 50%; margin-left: 20%;margin-top: 5%"/>
-
                             <p:growl showDetail="true"/>
                         </h:panelGrid>
+
                     </p:card>
                 </h:form>
 

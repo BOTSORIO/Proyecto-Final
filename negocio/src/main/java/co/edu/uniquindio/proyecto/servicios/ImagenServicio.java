@@ -12,6 +12,8 @@ public interface ImagenServicio {
 
     void eliminarImagen (int id) throws Exception;
 
+    List<Imagen> obtenerImagenesLugar(int idLugar) throws Exception;
+
     Imagen obtenerImagen(int id) throws Exception;
 
     List<Imagen> listarImagenes() ;

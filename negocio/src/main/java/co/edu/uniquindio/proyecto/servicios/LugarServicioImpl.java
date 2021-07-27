@@ -52,10 +52,12 @@ public class LugarServicioImpl implements LugarServicio {
     @Override
     public void eliminarLugar(int id) throws Exception {
 
-        Lugar lugarEncontrado = obtenerLugar(id);
+        Lugar lugarEncontrado = obtenerLugar2(id);
 
         if(lugarEncontrado != null){
+
             lugarRepo.delete(lugarEncontrado);
+
         } else {
             throw  new Exception("No se encontro el lugar");
         }
@@ -71,6 +73,18 @@ public class LugarServicioImpl implements LugarServicio {
       }
 
         return lugar.get();
+    }
+
+    @Override
+    public Lugar obtenerLugar2(int id) throws Exception {
+
+        Lugar lugar = lugarRepo.obtenerLugar(id);
+
+        if(lugar==null){
+            throw  new Exception("No se encontro el lugar");
+        }
+
+        return lugar;
     }
 
     @Override

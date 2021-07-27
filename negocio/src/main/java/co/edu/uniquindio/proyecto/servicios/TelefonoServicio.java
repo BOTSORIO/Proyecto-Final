@@ -12,6 +12,8 @@ public interface TelefonoServicio {
 
     void eliminarTelefono(int id) throws Exception;
 
+    List<Telefono> obtenerTelefonosLugar(int idLugar) throws Exception;
+
     Telefono obtenerTelefono (int id) throws Exception;
 
     List<Telefono> listarTelefonos ();

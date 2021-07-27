@@ -37,7 +37,6 @@ public class LugarBean implements Serializable {
     @Getter @Setter
     private Lugar lugar;
 
-    //Ya tenían las variables acá, estas si se pueden usar porque son Date
     @Getter @Setter
     private Date horaInicio;
 
@@ -100,7 +99,7 @@ public class LugarBean implements Serializable {
     public String registrarLugar(){
         try {
             if (personaLogin!=null) {
-                if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty()) {
+                if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty() && !telefonos.isEmpty()) {
 
                     for(Horario h:horarios){
                         horarioServicio.registrarHorario(h);
@@ -115,6 +114,14 @@ public class LugarBean implements Serializable {
                         i.setLugar(lugarCreado);
                         imagenServicio.registrarImagen(i);
                     }
+
+                    for(Telefono t: telefonos){
+                        t.setLugar(lugarCreado);
+                        telefonoServicio.registrarTelefono(t);
+                    }
+
+                    lugarCreado.setTelefonos(telefonos);
+                    lugarCreado.setImagenes(imagenes);
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se creo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -187,13 +194,15 @@ public class LugarBean implements Serializable {
         this.horaInicio = new Date();
         this.horaFin = new Date();
     }
+
     public void nuevoHorario() {
         this.horario = new Horario();
     }
 
     public void crearHorario() {
+
         try {
-            //acá está el casting, pero, value="#{lugarBean.horario.horaInicio}" acá lo asignan directamente, una solución e primero guardarlo en una variable acá en el bean
+
             if(horaInicio!=null && horaFin!=null) {
                 String inicio = this.horaInicio.toString().split(" ")[3].substring(0, 5);
                 String fin = this.horaFin.toString().split(" ")[3].substring(0, 5);
@@ -217,21 +226,15 @@ public class LugarBean implements Serializable {
     }
 
     public void nuevoTelefono(){
-
         this.telefono = new Telefono();
     }
 
     public void crearTelefono(){
 
-        if (personaLogin!=null){
+        if (personaLogin!=null) {
 
-            System.out.println(telefono.getTelefonoLugar());
             this.telefonos.add(telefono);
             nuevoTelefono();
-
-            for(Telefono t:telefonos){
-                System.out.println(t);
-            }
         }
 
     }
@@ -239,6 +242,45 @@ public class LugarBean implements Serializable {
     public void eliminarTelefono() {
         this.telefonos.remove(this.telefono);
         nuevoTelefono();
+    }
+
+
+    public void eliminarLugar(){
+
+        if (personaLogin!=null){
+            try {
+
+                List<Telefono> telefonos = telefonoServicio.obtenerTelefonosLugar(lugar.getId());
+
+                for (Telefono t:telefonos){
+                    telefonoServicio.eliminarTelefono(t.getId());
+                    t.setLugar(null);
+                }
+
+                List<Imagen> imagenes = imagenServicio.obtenerImagenesLugar(lugar.getId());
+
+                for (Imagen i: imagenes) {
+                    imagenServicio.eliminarImagen(i.getId());
+                    i.setLugar(null);
+                }
+
+                List<Horario> horarios = horarioServicio.obtenerHorariosLugar(lugar.getId());
+
+                for (Horario h: horarios){
+                    horarioServicio.eliminarHorario(h.getId());
+
+                }
+
+                lugarServicio.eliminarLugar(lugar.getId());
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se elimino correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            } catch (Exception e) {
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","No pudimos eliminar el lugar");
+                FacesContext.getCurrentInstance().addMessage(null,msg);
+            }
+        }
     }
 
 }

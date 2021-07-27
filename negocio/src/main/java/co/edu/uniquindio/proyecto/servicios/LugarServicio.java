@@ -17,6 +17,8 @@ public interface LugarServicio {
 
     Lugar obtenerLugar(int id) throws Exception;
 
+    Lugar obtenerLugar2(int id) throws Exception;
+
     List<Lugar> listarLugares();
 
     List<Lugar> buscarLugares(String nombre);

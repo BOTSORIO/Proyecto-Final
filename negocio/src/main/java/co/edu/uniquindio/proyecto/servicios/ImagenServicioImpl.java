@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
+import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class ImagenServicioImpl implements ImagenServicio{
 
     private final ImagenRepo imagenRepo;
+    private final LugarRepo lugarRepo;
 
-    public ImagenServicioImpl(ImagenRepo imagenRepo) {
+    public ImagenServicioImpl(ImagenRepo imagenRepo, LugarRepo lugarRepo) {
         this.imagenRepo = imagenRepo;
+        this.lugarRepo = lugarRepo;
     }
 
     @Override
@@ -45,6 +48,18 @@ public class ImagenServicioImpl implements ImagenServicio{
         }else {
             throw new Exception("No se encontro la imagen");
         }
+    }
+
+    @Override
+    public List<Imagen> obtenerImagenesLugar(int idLugar) throws Exception {
+
+        List<Imagen> imagenes = lugarRepo.obtenerImagenees(idLugar) ;
+
+        if(imagenes ==null){
+            throw new Exception("No se encontraron las imagenes");
+        }
+
+        return imagenes;
     }
 
     @Override

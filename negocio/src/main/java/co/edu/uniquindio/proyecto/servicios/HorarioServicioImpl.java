@@ -9,9 +9,11 @@ import java.util.*;
 public class HorarioServicioImpl implements  HorarioServicio{
 
    private final HorarioRepo horarioRepo;
+   private final LugarRepo lugarRepo;
 
-    public HorarioServicioImpl(HorarioRepo horarioRepo) {
+    public HorarioServicioImpl(HorarioRepo horarioRepo, LugarRepo lugarRepo) {
         this.horarioRepo = horarioRepo;
+        this.lugarRepo = lugarRepo;
     }
 
     @Override
@@ -56,11 +58,22 @@ public class HorarioServicioImpl implements  HorarioServicio{
         Horario horarioEncontrado  = obtenerHorario(id);
 
         if (horarioEncontrado != null) {
-
             horarioRepo.delete(horarioEncontrado);
         }else {
             throw  new Exception("No se encontro el horario");
         }
+    }
+
+    @Override
+    public List<Horario> obtenerHorariosLugar(int idLugar) throws Exception {
+
+        List<Horario> horarios = lugarRepo.obtenerHorarios(idLugar) ;
+
+        if(horarios ==null){
+            throw new Exception("No se encontraron los horarios");
+        }
+
+        return horarios;
     }
 
     @Override

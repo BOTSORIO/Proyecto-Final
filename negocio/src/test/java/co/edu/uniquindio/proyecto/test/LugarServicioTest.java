@@ -92,6 +92,7 @@ public class LugarServicioTest {
         try {
 
             Lugar lugarEncontrado = lugarServicio.obtenerLugar(1);
+            System.out.println(lugarEncontrado);
 
             lugarServicio.eliminarLugar(lugarEncontrado.getId());
             Lugar lugarBorrado= lugarServicio.obtenerLugar(1);
