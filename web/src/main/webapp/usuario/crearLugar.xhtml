@@ -68,10 +68,34 @@
                                 <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel for="telefono_lugar" value="Telefono:"/>
-                            <p:inputText id="telefono_lugar" value="#{telefono.}" style="width: 100%"
-                                         required="true"
-                                         requiredMessage="El nombre de usuario es obligatorio"/>
+                            <p:commandButton value="Telefono" action="#{lugarBean.nuevoTelefono}"
+
+                                             onclick="PF('Telefonos').show()">
+
+                            </p:commandButton>
+
+                            <p:dataTable id="dt-products1" widgetVar="dtProducts" var="telefono"
+                                         value="#{lugarBean.telefonos}"
+                                         reflow="true" styleClass="products-table"
+                                         selection="#{lugarBean.telefono}"
+                                         rows="10">
+                                <p:autoUpdate/>
+                                <f:facet name="header">
+                                    <div class="products-table-header">
+                                        <span style="font-weight: bold">Telefonos</span>
+                                    </div>
+                                </f:facet>
+
+
+                                <p:column headerText="Telefono">
+                                    <h:outputText value="#{telefono.telefonoLugar}"/>
+                                </p:column>
+                                <p:column headerText="Borrar">
+                                    <p:commandButton icon="pi pi-trash"
+                                                     actionListener="#{lugarBean.eliminarTelefono}"
+                                                     process="@this"/>
+                                </p:column>
+                            </p:dataTable>
 
                             <p:outputLabel for="imagenes_lugar" value="Imagenes: " />
                             <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced"
@@ -172,6 +196,29 @@
                             onclick="PF('Horarios').hide()"
                             action="#{lugarBean.crearHorario}">
                     </p:commandButton>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Telefonos" showEffect="fade"
+                  widgetVar="Telefonos" modal="true"
+                  styleClass="">
+            <h:form>
+                <p:outputPanel id="panel1">
+                    <p>
+                        <p:outputLabel for="numero_telefono" value="Numero de telefono:"/>
+                        <p:inputText id="numero_telefono" value="#{lugarBean.telefono.telefonoLugar}" style="width: 100%"
+                                     required="true"
+                                     requiredMessage="El numero de telefono es obligatorio"/>
+                    </p>
+
+                </p:outputPanel>
+                <p:commandButton
+                        style="background-color: #0c63e4; margin-left: 28%"
+                        value="Guardar"
+
+                        onclick="PF('Telefonos').hide()"
+                        action="#{lugarBean.crearTelefono}">
+                </p:commandButton>
             </h:form>
         </p:dialog>
 

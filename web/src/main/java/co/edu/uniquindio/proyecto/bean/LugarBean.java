@@ -216,14 +216,29 @@ public class LugarBean implements Serializable {
         nuevoHorario();
     }
 
+    public void nuevoTelefono(){
+
+        this.telefono = new Telefono();
+    }
 
     public void crearTelefono(){
 
         if (personaLogin!=null){
 
+            System.out.println(telefono.getTelefonoLugar());
             this.telefonos.add(telefono);
+            nuevoTelefono();
+
+            for(Telefono t:telefonos){
+                System.out.println(t);
+            }
         }
 
+    }
+
+    public void eliminarTelefono() {
+        this.telefonos.remove(this.telefono);
+        nuevoTelefono();
     }
 
 }
