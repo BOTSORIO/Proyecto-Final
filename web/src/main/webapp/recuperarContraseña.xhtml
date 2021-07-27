@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+    <ui:define name="title">Recuperar Contraseña</ui:define>
+    <ui:define name="content">
+
+        <p:card styleClass="card"
+                style="margin-left: 30%; margin-right: 30%; margin-top: 2%; margin-bottom: 2%">
+            <f:facet name="title">
+                Recupera tu contraseña
+            </f:facet>
+
+            <p>Por favor ingresa tu email para confirmar tu cuenta.</p>
+
+            <h:form>
+                <p:outputLabel for="email_usuario" value="Email:"/>
+                <p:inputText id="email_usuario" value="" style="width: 100%"
+                             required="true"
+                             requiredMessage="Ups! olvidaste el email"/>
+
+                <p:commandButton action="#" value="Confirmar correo"
+                                 update="@form"
+                                 style="width: 50%; margin-left: 25%; margin-top: 5%"/>
+
+                <div style="margin-top: 5%">
+                    <p:outputLabel for="contraseña_usuario" value="Nueva contraseña:"/>
+                    <p:inputText id="contraseña_usuario" value="" style="width: 100%"
+                                 required="true"
+                                 requiredMessage="Ups! olvidaste la nueva contraseña"/>
+
+                    <p:commandButton action="#" value="Confirmar"
+                                     update="@form"
+                                     style="width: 50%; margin-left: 25%; margin-top: 5%"/>
+                </div>
+
+            </h:form>
+
+        </p:card>
+
+    </ui:define>
+</ui:composition>
+</html>
