@@ -27,14 +27,12 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     @Query("select u from Usuario u where u.email = :email and u.nombre= :nombre")
     Usuario obtenerUsuario( @Param("email")String email ,@Param("nombre")String nombre);
 
-    //and o or
-    Usuario findByEmailOrNombre(String email,String nombre);
 
     Usuario findByEmailAndPassword(String email,String password);
 
     Optional<Usuario> findByNickname(String nickname);
 
-    Optional<Usuario> findByEmail(String email);
+    Usuario findByEmail(String email);
 
     List<Usuario> findByNombre(String nombre);
 

@@ -10,11 +10,13 @@ public class LugarServicioImpl implements LugarServicio {
 
     private final LugarRepo lugarRepo;
     private final ComentarioRepo comentarioRepo;
+    private final TelefonoRepo telefonoRepo;
 
 
-    public LugarServicioImpl(LugarRepo lugarRepo, ComentarioRepo comentarioRepo) {
+    public LugarServicioImpl(LugarRepo lugarRepo, ComentarioRepo comentarioRepo, TelefonoRepo telefonoRepo) {
         this.lugarRepo = lugarRepo;
         this.comentarioRepo = comentarioRepo;
+        this.telefonoRepo = telefonoRepo;
     }
 
     @Override

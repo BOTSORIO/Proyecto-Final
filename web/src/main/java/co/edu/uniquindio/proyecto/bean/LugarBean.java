@@ -32,6 +32,7 @@ public class LugarBean implements Serializable {
     private final TipoServicio tipoServicio;
     private final ImagenServicio imagenServicio;
     private final HorarioServicio horarioServicio;
+    private final TelefonoServicio telefonoServicio;
 
     @Getter @Setter
     private Lugar lugar;
@@ -51,10 +52,16 @@ public class LugarBean implements Serializable {
     private List<Ciudad> ciudades;
 
     @Getter @Setter
+    private List<Telefono> telefonos;
+
+    @Getter @Setter
     private List<Tipo> tipos;
 
     @Getter @Setter
     private List<Horario> horarios;
+
+    @Getter @Setter
+    private Telefono telefono;
 
     @Getter @Setter
     private Horario horario;
@@ -65,13 +72,14 @@ public class LugarBean implements Serializable {
     @Getter @Setter
     private ArrayList<String>dias;
 
-    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio) {
+    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio) {
         this.lugarServicio = lugarServicio;
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
         this.tipoServicio = tipoServicio;
         this.imagenServicio = imagenServicio;
         this.horarioServicio = horarioServicio;
+        this.telefonoServicio = telefonoServicio;
     }
 
     @PostConstruct
@@ -82,7 +90,9 @@ public class LugarBean implements Serializable {
         this.tipos = tipoServicio.listarTipos();
         this.imagenes = new ArrayList<>();
         this.horarios = new ArrayList<>();
+        this.telefonos = new ArrayList<>();
         this.dias = new ArrayList<>();
+        this.telefono= new Telefono();
         llenarDias();
 
     }
@@ -178,9 +188,7 @@ public class LugarBean implements Serializable {
         this.horaFin = new Date();
     }
     public void nuevoHorario() {
-        System.out.println("Nuevo Horario");
         this.horario = new Horario();
-
     }
 
     public void crearHorario() {
@@ -206,6 +214,16 @@ public class LugarBean implements Serializable {
     public void eliminarHorario() {
         this.horarios.remove(this.horario);
         nuevoHorario();
+    }
+
+
+    public void crearTelefono(){
+
+        if (personaLogin!=null){
+
+            this.telefonos.add(telefono);
+        }
+
     }
 
 }

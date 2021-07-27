@@ -10,15 +10,21 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
 
+    private Usuario usuarioEncontrado;
+
     public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
         this.usuarioRepo = usuarioRepo;
     }
 
 
     public boolean estaDisponible(String email){
-        Optional<Usuario> usuarioEmail = usuarioRepo.findByEmail(email);
+        Usuario usuarioEmail = usuarioRepo.findByEmail(email);
 
-        return  usuarioEmail.isPresent();
+        if (usuarioEmail!=null){
+            return  true;
+        }
+
+        return false;
     }
 
 
@@ -86,8 +92,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }else{
             throw new Exception("Usuario no encontrado ");
         }
-
     }
+
 
     @Override
     public Usuario obtenerUsuario(String id) throws Exception {
@@ -108,10 +114,36 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuario = usuarioRepo.findByEmailAndPassword(email,password);
 
         if(usuario==null){
-            throw new Exception("No existe un usuario con el correo dado");
+            throw new Exception("No existe un usuario con el correo y contraseña ingresado");
         }
 
         return usuario;
+    }
+
+
+    @Override
+    public Usuario obtenerUsuarioEmail(String email) throws Exception {
+
+        usuarioEncontrado = usuarioRepo.findByEmail(email);
+
+        if(usuarioEncontrado==null){
+
+            throw new Exception("No existe un usuario con el correo dado");
+        }
+        return usuarioEncontrado;
+    }
+
+
+    @Override
+    public void cambiarPassword(String passwordN) throws Exception {
+
+        if (usuarioEncontrado!=null){
+            usuarioEncontrado.setPassword(passwordN);
+            usuarioRepo.save(usuarioEncontrado);
+        }else{
+            throw new Exception("No existe un usuario con el correo dado");
+        }
+
     }
 
 

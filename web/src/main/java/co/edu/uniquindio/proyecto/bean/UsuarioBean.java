@@ -34,6 +34,9 @@ public class UsuarioBean implements Serializable {
     @Getter @Setter
     private Usuario usuario;
 
+    @Getter @Setter
+    private Usuario usuarioAux;
+
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
@@ -46,6 +49,7 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
+        this.usuarioAux = new Usuario();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -66,6 +70,7 @@ public class UsuarioBean implements Serializable {
 
         try {
             if (personaLogin!=null) {
+
                 usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -81,6 +86,7 @@ public class UsuarioBean implements Serializable {
 
         return null;
     }
+
 
     public String actualizarUsuario(){
 
@@ -101,8 +107,34 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
         }
-
         return null;
+    }
+
+
+    public void buscarPorEmail(){
+
+        try {
+            usuarioAux = usuarioServicio.obtenerUsuarioEmail(usuario.getEmail());
+
+        }catch (Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+
+    }
+
+
+    public void cambiarPassword(){
+
+        try {
+            usuarioServicio.cambiarPassword(usuario.getPassword());
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la contraseña se actualizo con exito");
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+        }catch (Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
     }
 
 }
