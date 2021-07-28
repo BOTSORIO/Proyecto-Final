@@ -16,7 +16,7 @@
     <ui:define name="content">
 
         <h1 style="margin: 5%">Lugares pendiendes de aprobación</h1>
-        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large"
+        <p:dataView var="lugar" value="#{moderadorBean.lugaresDesaprobados}" rows="12" paginator="true" gridIcon="pi pi-th-large"
                     listIcon="pi pi-bars" style="margin: 5%">
 
             <p:dataViewGridItem>
@@ -45,7 +45,9 @@
                     </p:outputPanel>
 
                     <h:panelGrid>
-                        <p:toggleSwitch value="#{lugar.estado}"/>
+                        <p:commandButton value="Aprobar" action="#{moderadorBean.aprobarLugar(lugar.id)}"
+                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                         iconPos="right"/>
                     </h:panelGrid>
 
                 </h:panelGrid>
@@ -54,7 +56,7 @@
         </p:dataView>
 
         <h1 style="margin: 5%">Lugares autorizados por usted</h1>
-        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large"
+        <p:dataView var="lugar" value="#{moderadorBean.lugaresAprobados}" rows="12" paginator="true" gridIcon="pi pi-th-large"
                     listIcon="pi pi-bars" style="margin: 5%">
 
             <p:dataViewGridItem>
@@ -82,7 +84,7 @@
                         </h:panelGrid>
                     </p:outputPanel>
                     <h:panelGroup>
-                        <p:toggleSwitch value="#{lugar.estado}"/>
+                        <p:toggleSwitch value="#{moderadorBean.aprobarLugar}"/>
                     </h:panelGroup>
                      </h:panelGrid>
             </p:dataViewListItem>

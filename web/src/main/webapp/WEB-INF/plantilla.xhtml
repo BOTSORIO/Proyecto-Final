@@ -87,6 +87,19 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <li class="nav-item dropdown"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='moderador'}">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="pi pi-user"/>
+                                    Moderadores
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
+                                    <li><a class="dropdown-item" href="/moderador/principalModerador.xhtml"><i class="pi pi-user" style="margin-right: 15px"/>Crear</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                         <div class="d-flex">
                             <h:form class="d-flex me-2">

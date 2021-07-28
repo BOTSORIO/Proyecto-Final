@@ -10,9 +10,11 @@ import java.util.*;
 public class ModeradorServicioImpl implements ModeradorServicio{
 
     private final ModeradorRepo moderadorRepo;
+    private final LugarRepo lugarRepo;
 
-    public ModeradorServicioImpl(ModeradorRepo moderadorRepo) {
+    public ModeradorServicioImpl(ModeradorRepo moderadorRepo, LugarRepo lugarRepo) {
         this.moderadorRepo = moderadorRepo;
+        this.lugarRepo = lugarRepo;
     }
 
     public boolean estaDisponible(String email){
@@ -110,6 +112,28 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         }
         return moderador;
     }
+
+    @Override
+    public List<Lugar> obtenerLugaresAprobados(String email){
+
+        List<Lugar> lugares = lugarRepo.obtenerLugaresAprobados(email);
+
+        return lugares;
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresSinAprobacion() throws Exception {
+
+        List<Lugar> lugares = lugarRepo.obtenerLugaresSinAprobacion();
+
+        if (lugares.isEmpty()){
+
+            throw new Exception("No se encontraron lugares");
+        }
+
+        return lugares;
+    }
+
 
     @Override
     public List<Moderador> listarModeradores() {

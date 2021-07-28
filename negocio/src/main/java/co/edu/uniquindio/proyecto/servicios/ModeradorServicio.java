@@ -14,6 +14,10 @@ public interface ModeradorServicio {
 
     Moderador obtenerModerador(String id) throws Exception;
 
+    List<Lugar> obtenerLugaresAprobados(String email);
+
+    List<Lugar> obtenerLugaresSinAprobacion() throws Exception;
+
     List<Moderador> listarModeradores();
 
     Moderador obtenerEmailPassword(String email, String password) throws Exception;

@@ -34,6 +34,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l.nombre,l.descripcion,l.ciudad.nombre from Lugar l where l.moderador.email = :emailMod and l.estado= true")
     List<Object[]> obtenerLugaresModeradores(String emailMod);
 
+
     @Query("select l.nombre,l.descripcion,l.longitud,l.latitud from Lugar l join l.horarios h where h.diaSemana = :diaSemana and h.horaInicio= :horaInicio and h.horaFin= :horaFin")
     List<Object[]> obtenerLugaresHorario(String diaSemana,String horaInicio,String horaFin);
 
@@ -117,5 +118,13 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     //A implementar
     @Query("select avg(c.calificacion) from Comentario c where c.lugar.id = :idLugar")
     int obtenerCalificacion(Integer idLugar);
+
+
+    //Cargar
+    @Query("select l from Lugar l where l.estado = false")
+    List<Lugar> obtenerLugaresSinAprobacion();
+
+    @Query("select l from Lugar l where l.moderador.email = :emailMod and l.estado=true")
+    List<Lugar> obtenerLugaresAprobados(String emailMod);
 
 }
