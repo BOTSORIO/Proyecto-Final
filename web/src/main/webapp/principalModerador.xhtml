@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+    <ui:define name="title">Inicio | Moderador</ui:define>
+    <ui:define name="content">
+
+        <h1 style="margin: 5%">Lugares pendiendes de aprobación</h1>
+        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large"
+                    listIcon="pi pi-bars" style="margin: 5%">
+
+            <p:dataViewGridItem>
+                <div class="card" style="width: 18rem;">
+                    <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."/>
+                    <div class="card-body">
+                        <h5 class="card-title">#{lugar.nombre}</h5>
+                        <p class="card-text">#{lugar.descripcion}</p>
+                        <p:toggleSwitch value="#{lugar.estado}"/>
+                    </div>
+                </div>
+            </p:dataViewGridItem>
+
+            <p:dataViewListItem>
+                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                    <p:graphicImage styleClass="imagen-lugar"/>
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Nombre:"/>
+                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold"/>
+                            <h:outputText value="Tipo:"/>
+                            <h:outputText value="#{lugar.tipo.nombre}"/>
+                            <h:outputText value="Descripción:"/>
+                            <h:outputText value="#{lugar.descripcion}"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+
+                    <h:panelGrid>
+                        <p:toggleSwitch value="#{lugar.estado}"/>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+            </p:dataViewListItem>
+
+        </p:dataView>
+
+        <h1 style="margin: 5%">Lugares autorizados por usted</h1>
+        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large"
+                    listIcon="pi pi-bars" style="margin: 5%">
+
+            <p:dataViewGridItem>
+                <div class="card" style="width: 18rem;">
+                    <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."/>
+                    <div class="card-body">
+                        <h5 class="card-title">#{lugar.nombre}</h5>
+                        <p class="card-text">#{lugar.descripcion}</p>
+                        <p:toggleSwitch value="#{lugar.estado}"/>
+                        </div>
+                </div>
+            </p:dataViewGridItem>
+
+            <p:dataViewListItem>
+                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                    <p:graphicImage styleClass="imagen-lugar"/>
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Nombre:"/>
+                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold"/>
+                            <h:outputText value="Tipo:"/>
+                            <h:outputText value="#{lugar.tipo.nombre}"/>
+                            <h:outputText value="Descripción:"/>
+                            <h:outputText value="#{lugar.descripcion}"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                    <h:panelGroup>
+                        <p:toggleSwitch value="#{lugar.estado}"/>
+                    </h:panelGroup>
+                     </h:panelGrid>
+            </p:dataViewListItem>
+
+        </p:dataView>
+
+    </ui:define>
+</ui:composition>
+</html>
