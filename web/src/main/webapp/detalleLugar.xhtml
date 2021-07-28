@@ -28,23 +28,23 @@
                         <h1> Comentarios </h1>
                     </f:facet>
 
-                    <h5>#{detalleLugarBean.comentariosDetal}</h5>
+                    <div class="product card">
+                        <h:form>
+                            <p:dataScroller value="#{detalleLugarBean.comentariosDetal}" var="comentario" chunkSize="10"
+                                            mode="inline"
+                                            scrollHeight="300">
 
-                    <div>
-                        <h:form id="form">
-                            <p:dataView var="comentario" value="#{detalleLugarBean.comentariosDetal}"
-                                        gridIcon="pi pi-th-large">
-
-                                <p:dataViewGridItem>
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">#{comentario.nombre}</h5>
-                                            <p class="card-text">#{comentario.descripcion}</p>
+                                <div class="product">
+                                    <div class="product-list-item p-p-5">
+                                        <p:graphicImage name="resources/img/avatar.png"/>
+                                        <div class="product-list-detail">
+                                            <div class="product-name">#{comentario.usuario.nombre}</div>
+                                            <div class="product-description">#{comentario.comentario}</div>
+                                            <p:rating readonly="true" value="#{comentario.calificacion}"/>
                                         </div>
                                     </div>
-                                </p:dataViewGridItem>
-
-                            </p:dataView>
+                                </div>
+                            </p:dataScroller>
                         </h:form>
                     </div>
 
@@ -58,9 +58,9 @@
                             </p:card>
                         </div>
                         <div class="col" style="margin-left: 20px; margin-top: 5%">
-                            <h:panelGrid columns="1" style="margin-bottom: 10px"
+                            <h:panelGrid columns="1" style="margin-bottom: 5%; margin-top: 5%"
                                          rendered="#{seguridadBean.autenticado}">
-                                <h6> Calificaló: </h6>
+                                <h4> Calificación: </h4>
                                 <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
                             </h:panelGrid>
                         </div>
@@ -74,7 +74,6 @@
                 </p:card>
 
 
-
             </div>
 
             <div style="margin-top: 5%" class="col">
@@ -84,8 +83,12 @@
 
                         <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
 
-                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-star-o" style="color: #ffcd39" styleClass="rounded-button ui-button-warning ui-button-flat" />
-                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-trash" style="color: red" styleClass="rounded-button ui-button-danger ui-button-flat" />
+                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-star-o"
+                                         style="color: #ffcd39"
+                                         styleClass="rounded-button ui-button-warning ui-button-flat"/>
+                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-trash"
+                                         style="color: red"
+                                         styleClass="rounded-button ui-button-danger ui-button-flat"/>
 
                     </f:facet>
                     <h6> información: </h6>
