@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Comentario;
-import co.edu.uniquindio.proyecto.entidades.Horario;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
-import co.edu.uniquindio.proyecto.entidades.Telefono;
+import co.edu.uniquindio.proyecto.entidades.*;
 
 import java.util.List;
 
@@ -31,6 +28,5 @@ public interface LugarServicio {
 
     void registrarComentario(Comentario c) throws Exception;
 
-
-
+    void marcarFavorito(Lugar lugar, Persona p) throws Exception;
 }

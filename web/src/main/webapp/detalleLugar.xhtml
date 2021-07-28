@@ -61,7 +61,7 @@
                             <h:panelGrid columns="1" style="margin-bottom: 10px"
                                          rendered="#{seguridadBean.autenticado}">
                                 <h6> Calificaló: </h6>
-                                <p:rating value="#{detalleLugarBean.calificacionPromedio}"/>
+                                <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
                             </h:panelGrid>
                         </div>
                     </div>
@@ -73,11 +73,20 @@
                     </f:facet>
                 </p:card>
 
+
+
             </div>
+
             <div style="margin-top: 5%" class="col">
                 <p:card style="width: 25rem; margin-bottom: 2em">
                     <f:facet name="title">
                         <h1> #{detalleLugarBean.lugar.nombre} </h1>
+
+                        <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
+
+                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-star-o" style="color: #ffcd39" styleClass="rounded-button ui-button-warning ui-button-flat" />
+                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-trash" style="color: red" styleClass="rounded-button ui-button-danger ui-button-flat" />
+
                     </f:facet>
                     <h6> información: </h6>
                     #{detalleLugarBean.lugar.descripcion}

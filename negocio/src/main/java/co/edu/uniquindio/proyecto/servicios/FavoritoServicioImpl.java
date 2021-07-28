@@ -17,9 +17,6 @@ public class FavoritoServicioImpl implements FavoritoServicio {
     @Override
     public Favorito registrarFavorito(Favorito f) throws Exception {
 
-        if(f.getAporte().length()>255){
-            throw new Exception("No puede ingresar un aporte que supere 255 caracteres");
-        }
         return favoritoRepo.save(f);
     }
 
@@ -29,7 +26,7 @@ public class FavoritoServicioImpl implements FavoritoServicio {
         Favorito favorito = obtenerFavorito(codigoFavorito);
 
         if (favorito != null) {
-            favorito.setAporte(f.getAporte());
+
 
             favoritoRepo.save(favorito);
         }

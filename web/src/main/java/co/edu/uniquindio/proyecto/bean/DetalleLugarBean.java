@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Component
-@RequestScope
+@ViewScoped
 public class DetalleLugarBean implements Serializable {
 
     @Value("#{param['lugar']}")
@@ -43,6 +44,9 @@ public class DetalleLugarBean implements Serializable {
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
+
+    @Getter @Setter
+    private String icono;
 
     @PostConstruct
     public void inicializar(){
@@ -77,9 +81,16 @@ public class DetalleLugarBean implements Serializable {
         }
     }
 
-    public void marcarFavorito(){
+    public void marcarFavorito() throws Exception{
 
-        //lugarServicio.marcarFavorito(this.lugar,personaLogin);
+        Lugar lugarEncontrado;
+
+        if(personaLogin!= null){
+
+            int id = Integer.parseInt(idLugar);
+            lugarEncontrado = lugarServicio.obtenerLugar(id);
+            lugarServicio.marcarFavorito(lugarEncontrado,personaLogin);
+        }
     }
 
     public List<Comentario> obtenerComentarios() throws Exception {

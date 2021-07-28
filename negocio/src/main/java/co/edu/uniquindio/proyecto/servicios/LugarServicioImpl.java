@@ -11,12 +11,14 @@ public class LugarServicioImpl implements LugarServicio {
     private final LugarRepo lugarRepo;
     private final ComentarioRepo comentarioRepo;
     private final TelefonoRepo telefonoRepo;
+    private final FavoritoRepo favoritoRepo;
 
 
-    public LugarServicioImpl(LugarRepo lugarRepo, ComentarioRepo comentarioRepo, TelefonoRepo telefonoRepo) {
+    public LugarServicioImpl(LugarRepo lugarRepo, ComentarioRepo comentarioRepo, TelefonoRepo telefonoRepo, FavoritoRepo favoritoRepo) {
         this.lugarRepo = lugarRepo;
         this.comentarioRepo = comentarioRepo;
         this.telefonoRepo = telefonoRepo;
+        this.favoritoRepo = favoritoRepo;
     }
 
     @Override
@@ -93,6 +95,7 @@ public class LugarServicioImpl implements LugarServicio {
         return lugar;
     }
 
+
     @Override
     public List<Lugar> listarLugares() {
         return lugarRepo.findAll();
@@ -122,6 +125,18 @@ public class LugarServicioImpl implements LugarServicio {
             comentarioRepo.save(c);
         }catch (Exception e){
             throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public void marcarFavorito(Lugar lugar, Persona persona) throws Exception {
+
+        Favorito favorito = new Favorito();
+
+        if(lugar != null && persona != null){
+                favorito.setLugar(lugar);
+                favorito.setUsuario((Usuario)persona);
+                favoritoRepo.save(favorito);
         }
     }
 

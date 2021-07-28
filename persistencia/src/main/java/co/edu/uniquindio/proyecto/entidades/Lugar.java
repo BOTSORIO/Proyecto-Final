@@ -152,11 +152,6 @@ public class Lugar implements Serializable {
             cadena += "\nComentarios: \n" +getComentarios().get(i).getComentario()+"\n";
         }
 
-        for (int i=0;i<getFavoritos().size();i++){
-
-            cadena += "\nFavoritos: \n"+getFavoritos().get(i).getAporte()+"\n";
-        }
-
         return "\nCodigo: "+getId()+"\nNombre: "+getNombre()+"\nDescripcion: "+getDescripcion()
                 +"\nFechaC: "+getFechaCreacion()+"\nFechaA: "+getFechaAprobacion()+"\nLogintud: "+getLongitud()
                 +"\nLatitud: "+getLatitud()+"\nEstado: "+getEstado()+"\n\nCiudad: "+getCiudad()

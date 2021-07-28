@@ -50,7 +50,7 @@ public class LugarTest {
                 Horario horario= new Horario("lunes a viernes","10:00","22:00");
                 Imagen imagen = new Imagen("addafada.dadada");
                 Telefono telefono = new Telefono("3116310037");
-               Favorito favorito = new Favorito("xd");
+
 
                 Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
                 lugarNuevo.setCiudad(ciudad);
@@ -62,7 +62,7 @@ public class LugarTest {
                 lugarNuevo.getHorarios().add(horario);
                 lugarNuevo.getImagenes().add(imagen);
                 lugarNuevo.getTelefonos().add(telefono);
-                lugarNuevo.getFavoritos().add(favorito);
+
                 tipo.getLugares().add(lugarNuevo);
                 horario.getLugares().add(lugarNuevo);
                 ciudad.getLugares().add(lugarNuevo);
@@ -93,7 +93,7 @@ public class LugarTest {
             Horario horario= new Horario("lunes a viernes","10am","10pm");
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
-            Favorito favorito = new Favorito("xd");
+
 
             Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
             lugarNuevo.setCiudad(ciudad);
@@ -104,7 +104,7 @@ public class LugarTest {
             lugarNuevo.getHorarios().add(horario);
             lugarNuevo.getImagenes().add(imagen);
             lugarNuevo.getTelefonos().add(telefono);
-            lugarNuevo.getFavoritos().add(favorito);
+
             tipo.getLugares().add(lugarNuevo);
             horario.getLugares().add(lugarNuevo);
             ciudad.getLugares().add(lugarNuevo);
@@ -141,7 +141,7 @@ public class LugarTest {
             Horario horario= new Horario("lunes a viernes","10:00","22:00");
             Imagen imagen = new Imagen("addafada.dadada");
             Telefono telefono = new Telefono("3116310037");
-            Favorito favorito = new Favorito("xd");
+
 
 
             Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
@@ -154,7 +154,7 @@ public class LugarTest {
             lugarNuevo.getImagenes().add(imagen);
             lugarNuevo.getHorarios().add(horario);
             lugarNuevo.getTelefonos().add(telefono);
-            lugarNuevo.getFavoritos().add(favorito);
+
             tipo.getLugares().add(lugarNuevo);
             horario.getLugares().add(lugarNuevo);
             usuario.getLugares().add(lugarNuevo);
