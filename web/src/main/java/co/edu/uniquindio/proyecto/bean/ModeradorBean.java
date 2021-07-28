@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,19 +68,52 @@ public class ModeradorBean implements Serializable {
                     lugarEncontrado.setEstado(true);
                     lugarEncontrado.setModerador((Moderador) personaLogin);
 
-                    lugarServicio.registrarLugar(lugarEncontrado);
+                    lugarServicio.actualizarLugar(lugarEncontrado);
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se autorizo correctamente");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
                 } else if (lugarEncontrado != null && lugarEncontrado.getEstado()) {
 
-                    lugarEncontrado.setEstado(false);
-                    lugarEncontrado.setModerador(null);
+                    FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","El lugar ya se encuentra autorizado o no existe");
+                    FacesContext.getCurrentInstance().addMessage(null,msg);
 
-                    lugarServicio.registrarLugar(lugarEncontrado);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void desaprobarLugar(int id){
+
+        Lugar lugarEncontrado = null;
+
+        if (personaLogin != null) {
+
+            try {
+
+                lugarEncontrado = lugarServicio.obtenerLugar(id);
+
+                if(lugarEncontrado!=null){
+
+                    lugarEncontrado.setEstado(false);
+                    lugarEncontrado.setModerador(null);
+
+                    lugarServicio.actualizarLugar(lugarEncontrado);
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se autorizo correctamente");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+                }else{
+                    FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","El lugar no existe");
+                    FacesContext.getCurrentInstance().addMessage(null,msg);
+                }
+
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+        }
+
     }
 
 

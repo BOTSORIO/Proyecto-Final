@@ -13,6 +13,8 @@ public interface LugarServicio {
 
     void  actualizarLugar(Lugar l, int codigoLugar) throws Exception;
 
+    void actualizarLugar(Lugar l) throws Exception;
+
     void eliminarLugar(int id) throws Exception;
 
     Lugar obtenerLugar(int id) throws Exception;

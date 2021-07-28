@@ -63,6 +63,13 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
+    public void actualizarLugar(Lugar l) throws Exception{
+
+        lugarRepo.save(l);
+
+    }
+
+    @Override
     public Lugar obtenerLugar(int id) throws Exception {
 
       Optional<Lugar> lugar = lugarRepo.findById(id);

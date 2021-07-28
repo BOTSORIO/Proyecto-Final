@@ -84,7 +84,9 @@
                         </h:panelGrid>
                     </p:outputPanel>
                     <h:panelGroup>
-                        <p:toggleSwitch value="#{moderadorBean.aprobarLugar}"/>
+                        <p:commandButton value="Desaprobar" action="#{moderadorBean.desaprobarLugar(lugar.id)}"
+                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                         iconPos="right"/>
                     </h:panelGroup>
                      </h:panelGrid>
             </p:dataViewListItem>

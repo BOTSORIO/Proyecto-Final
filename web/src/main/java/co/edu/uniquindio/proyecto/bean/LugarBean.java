@@ -254,7 +254,7 @@ public class LugarBean implements Serializable {
                 Lugar lugarAux = lugarServicio.obtenerLugar(lugar.getId());
                 lugarAux.getHorarios().clear();
 
-                lugarServicio.registrarLugar(lugarAux);
+                lugarServicio.actualizarLugar(lugarAux);
 
                 List<Horario> horarios = horarioServicio.obtenerHorariosLugar(lugar.getId());
 
