@@ -21,29 +21,21 @@
                 Recupera tu contraseña
             </f:facet>
 
+            <div class="fotox" style="margin-left: 35%">
+                <img src="resources/img/contrasena.png" alt=""/>
+            </div>
+
             <p>Por favor ingresa tu email para confirmar tu cuenta.</p>
 
             <h:form>
-                <p:outputLabel for="email_usuario" value="Email:"/>
-                <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                <p:outputLabel for="contraseña_usuario" value="Nueva contraseña:"/>
+                <p:inputText id="contraseña_usuario" value="" style="width: 100%"
                              required="true"
-                             requiredMessage="Ups! olvidaste el email"/>
+                             requiredMessage="Ups! olvidaste la nueva contraseña"/>
 
-                <p:commandButton action="#" value="Confirmar correo"
+                <p:commandButton action="#" value="Confirmar"
                                  update="@form"
                                  style="width: 50%; margin-left: 25%; margin-top: 5%"/>
-
-                <div style="margin-top: 5%">
-                    <p:outputLabel for="contraseña_usuario" value="Nueva contraseña:"/>
-                    <p:inputText id="contraseña_usuario" value="" style="width: 100%"
-                                 required="true"
-                                 requiredMessage="Ups! olvidaste la nueva contraseña"/>
-
-                    <p:commandButton action="#" value="Confirmar"
-                                     update="@form"
-                                     style="width: 50%; margin-left: 25%; margin-top: 5%"/>
-                </div>
-
             </h:form>
 
         </p:card>

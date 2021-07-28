@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="col-2">
-                            <div id="fotox">
+                            <div class="fotox">
                                 <img src="resources/img/user.png" alt=""/>
                             </div>
                         </div>
@@ -136,14 +136,45 @@
                         <p:commandButton style="min-width: 30%" value="Iniciar" action="#{seguridadBean.iniciarSesion}"
                                          styleClass="ui-button-raised ui-button-success ui-button-flat"
                                          update="@form" href="/index.xhtml" icon="pi pi-sign-in" iconPos="left"/>
-                        <p:button style="min-width: 30%" value="Registrarse"
+                        <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
                                   styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
-                                  href="
-                                  /registrarUsuario.xhtml"/>
+                                  onclick="PF('dlg2').show()" />
                         <p:growl showDetail="true" for="login-bean"/>
                     </f:facet>
                 </p:dialog>
             </h:form>
+
+
+            <h:form>
+                <p:dialog header="Recupera tu cuenta" widgetVar="dlg2" Height="400px" width="40%" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Correo electronico</h5>
+                            <p:inputText id="correo" value="#{seguridadBean.email}" styleClass="p-d-block"
+                                         style="width: 100%"
+                                         required="true" requiredMessage="¡Ups! olvidaste el email"/>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="fotox">
+                                <img src="resources/img/contrasena.png" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <f:facet name="footer">
+                        <p:button style="min-width: 30%" value="Recuperar contraseña"
+                                  styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                                  href="recuperarContrasena.xhtml" />
+                        <p:growl showDetail="true" for="login-bean"/>
+                    </f:facet>
+                </p:dialog>
+            </h:form>
+
+
         </ui:insert>
     </div>
 

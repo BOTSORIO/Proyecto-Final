@@ -61,8 +61,7 @@
                             <h:panelGrid columns="1" style="margin-bottom: 10px"
                                          rendered="#{seguridadBean.autenticado}">
                                 <h6> Calificaló: </h6>
-                                <p:inputText id="sliderTxtMax" value="5"/>
-                                <p:slider for="sliderTxtMax" range="3" maxValue="5"/>
+                                <p:rating value="#{detalleLugarBean.calificacionPromedio}"/>
                             </h:panelGrid>
                         </div>
                     </div>
@@ -90,7 +89,8 @@
                     Ubicada en:       #{detalleLugarBean.lugar.ciudad.nombre}
 
                     <div id="mapa"
-                         style="width: 80%;height:400px"></div>
+                         style="width: 80%;height:400px">
+                    </div>
 
                 </p:card>
             </div>
