@@ -5,8 +5,6 @@ import co.edu.uniquindio.proyecto.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,10 +47,24 @@ public class InformacionPorDefecto implements CommandLineRunner {
             Ciudad ciudad1 = new Ciudad("Calarcá");
             Ciudad ciudad3 = new Ciudad("Medellin");
             Ciudad ciudad4 = new Ciudad("Pereira");
+            Ciudad ciudad5 = new Ciudad("Armenia");
+            Ciudad ciudad6 = new Ciudad("Bogota");
+            Ciudad ciudad7 = new Ciudad("Cucuta");
+            Ciudad ciudad8 = new Ciudad("Villavicencio");
+            Ciudad ciudad9 = new Ciudad("Cali");
+            Ciudad ciudad10 = new Ciudad("Tulua");
+            Ciudad ciudad11 = new Ciudad("Ibague");
 
             ciudadServicio.registrarCiudad(ciudad1);
             ciudadServicio.registrarCiudad(ciudad3);
             ciudadServicio.registrarCiudad(ciudad4);
+            ciudadServicio.registrarCiudad(ciudad5);
+            ciudadServicio.registrarCiudad(ciudad6);
+            ciudadServicio.registrarCiudad(ciudad7);
+            ciudadServicio.registrarCiudad(ciudad8);
+            ciudadServicio.registrarCiudad(ciudad9);
+            ciudadServicio.registrarCiudad(ciudad10);
+            ciudadServicio.registrarCiudad(ciudad11);
 
             Tipo tipo1 = new Tipo("Restaurante");
             Tipo tipo2 = new Tipo("Motel");
@@ -64,11 +76,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
             tipoServicio.registrarTipo(tipo3);
             tipoServicio.registrarTipo(tipo4);
 
-            //Los arrayList vacios que se mandan en el contructor son las imagenes y los horarios
 
             Horario h1 = new Horario("Lunes", "10:00", "16:00");
             Horario h2 = new Horario("Martes", "10:00", "16:00");
- // profe, en lugar bean en crear horario se esta tomando la hora del date  y se guardsa en un string, ok, pero no lo pueden hacer directamente en el objeto de Horario, espereme reviso
             horarioServicio.registrarHorario(h1);
             horarioServicio.registrarHorario(h2);
 

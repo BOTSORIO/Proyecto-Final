@@ -16,10 +16,6 @@ public interface UsuarioServicio {
 
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
 
-    Usuario obtenerUsuarioEmail(String email)throws Exception;
-
-    void cambiarPassword(String passwordN) throws Exception;
-
     List<Usuario> listarUsuarios();
 
 }

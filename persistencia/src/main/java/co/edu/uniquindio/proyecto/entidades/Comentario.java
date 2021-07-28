@@ -62,8 +62,8 @@ public class Comentario implements Serializable {
     //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {
-        return "\nComentario: " + getComentario() + "\nCalificacion: " + getCalificacion() +
-                "\nRespuesta: " + getRespuesta() + "\nFecha del comentario: " + getFechaComentario() +
-                "\nLugar: "+ getLugar().getNombre()+"\nUsuario: "+getUsuario().getNombre()+"\n";
+
+        return  "Usuario: " + getUsuario().getNombre() + "\nComentario: " + getComentario()+
+                "\nCalificación: " + getCalificacion() + "\nFecha: " + getFechaComentario();
     }
 }

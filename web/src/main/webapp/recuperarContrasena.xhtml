@@ -29,14 +29,21 @@
 
             <h:form>
                 <p:outputLabel for="contraseña_usuario" value="Nueva contraseña:"/>
-                <p:inputText id="contraseña_usuario" value="" style="width: 100%"
+                <p:inputText id="contraseña_usuario" value="#{seguridadBean.password}" style="width: 100%"
                              required="true"
                              requiredMessage="Ups! olvidaste la nueva contraseña"/>
 
-                <p:commandButton action="#" value="Confirmar"
-                                 update="@form"
-                                 style="width: 50%; margin-left: 25%; margin-top: 5%"/>
+                <h:panelGrid columns="2" cellpadding="5" width="100%">
+                    <p:commandButton action="#{seguridadBean.cambiarPassword}" value="Confirmar"
+                                     update="@form"
+                                     style="width: 50%; margin-left: 25%; margin-top: 5%" />
+                    <p:button href="/index.xhtml" value="Volver"
+                              style="width: 65%; margin-left: 5px;margin-top: 5%"/>
+                    <p:growl showDetail="true"/>
+                </h:panelGrid>
             </h:form>
+
+
 
         </p:card>
 

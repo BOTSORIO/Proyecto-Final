@@ -152,7 +152,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h5>Correo electronico</h5>
-                            <p:inputText id="correo" value="#{seguridadBean.email}" styleClass="p-d-block"
+                            <p:inputText id="correo" value="#{seguridadBean.emailR}" styleClass="p-d-block"
                                          style="width: 100%"
                                          required="true" requiredMessage="¡Ups! olvidaste el email"/>
                         </div>
@@ -166,9 +166,9 @@
 
 
                     <f:facet name="footer">
-                        <p:button style="min-width: 30%" value="Recuperar contraseña"
-                                  styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
-                                  href="recuperarContrasena.xhtml" />
+                        <p:commandButton style="min-width: 30%" value="Recuperar contraseña" action="#{seguridadBean.buscarPorEmail}"
+                                         styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                         update="@form" icon="pi pi-sign-in" iconPos="left" />
                         <p:growl showDetail="true" for="login-bean"/>
                     </f:facet>
                 </p:dialog>

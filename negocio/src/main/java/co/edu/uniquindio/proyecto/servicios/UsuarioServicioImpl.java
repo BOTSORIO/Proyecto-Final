@@ -10,7 +10,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
 
-    private Usuario usuarioEncontrado;
 
     public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
         this.usuarioRepo = usuarioRepo;
@@ -118,32 +117,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuario;
-    }
-
-
-    @Override
-    public Usuario obtenerUsuarioEmail(String email) throws Exception {
-
-        usuarioEncontrado = usuarioRepo.findByEmail(email);
-
-        if(usuarioEncontrado==null){
-
-            throw new Exception("No existe un usuario con el correo dado");
-        }
-        return usuarioEncontrado;
-    }
-
-
-    @Override
-    public void cambiarPassword(String passwordN) throws Exception {
-
-        if (usuarioEncontrado!=null){
-            usuarioEncontrado.setPassword(passwordN);
-            usuarioRepo.save(usuarioEncontrado);
-        }else{
-            throw new Exception("No existe un usuario con el correo dado");
-        }
-
     }
 
 

@@ -110,31 +110,4 @@ public class UsuarioBean implements Serializable {
         return null;
     }
 
-
-    public void buscarPorEmail(){
-
-        try {
-            usuarioAux = usuarioServicio.obtenerUsuarioEmail(usuario.getEmail());
-
-        }catch (Exception e){
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-
-    }
-
-
-    public void cambiarPassword(){
-
-        try {
-            usuarioServicio.cambiarPassword(usuario.getPassword());
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la contraseña se actualizo con exito");
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-        }catch (Exception e){
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-    }
-
 }

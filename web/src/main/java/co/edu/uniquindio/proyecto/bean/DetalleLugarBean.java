@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
-
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.List;
@@ -22,6 +22,9 @@ public class DetalleLugarBean implements Serializable {
 
     @Autowired
     private LugarServicio lugarServicio;
+
+    @Autowired
+    private ComentarioServicio comentarioServicio;
 
     @Getter @Setter
     private Lugar lugar;
@@ -77,6 +80,23 @@ public class DetalleLugarBean implements Serializable {
     public void marcarFavorito(){
 
         //lugarServicio.marcarFavorito(this.lugar,personaLogin);
+    }
+
+    public List<Comentario> obtenerComentarios() throws Exception {
+
+        List<Comentario> comentarios;
+        int id = Integer.parseInt(idLugar);
+
+        try {
+            comentarios = comentarioServicio.obtenerComentariosLugar(id);
+
+            return comentarios;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

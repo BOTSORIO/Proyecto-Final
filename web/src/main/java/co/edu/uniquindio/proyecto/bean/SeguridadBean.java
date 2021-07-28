@@ -24,6 +24,9 @@ public class SeguridadBean implements Serializable {
     private Persona persona;
 
     @Getter @Setter
+    private Persona personaAux;
+
+    @Getter @Setter
     private  boolean autenticado;
 
     @Autowired
@@ -31,7 +34,7 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     @NotBlank
-    private String email,password;
+    private String email,emailR,password;
 
     @Getter @Setter
     private String rol;
@@ -67,5 +70,43 @@ public class SeguridadBean implements Serializable {
 
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index?faces-redirect=true";
+    }
+
+
+    public String buscarPorEmail(){
+
+        try {
+            personaAux = personaServicio.obtenerPersonaEmail(emailR);
+            return "/recuperarContrasena?faces-redirect=true";
+
+        }catch (Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+
+        return null;
+    }
+
+
+    public void cambiarPassword(){
+
+        try {
+            if (personaAux!=null && !password.isEmpty()){
+
+                personaServicio.cambiarPassword(personaAux.getEmail(),password);
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la contraseña se actualizo con exito");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }else{
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "¡Lo sentimos! no pudimos actualizar tu contraseña");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+
+        }catch (Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+
     }
 }
