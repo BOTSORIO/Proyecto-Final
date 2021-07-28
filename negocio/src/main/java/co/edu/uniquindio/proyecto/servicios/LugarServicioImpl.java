@@ -37,7 +37,6 @@ public class LugarServicioImpl implements LugarServicio {
 
         if(lugar != null){
             lugar.setNombre(l.getNombre());
-            lugar.setEstado(l.getEstado());
             lugar.setDescripcion(l.getDescripcion());
             lugar.setCiudad(l.getCiudad());
             lugar.setHorarios(l.getHorarios());

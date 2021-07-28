@@ -15,4 +15,6 @@ public interface ComentarioServicio {
     Comentario obtenerComentario(int id) throws  Exception;
 
     List<Comentario> listarComentarios();
+
+    List<Comentario> obtenerComentariosLugar(int idLugar) throws  Exception;
 }

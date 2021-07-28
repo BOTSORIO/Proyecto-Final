@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class ComentarioServicioImpl implements ComentarioServicio{
 
     private final ComentarioRepo comentarioRepo;
+    private final LugarRepo lugarRepo;
     private final UsuarioRepo usuarioRepo;
 
-    public ComentarioServicioImpl(ComentarioRepo comentarioRepo, UsuarioRepo usuarioRepo) {
+    public ComentarioServicioImpl(ComentarioRepo comentarioRepo, LugarRepo lugarRepo, UsuarioRepo usuarioRepo) {
         this.comentarioRepo = comentarioRepo;
+        this.lugarRepo = lugarRepo;
         this.usuarioRepo = usuarioRepo;
     }
 
@@ -44,6 +47,19 @@ public class ComentarioServicioImpl implements ComentarioServicio{
             comentarioRepo.save(comentarioObtenido);
         }
 
+    }
+
+    @Override
+    public List<Comentario> obtenerComentariosLugar(int idLugar) throws Exception {
+
+        List<Comentario>comentariosLugar = lugarRepo.obtenerComentariosLugar(idLugar);
+
+        if(comentariosLugar==null){
+
+            throw new Exception("No se encontraron los horarios");
+        }
+
+        return comentariosLugar;
     }
 
     @Override

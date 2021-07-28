@@ -105,14 +105,16 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     List<Telefono> obtenerTelefonos(int idLugar);
 
     @Query("select i from Lugar l join l.imagenes i where l.id = :idLugar")
-    List<Imagen> obtenerImagenees(int idLugar);
+    List<Imagen> obtenerImagenes(int idLugar);
 
     @Query("select h from Lugar l join l.horarios h where l.id = :idLugar")
     List<Horario> obtenerHorarios(int idLugar);
 
+    @Query("select c from Lugar l join l.comentarios c where l.id = :idLugar")
+    List<Comentario>obtenerComentariosLugar(int idLugar);
+
 
     //A implementar
-
     @Query("select avg(c.calificacion) from Comentario c where c.lugar.id = :idLugar")
     int obtenerCalificacion(Integer idLugar);
 

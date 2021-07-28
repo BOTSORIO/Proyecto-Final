@@ -33,6 +33,7 @@ public class LugarBean implements Serializable {
     private final ImagenServicio imagenServicio;
     private final HorarioServicio horarioServicio;
     private final TelefonoServicio telefonoServicio;
+    private final ComentarioServicio comentarioServicio;
 
     @Getter @Setter
     private Lugar lugar;
@@ -71,7 +72,7 @@ public class LugarBean implements Serializable {
     @Getter @Setter
     private ArrayList<String>dias;
 
-    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio) {
+    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio, ComentarioServicio comentarioServicio) {
         this.lugarServicio = lugarServicio;
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
@@ -79,6 +80,7 @@ public class LugarBean implements Serializable {
         this.imagenServicio = imagenServicio;
         this.horarioServicio = horarioServicio;
         this.telefonoServicio = telefonoServicio;
+        this.comentarioServicio = comentarioServicio;
     }
 
     @PostConstruct
@@ -244,31 +246,39 @@ public class LugarBean implements Serializable {
         nuevoTelefono();
     }
 
-
     public void eliminarLugar(){
 
         if (personaLogin!=null){
             try {
 
+                Lugar lugarAux = lugarServicio.obtenerLugar(lugar.getId());
+                lugarAux.getHorarios().clear();
+
+                lugarServicio.registrarLugar(lugarAux);
+
+                List<Horario> horarios = horarioServicio.obtenerHorariosLugar(lugar.getId());
+
+                for(Horario h:horarios){
+
+                    horarioServicio.eliminarHorario(h.getId());
+                }
+
                 List<Telefono> telefonos = telefonoServicio.obtenerTelefonosLugar(lugar.getId());
 
                 for (Telefono t:telefonos){
                     telefonoServicio.eliminarTelefono(t.getId());
-                    t.setLugar(null);
                 }
 
                 List<Imagen> imagenes = imagenServicio.obtenerImagenesLugar(lugar.getId());
 
                 for (Imagen i: imagenes) {
                     imagenServicio.eliminarImagen(i.getId());
-                    i.setLugar(null);
                 }
 
-                List<Horario> horarios = horarioServicio.obtenerHorariosLugar(lugar.getId());
+                List<Comentario>comentarios = comentarioServicio.obtenerComentariosLugar(lugar.getId());
 
-                for (Horario h: horarios){
-                    horarioServicio.eliminarHorario(h.getId());
-
+                for(Comentario c:comentarios){
+                    comentarioServicio.eliminarComentario(c.getId());
                 }
 
                 lugarServicio.eliminarLugar(lugar.getId());
@@ -281,6 +291,27 @@ public class LugarBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null,msg);
             }
         }
+    }
+
+    public void actualizarLugar(){
+
+        if(personaLogin!=null){
+
+            try {
+
+                lugarServicio.actualizarLugar(lugar, lugar.getId());
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se actualizo correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }catch (Exception e){
+
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","No pudimos actualizar el lugar");
+                FacesContext.getCurrentInstance().addMessage(null,msg);
+
+            }
+
+        }
+
     }
 
 }

@@ -53,7 +53,7 @@ public class ImagenServicioImpl implements ImagenServicio{
     @Override
     public List<Imagen> obtenerImagenesLugar(int idLugar) throws Exception {
 
-        List<Imagen> imagenes = lugarRepo.obtenerImagenees(idLugar) ;
+        List<Imagen> imagenes = lugarRepo.obtenerImagenes(idLugar) ;
 
         if(imagenes ==null){
             throw new Exception("No se encontraron las imagenes");

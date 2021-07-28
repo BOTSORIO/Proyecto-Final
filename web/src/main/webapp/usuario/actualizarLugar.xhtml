@@ -42,8 +42,13 @@
             <f:facet name="title">
               ¡Actualice su lugar!
             </f:facet>
-
+            <p>Ingrese el codigo del lugar a modificar</p>
             <h:panelGrid columns="2" cellpadding="5" width="100%">
+
+              <p:outputLabel for="id_lugar" value="Codigo:"/>
+              <p:inputText id="id_lugar" value="#{lugarBean.lugar.id}" style="width: 100%"
+                           required="true"
+                           requiredMessage="El codigo del lugar es obligatorio"/>
 
               <p:outputLabel for="nombre_lugar" value="Nombre:"/>
               <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" style="width: 100%"
@@ -68,7 +73,7 @@
               </p:selectOneMenu>
 
               <p:outputLabel for="imagenes_lugar" value="Imagenes: " />
-              <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="simple"
+              <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced"
                             multiple="true" sizeLimit="1000000" fileLimit="5"
                             allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
 
@@ -81,7 +86,7 @@
 
             <h:panelGrid columns="2" cellpadding="5" width="100%">
 
-              <p:commandButton action="#{lugarBean.registrarLugar}" value="Crear" update="@form"
+              <p:commandButton action="#{lugarBean.actualizarLugar}" value="Crear" update="@form"
                                style="width: 50%; margin-left: 30%;margin-top: 5%"/>
 
               <p:button href="/index.xhtml" value="Volver"
