@@ -48,7 +48,9 @@
                         <p:commandButton value="Aprobar" action="#{moderadorBean.aprobarLugar(lugar.id)}"
                                          styleClass="ui-button-raised" icon="pi pi-arrow-right"
                                          iconPos="right"/>
+                        <p:growl showDetail="true"/>
                     </h:panelGrid>
+
 
                 </h:panelGrid>
             </p:dataViewListItem>
@@ -87,6 +89,7 @@
                         <p:commandButton value="Desaprobar" action="#{moderadorBean.desaprobarLugar(lugar.id)}"
                                          styleClass="ui-button-raised" icon="pi pi-arrow-right"
                                          iconPos="right"/>
+                        <p:growl showDetail="true"/>
                     </h:panelGroup>
                      </h:panelGrid>
             </p:dataViewListItem>

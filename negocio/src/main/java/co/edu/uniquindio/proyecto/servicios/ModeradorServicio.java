@@ -16,7 +16,7 @@ public interface ModeradorServicio {
 
     List<Lugar> obtenerLugaresAprobados(String email);
 
-    List<Lugar> obtenerLugaresSinAprobacion() throws Exception;
+    List<Lugar> obtenerLugaresSinAprobacion();
 
     List<Moderador> listarModeradores();
 

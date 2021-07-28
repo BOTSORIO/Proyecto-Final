@@ -122,14 +122,9 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
-    public List<Lugar> obtenerLugaresSinAprobacion() throws Exception {
+    public List<Lugar> obtenerLugaresSinAprobacion(){
 
         List<Lugar> lugares = lugarRepo.obtenerLugaresSinAprobacion();
-
-        if (lugares.isEmpty()){
-
-            throw new Exception("No se encontraron lugares");
-        }
 
         return lugares;
     }

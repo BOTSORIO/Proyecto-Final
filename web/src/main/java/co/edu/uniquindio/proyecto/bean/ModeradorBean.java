@@ -12,12 +12,13 @@ import org.springframework.web.context.annotation.RequestScope;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@RequestScope
+@ViewScoped
 public class ModeradorBean implements Serializable {
 
     private final ModeradorServicio moderadorServicio;
@@ -71,11 +72,6 @@ public class ModeradorBean implements Serializable {
                     lugarServicio.actualizarLugar(lugarEncontrado);
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se autorizo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-                } else if (lugarEncontrado != null && lugarEncontrado.getEstado()) {
-
-                    FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","El lugar ya se encuentra autorizado o no existe");
-                    FacesContext.getCurrentInstance().addMessage(null,msg);
 
                 }
             } catch (Exception e) {
