@@ -108,7 +108,10 @@ public class LugarServicioImpl implements LugarServicio {
 
     @Override
     public List<Comentario> listarComentarios(Integer idLugar) {
-        return lugarRepo.obtenerComentariosLugarEspecifico(idLugar);
+
+        List<Comentario> comentarios = lugarRepo.obtenerComentariosLugarEspecifico(idLugar);
+
+        return comentarios;
     }
 
     @Override

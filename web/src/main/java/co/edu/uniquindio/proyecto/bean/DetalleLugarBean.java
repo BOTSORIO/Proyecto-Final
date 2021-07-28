@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
@@ -31,7 +30,7 @@ public class DetalleLugarBean implements Serializable {
     private Lugar lugar;
 
     @Getter @Setter
-    private List<Comentario> comentarios;
+    private List<Comentario> comentariosDetal;
 
     @Getter @Setter
     private List<Horario> horarios;
@@ -58,7 +57,7 @@ public class DetalleLugarBean implements Serializable {
                 int id = Integer.parseInt(idLugar);
 
                 this.lugar = lugarServicio.obtenerLugar(id);
-                this.comentarios = lugarServicio.listarComentarios(id);
+                this.comentariosDetal = obtenerComentarios();
                 this.horarios = lugarServicio.listarHorarios(id);
                // this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
             } catch (Exception e) {
@@ -93,18 +92,23 @@ public class DetalleLugarBean implements Serializable {
         }
     }
 
-    public List<Comentario> obtenerComentarios() throws Exception {
+
+    public List<Comentario> obtenerComentarios(){
 
         List<Comentario> comentarios;
-        int id = Integer.parseInt(idLugar);
 
-        try {
-            comentarios = comentarioServicio.obtenerComentariosLugar(id);
+        if (idLugar!=null){
 
-            return comentarios;
+            int id = Integer.parseInt(idLugar);
 
-        }catch (Exception e){
-            e.printStackTrace();
+            try {
+                comentarios = comentarioServicio.obtenerComentariosLugar(id);
+
+                return comentarios;
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         return null;

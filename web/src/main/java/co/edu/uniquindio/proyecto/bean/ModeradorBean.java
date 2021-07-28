@@ -42,7 +42,7 @@ public class ModeradorBean implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        //  this.lugar= new Lugar();
+
         this.lugaresAprobados = obtenerLugaresAprobados();
 
         try {
