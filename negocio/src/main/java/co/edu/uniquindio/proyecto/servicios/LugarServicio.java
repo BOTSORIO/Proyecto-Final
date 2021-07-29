@@ -28,5 +28,9 @@ public interface LugarServicio {
 
     void registrarComentario(Comentario c) throws Exception;
 
+    void ingresarComentario(Comentario c,Lugar lugar,Persona persona) throws Exception;
+
     void marcarFavorito(Lugar lugar, Persona p) throws Exception;
+
+    void eliminarFavorito(Lugar lugar, Persona persona) throws Exception;
 }

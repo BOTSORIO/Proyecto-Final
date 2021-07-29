@@ -28,52 +28,51 @@
                         <h1> Comentarios </h1>
                     </f:facet>
 
-                    <div class="product card">
-                        <h:form>
-                            <p:dataScroller value="#{detalleLugarBean.comentariosDetal}" var="comentario" chunkSize="10"
-                                            mode="inline"
-                                            scrollHeight="300">
+                    <h5>#{detalleLugarBean.comentariosDetal}</h5>
 
-                                <div class="product">
-                                    <div class="product-list-item p-p-5">
-                                        <p:graphicImage name="resources/img/avatar.png"/>
-                                        <div class="product-list-detail">
-                                            <div class="product-name">#{comentario.usuario.nombre}</div>
-                                            <div class="product-description">#{comentario.comentario}</div>
-                                            <p:rating readonly="true" value="#{comentario.calificacion}"/>
+                    <div>
+                        <h:form id="form">
+                            <p:dataView var="comentario" value="#{detalleLugarBean.comentariosDetal}"
+                                        gridIcon="pi pi-th-large">
+
+                                <p:dataViewGridItem>
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">#{comentario.nombre}</h5>
+                                            <p class="card-text">#{comentario.descripcion}</p>
                                         </div>
                                     </div>
-                                </div>
-                            </p:dataScroller>
+                                </p:dataViewGridItem>
+
+                            </p:dataView>
                         </h:form>
                     </div>
 
+                    <h:form>
                     <div class="row" style="margin-top: 2%">
                         <div class="col">
                             <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
                                 <f:facet name="title">
                                     Añade tu comentario
                                 </f:facet>
-                                <p:inputTextarea rows="2" cols="30"/>
+                                <p:inputTextarea rows="2" cols="30" value="#{detalleLugarBean.comentarioNuevo.comentario}"/>
                             </p:card>
                         </div>
                         <div class="col" style="margin-left: 20px; margin-top: 5%">
-                            <h:panelGrid columns="1" style="margin-bottom: 5%; margin-top: 5%"
+                            <h:panelGrid columns="1" style="margin-bottom: 10px"
                                          rendered="#{seguridadBean.autenticado}">
-                                <h4> Calificación: </h4>
+                                <h6> Calificaló: </h6>
                                 <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
                             </h:panelGrid>
                         </div>
                     </div>
 
-                    <f:facet name="footer">
-                        <p:commandButton icon="pi pi-check" value="Guardar" style="margin-left: 7%; width: 40%"/>
+                        <p:commandButton icon="pi pi-check" value="Guardar" action="#{detalleLugarBean.ingresarComentario}" style="margin-left: 7%; width: 40%"/>
                         <p:button icon="pi pi-undo" value="Volver" styleClass="ui-button-secondary"
                                   style="margin-left: .5em; width: 40%" href="/index.xhtml"/>
-                    </f:facet>
+                </h:form>
+
                 </p:card>
-
-
             </div>
 
             <div style="margin-top: 5%" class="col">
@@ -83,12 +82,8 @@
 
                         <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
 
-                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-star-o"
-                                         style="color: #ffcd39"
-                                         styleClass="rounded-button ui-button-warning ui-button-flat"/>
-                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-trash"
-                                         style="color: red"
-                                         styleClass="rounded-button ui-button-danger ui-button-flat"/>
+                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-star-o" style="color: #ffcd39" styleClass="rounded-button ui-button-warning ui-button-flat" />
+                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-trash" style="color: red" styleClass="rounded-button ui-button-danger ui-button-flat" />
 
                     </f:facet>
                     <h6> información: </h6>

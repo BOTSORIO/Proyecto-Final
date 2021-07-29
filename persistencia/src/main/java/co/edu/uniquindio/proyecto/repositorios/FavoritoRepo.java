@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface FavoritoRepo extends JpaRepository<Favorito,Integer> {
 
     //================================= REPOSITORIO DE FAVORITO =================================//
+
+    @Query("select f from Favorito f where f.lugar.id= :idLugar and f.usuario.id= :cedula")
+    Favorito obtenerFavorito(int idLugar,String cedula);
 }

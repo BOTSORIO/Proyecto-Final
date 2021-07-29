@@ -67,28 +67,53 @@ public class DetalleLugarBean implements Serializable {
     }
 
 
-    public void crearComentario(){
+    public void ingresarComentario(){
+
+        Lugar lugarEncontrado;
         try {
-            if (personaLogin!=null) {
-                comentarioNuevo.setLugar(this.lugar);
-                comentarioNuevo.setUsuario((Usuario) personaLogin);
-                lugarServicio.registrarComentario(comentarioNuevo);
+            int id = Integer.parseInt(idLugar);
+            lugarEncontrado = lugarServicio.obtenerLugar(id);
+
+            if (personaLogin!=null && lugarEncontrado!=null){
+                lugarServicio.ingresarComentario(comentarioNuevo,lugarEncontrado,personaLogin);
                 this.comentarioNuevo = new Comentario();
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void marcarFavorito() throws Exception{
+    public void marcarFavorito() {
 
         Lugar lugarEncontrado;
 
         if(personaLogin!= null){
 
             int id = Integer.parseInt(idLugar);
-            lugarEncontrado = lugarServicio.obtenerLugar(id);
-            lugarServicio.marcarFavorito(lugarEncontrado,personaLogin);
+            try {
+                lugarEncontrado = lugarServicio.obtenerLugar(id);
+                lugarServicio.marcarFavorito(lugarEncontrado,personaLogin);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void eliminarFavorito(){
+
+        Lugar lugarEncontrado;
+
+        if (personaLogin != null){
+
+            int id= Integer.parseInt(idLugar);
+            try {
+
+                lugarEncontrado= lugarServicio.obtenerLugar(id);
+                lugarServicio.eliminarFavorito(lugarEncontrado,personaLogin);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

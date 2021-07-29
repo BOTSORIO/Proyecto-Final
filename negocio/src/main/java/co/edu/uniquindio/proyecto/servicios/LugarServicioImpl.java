@@ -132,14 +132,47 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
+    public void ingresarComentario(Comentario c, Lugar lugar,Persona persona) throws Exception {
+
+        try {
+            if (lugar != null && persona != null) {
+
+                c.setFechaComentario(new Date());
+                c.setLugar(lugar);
+                c.setUsuario((Usuario) persona);
+                comentarioRepo.save(c);
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public void marcarFavorito(Lugar lugar, Persona persona) throws Exception {
 
         Favorito favorito = new Favorito();
+
 
         if(lugar != null && persona != null){
                 favorito.setLugar(lugar);
                 favorito.setUsuario((Usuario)persona);
                 favoritoRepo.save(favorito);
+        }
+    }
+
+    @Override
+    public void eliminarFavorito(Lugar lugar, Persona persona) throws Exception{
+
+        Favorito favorito;
+
+        if(lugar !=null && persona !=null){
+
+            favorito= favoritoRepo.obtenerFavorito(lugar.getId(),persona.getId());
+
+            favorito.setLugar(null);
+            favorito.setUsuario(null);
+            favoritoRepo.save(favorito);
+            favoritoRepo.delete(favorito);
         }
     }
 

@@ -24,12 +24,10 @@ public class Comentario implements Serializable {
     private int id;
 
     @Column(name = "comentario", nullable = false,length = 200)
-    @NotBlank
     @Size(max = 200, message = "El comentario no puede superar los 200 caracteres")
     private String comentario;
 
     @Column(name = "calificacion", nullable = false)
-    @Positive
     private int calificacion;
 
     @Column(name = "respuesta", nullable = true,length = 200)
