@@ -16,6 +16,12 @@ public interface UsuarioServicio {
 
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
 
+    List<Lugar> obtenerLugaresPorUsuario(String idUsuario);
+
+    public List<Comentario> obtenerComentariosSinRespuesta(String idUsuario);
+
+    public List<Comentario> obtenerComentariosConRespuesta(String idUsuario);
+
     List<Usuario> listarUsuarios();
 
 }

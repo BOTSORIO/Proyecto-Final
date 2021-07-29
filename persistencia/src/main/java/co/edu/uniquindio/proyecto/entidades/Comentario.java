@@ -56,7 +56,6 @@ public class Comentario implements Serializable {
 
     }
 
-
     //================================= TO STRING DE LA ENTIDAD =================================//
     @Override
     public String toString() {

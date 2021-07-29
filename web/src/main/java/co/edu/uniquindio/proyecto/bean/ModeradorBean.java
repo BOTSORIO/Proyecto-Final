@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@ViewScoped
+@RequestScope
 public class ModeradorBean implements Serializable {
 
     private final ModeradorServicio moderadorServicio;
@@ -56,7 +56,7 @@ public class ModeradorBean implements Serializable {
 
     public void aprobarLugar(int id) {
 
-        Lugar lugarEncontrado = null;
+        Lugar lugarEncontrado ;
 
         if (personaLogin != null) {
 
@@ -70,6 +70,8 @@ public class ModeradorBean implements Serializable {
                     lugarEncontrado.setModerador((Moderador) personaLogin);
 
                     lugarServicio.actualizarLugar(lugarEncontrado);
+                    this.lugaresAprobados=obtenerLugaresAprobados();
+                    this.lugaresDesaprobados=obtenerLugaresDesaprobados();
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se autorizo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
@@ -82,7 +84,7 @@ public class ModeradorBean implements Serializable {
 
     public void desaprobarLugar(int id){
 
-        Lugar lugarEncontrado = null;
+        Lugar lugarEncontrado ;
 
         if (personaLogin != null) {
 
@@ -96,7 +98,10 @@ public class ModeradorBean implements Serializable {
                     lugarEncontrado.setModerador(null);
 
                     lugarServicio.actualizarLugar(lugarEncontrado);
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se autorizo correctamente");
+                    this.lugaresAprobados=obtenerLugaresAprobados();
+                    this.lugaresDesaprobados=obtenerLugaresDesaprobados();
+
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El lugar se desaprobo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
                 }else{

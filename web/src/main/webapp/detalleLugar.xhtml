@@ -23,8 +23,13 @@
 
         <div class="row">
             <div style="margin-top: 2%; margin-left: 10%" class="col">
-                <img src="/uploads/#{detalleLugarBean.lugar.imagenPrincipal}" class="card-img-top" alt="..."
-                     height="300"/>
+
+                <div class="card">
+                    <p:galleria value="#{detalleLugarBean.urlImagenes}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                        <p:graphicImage name="/uploads/#{image}" alt="Image Description for #{image}"
+                                        title="#{image}"/>
+                    </p:galleria>
+                </div>
 
                 <p:card style="width: 100%; margin-bottom: 2em">
                     <f:facet name="title">

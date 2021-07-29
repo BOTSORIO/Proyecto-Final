@@ -1,9 +1,9 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.entidades.Ciudad;
-import co.edu.uniquindio.proyecto.entidades.Persona;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
+import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +28,9 @@ public class UsuarioBean implements Serializable {
     private UsuarioServicio usuarioServicio;
 
     @Autowired
+    private ComentarioServicio comentarioServicio;
+
+    @Autowired
     @Getter @Setter
     private CiudadServicio ciudadServicio;
 
@@ -46,11 +49,27 @@ public class UsuarioBean implements Serializable {
     @Getter @Setter
     private List<Ciudad> ciudades;
 
+    @Getter @Setter
+    private List<Lugar>lugaresUsuario;
+
+    @Getter @Setter
+    private List<Comentario>comentariosSR;
+
+    @Getter @Setter
+    private List<Comentario>comentariosCR;
+
+    @Getter @Setter
+    private Comentario comentario;
+
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
         this.usuarioAux = new Usuario();
+        this.comentario = new Comentario();
         this.ciudades = ciudadServicio.listarCiudades();
+        this.lugaresUsuario = obtenerLugaresUsuario();
+        this.comentariosSR = obtenerComentariosSR();
+        this.comentariosCR = obtenerComentariosCR();
     }
 
     public void registrarUsuario() {
@@ -108,6 +127,104 @@ public class UsuarioBean implements Serializable {
 
         }
         return null;
+    }
+
+
+    public List<Lugar> obtenerLugaresUsuario(){
+
+        List<Lugar> lugaresU = null;
+
+        if (personaLogin!=null){
+            try{
+                lugaresU= usuarioServicio.obtenerLugaresPorUsuario(personaLogin.getId());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return lugaresU;
+
+    }
+
+    public List<Comentario>obtenerComentariosSR(){
+
+        List<Comentario>comentariosSR=null;
+
+        if(personaLogin!=null){
+            try{
+
+                comentariosSR=usuarioServicio.obtenerComentariosSinRespuesta(personaLogin.getId());
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return comentariosSR;
+
+    }
+
+    public List<Comentario>obtenerComentariosCR(){
+
+        List<Comentario>comentariosCR=null;
+
+        if(personaLogin!=null){
+            try{
+
+                comentariosCR=usuarioServicio.obtenerComentariosConRespuesta(personaLogin.getId());
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return comentariosCR;
+    }
+
+
+    public void responderComentario(int idComentario){
+
+        Comentario comentarioEncontrado;
+
+        if(personaLogin!=null){
+
+            try{
+
+                comentarioEncontrado = comentarioServicio.obtenerComentario(idComentario);
+
+                if (comentarioEncontrado!=null){
+                    comentarioServicio.responderComentario(comentario.getRespuesta(),idComentario);
+
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la respuesta se registro exitosamente");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                }
+            }catch (Exception e){
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No fue posible registrar la respuesta");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+        }
+    }
+
+
+    public void eliminarComentario(int idComentario){
+
+        Comentario comentarioEncontrado;
+
+        if (personaLogin!=null){
+
+            try {
+
+               comentarioEncontrado= comentarioServicio.obtenerComentario(idComentario);
+               comentarioServicio.eliminarComentario(comentarioEncontrado.getId());
+
+               FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El comentario se elimino correctamente");
+               FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }catch (Exception e){
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No se encontro el comentario");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+        }
+
     }
 
 }

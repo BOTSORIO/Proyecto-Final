@@ -15,75 +15,50 @@
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
+    <h:form id="form">
         <div style="margin: 5%">
             <h1>¡Hola!</h1>
             <h2>#{usuarioBean.usuario.nombre} don chimbo</h2>
         </div>
 
-        <h1 style="margin: 5%">Comentarios que faltan por aprobar</h1>
-        <p:dataView var="comentario" value="#{detalleLugarBean.comentariosDetal}" rows="12" paginator="true"
-                    gridIcon="pi pi-th-large"
-                    listIcon="pi pi-bars" style="margin: 5%">
+        <h1 style="margin: 5%">Comentarios que faltan por responder</h1>
 
-            <p:dataViewGridItem>
-                <div class="card" style="width: 18rem;">
-                    <img src="../resources/img/avatar.png" class="card-img-top" alt="..."/>
-                    <div class="card-body">
-                        <h5 class="card-title">#{comentario.usuario.nombre}</h5>
-                        <p class="card-text">#{comentario.comentario}</p>
-                        <p:commandButton type="button" value="Responder"
-                                         styleClass="ui-button-raised ui-button-secondary ui-button-flat"/>
-                    </div>
-                </div>
-            </p:dataViewGridItem>
+        <p:outputPanel id="sin_respuesta">
+            <p:dataTable value="#{usuarioBean.comentariosSR}" var="comentario" id="sin_respuestaTable">
 
-            <p:dataViewListItem>
-                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-                    <p:graphicImage styleClass="imagen-lugar"/>
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Usuario:"/>
-                            <h:outputText value="#{comentario.usuario.nombre}" style="font-weight: bold"/>
-                            <h:outputText value="Comentario:"/>
-                            <h:outputText value="#{comentario.comentario}"/>
-                            <h:outputText value="Calificación:"/>
-                            <h:outputText value="#{comentario.calificacion}"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
+                <p:column headerText="Usuario">
+                    <h:outputText value="#{comentario.usuario.nombre}"/>
+                </p:column>
 
-                    <h:panelGrid>
-                        <p:commandButton value="Responder" action="#{moderadorBean.aprobarLugar(lugar.id)}"
-                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
-                                         iconPos="right"/>
-                    </h:panelGrid>
+                <p:column headerText="Comentario">
+                    <f:facet name="header">
+                        <h:outputText value="Comentario"/>
+                    </f:facet>
+                    <h:outputText value="#{comentario.comentario}"/>
+                </p:column>
 
-                </h:panelGrid>
-            </p:dataViewListItem>
+                <p:column headerText="Fecha">
+                    <f:facet name="header">
+                        <h:outputText value="Fecha"/>
+                    </f:facet>
+                    <h:outputText value="#{comentario.fechaComentario}"/>
+                </p:column>
 
-        </p:dataView>
+                <p:column headerText="Responder">
+                    <p:commandLink value="Responder" update=":form:sin_respuesta"  process=":form:sin_respuesta">
+                        <p:collector value="#{comentario}" removeFrom="#{usuarioBean.responderComentario(comentario.id)}" unique="true"/>
+                    </p:commandLink>
+                </p:column>
 
+                <p:column headerText="Eliminar">
+                    <p:commandLink value="Eliminar" update=":form:sin_respuesta"  process=":form:sin_respuesta">
+                        <p:collector value="#{comentario}" removeFrom="#{usuarioBean.eliminarComentario(comentario.id)}" unique="true"/>
+                    </p:commandLink>
+                </p:column>
 
-        <div class="product card">
-            <h:form>
-                <p:dataScroller value="#{detalleLugarBean.comentariosDetal}" var="comentario" chunkSize="10"
-                                mode="inline"
-                                scrollHeight="300">
-
-                    <div class="product">
-                        <div class="product-list-item p-p-5">
-                            <p:graphicImage name="resources/img/avatar.png"/>
-                            <div class="product-list-detail">
-                                <div class="product-name">#{comentario.usuario.nombre}</div>
-                                <div class="product-description">#{comentario.comentario}</div>
-                                <p:rating readonly="true" value="#{comentario.calificacion}"/>
-                            </div>
-                            <p:commandButton type="button" value="Responder"
-                                             styleClass="ui-button-raised ui-button-secondary ui-button-flat"/>
-                        </div>
-                    </div>
-                </p:dataScroller>
-            </h:form>
-        </div>
+            </p:dataTable>
+        </p:outputPanel>
+    </h:form>
 
     </ui:define>
 </ui:composition>

@@ -9,10 +9,11 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
+    private final LugarRepo lugarRepo;
 
-
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, LugarRepo lugarRepo) {
         this.usuarioRepo = usuarioRepo;
+        this.lugarRepo = lugarRepo;
     }
 
 
@@ -117,6 +118,67 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuario;
+    }
+
+
+    @Override
+    public List<Lugar> obtenerLugaresPorUsuario(String idUsuario){
+
+        List<Lugar> lugaresU = lugarRepo.obtenerLugaresPorUsuario(idUsuario);
+
+        return lugaresU;
+    }
+
+    @Override
+    public List<Comentario> obtenerComentariosSinRespuesta(String idUsuario){
+
+        List<Lugar> lugaresU = obtenerLugaresPorUsuario(idUsuario);
+        List<Comentario> comentariosSR=new ArrayList<>();
+
+        for (Lugar l:lugaresU){
+            List<Comentario>comentariosLugar=l.getComentarios();
+
+            if(comentariosLugar.size()>0){
+
+                for(Comentario c:comentariosLugar){
+
+                    if(c.getRespuesta()==null){
+
+                        comentariosSR.add(c);
+                    }
+
+                }
+            }
+
+        }
+
+        return comentariosSR;
+    }
+
+    @Override
+    public List<Comentario> obtenerComentariosConRespuesta(String idUsuario){
+
+        List<Lugar> lugaresU = obtenerLugaresPorUsuario(idUsuario);
+        List<Comentario> comentariosCR=new ArrayList<>();
+
+        for (Lugar l:lugaresU){
+            List<Comentario>comentariosLugar=l.getComentarios();
+
+            if(comentariosLugar.size()>0){
+
+                for(Comentario c:comentariosLugar){
+
+                    if(c.getRespuesta()!=null){
+
+                        comentariosCR.add(c);
+                    }
+
+                }
+            }
+
+        }
+
+        return comentariosCR;
     }
 
 

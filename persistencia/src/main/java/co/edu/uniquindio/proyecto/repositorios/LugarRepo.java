@@ -25,8 +25,6 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l.nombre, l.latitud, l.longitud from Lugar l ")
     List<Object[]> infoLugares2();
 
-    @Query("select l, c from Lugar l left join l.comentarios c")
-    List<Object[]> obtenerComentarios();
 
     @Query("select new co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO(l,c) from Lugar l left join l.comentarios c")
     List<ComentariosLugarDTO> obtenerComentariosLugares();
@@ -77,9 +75,6 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select count (l) from Lugar l  join l.comentarios c where c.calificacion  < 6 and l.id= :id")
     long calcularCantComentarios(Integer id);
 
-    @Query("select l from Lugar l where l.usuario.id= :idUsuario")
-    List<Lugar> obtenerLugaresPorUsuario(String idUsuario);
-
 
     @Query("select c from Lugar l join l.comentarios c where l.id= :idLugar ")
     List<Comentario> obtenerComentariosLugarEspecifico(int idLugar);
@@ -115,9 +110,15 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     List<Comentario>obtenerComentariosLugar(int idLugar);
 
 
+
+
     //A implementar
     @Query("select avg(c.calificacion) from Comentario c where c.lugar.id = :idLugar")
     int obtenerCalificacion(Integer idLugar);
+
+    @Query("select l from Lugar l where l.usuario.id= :idUsuario")
+    List<Lugar> obtenerLugaresPorUsuario(String idUsuario);
+
 
 
     //Cargar

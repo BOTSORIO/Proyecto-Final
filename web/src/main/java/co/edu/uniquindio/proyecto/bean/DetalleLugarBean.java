@@ -52,6 +52,9 @@ public class DetalleLugarBean implements Serializable {
     @Getter @Setter
     private String icono;
 
+    @Getter @Setter
+    private List<String>urlImagenes;
+
     @PostConstruct
     public void inicializar(){
 
@@ -64,6 +67,14 @@ public class DetalleLugarBean implements Serializable {
                 this.lugar = lugarServicio.obtenerLugar(id);
                 this.comentariosDetal = obtenerComentarios();
                 this.horarios = lugarServicio.listarHorarios(id);
+                this.urlImagenes = new ArrayList<>();
+
+                List<Imagen>imagenes = lugar.getImagenes();
+
+                for(Imagen i:imagenes){
+
+                    urlImagenes.add(i.getUrl());
+                }
 
                 List<Lugar>lugares=new ArrayList<>();
                 lugares.add(lugar);
