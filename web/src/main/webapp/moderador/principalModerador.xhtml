@@ -55,6 +55,11 @@
 
         </p:dataView>
 
+        <div style="margin: 5%">
+            <h1>¡Hola!</h1>
+            <h2>#{usuarioBean.usuario.nombre} don chimbo</h2>
+        </div>
+
         <h1 style="margin: 5%">Lugares autorizados por usted</h1>
         <p:dataView var="lugar" value="#{moderadorBean.lugaresAprobados}" rows="12" paginator="true" gridIcon="pi pi-th-large"
                     listIcon="pi pi-bars" style="margin: 5%">

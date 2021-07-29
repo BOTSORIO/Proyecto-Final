@@ -23,7 +23,8 @@
 
         <div class="row">
             <div style="margin-top: 2%; margin-left: 10%" class="col">
-                <img src="/uploads/#{detalleLugarBean.lugar.imagenPrincipal}" class="card-img-top" alt="..." height="300"/>
+                <img src="/uploads/#{detalleLugarBean.lugar.imagenPrincipal}" class="card-img-top" alt="..."
+                     height="300"/>
 
                 <p:card style="width: 100%; margin-bottom: 2em">
                     <f:facet name="title">
@@ -43,6 +44,7 @@
                                             <div class="product-name">#{comentario.usuario.nombre}</div>
                                             <div class="product-description">#{comentario.comentario}</div>
                                             <p:rating readonly="true" value="#{comentario.calificacion}"/>
+                                            <p:divider></p:divider>
                                         </div>
                                     </div>
                                 </div>
@@ -51,23 +53,24 @@
                     </div>
 
                     <h:form>
-                    <div class="row" style="margin-top: 2%">
-                        <div class="col">
-                            <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
-                                <f:facet name="title">
-                                    Añade tu comentario
-                                </f:facet>
-                                <p:inputTextarea rows="2" cols="30" value="#{detalleLugarBean.comentarioNuevo.comentario}"/>
-                            </p:card>
+                        <div class="row" style="margin-top: 2%; margin-bottom: 2%">
+                            <div class="col">
+                                <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
+                                    <f:facet name="title">
+                                        Añade tu comentario
+                                    </f:facet>
+                                    <p:inputTextarea rows="2" cols="30"
+                                                     value="#{detalleLugarBean.comentarioNuevo.comentario}"/>
+                                </p:card>
+                            </div>
+                            <div class="col" style="margin-left: 20px; margin-top: 5%">
+                                <h:panelGrid columns="1" style="margin-bottom: 10px"
+                                             rendered="#{seguridadBean.autenticado}">
+                                    <h4> Calificación: </h4>
+                                    <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
+                                </h:panelGrid>
+                            </div>
                         </div>
-                        <div class="col" style="margin-left: 20px; margin-top: 5%">
-                            <h:panelGrid columns="1" style="margin-bottom: 10px"
-                                         rendered="#{seguridadBean.autenticado}">
-                                <h6> Calificación: </h6>
-                                <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
-                            </h:panelGrid>
-                        </div>
-                    </div>
 
                         <p:commandButton icon="pi pi-check" value="Guardar"
                                          action="#{detalleLugarBean.ingresarComentario}"
@@ -84,15 +87,23 @@
                     <f:facet name="title">
                         <h1> #{detalleLugarBean.lugar.nombre} </h1>
 
-                        <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
-
-                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-star-o"
-                                         style="color: #ffcd39"
-                                         styleClass="rounded-button ui-button-warning ui-button-flat"/>
-                        <p:commandButton action="#{detalleLugarBean.marcarFavorito}" icon="pi pi-trash"
-                                         style="color: red"
-                                         styleClass="rounded-button ui-button-danger ui-button-flat"/>
-
+                        <div class="row">
+                            <div class="col">
+                                <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
+                            </div>
+                            <div class="col-4">
+                                <p:commandButton id="favorito" action="#{detalleLugarBean.marcarFavorito}"
+                                                 icon="pi pi-star-o"
+                                                 style="color: #ffcd39"
+                                                 styleClass="rounded-button ui-button-warning ui-button-flat"/>
+                                <p:tooltip for="favorito" value="Selecionar como favorito" position="right"/>
+                                <p:commandButton id="Nofavorito" action="#{detalleLugarBean.marcarFavorito}"
+                                                 icon="pi pi-trash"
+                                                 style="color: red"
+                                                 styleClass="rounded-button ui-button-danger ui-button-flat"/>
+                                <p:tooltip for="Nofavorito" value="Quite de sus favoritos" position="right"/>
+                            </div>
+                        </div>
                     </f:facet>
                     <h6> información: </h6>
                     #{detalleLugarBean.lugar.descripcion}
@@ -103,8 +114,8 @@
                     <br></br>
                     Ubicada en:       #{detalleLugarBean.lugar.ciudad.nombre}
 
-                    <div id="mapa">
-                        <div id='map' style="visibility: hidden"></div>
+                    <div id="mapa" style="height: 300px">
+                        <div id='map' style="visibility: visible;height: 300px;"></div>
                     </div>
 
                 </p:card>

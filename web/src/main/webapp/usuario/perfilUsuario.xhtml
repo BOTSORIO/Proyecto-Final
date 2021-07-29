@@ -15,6 +15,11 @@
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
+        <div style="margin: 5%">
+            <h1>¡Hola!</h1>
+            <h2>#{usuarioBean.usuario.nombre} don chimbo</h2>
+        </div>
+
         <h1 style="margin: 5%">Comentarios que faltan por aprobar</h1>
         <p:dataView var="comentario" value="#{detalleLugarBean.comentariosDetal}" rows="12" paginator="true"
                     gridIcon="pi pi-th-large"
@@ -22,7 +27,7 @@
 
             <p:dataViewGridItem>
                 <div class="card" style="width: 18rem;">
-                    <img src="resources/img/avatar.png" class="card-img-top" alt="..."/>
+                    <img src="../resources/img/avatar.png" class="card-img-top" alt="..."/>
                     <div class="card-body">
                         <h5 class="card-title">#{comentario.usuario.nombre}</h5>
                         <p class="card-text">#{comentario.comentario}</p>
