@@ -25,9 +25,8 @@
             <div style="margin-top: 2%; margin-left: 10%" class="col">
 
                 <div class="card">
-                    <p:galleria value="#{detalleLugarBean.urlImagenes}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-                        <p:graphicImage name="/uploads/#{image}" alt="Image Description for #{image}"
-                                        title="#{image}"/>
+                    <p:galleria value="#{detalleLugarBean.urlImagenes}" var="image" panelWidth="700" panelHeight="313" showCaption="true">
+                        <p:graphicImage url="/uploads/#{image}" title="Imagenes"/>
                     </p:galleria>
                 </div>
 

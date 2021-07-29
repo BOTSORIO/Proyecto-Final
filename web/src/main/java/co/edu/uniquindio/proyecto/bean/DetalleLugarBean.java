@@ -71,10 +71,17 @@ public class DetalleLugarBean implements Serializable {
 
                 List<Imagen>imagenes = lugar.getImagenes();
 
-                for(Imagen i:imagenes){
+                if(imagenes.size()>0){
 
-                    urlImagenes.add(i.getUrl());
+                    for(Imagen i:imagenes){
+
+                        urlImagenes.add(i.getUrl());
+                    }
+                }else{
+
+                    urlImagenes.add("default.jpg");
                 }
+
 
                 List<Lugar>lugares=new ArrayList<>();
                 lugares.add(lugar);
