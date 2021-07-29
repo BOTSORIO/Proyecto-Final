@@ -12,16 +12,18 @@
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+        <h:outputScript library="js" name="mapbox-gl.js"/>
+        <h:outputScript library="js" name="script-detalleLugar.js"/>
+    </ui:define>
+
     <ui:define name="title">Lugar | Detalle</ui:define>
     <ui:define name="content">
 
         <div class="row">
             <div style="margin-top: 2%; margin-left: 10%" class="col">
-                <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313"
-                            showCaption="true">
-                    <p:graphicImage name="demo/images/nature/#{image}" alt="Image Description for #{image}"
-                                    title="#{image}"/>
-                </p:galleria>
+                <img src="/uploads/#{detalleLugarBean.lugar.imagenPrincipal}" class="card-img-top" alt="..." height="300"/>
 
                 <p:card style="width: 100%; margin-bottom: 2em">
                     <f:facet name="title">
@@ -49,24 +51,23 @@
                     </div>
 
                     <h:form>
-                        <div class="row" style="margin-top: 2%; margin-bottom: 2%">
-                            <div class="col">
-                                <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
-                                    <f:facet name="title">
-                                        Añade tu comentario
-                                    </f:facet>
-                                    <p:inputTextarea rows="2" cols="30"
-                                                     value="#{detalleLugarBean.comentarioNuevo.comentario}"/>
-                                </p:card>
-                            </div>
-                            <div class="col" style="margin-left: 20px; margin-top: 5%">
-                                <h:panelGrid columns="1" style="margin-bottom: 10px"
-                                             rendered="#{seguridadBean.autenticado}">
-                                    <h6> Calificaló: </h6>
-                                    <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
-                                </h:panelGrid>
-                            </div>
+                    <div class="row" style="margin-top: 2%">
+                        <div class="col">
+                            <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
+                                <f:facet name="title">
+                                    Añade tu comentario
+                                </f:facet>
+                                <p:inputTextarea rows="2" cols="30" value="#{detalleLugarBean.comentarioNuevo.comentario}"/>
+                            </p:card>
                         </div>
+                        <div class="col" style="margin-left: 20px; margin-top: 5%">
+                            <h:panelGrid columns="1" style="margin-bottom: 10px"
+                                         rendered="#{seguridadBean.autenticado}">
+                                <h6> Calificación: </h6>
+                                <p:rating value="#{detalleLugarBean.comentarioNuevo.calificacion}"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
 
                         <p:commandButton icon="pi pi-check" value="Guardar"
                                          action="#{detalleLugarBean.ingresarComentario}"
@@ -102,8 +103,8 @@
                     <br></br>
                     Ubicada en:       #{detalleLugarBean.lugar.ciudad.nombre}
 
-                    <div id="mapa"
-                         style="width: 80%;height:400px">
+                    <div id="mapa">
+                        <div id='map' style="visibility: hidden"></div>
                     </div>
 
                 </p:card>
