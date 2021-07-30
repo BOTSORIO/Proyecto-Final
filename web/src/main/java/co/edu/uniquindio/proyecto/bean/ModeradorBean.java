@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -30,7 +31,15 @@ public class ModeradorBean implements Serializable {
 
     @Getter
     @Setter
+    private List<Lugar> lugaresTAprobados;
+
+    @Getter
+    @Setter
     private List<Lugar> lugaresDesaprobados;
+
+    @Getter
+    @Setter
+    private Moderador moderador;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -43,10 +52,11 @@ public class ModeradorBean implements Serializable {
     @PostConstruct
     public void inicializar() {
 
-        this.lugaresAprobados = obtenerLugaresAprobados();
-
         try {
+            this.lugaresAprobados = obtenerLugaresAprobados();
+            this.lugaresTAprobados = obtenerTodosLugaresAprobados();
             this.lugaresDesaprobados = obtenerLugaresDesaprobados();
+            this.moderador = obtenerModerador();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,10 +78,12 @@ public class ModeradorBean implements Serializable {
 
                     lugarEncontrado.setEstado(true);
                     lugarEncontrado.setModerador((Moderador) personaLogin);
+                    lugarEncontrado.setFechaAprobacion(new Date());
 
                     lugarServicio.actualizarLugar(lugarEncontrado);
                     this.lugaresAprobados=obtenerLugaresAprobados();
                     this.lugaresDesaprobados=obtenerLugaresDesaprobados();
+                    this.lugaresTAprobados=obtenerTodosLugaresAprobados();
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se autorizo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
@@ -96,6 +108,7 @@ public class ModeradorBean implements Serializable {
 
                     lugarEncontrado.setEstado(false);
                     lugarEncontrado.setModerador(null);
+                    lugarEncontrado.setFechaAprobacion(null);
 
                     lugarServicio.actualizarLugar(lugarEncontrado);
                     this.lugaresAprobados=obtenerLugaresAprobados();
@@ -117,7 +130,16 @@ public class ModeradorBean implements Serializable {
 
     }
 
+    public List<Lugar> obtenerTodosLugaresAprobados(){
 
+        List<Lugar> aprobados = null;
+
+        if (personaLogin!=null){
+
+            aprobados =moderadorServicio.obtenerTodosLugaresAprobados();
+        }
+        return aprobados;
+    }
 
     public List<Lugar> obtenerLugaresAprobados(){
 
@@ -144,6 +166,22 @@ public class ModeradorBean implements Serializable {
         }
 
         return desaprobados;
+    }
+
+    public Moderador obtenerModerador() {
+
+        Moderador moderadorEncontrado = new Moderador();
+
+        if (personaLogin != null) {
+
+            try {
+                moderadorEncontrado=moderadorServicio.obtenerModerador(personaLogin.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return moderadorEncontrado;
     }
 
 }

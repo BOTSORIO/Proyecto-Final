@@ -144,6 +144,29 @@ public class LugarBean implements Serializable {
         return null;
     }
 
+
+    public void actualizarLugar(){
+
+        if(personaLogin!=null){
+
+            try {
+
+                lugarServicio.actualizarLugar(lugar, lugar.getId());
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se actualizo correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }catch (Exception e){
+
+                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","No pudimos actualizar el lugar");
+                FacesContext.getCurrentInstance().addMessage(null,msg);
+
+            }
+
+        }
+
+    }
+
+
     public void subirImagenes(FileUploadEvent event){
 
         UploadedFile imagen = event.getFile();
@@ -301,25 +324,5 @@ public class LugarBean implements Serializable {
         }
     }
 
-    public void actualizarLugar(){
-
-        if(personaLogin!=null){
-
-            try {
-
-                lugarServicio.actualizarLugar(lugar, lugar.getId());
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se actualizo correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-            }catch (Exception e){
-
-                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","No pudimos actualizar el lugar");
-                FacesContext.getCurrentInstance().addMessage(null,msg);
-
-            }
-
-        }
-
-    }
 
 }

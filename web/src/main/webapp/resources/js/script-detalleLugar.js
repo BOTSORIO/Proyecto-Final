@@ -1,32 +1,51 @@
-function crearMapa(lugares){
+function crearMapa(lugares) {
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
 
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-75.66, 4.52],
-        zoom: 12
-    });
+            let enable = true;
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
 
-    map.on("load",function (e){
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [-75.66, 4.52],
+                zoom: 12
+            });
 
-        ubicarLugares(lugares,map);
-    });
-}
+            //Añade un control de geolocalizacion al mapa en la ventana de la creacion del lugar
+            map.addControl(new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            }));
 
-function ubicarLugares(lugares, map){
+            //Añade varios controles al mapa
+            map.addControl(new mapboxgl.NavigationControl());
 
-    let bounds = new mapboxgl.LngLatBounds();
+            map.on("load", function (e) {
 
-    for(let l of lugares){
+                ubicarLugares(lugares, map);
+            });
 
-        new mapboxgl.Marker().setLngLat([l.lng,l.lat]).setPopup(new mapboxgl.Popup().setHTML("<strong>"+l.nombre+"</strong><br>"+l.descripcion)).addTo(map).togglePopup();
-
-        bounds.extend([l.lng,l.lat]);
+        })
     }
 
-    map.fitBounds(bounds,{padding: 100});
-    document.getElementById("map").style.visibility="visible";
+    function ubicarLugares(lugares, map) {
+
+        let bounds = new mapboxgl.LngLatBounds();
+
+        for (let l of lugares) {
+
+            new mapboxgl.Marker().setLngLat([l.lng, l.lat]).setPopup(new mapboxgl.Popup().setHTML("<strong>" + l.nombre + "</strong><br>" + l.descripcion)).addTo(map).togglePopup();
+
+            bounds.extend([l.lng, l.lat]);
+        }
+
+        map.fitBounds(bounds, {padding: 100});
+        document.getElementById("map").style.visibility = "visible";
+
+    }
 
 }

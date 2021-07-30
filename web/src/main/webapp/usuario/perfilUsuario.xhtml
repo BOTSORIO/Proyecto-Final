@@ -19,9 +19,13 @@
 
             <div style="margin: 2% 5%">
                 <h1>¡Hola!</h1>
-                <h2>(nombre del Usuario{falta metodo})</h2>
+                <h2> #{usuarioBean.usuarioAux.nombre} </h2>
                 <p:divider></p:divider>
-                <h4>Email:(email del Usuario{falta metodo})</h4>
+                <h4>Email:  #{usuarioBean.usuarioAux.email} </h4>
+                <br></br>
+                <h4>Nickname:  #{usuarioBean.usuarioAux.nickname} </h4>
+                <br></br>
+                <h4>Ciudad:  #{usuarioBean.usuarioAux.ciudad} </h4>
             </div>
 
             <div class="card" style="margin: 2% 5%">
@@ -51,9 +55,6 @@
                         <p:column headerText="Responder">
                             <p:commandLink value="Responder" onclick="PF('dlg3').show()" update=":form:sin_respuesta"
                                            process=":form:sin_respuesta">
-                                <p:collector value="#{comentario}"
-                                             removeFrom="#{usuarioBean.responderComentario(comentario.id)}"
-                                             unique="true"/>
                             </p:commandLink>
                         </p:column>
 
@@ -75,16 +76,15 @@
                       closeOnEscape="true">
 
                 <h5>Pon tu respuesta:</h5>
-                <p:inputTextarea rows="3" cols="65"/>
+                <p:inputTextarea value="#{usuarioBean.comentario.respuesta}" rows="3" cols="65"/>
 
-                <f:facet name="footer">
-                    <p:commandButton style="min-width: 30%" value="Responder" action="#{seguridadBean.iniciarSesion}"
+                    <p:commandButton style="min-width: 30%" value="Responder" action="#{usuarioBean.responderComentario(comentario.id)}"
                                      styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                     update="@form" href="/index.xhtml" icon="pi pi-sign-in" iconPos="left"/>
+                                     update="@form" icon="pi pi-sign-in" iconPos="left"/>
                     <p:commandButton style="min-width: 30%" value="Cancelar"
                                      styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"/>
                     <p:growl showDetail="true" for="login-bean"/>
-                </f:facet>
+
             </p:dialog>
         </h:form>
 

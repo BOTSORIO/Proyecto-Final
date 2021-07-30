@@ -122,6 +122,14 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
+    public List<Lugar> obtenerTodosLugaresAprobados(){
+
+        List<Lugar> lugares = lugarRepo.obtenerTodosLugaresAprobados();
+
+        return lugares;
+    }
+
+    @Override
     public List<Lugar> obtenerLugaresSinAprobacion(){
 
         List<Lugar> lugares = lugarRepo.obtenerLugaresSinAprobacion();

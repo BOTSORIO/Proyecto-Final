@@ -23,7 +23,7 @@
             <p:outputPanel id="desaprobados" style="margin: 1% 5%">
                 <p:dataTable value="#{moderadorBean.lugaresDesaprobados}" var="lugar" id="desaprobadosTable">
 
-                    <p:column headerText="Nombre">
+                    <p:column headerText="Nombre" >
                         <h:outputText value="#{lugar.nombre}"/>
                     </p:column>
 
@@ -43,7 +43,7 @@
 
                     <p:column headerText="Aprobar">
                         <p:commandButton action="#{moderadorBean.aprobarLugar(lugar.id)}"
-                                         update="desaprobadosTable,aprobadosTable" icon="pi pi-check"
+                                         update="desaprobadosTable,tableAprobados" icon="pi pi-check"
                                          styleClass="rounded-button ui-button-flat"/>
                     </p:column>
 
@@ -56,7 +56,11 @@
             <h1 style="margin: 2% 5%">Lugares aprobados</h1>
 
             <p:outputPanel id="aprobados" style="margin: 1% 5%">
-                <p:dataTable value="#{moderadorBean.lugaresAprobados}" var="lugar" id="aprobadosTable">
+                <p:dataTable value="#{moderadorBean.lugaresTAprobados}" var="lugar" id="tableAprobados" >
+
+                    <p:column headerText="Moderador">
+                        <h:outputText value="#{lugar.moderador.nombre}"/>
+                    </p:column>
 
                     <p:column headerText="Nombre">
                         <h:outputText value="#{lugar.nombre}"/>
@@ -69,20 +73,7 @@
                         <h:outputText value="#{lugar.tipo.nombre}"/>
                     </p:column>
 
-                    <p:column headerText="Descripcion">
-                        <f:facet name="header">
-                            <h:outputText value="Descripcion"/>
-                        </f:facet>
-                        <h:outputText value="#{lugar.descripcion}"/>
-                    </p:column>
-
-                    <p:column headerText="Desaprobar">
-                        <p:commandButton action="#{moderadorBean.desaprobarLugar(lugar.id)}"
-                                         update="aprobadosTable,desaprobadosTable" icon="pi pi-times"
-                                         styleClass="rounded-button ui-button-flat"/>
-                    </p:column>
-
-                </p:dataTable>
+                </p:dataTable >
             </p:outputPanel>
         </div>
 

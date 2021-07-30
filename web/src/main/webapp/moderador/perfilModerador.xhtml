@@ -17,10 +17,12 @@
 
         <div style="margin: 2% 5%">
             <h1>¡Hola!</h1>
-            <h2>(nombre del moderador{falta metodo})</h2>
+            <h2>#{moderadorBean.moderador.nombre}</h2>
             <p:divider></p:divider>
-            <h4>Email:(email del moderador{falta metodo})</h4>
-            <h4>Administrador:(nombre del administrador{falta metodo})</h4>
+            <h4>Email:          #{moderadorBean.moderador.email}</h4>
+            <br></br>
+            <h4>Nickname:          #{moderadorBean.moderador.nickname}</h4>
+            <br></br>
         </div>
 
         <div class="card" style="margin: 2% 5%">
@@ -49,7 +51,7 @@
 
                     <p:column headerText="Desaprobar">
                         <p:commandButton action="#{moderadorBean.desaprobarLugar(lugar.id)}"
-                                         update="aprobadosTable,desaprobadosTable" icon="pi pi-times"
+                                         update="aprobadosTable" icon="pi pi-times"
                                          styleClass="rounded-button ui-button-flat"/>
                     </p:column>
 

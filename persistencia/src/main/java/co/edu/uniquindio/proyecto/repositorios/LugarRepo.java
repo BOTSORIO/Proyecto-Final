@@ -123,4 +123,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l from Lugar l where l.moderador.email = :emailMod and l.estado=true")
     List<Lugar> obtenerLugaresAprobados(String emailMod);
 
+    @Query("select l from Lugar l where l.estado=true")
+    List<Lugar> obtenerTodosLugaresAprobados();
+
 }

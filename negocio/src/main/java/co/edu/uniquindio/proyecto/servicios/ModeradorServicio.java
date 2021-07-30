@@ -16,6 +16,8 @@ public interface ModeradorServicio {
 
     List<Lugar> obtenerLugaresAprobados(String email);
 
+    List<Lugar> obtenerTodosLugaresAprobados();
+
     List<Lugar> obtenerLugaresSinAprobacion();
 
     List<Moderador> listarModeradores();

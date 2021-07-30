@@ -64,7 +64,7 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
-        this.usuarioAux = new Usuario();
+        this.usuarioAux = obtenerUsuario();
         this.comentario = new Comentario();
         this.ciudades = ciudadServicio.listarCiudades();
         this.lugaresUsuario = obtenerLugaresUsuario();
@@ -205,26 +205,41 @@ public class UsuarioBean implements Serializable {
     }
 
 
-    public void eliminarComentario(int idComentario){
+    public void eliminarComentario(int idComentario) {
 
         Comentario comentarioEncontrado;
 
-        if (personaLogin!=null){
+        if (personaLogin != null) {
 
             try {
 
-               comentarioEncontrado= comentarioServicio.obtenerComentario(idComentario);
-               comentarioServicio.eliminarComentario(comentarioEncontrado.getId());
+                comentarioEncontrado = comentarioServicio.obtenerComentario(idComentario);
+                comentarioServicio.eliminarComentario(comentarioEncontrado.getId());
 
-               FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El comentario se elimino correctamente");
-               FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El comentario se elimino correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No se encontro el comentario");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
             }
         }
+    }
 
+    public Usuario obtenerUsuario(){
+
+        Usuario usuarioEncontrado = new Usuario();
+
+        if (personaLogin!=null){
+
+            try {
+                usuarioEncontrado = usuarioServicio.obtenerUsuario(personaLogin.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return usuarioEncontrado;
     }
 
 }
