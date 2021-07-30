@@ -15,8 +15,6 @@
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
-        <h:form id="form">
-
             <div style="margin: 2% 5%">
                 <h1>¡Hola!</h1>
                 <h2> #{usuarioBean.usuarioAux.nombre} </h2>
@@ -32,6 +30,9 @@
                 <h1 style="margin: 2% 5%">Comentarios que faltan por responder</h1>
 
                 <p:outputPanel id="sin_respuesta" style="margin: 2% 5%">
+
+                    <h:form id="form">
+
                     <p:dataTable value="#{usuarioBean.comentariosSR}" var="comentario" id="sin_respuestaTable">
 
                         <p:column headerText="Usuario">
@@ -55,8 +56,7 @@
                         <p:column headerText="Responder">
                             <p:commandButton action="#{usuarioBean.responder(comentario.id)}"
                                              onclick="PF('dlg3').show()"
-                                             icon="pi pi-send" update="sin_respuestaTable"
-                                             styleClass="rounded-button ui-button-flat"/>
+                                             icon="pi pi-send" styleClass="rounded-button ui-button-flat"/>
                         </p:column>
 
                         <p:column headerText="Eliminar">
@@ -65,9 +65,10 @@
                                              styleClass="rounded-button ui-button-flat"/>
                         </p:column>
                     </p:dataTable>
+                    </h:form>
                 </p:outputPanel>
             </div>
-        </h:form>
+
 
 
         <p:dialog id="dialogo" header="Respuesta" widgetVar="dlg3" Height="400px" width="40%" showEffect="fade"
@@ -79,9 +80,9 @@
 
                 <div style="margin-top: 5%;margin-left: 25%">
                     <p:commandButton style="min-width: 30%" value="Responder"
-                                     action="#{usuarioBean.responderComentario}"
+                                     action="#{usuarioBean.responderComentario}" onclick="PF('dlg3').hide()" update="form:sin_respuestaTable"
                                      styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                     update="@form" icon="pi pi-sign-in" iconPos="left"/>
+                                     icon="pi pi-sign-in" iconPos="left"/>
 
                     <p:commandButton style="min-width: 30%; margin-left: 5%" value="Cancelar"
                                      styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"/>

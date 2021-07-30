@@ -37,7 +37,7 @@ public class Lugar implements Serializable {
     private Date fechaCreacion;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_aprobacion", nullable = false)
+    @Column(name = "fecha_aprobacion")
     private Date fechaAprobacion;
 
     @Column(name = "latitud", nullable = false)

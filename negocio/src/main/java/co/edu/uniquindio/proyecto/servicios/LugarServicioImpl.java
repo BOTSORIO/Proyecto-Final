@@ -26,7 +26,6 @@ public class LugarServicioImpl implements LugarServicio {
 
 
         l.setEstado(false);
-        l.setFechaAprobacion(new Date());
         l.setFechaCreacion(new Date());
 
         return lugarRepo.save(l);

@@ -38,10 +38,10 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
         if (administradorServicio.listarAdministradores().isEmpty()){
 
-            Administrador admin1= new Administrador("1010017812","Melissa","DiosaNeko","Meli123","mortiz@gmail,com");
+            Administrador admin1= new Administrador("1010017812","Melissa","DiosaNeko","meli123","mortiz@gmail.com");
             administradorServicio.registrarAdministrador(admin1);
 
-            Usuario u = new Usuario("1193409775", "usuario", "usuario", "usuario", "u@mail.com");
+            Usuario u = new Usuario("1193409775", "usuario", "usuario", "usuario", "usuario@mail.com");
             usuarioServicio.registrarUsuario(u);
 
             Ciudad ciudad1 = new Ciudad("Calarcá");
@@ -70,11 +70,23 @@ public class InformacionPorDefecto implements CommandLineRunner {
             Tipo tipo2 = new Tipo("Motel");
             Tipo tipo3 = new Tipo("Cafe");
             Tipo tipo4 = new Tipo("Hotel");
+            Tipo tipo5 = new Tipo("Tienda");
+            Tipo tipo6 = new Tipo("Supermercado");
+            Tipo tipo7 = new Tipo("Tienda");
+            Tipo tipo8 = new Tipo("Museo");
+            Tipo tipo9 = new Tipo("Zoologico");
+            Tipo tipo10 = new Tipo("Parque");
 
             tipoServicio.registrarTipo(tipo1);
             tipoServicio.registrarTipo(tipo2);
             tipoServicio.registrarTipo(tipo3);
             tipoServicio.registrarTipo(tipo4);
+            tipoServicio.registrarTipo(tipo5);
+            tipoServicio.registrarTipo(tipo6);
+            tipoServicio.registrarTipo(tipo7);
+            tipoServicio.registrarTipo(tipo8);
+            tipoServicio.registrarTipo(tipo9);
+            tipoServicio.registrarTipo(tipo10);
 
 
             Horario h1 = new Horario("Lunes", "10:00", "16:00");
@@ -90,7 +102,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
                     -75.7124921956696F,ciudad1, u,new ArrayList<>(), horarios,tipo1);
 
             Lugar lugar2 = new Lugar("Selva negra","Cafe central",new Date(),new Date(),4.543038953770576F,
-                    -75.68641861978931F,ciudad3, u,new ArrayList<>(), horarios,tipo2);
+                    -75.68641861978931F,ciudad3, u,new ArrayList<>(), horarios,tipo3);
 
             lugarServicio.registrarLugar(lugar1);
             lugarServicio.registrarLugar(lugar2);
