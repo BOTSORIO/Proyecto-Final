@@ -15,50 +15,103 @@
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
-    <h:form id="form">
-        <div style="margin: 5%">
-            <h1>¡Hola!</h1>
-            <h2>#{usuarioBean.usuario.nombre} don chimbo</h2>
+        <h:form id="form">
+
+            <div style="margin: 2% 5%">
+                <h1>¡Hola!</h1>
+                <h2>(nombre del Usuario{falta metodo})</h2>
+                <p:divider></p:divider>
+                <h4>Email:(email del Usuario{falta metodo})</h4>
+            </div>
+
+            <div class="card" style="margin: 2% 5%">
+                <h1 style="margin: 2% 5%">Comentarios que faltan por responder</h1>
+
+                <p:outputPanel id="sin_respuesta" style="margin: 2% 5%">
+                    <p:dataTable value="#{usuarioBean.comentariosSR}" var="comentario" id="sin_respuestaTable">
+
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{comentario.usuario.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Comentario">
+                            <f:facet name="header">
+                                <h:outputText value="Comentario"/>
+                            </f:facet>
+                            <h:outputText value="#{comentario.comentario}"/>
+                        </p:column>
+
+                        <p:column headerText="Fecha">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{comentario.fechaComentario}"/>
+                        </p:column>
+
+                        <p:column headerText="Responder">
+                            <p:commandLink value="Responder" onclick="PF('dlg3').show()" update=":form:sin_respuesta"
+                                           process=":form:sin_respuesta">
+                                <p:collector value="#{comentario}"
+                                             removeFrom="#{usuarioBean.responderComentario(comentario.id)}"
+                                             unique="true"/>
+                            </p:commandLink>
+                        </p:column>
+
+                        <p:column headerText="Eliminar">
+                            <p:commandLink value="Eliminar" update=":form:sin_respuesta" process=":form:sin_respuesta">
+                                <p:collector value="#{comentario}"
+                                             removeFrom="#{usuarioBean.eliminarComentario(comentario.id)}"
+                                             unique="true"/>
+                            </p:commandLink>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </h:form>
+
+        <h:form>
+            <p:dialog id="dialogo" header="Respuesta" widgetVar="dlg3" Height="400px" width="40%" showEffect="fade"
+                      closeOnEscape="true">
+
+                <h5>Pon tu respuesta:</h5>
+                <p:inputTextarea rows="3" cols="65"/>
+
+                <f:facet name="footer">
+                    <p:commandButton style="min-width: 30%" value="Responder" action="#{seguridadBean.iniciarSesion}"
+                                     styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                     update="@form" href="/index.xhtml" icon="pi pi-sign-in" iconPos="left"/>
+                    <p:commandButton style="min-width: 30%" value="Cancelar"
+                                     styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"/>
+                    <p:growl showDetail="true" for="login-bean"/>
+                </f:facet>
+            </p:dialog>
+        </h:form>
+
+        <div style="margin: 2% 5%">
+            <h2>Tus lugares!</h2>
+            <h6>Estos son los lugares creados por tí</h6>
+            <p:carousel value="#{inicioBean.lugares}" var="lugar" responsive="true" itemStyle="text-align:center">
+                <div class="product">
+                    <div class="product-grid-item p-p-5">
+                        <div class="product-grid-item-top">
+                            <div class="product-name"><h2>#{lugar.nombre}</h2></div>
+                            <div>
+                                <i class="pi pi-map-marker product-category-icon"/>
+                                <span class="product-category">#{lugar.tipo.nombre}</span>
+                            </div>
+                        </div>
+                        <div class="product-grid-item-content" style="margin: 5%">
+                            <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..." height="300"/>
+                            <div class="product-description">#{lugar.descripcion}</div>
+                            <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
+                                             styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                             iconPos="right"/>
+                        </div>
+                    </div>
+                </div>
+            </p:carousel>
         </div>
-
-        <h1 style="margin: 5%">Comentarios que faltan por responder</h1>
-
-        <p:outputPanel id="sin_respuesta">
-            <p:dataTable value="#{usuarioBean.comentariosSR}" var="comentario" id="sin_respuestaTable">
-
-                <p:column headerText="Usuario">
-                    <h:outputText value="#{comentario.usuario.nombre}"/>
-                </p:column>
-
-                <p:column headerText="Comentario">
-                    <f:facet name="header">
-                        <h:outputText value="Comentario"/>
-                    </f:facet>
-                    <h:outputText value="#{comentario.comentario}"/>
-                </p:column>
-
-                <p:column headerText="Fecha">
-                    <f:facet name="header">
-                        <h:outputText value="Fecha"/>
-                    </f:facet>
-                    <h:outputText value="#{comentario.fechaComentario}"/>
-                </p:column>
-
-                <p:column headerText="Responder">
-                    <p:commandLink value="Responder" update=":form:sin_respuesta"  process=":form:sin_respuesta">
-                        <p:collector value="#{comentario}" removeFrom="#{usuarioBean.responderComentario(comentario.id)}" unique="true"/>
-                    </p:commandLink>
-                </p:column>
-
-                <p:column headerText="Eliminar">
-                    <p:commandLink value="Eliminar" update=":form:sin_respuesta"  process=":form:sin_respuesta">
-                        <p:collector value="#{comentario}" removeFrom="#{usuarioBean.eliminarComentario(comentario.id)}" unique="true"/>
-                    </p:commandLink>
-                </p:column>
-
-            </p:dataTable>
-        </p:outputPanel>
-    </h:form>
 
     </ui:define>
 </ui:composition>

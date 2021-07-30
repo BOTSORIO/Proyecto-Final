@@ -40,10 +40,11 @@
                                 <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                             </li>
 
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                            <li class="nav-item"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                 <a class="nav-link active" aria-current="page" href="/usuario/perfilUsuario.xhtml"
-                                jsf:rendered="#{seguridadBean.autenticado}">
-                                <i class="pi pi-id-card"/>
+                                   jsf:rendered="#{seguridadBean.autenticado}">
+                                    <i class="pi pi-id-card"/>
                                     Perfil
                                 </a>
                             </li>
@@ -55,25 +56,33 @@
                                     Usuarios
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="/registrarUsuario.xhtml"><i class="pi pi-user-plus" style="margin-right: 10px"/>Registrarse</a></li>
+                                    <li><a class="dropdown-item" href="/registrarUsuario.xhtml"><i
+                                            class="pi pi-user-plus" style="margin-right: 10px"/>Registrarse</a></li>
                                     <li><a class="dropdown-item" href="/usuario/eliminarUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus" style="margin-right: 15px"/>Eliminar</a></li>
+                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus"
+                                                                                          style="margin-right: 15px"/>Eliminar</a>
+                                    </li>
                                     <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit" style="margin-right: 15px"/>Actualizar</a></li>
-                                    </ul>
+                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit"
+                                                                                          style="margin-right: 15px"/>Actualizar</a>
+                                    </li>
+                                </ul>
                             </li>
 
                             <li class="nav-item dropdown"
                                 jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                                <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown_lugar" role="button"
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="pi pi-map-marker"/>
                                     Lugares
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml"><i class="pi pi-plus-circle" style="margin-right: 15px"/>Crear</a></li>
-                                    <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml"><i class="pi pi-minus-circle" style="margin-right: 15px"/>Eliminar</a></li>
-                                    <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml"><i class="pi pi-pencil" style="margin-right: 15px"/>Actualizar</a>
+                                    <li><a class="dropdown-item" href="/usuario/crearLugar.xhtml"><i
+                                            class="pi pi-plus-circle" style="margin-right: 15px"/>Crear</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/eliminarLugar.xhtml"><i
+                                            class="pi pi-minus-circle" style="margin-right: 15px"/>Eliminar</a></li>
+                                    <li><a class="dropdown-item" href="/usuario/actualizarLugar.xhtml"><i
+                                            class="pi pi-pencil" style="margin-right: 15px"/>Actualizar</a>
                                     </li>
                                 </ul>
                             </li>
@@ -86,12 +95,16 @@
                                     Moderadores
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/administrador/crearModerador.xhtml"><i class="pi pi-user-plus" style="margin-right: 15px"/>Crear</a>
+                                    <li><a class="dropdown-item" href="/administrador/crearModerador.xhtml"><i
+                                            class="pi pi-user-plus" style="margin-right: 15px"/>Crear</a>
                                     </li>
                                     <li><a class="dropdown-item"
-                                           href="/administrador/eliminarModerador.xhtml"><i class="pi pi-user-minus" style="margin-right: 15px"/>Eliminar</a></li>
+                                           href="/administrador/eliminarModerador.xhtml"><i class="pi pi-user-minus"
+                                                                                            style="margin-right: 15px"/>Eliminar</a>
+                                    </li>
                                     <li><a class="dropdown-item"
-                                           href="/administrador/actualizarModerador.xhtml"><i class="pi pi-user-edit" style="margin-right: 15px"/>Actualizar</a>
+                                           href="/administrador/actualizarModerador.xhtml"><i class="pi pi-user-edit"
+                                                                                              style="margin-right: 15px"/>Actualizar</a>
                                     </li>
                                 </ul>
                             </li>
@@ -104,7 +117,13 @@
                                     Moderadores
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/moderador/principalModerador.xhtml"><i class="pi pi-user" style="margin-right: 15px"/>Autorizar o denegar lugares</a>
+                                    <li><a class="dropdown-item" href="/moderador/principalModerador.xhtml"><i
+                                            class="pi pi-user"
+                                            style="margin-right: 15px"/>Autorizar o denegar lugares</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="/moderador/perfilModerador.xhtml"><i
+                                            class="pi pi-id-card"
+                                            style="margin-right: 15px"/>Perfil</a>
                                     </li>
                                 </ul>
                             </li>
@@ -158,8 +177,8 @@
                                          styleClass="ui-button-raised ui-button-success ui-button-flat"
                                          update="@form" href="/index.xhtml" icon="pi pi-sign-in" iconPos="left"/>
                         <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
-                                  styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
-                                  onclick="PF('dlg2').show()" />
+                                         styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                                         onclick="PF('dlg2').show()"/>
                         <p:growl showDetail="true" for="login-bean"/>
                     </f:facet>
                 </p:dialog>
@@ -187,9 +206,10 @@
 
 
                     <f:facet name="footer">
-                        <p:commandButton style="min-width: 30%" value="Recuperar contraseña" action="#{seguridadBean.buscarPorEmail}"
+                        <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
+                                         action="#{seguridadBean.buscarPorEmail}"
                                          styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                         update="@form" icon="pi pi-sign-in" iconPos="left" />
+                                         update="@form" icon="pi pi-sign-in" iconPos="left"/>
                         <p:growl showDetail="true" for="login-bean"/>
                     </f:facet>
                 </p:dialog>
