@@ -14,6 +14,8 @@ public interface FavoritoServicio {
 
     Favorito obtenerFavorito(int id) throws  Exception;
 
+    List<Favorito> obtenerListaFavoritosLugar(int idLugar);
+
     List<Favorito> listarFavoritos();
 
 }

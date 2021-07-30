@@ -34,6 +34,7 @@ public class LugarBean implements Serializable {
     private final HorarioServicio horarioServicio;
     private final TelefonoServicio telefonoServicio;
     private final ComentarioServicio comentarioServicio;
+    private final FavoritoServicio favoritoServicio;
 
     @Getter @Setter
     private Lugar lugar;
@@ -72,7 +73,7 @@ public class LugarBean implements Serializable {
     @Getter @Setter
     private ArrayList<String>dias;
 
-    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio, ComentarioServicio comentarioServicio) {
+    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio, ComentarioServicio comentarioServicio, FavoritoServicio favoritoServicio) {
         this.lugarServicio = lugarServicio;
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
@@ -81,6 +82,7 @@ public class LugarBean implements Serializable {
         this.horarioServicio = horarioServicio;
         this.telefonoServicio = telefonoServicio;
         this.comentarioServicio = comentarioServicio;
+        this.favoritoServicio = favoritoServicio;
     }
 
     @PostConstruct
@@ -279,6 +281,12 @@ public class LugarBean implements Serializable {
 
                 for(Comentario c:comentarios){
                     comentarioServicio.eliminarComentario(c.getId());
+                }
+
+                List<Favorito>favoritosLugar = favoritoServicio.obtenerListaFavoritosLugar(lugar.getId());
+
+                for(Favorito f:favoritosLugar){
+                    favoritoServicio.eliminarFavorito(f.getId());
                 }
 
                 lugarServicio.eliminarLugar(lugar.getId());

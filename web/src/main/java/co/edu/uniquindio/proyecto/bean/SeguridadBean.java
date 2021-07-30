@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Administrador;
+import co.edu.uniquindio.proyecto.entidades.Moderador;
 import co.edu.uniquindio.proyecto.entidades.Persona;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.PersonaServicio;
@@ -51,8 +52,10 @@ public class SeguridadBean implements Serializable {
                     rol="usuario";
                 }else if (persona instanceof Administrador){
                     rol="admin";
-                }else{
+                }else if (persona instanceof Moderador){
                     rol="moderador";
+                    autenticado=true;
+                    return "/moderador/principalModerador?faces-redirect=true";
                 }
 
                 autenticado=true;

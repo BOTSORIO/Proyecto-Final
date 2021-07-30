@@ -57,6 +57,14 @@ public class FavoritoServicioImpl implements FavoritoServicio {
     }
 
     @Override
+    public List<Favorito> obtenerListaFavoritosLugar(int idLugar){
+
+        List<Favorito>listaFavoritos = favoritoRepo.obtenerListaFavoritos(idLugar);
+
+        return listaFavoritos;
+    }
+
+    @Override
     public List<Favorito> listarFavoritos() {
         return favoritoRepo.findAll();
     }

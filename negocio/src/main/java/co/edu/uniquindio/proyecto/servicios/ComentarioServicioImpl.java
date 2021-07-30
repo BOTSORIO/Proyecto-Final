@@ -56,7 +56,7 @@ public class ComentarioServicioImpl implements ComentarioServicio{
 
         if(comentariosLugar==null){
 
-            throw new Exception("No se encontraron los horarios");
+            throw new Exception("No se encontraron los comentarios");
         }
 
         return comentariosLugar;
