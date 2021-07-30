@@ -127,7 +127,7 @@ public class Lugar implements Serializable {
             return imagenes.get(0).getUrl();
         }
 
-        return "default.jpg";
+        return "default.png";
     }
 
 

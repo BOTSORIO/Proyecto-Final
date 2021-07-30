@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Component
-@RequestScope
+@ViewScoped
 public class UsuarioBean implements Serializable {
 
     @Autowired
@@ -60,6 +60,9 @@ public class UsuarioBean implements Serializable {
 
     @Getter @Setter
     private Comentario comentario;
+
+    @Getter @Setter
+    private Integer idComentarioResponder;
 
     @PostConstruct
     public void inicializar() {
@@ -181,7 +184,7 @@ public class UsuarioBean implements Serializable {
     }
 
 
-    public void responderComentario(int idComentario){
+    public void responderComentario(){
 
         Comentario comentarioEncontrado;
 
@@ -189,10 +192,11 @@ public class UsuarioBean implements Serializable {
 
             try{
 
-                comentarioEncontrado = comentarioServicio.obtenerComentario(idComentario);
+                comentarioEncontrado = comentarioServicio.obtenerComentario(idComentarioResponder);
 
                 if (comentarioEncontrado!=null){
-                    comentarioServicio.responderComentario(comentario.getRespuesta(),idComentario);
+                    comentarioServicio.responderComentario(comentario.getRespuesta(),idComentarioResponder);
+                    this.comentariosSR = obtenerComentariosSR();
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la respuesta se registro exitosamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -215,6 +219,7 @@ public class UsuarioBean implements Serializable {
 
                 comentarioEncontrado = comentarioServicio.obtenerComentario(idComentario);
                 comentarioServicio.eliminarComentario(comentarioEncontrado.getId());
+                this.comentariosSR = obtenerComentariosSR();
 
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El comentario se elimino correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -240,6 +245,10 @@ public class UsuarioBean implements Serializable {
         }
 
         return usuarioEncontrado;
+    }
+
+    public void responder(Integer id) {
+        this.idComentarioResponder = id;
     }
 
 }

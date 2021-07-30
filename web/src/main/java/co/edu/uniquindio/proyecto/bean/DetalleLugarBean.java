@@ -86,7 +86,7 @@ public class DetalleLugarBean implements Serializable {
                     }
                 }else{
 
-                    urlImagenes.add("default.jpg");
+                    urlImagenes.add("default.png");
                 }
 
 
@@ -110,6 +110,7 @@ public class DetalleLugarBean implements Serializable {
 
             if (personaLogin!=null && lugarEncontrado!=null){
                 lugarServicio.ingresarComentario(comentarioNuevo,lugarEncontrado,personaLogin);
+                this.comentariosDetal.add(comentarioNuevo);
                 this.comentarioNuevo = new Comentario();
             }
 

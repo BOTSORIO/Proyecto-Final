@@ -92,6 +92,9 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l from Lugar l where l.nombre like concat('%',:nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
 
+    @Query("select l from Lugar l where l.nombre like concat('%', :cadena,'%') or l.tipo.nombre like concat('%', :cadena,'%')")
+    List<Lugar> busquedaLugaresTipoNombre(String cadena);
+
     @Query("select l from Lugar  l where l.id = :idLugar")
     Lugar obtenerLugar(int idLugar);
 
@@ -125,5 +128,4 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
 
     @Query("select l from Lugar l where l.estado=true")
     List<Lugar> obtenerTodosLugaresAprobados();
-
 }

@@ -102,8 +102,8 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> buscarLugares(String nombre) {
-        return lugarRepo.buscarLugares(nombre);
+    public List<Lugar> buscarLugares(String cadena) {
+        return lugarRepo.busquedaLugaresTipoNombre(cadena);
     }
 
     @Override
