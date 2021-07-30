@@ -43,7 +43,7 @@
                             <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                 <a class="nav-link active" aria-current="page" href="/usuario/perfilUsuario.xhtml"
                                 jsf:rendered="#{seguridadBean.autenticado}">
-                                <i class="pi pi-user"/>
+                                <i class="pi pi-id-card"/>
                                     Perfil
                                 </a>
                             </li>
@@ -60,9 +60,7 @@
                                            jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus" style="margin-right: 15px"/>Eliminar</a></li>
                                     <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml"
                                            jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit" style="margin-right: 15px"/>Actualizar</a></li>
-                                    <li><a class="dropdown-item" href="/usuario/perfilUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-id-card" style="margin-right: 15px"/>Perfil</a></li>
-                                </ul>
+                                    </ul>
                             </li>
 
                             <li class="nav-item dropdown"
@@ -84,7 +82,7 @@
                                 jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="pi pi-user"/>
+                                    <i class="pi pi-users"/>
                                     Moderadores
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
@@ -102,7 +100,7 @@
                                 jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='moderador'}">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="pi pi-user"/>
+                                    <i class="pi pi-users"/>
                                     Moderadores
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">

@@ -44,6 +44,9 @@ public class DetalleLugarBean implements Serializable {
     private int calificacionPromedio;
 
     @Getter @Setter
+    private List<String> listaTelefonos;
+
+    @Getter @Setter
     private Comentario comentarioNuevo;
 
     @Value(value = "#{seguridadBean.persona}")
@@ -68,6 +71,10 @@ public class DetalleLugarBean implements Serializable {
                 this.comentariosDetal = obtenerComentarios();
                 this.horarios = lugarServicio.listarHorarios(id);
                 this.urlImagenes = new ArrayList<>();
+                this.listaTelefonos=new ArrayList<>();
+                this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
+
+                obtenerTelefonosLugar();
 
                 List<Imagen>imagenes = lugar.getImagenes();
 
@@ -86,8 +93,6 @@ public class DetalleLugarBean implements Serializable {
                 List<Lugar>lugares=new ArrayList<>();
                 lugares.add(lugar);
                 PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud())).collect(Collectors.toList()))+");");
-
-               // this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -166,6 +171,23 @@ public class DetalleLugarBean implements Serializable {
         }
 
         return null;
+    }
+
+    public void obtenerTelefonosLugar(){
+
+        List<Telefono>telefonos=lugar.getTelefonos();
+
+        if(telefonos.size()>0){
+
+            for(Telefono t:telefonos){
+
+                listaTelefonos.add(t.getTelefonoLugar());
+            }
+        }else{
+            listaTelefonos.add("No hay telefonos");
+        }
+
+
     }
 
 }

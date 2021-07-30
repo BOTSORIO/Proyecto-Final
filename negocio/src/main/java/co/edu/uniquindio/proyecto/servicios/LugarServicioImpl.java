@@ -176,4 +176,30 @@ public class LugarServicioImpl implements LugarServicio {
         }
     }
 
+    @Override
+    public int obtenerCalificacionPromedio(int idLugar) throws Exception {
+
+        Integer calificacion=0;
+        Lugar lugarEncontrado= lugarRepo.obtenerLugar(idLugar);
+
+        if (lugarEncontrado!=null){
+
+            calificacion = lugarRepo.obtenerCalificacion(lugarEncontrado.getId());
+
+
+        }else{
+            throw new Exception("El lugar no fue encontrado");
+        }
+
+        if(calificacion==null){
+
+            return 0;
+        }
+        else{
+            return calificacion;
+        }
+
+    }
+
+
 }

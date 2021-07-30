@@ -33,4 +33,6 @@ public interface LugarServicio {
     void marcarFavorito(Lugar lugar, Persona p) throws Exception;
 
     void eliminarFavorito(Lugar lugar, Persona persona) throws Exception;
+
+    int obtenerCalificacionPromedio(int idLugar) throws Exception;
 }

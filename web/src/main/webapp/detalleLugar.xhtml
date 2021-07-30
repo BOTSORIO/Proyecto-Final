@@ -101,7 +101,7 @@
                                                  style="color: #ffcd39"
                                                  styleClass="rounded-button ui-button-warning ui-button-flat"/>
                                 <p:tooltip for="favorito" value="Selecionar como favorito" position="right"/>
-                                <p:commandButton id="Nofavorito" action="#{detalleLugarBean.marcarFavorito}"
+                                <p:commandButton id="Nofavorito" action="#{detalleLugarBean.eliminarFavorito}"
                                                  icon="pi pi-trash"
                                                  style="color: red"
                                                  styleClass="rounded-button ui-button-danger ui-button-flat"/>
@@ -114,7 +114,7 @@
                     <br></br>
                     Tipo de lugar:    #{detalleLugarBean.lugar.tipo.nombre}
                     <br></br>
-                    Telefonos:        #{detalleLugarBean.lugar.telefonos}
+                    Telefonos:        #{detalleLugarBean.listaTelefonos}
                     <br></br>
                     Ubicada en:       #{detalleLugarBean.lugar.ciudad.nombre}
 
