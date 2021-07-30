@@ -61,7 +61,8 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel for="tipo_lugar" value="Tipo:"/>
-                            <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipo}" converter="#{tipoConverter}"
+                            <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipo}"
+                                             converter="#{tipoConverter}"
                                              style="width: 100%" required="true"
                                              requiredMessage="Ups! olvidaste seleccionar un tipo">
                                 <f:selectItem itemLabel="Seleccione un tipo" noSelectionOption="true"/>
@@ -97,11 +98,10 @@
                                 </p:column>
                             </p:dataTable>
 
-                            <p:outputLabel for="imagenes_lugar" value="Imagenes: " />
+                            <p:outputLabel for="imagenes_lugar" value="Imagenes: "/>
                             <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced"
                                           multiple="true" sizeLimit="1000000" fileLimit="5"
                                           allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
-
 
 
                             <p:commandButton value="Horario" action="#{lugarBean.nuevoHorario}"
@@ -142,8 +142,8 @@
 
                             <p:outputLabel for="descripcion_lugar" value="Descripcion:"/>
                             <p:inputText id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
-                                             style="width: 100%"
-                                             required="true" requiredMessage="La descripcion es obligatoria"/>
+                                         style="width: 100%"
+                                         required="true" requiredMessage="La descripcion es obligatoria"/>
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
@@ -174,28 +174,39 @@
                         <f:selectItems value="#{lugarBean.dias}"/>
                     </p:selectOneMenu>
 
-                    <p>
-                        Apertura:
-                        <pe:timePicker value="#{lugarBean.horaInicio}"
-                                       mode="popup"
-                                       widgetVar="popupTimeWidget2"
-                                       label="Popup time picker"/>
-                    </p>
-
-                    <p>
-                        Cierre:
-                        <pe:timePicker value="#{lugarBean.horaFin}" mode="popup"
-                                       widgetVar="popupTimeWidget"
-                                       label="Popup time picker"/>
-                    </p>
+                    <div class="row">
+                        <div class="col" style="margin-top: 5%">
+                            <p>
+                                Apertura:
+                            </p>
+                        </div>
+                        <div class="col">
+                            <pe:timePicker value="#{lugarBean.horaInicio}"
+                                           mode="popup"
+                                           widgetVar="popupTimeWidget2"
+                                           label="Popup time picker"/>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5%">
+                        <div class="col" style="margin-top: 5%">
+                            <p>
+                                Cierre:
+                            </p>
+                        </div>
+                        <div class="col">
+                            <pe:timePicker value="#{lugarBean.horaFin}" mode="popup"
+                                           widgetVar="popupTimeWidget"
+                                           label="Popup time picker"/>
+                        </div>
+                    </div>
                 </p:outputPanel>
-                    <p:commandButton
-                            style="background-color: #0c63e4; margin-left: 28%"
-                            value="Guardar"
-                            update="crear-lugar:dt-products, @this"
-                            onclick="PF('Horarios').hide()"
-                            action="#{lugarBean.crearHorario}">
-                    </p:commandButton>
+                <p:commandButton
+                        style="background-color: #0c63e4; margin-left: 28%"
+                        value="Guardar"
+                        update="crear-lugar:dt-products, @this"
+                        onclick="PF('Horarios').hide()"
+                        action="#{lugarBean.crearHorario}">
+                </p:commandButton>
             </h:form>
         </p:dialog>
 
@@ -206,7 +217,8 @@
                 <p:outputPanel id="panel1">
                     <p>
                         <p:outputLabel for="numero_telefono" value="Numero de telefono:"/>
-                        <p:inputText id="numero_telefono" value="#{lugarBean.telefono.telefonoLugar}" style="width: 100%"
+                        <p:inputText id="numero_telefono" value="#{lugarBean.telefono.telefonoLugar}"
+                                     style="width: 100%"
                                      required="true"
                                      requiredMessage="El numero de telefono es obligatorio"/>
                     </p>

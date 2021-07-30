@@ -53,15 +53,16 @@
                         </p:column>
 
                         <p:column headerText="Responder">
-                            <p:commandButton  action="#{usuarioBean.responder(comentario.id)}" onclick="PF('dlg3').show()"
-                                              icon="pi pi-send" update="sin_respuestaTable"
+                            <p:commandButton action="#{usuarioBean.responder(comentario.id)}"
+                                             onclick="PF('dlg3').show()"
+                                             icon="pi pi-send" update="sin_respuestaTable"
                                              styleClass="rounded-button ui-button-flat"/>
                         </p:column>
 
                         <p:column headerText="Eliminar">
-                                <p:commandButton  action="#{usuarioBean.eliminarComentario(comentario.id)}"
-                                                  icon="pi pi-trash" update="sin_respuestaTable"
-                                                  styleClass="rounded-button ui-button-flat"/>
+                            <p:commandButton action="#{usuarioBean.eliminarComentario(comentario.id)}"
+                                             icon="pi pi-trash" update="sin_respuestaTable"
+                                             styleClass="rounded-button ui-button-flat"/>
                         </p:column>
                     </p:dataTable>
                 </p:outputPanel>
@@ -69,28 +70,32 @@
         </h:form>
 
 
-            <p:dialog id="dialogo" header="Respuesta" widgetVar="dlg3" Height="400px" width="40%" showEffect="fade"
-                      closeOnEscape="true">
-                <h:form>
+        <p:dialog id="dialogo" header="Respuesta" widgetVar="dlg3" Height="400px" width="40%" showEffect="fade"
+                  closeOnEscape="true">
+            <h:form>
 
                 <h5>Pon tu respuesta:</h5>
                 <p:inputTextarea value="#{usuarioBean.comentario.respuesta}" rows="3" cols="65"/>
 
-                    <p:commandButton style="min-width: 30%" value="Responder" action="#{usuarioBean.responderComentario}"
+                <div style="margin-top: 5%;margin-left: 25%">
+                    <p:commandButton style="min-width: 30%" value="Responder"
+                                     action="#{usuarioBean.responderComentario}"
                                      styleClass="ui-button-raised ui-button-success ui-button-flat"
                                      update="@form" icon="pi pi-sign-in" iconPos="left"/>
 
-                    <p:commandButton style="min-width: 30%" value="Cancelar"
+                    <p:commandButton style="min-width: 30%; margin-left: 5%" value="Cancelar"
                                      styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"/>
-                    <p:growl showDetail="true" />
-                </h:form>
-            </p:dialog>
+                    <p:growl showDetail="true"/>
+                </div>
+            </h:form>
+        </p:dialog>
 
 
         <div style="margin: 2% 5%">
             <h2>Tus lugares!</h2>
             <h6>Estos son los lugares creados por tí</h6>
-            <p:carousel value="#{usuarioBean.lugaresUsuario}" var="lugar" responsive="true" itemStyle="text-align:center">
+            <p:carousel value="#{usuarioBean.lugaresUsuario}" var="lugar" responsive="true"
+                        itemStyle="text-align:center">
                 <div class="product">
                     <div class="product-grid-item p-p-5">
                         <div class="product-grid-item-top">

@@ -36,30 +36,30 @@
                         <h1> Comentarios </h1>
                     </f:facet>
 
-                    <div class="product card">
-                        <h:form>
-                            <p:dataScroller id="comentarios_table" value="#{detalleLugarBean.comentariosDetal}" var="comentario" chunkSize="10"
-                                            mode="inline"
-                                            scrollHeight="300">
+                    <h:form>
+                        <p:dataScroller id="comentarios_table" value="#{detalleLugarBean.comentariosDetal}"
+                                        var="comentario" chunkSize="10"
+                                        mode="inline"
+                                        scrollHeight="300">
 
-                                <div class="product">
-                                    <div class="product-list-item p-p-5">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <p:graphicImage value="resources/img/usuario.png" height="70" width="70"/>
-                                            </div>
-                                            <div class="col">
-                                                <div class="product-list-detail">
-                                                    <div class="product-name">#{comentario.usuario.nombre}</div>
-                                                    <div class="product-description">#{comentario.comentario}</div>
-                                                    <p:rating readonly="true" value="#{comentario.calificacion}"/>
-                                                    <p:divider></p:divider>
-                                                </div>
+                            <div class="product">
+                                <div class="product-list-item p-p-5">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p:graphicImage value="resources/img/usuario.png" height="70" width="70"/>
+                                        </div>
+                                        <div class="col">
+                                            <div class="product-list-detail">
+                                                <div class="product-name">#{comentario.usuario.nombre}</div>
+                                                <div class="product-description">#{comentario.comentario}</div>
+                                                <p:rating readonly="true" value="#{comentario.calificacion}"/>
+                                                <p:divider></p:divider>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </p:dataScroller>
+                            </div>
+                        </p:dataScroller>
 
 
                         <div class="row" style="margin-top: 2%; margin-bottom: 2%">
@@ -87,7 +87,7 @@
                         <p:button icon="pi pi-undo" value="Volver" styleClass="ui-button-secondary"
                                   style="margin-left: .5em; width: 40%" href="/index.xhtml"/>
                     </h:form>
-                    </div>
+
                 </p:card>
             </div>
 
@@ -122,10 +122,33 @@
                     Tipo de lugar:    #{detalleLugarBean.lugar.tipo.nombre}
                     <br></br>
                     <br></br>
-                    Telefonos:        <br> #{detalleLugarBean.listaTelefonos}</br>
+                    <h:form>
+                        <div class="card">
+                            <p:dataTable var="telefono" value="#{detalleLugarBean.listaTelefonos}">
+                                <p:column headerText="telefonos">
+                                    <h:outputText value="#{telefono}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </h:form>
                     <br></br>
                     <br></br>
-                    Horarios:       <br>#{detalleLugarBean.lugar.horarios}</br>
+                    <h5>Horarios:</h5>
+                    <h:form>
+                        <div class="card">
+                            <p:dataTable var="horario" value="#{detalleLugarBean.lugar.horarios}">
+                                <p:column headerText="Día">
+                                    <h:outputText value="#{horario.diaSemana}"/>
+                                </p:column>
+                                <p:column headerText="Apertura">
+                                    <h:outputText value="#{horario.horaInicio}"/>
+                                </p:column>
+                                <p:column headerText="Cierre">
+                                    <h:outputText value="#{horario.horaFin}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </h:form>
                     <br></br>
                     <br></br>
                     Fecha:       #{detalleLugarBean.lugar.fechaCreacion}
