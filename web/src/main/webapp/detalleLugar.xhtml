@@ -25,7 +25,8 @@
             <div style="margin-top: 2%; margin-left: 10%" class="col">
 
                 <div class="card">
-                    <p:galleria value="#{detalleLugarBean.urlImagenes}" var="image" panelWidth="700" panelHeight="313" showCaption="true">
+                    <p:galleria value="#{detalleLugarBean.urlImagenes}" var="image" panelWidth="700" panelHeight="313"
+                                showCaption="true">
                         <p:graphicImage url="/uploads/#{image}" title="Imagenes"/>
                     </p:galleria>
                 </div>
@@ -43,13 +44,21 @@
 
                                 <div class="product">
                                     <div class="product-list-item p-p-5">
-                                        <p:graphicImage name="resources/img/avatar.png"/>
-                                        <div class="product-list-detail">
-                                            <div class="product-name">#{comentario.usuario.nombre}</div>
-                                            <div class="product-description">#{comentario.comentario}</div>
-                                            <p:rating readonly="true" value="#{comentario.calificacion}"/>
-                                            <p:divider></p:divider>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <p:graphicImage value="resources/img/avatar.png" height="80" width="80"/>
+                                            </div>
+                                            <div class="col">
+                                                <div class="product-list-detail">
+                                                    <div class="product-name">#{comentario.usuario.nombre}</div>
+                                                    <div class="product-description">#{comentario.comentario}</div>
+                                                    <p:rating readonly="true" value="#{comentario.calificacion}"/>
+                                                    <p:divider></p:divider>
+                                                </div>
+                                            </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </p:dataScroller>
