@@ -83,7 +83,7 @@
 
                         <p:commandButton icon="pi pi-check" value="Guardar"
                                          action="#{detalleLugarBean.ingresarComentario}"
-                                         style="margin-left: 7%; width: 40%" update="@form,comentarios_table"/>
+                                         style="margin-left: 7%; width: 40%" update="@form,comentarios_table,promedioLugar"/>
                         <p:button icon="pi pi-undo" value="Volver" styleClass="ui-button-secondary"
                                   style="margin-left: .5em; width: 40%" href="/index.xhtml"/>
                     </h:form>
@@ -98,7 +98,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
+                                <p:rating id="promedioLugar" value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
                             </div>
                             <div class="col-4">
                                 <p:commandButton id="favorito" action="#{detalleLugarBean.marcarFavorito}"

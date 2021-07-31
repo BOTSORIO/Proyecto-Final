@@ -112,6 +112,7 @@ public class DetalleLugarBean implements Serializable {
                 lugarServicio.ingresarComentario(comentarioNuevo,lugarEncontrado,personaLogin);
                 this.comentariosDetal.add(comentarioNuevo);
                 this.comentarioNuevo = new Comentario();
+                this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
             }
 
         }catch (Exception e){
