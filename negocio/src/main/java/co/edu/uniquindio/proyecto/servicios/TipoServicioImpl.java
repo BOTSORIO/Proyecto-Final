@@ -28,7 +28,7 @@ public class TipoServicioImpl implements TipoServicio{
     }
 
     @Override
-    public void  actualizarTipo(Tipo t, int codigoTipo) throws Exception {
+    public void actualizarTipo(Tipo t, int codigoTipo) throws Exception {
 
         Tipo tipo= obtenerTipo(codigoTipo);
 

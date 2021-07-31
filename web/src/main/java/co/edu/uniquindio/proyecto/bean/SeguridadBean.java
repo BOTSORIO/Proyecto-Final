@@ -4,13 +4,15 @@ import co.edu.uniquindio.proyecto.entidades.Administrador;
 import co.edu.uniquindio.proyecto.entidades.Moderador;
 import co.edu.uniquindio.proyecto.entidades.Persona;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.servicios.MailService;
 import co.edu.uniquindio.proyecto.servicios.PersonaServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -39,6 +41,10 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     private String rol;
+
+    @Autowired
+    private MailService mailService;
+
 
     public String iniciarSesion(){
 
@@ -80,6 +86,9 @@ public class SeguridadBean implements Serializable {
 
         try {
             personaAux = personaServicio.obtenerPersonaEmail(emailR);
+
+            //sendMail();
+
             return "/recuperarContrasena?faces-redirect=true";
 
         }catch (Exception e){
@@ -110,6 +119,18 @@ public class SeguridadBean implements Serializable {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
+
+    }
+
+    @PostMapping("/sendMail")
+    public void sendMail(){
+
+        String subject = "Recuperacion de contraseña";
+        String url = "http://localhost:8080/recuperarContrasena.xhtml";
+        String message = "Cordial Saludo para recuperar su contraseña, de click en el siguiente enlace" + "\n"+
+                url;
+
+        mailService.sendMail("sebastianquinteroosorio2104@gmail.com", personaAux.getEmail(),subject,message);
 
     }
 }

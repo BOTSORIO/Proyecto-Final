@@ -118,6 +118,9 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
     @Query("select l from Lugar l where l.usuario.id= :idUsuario")
     List<Lugar> obtenerLugaresPorUsuario(String idUsuario);
 
+    @Query("select l from Lugar l where l.ciudad.nombre= :nombreCiudad")
+    List<Lugar> obtenerLugaresPorCiudad(String nombreCiudad);
+
 
     //Cargar
     @Query("select l from Lugar l where l.estado = false")

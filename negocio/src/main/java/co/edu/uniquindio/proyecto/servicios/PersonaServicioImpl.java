@@ -6,6 +6,9 @@ import co.edu.uniquindio.proyecto.repositorios.PersonaRepo;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +20,6 @@ public class PersonaServicioImpl implements PersonaServicio{
 
     @Autowired
     private PersonaRepo personaRepo;
-
 
     @Override
     public Persona login(String email, String password) throws Exception {
@@ -58,4 +60,5 @@ public class PersonaServicioImpl implements PersonaServicio{
         }
 
     }
+
 }

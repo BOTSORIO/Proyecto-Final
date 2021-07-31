@@ -17,13 +17,11 @@
 
         <div style="margin: 2% 5%">
             <h1>¡Hola!</h1>
-            <h2> {nombre del moderador} </h2>
+            <h2>#{administradorBean.administrador.nombre}</h2>
             <p:divider></p:divider>
-            <h4>Email:  #{usuarioBean.usuarioAux.email} </h4>
+            <h4>Email:  #{administradorBean.administrador.email} </h4>
             <br></br>
-            <h4>Nickname:  #{usuarioBean.usuarioAux.nickname} </h4>
-            <br></br>
-            <h4>Ciudad:  #{usuarioBean.usuarioAux.ciudad.nombre} </h4>
+            <h4>Nickname:  #{administradorBean.administrador.nickname} </h4>
         </div>
 
         <div class="card" style="margin: 2% 5%">
@@ -33,26 +31,20 @@
             <div class="row" style="margin: 1%">
                 <div class="col">
                     <h5>Diagrama de barra</h5>
-                    <!--
-                    <p:barChart model="" style="width: 100%; height: 500px;"/>
-                    -->
-                    <p>información importante del diagrama</p>
+                        <h:panelGrid id="barLugaresCiudad">
+                            <p:barChart model="#{administradorBean.barLugaresCiudad}" style="width: 800px; height: 400px;" rendered="#{administradorBean.barLugaresCiudad != null}"/>
+                        </h:panelGrid>
+
+                    <h:panelGrid id="barLugaresCalificacion">
+                        <p:barChart model="#{administradorBean.barLugaresCalificacion}" style="width: 800px; height: 400px;" rendered="#{administradorBean.barLugaresCalificacion != null}"/>
+                    </h:panelGrid>
                 </div>
 
                 <div class="col">
                     <h5>Diagrama de dona</h5>
-                    <!--
-                    <p:donutChart model="#{chartJsView.donutModel}" style="width: 100%; height: 500px;"/>
-                    -->
-                    <p>información importante del diagrama</p>
-                </div>
-
-                <div class="col">
-                    <h5>Digrama de linea</h5>
-                    <!--
-                    <p:lineChart model="#{chartJsView.lineModel}" style="width: 100%; height: 500px;"/>
-                    -->
-                    <p>información importante del diagrama</p>
+                        <h:panelGrid id="pieLugaresTipo">
+                            <p:chart type="pie" model="#{administradorBean.pieLugaresTipo}" style="width: 400px; height: 400px;" rendered="#{administradorBean.pieLugaresTipo != null}"/>
+                        </h:panelGrid>
                 </div>
             </div>
 

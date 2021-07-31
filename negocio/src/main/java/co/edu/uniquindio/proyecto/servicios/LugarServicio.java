@@ -35,4 +35,8 @@ public interface LugarServicio {
     void eliminarFavorito(Lugar lugar, Persona persona) throws Exception;
 
     int obtenerCalificacionPromedio(int idLugar) throws Exception;
+
+    List<Lugar> obtenerLugaresPorTipo(String tipo);
+
+    List<Lugar> obtenerLugaresPorCiudad(String nombreCiudad);
 }

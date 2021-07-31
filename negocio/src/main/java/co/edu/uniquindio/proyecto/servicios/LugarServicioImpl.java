@@ -200,5 +200,25 @@ public class LugarServicioImpl implements LugarServicio {
 
     }
 
+    @Override
+    public List<Lugar> obtenerLugaresPorTipo(String tipo){
+
+        List<Lugar>lugares;
+
+        lugares = lugarRepo.busquedaLugaresTipoNombre(tipo);
+
+        return lugares;
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresPorCiudad(String nombreCiudad){
+
+        List<Lugar>lugares;
+
+        lugares = lugarRepo.obtenerLugaresPorCiudad(nombreCiudad);
+
+        return lugares;
+    }
+
 
 }
