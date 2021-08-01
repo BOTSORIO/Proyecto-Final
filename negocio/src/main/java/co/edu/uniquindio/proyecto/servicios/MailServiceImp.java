@@ -23,6 +23,7 @@ public class MailServiceImp implements MailService{
         simpleMailMessage.setText(body);
 
         javaMailSender.send(simpleMailMessage);
+        System.out.println("Email enviado");
     }
 
 }

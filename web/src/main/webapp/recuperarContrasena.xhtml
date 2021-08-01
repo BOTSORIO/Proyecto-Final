@@ -28,10 +28,19 @@
             <p>Por favor ingresa tu email para confirmar tu cuenta.</p>
 
             <h:form>
-                <p:outputLabel for="contraseña_usuario" value="Nueva contraseña:"/>
-                <p:inputText id="contraseña_usuario" value="#{seguridadBean.password}" style="width: 100%"
+                <p:outputLabel for="email_usuario" value="Email:"/>
+                <p:inputText id="email_usuario" value="#{seguridadBean.email}" style="width: 100%"
                              required="true"
-                             requiredMessage="Ups! olvidaste la nueva contraseña"/>
+                             requiredMessage="Ups! olvidaste el email"/>
+                <br></br>
+                <br></br>
+
+                <p:outputLabel for="contrasenia_usuario" value="Nueva contraseña:"/>
+                <p:password id="contrasenia_usuario" value="#{seguridadBean.password}" feedback="true"
+                            promptLabel="Ingrese su nueva contraseña" weakLabel="Débil"
+                            goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%"
+                            required="true"
+                            requiredMessage="Ups! olvidaste la contraseña"/>
 
                 <h:panelGrid columns="2" cellpadding="5" width="100%">
                     <p:commandButton action="#{seguridadBean.cambiarPassword}" value="Confirmar"
@@ -42,9 +51,6 @@
                     <p:growl showDetail="true"/>
                 </h:panelGrid>
             </h:form>
-
-
-
         </p:card>
 
     </ui:define>

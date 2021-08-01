@@ -85,7 +85,14 @@ public class SeguridadBean implements Serializable {
         try {
             personaAux = personaServicio.obtenerPersonaEmail(emailR);
 
-            sendMail();
+            if(personaAux!=null){
+
+                sendMail();
+            }else{
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "El email que ingreso no se encuentra registrado");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
 
             return "/index?faces-redirect=true";
 
@@ -94,7 +101,6 @@ public class SeguridadBean implements Serializable {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
-
         return null;
     }
 
@@ -102,9 +108,9 @@ public class SeguridadBean implements Serializable {
     public void cambiarPassword(){
 
         try {
-            if (personaAux!=null && !password.isEmpty()){
+            if (!password.isEmpty()){
 
-                personaServicio.cambiarPassword(personaAux.getEmail(),password);
+                personaServicio.cambiarPassword(email,password);
 
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la contraseña se actualizo con exito");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
