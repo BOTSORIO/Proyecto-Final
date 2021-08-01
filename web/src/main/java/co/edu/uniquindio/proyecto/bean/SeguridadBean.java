@@ -11,8 +11,6 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -87,11 +85,12 @@ public class SeguridadBean implements Serializable {
         try {
             personaAux = personaServicio.obtenerPersonaEmail(emailR);
 
-            //sendMail();
+            sendMail();
 
-            return "/recuperarContrasena?faces-redirect=true";
+            return "/index?faces-redirect=true";
 
         }catch (Exception e){
+
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
         }
@@ -122,15 +121,13 @@ public class SeguridadBean implements Serializable {
 
     }
 
-    @PostMapping("/sendMail")
     public void sendMail(){
 
         String subject = "Recuperacion de contraseña";
         String url = "http://localhost:8080/recuperarContrasena.xhtml";
-        String message = "Cordial Saludo para recuperar su contraseña, de click en el siguiente enlace" + "\n"+
-                url;
+        String message = "Cordial Saludo para recuperar su contraseña, de click en el siguiente enlace" + "\n"+ url;
 
-        mailService.sendMail("sebastianquinteroosorio2104@gmail.com", personaAux.getEmail(),subject,message);
+        mailService.sendMail("brahianandroid@gmail.com", personaAux.getEmail(),subject,message);
 
     }
 }
