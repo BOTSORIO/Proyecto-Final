@@ -32,7 +32,7 @@ public class BusquedaBean implements Serializable {
         if (busquedaParam!=null && !busquedaParam.isEmpty()){
 
           lugares =   lugarServicio.buscarLugares(busquedaParam);
-            PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(this.lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud())).collect(Collectors.toList()))+");");
+            PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(this.lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud(),l.getEstado())).collect(Collectors.toList()))+");");
         }
     }
 

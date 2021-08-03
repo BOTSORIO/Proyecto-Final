@@ -21,9 +21,13 @@ function ubicarLugares(lugares, map){
 
     for(let l of lugares){
 
-        new mapboxgl.Marker().setLngLat([l.lng,l.lat]).setPopup(new mapboxgl.Popup().setHTML("<strong>"+l.nombre+"</strong><br>"+l.descripcion+"<br><a href='http://localhost:8080/detalleLugar.xhtml?lugar="+l.id+"'>Ir a detalle</a>")).addTo(map).togglePopup();
+        if(l.aprobado){
 
-        bounds.extend([l.lng,l.lat]);
+            new mapboxgl.Marker().setLngLat([l.lng,l.lat]).setPopup(new mapboxgl.Popup().setHTML("<strong>"+l.nombre+"</strong><br>"+l.descripcion+"<br><a href='http://localhost:8080/detalleLugar.xhtml?lugar="+l.id+"'>Ir a detalle</a>")).addTo(map).togglePopup();
+
+            bounds.extend([l.lng,l.lat]);
+        }
+
     }
 
     map.fitBounds(bounds,{padding: 100});

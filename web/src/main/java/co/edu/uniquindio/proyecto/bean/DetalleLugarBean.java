@@ -96,7 +96,7 @@ public class DetalleLugarBean implements Serializable {
 
                 List<Lugar>lugares=new ArrayList<>();
                 lugares.add(lugar);
-                PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud())).collect(Collectors.toList()))+");");
+                PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud(),l.getEstado())).collect(Collectors.toList()))+");");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -214,6 +214,11 @@ public class DetalleLugarBean implements Serializable {
 
         mailService.sendMail("unilocal0804@gmail.com", email,subject,message);
 
+    }
+
+    public void generarRuta(){
+
+        PrimeFaces.current().executeScript("crearMapa("+lugar.getLongitud()+","+lugar.getLatitud()+");");
     }
 
 }

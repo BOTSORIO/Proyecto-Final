@@ -13,4 +13,5 @@ public class MarkerDTO {
     private String nombre;
     private String descripcion;
     private float lat, lng;
+    private boolean aprobado;
 }
