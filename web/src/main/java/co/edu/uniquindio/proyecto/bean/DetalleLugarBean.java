@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.MarkerDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
+import co.edu.uniquindio.proyecto.servicios.MailService;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,9 @@ public class DetalleLugarBean implements Serializable {
 
     @Autowired
     private LugarServicio lugarServicio;
+
+    @Autowired
+    private MailService mailService;
 
     @Autowired
     private ComentarioServicio comentarioServicio;
@@ -104,12 +108,16 @@ public class DetalleLugarBean implements Serializable {
     public void ingresarComentario(){
 
         Lugar lugarEncontrado;
+        Usuario usuarioCreador;
         try {
             int id = Integer.parseInt(idLugar);
             lugarEncontrado = lugarServicio.obtenerLugar(id);
+            usuarioCreador=lugarEncontrado.getUsuario();
 
-            if (personaLogin!=null && lugarEncontrado!=null){
+            if (personaLogin!=null && lugarEncontrado!=null && usuarioCreador!=null){
                 lugarServicio.ingresarComentario(comentarioNuevo,lugarEncontrado,personaLogin);
+                sendMailComentario();
+                sendMailComentarioCreador(comentarioNuevo.getComentario(),usuarioCreador.getEmail());
                 this.comentariosDetal.add(comentarioNuevo);
                 this.comentarioNuevo = new Comentario();
                 this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
@@ -188,7 +196,23 @@ public class DetalleLugarBean implements Serializable {
         }else{
             listaTelefonos.add("No hay telefonos");
         }
+    }
 
+    public void sendMailComentario(){
+
+        String subject = "¡Tu comentario se registro con exito!";
+        String message = "Cordial saludo, este correo es para informarte que acabas de publicar un comentario, ¡gracias por tu aporte!";
+
+        mailService.sendMail("unilocal0804@gmail.com", personaLogin.getEmail(),subject,message);
+
+    }
+
+    public void sendMailComentarioCreador(String comentario,String email){
+
+        String subject = "¡Alguien comento tu publicacion!";
+        String message = comentario ;
+
+        mailService.sendMail("unilocal0804@gmail.com", email,subject,message);
 
     }
 

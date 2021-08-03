@@ -81,6 +81,29 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     }
 
+    @Override
+    public void actualizar(String id,Usuario u){
+
+        try {
+            Usuario usuarioEncontrado = obtenerUsuario(id);
+
+            if (usuarioEncontrado!=null){
+
+                usuarioEncontrado.setNombre(u.getNombre());
+                usuarioEncontrado.setNickname(u.getNickname());
+                usuarioEncontrado.setPassword(u.getPassword());
+                usuarioEncontrado.setCiudad(u.getCiudad());
+                usuarioEncontrado.setEmail(u.getEmail());
+
+                usuarioRepo.save(usuarioEncontrado);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     public void eliminarUsuario(String email,String password) throws Exception {
@@ -88,6 +111,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuarioEncontrado = obtenerUsuarioEmailPassword(email,password) ;
 
         if (usuarioEncontrado != null){
+            usuarioRepo.delete(usuarioEncontrado);
+        }else{
+            throw new Exception("Usuario no encontrado ");
+        }
+    }
+
+    @Override
+    public void eliminarUsuarioId(String id) throws Exception {
+
+        Usuario usuarioEncontrado = obtenerUsuario(id);
+
+        if (usuarioEncontrado!=null){
             usuarioRepo.delete(usuarioEncontrado);
         }else{
             throw new Exception("Usuario no encontrado ");
@@ -181,6 +216,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return comentariosCR;
     }
 
+
+    @Override
+    public List<Lugar> listarFavoritosUsuario(String id){
+        return usuarioRepo.obtenerLugaresFav(id);
+    }
 
     @Override
     public List<Usuario> listarUsuarios() {

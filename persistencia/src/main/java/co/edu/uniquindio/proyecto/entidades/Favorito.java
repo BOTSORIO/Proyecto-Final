@@ -1,9 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.*;
@@ -13,6 +11,7 @@ import java.io.*;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Favorito implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
@@ -28,12 +27,8 @@ public class Favorito implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
+    @ToString.Exclude
+    @JsonIgnore
     private Usuario usuario;
 
-
-    //================================= TO STRING DE LA ENTIDAD =================================//
-    @Override
-    public String toString() {
-        return "\nCodigo: " +getId() ;
-    }
 }

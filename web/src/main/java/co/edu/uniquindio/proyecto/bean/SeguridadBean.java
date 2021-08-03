@@ -133,7 +133,7 @@ public class SeguridadBean implements Serializable {
         String url = "http://localhost:8080/recuperarContrasena.xhtml";
         String message = "Cordial Saludo para recuperar su contraseña, de click en el siguiente enlace" + "\n"+ url;
 
-        mailService.sendMail("brahianandroid@gmail.com", personaAux.getEmail(),subject,message);
+        mailService.sendMail("unilocal0804@gmail.com", personaAux.getEmail(),subject,message);
 
     }
 }

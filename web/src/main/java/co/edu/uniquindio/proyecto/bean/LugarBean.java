@@ -35,45 +35,60 @@ public class LugarBean implements Serializable {
     private final TelefonoServicio telefonoServicio;
     private final ComentarioServicio comentarioServicio;
     private final FavoritoServicio favoritoServicio;
+    private final MailService mailService;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Lugar lugar;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Date horaInicio;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Date horaFin;
 
     @Value("${upload.url}")
     private String urlImagenes;
-    private ArrayList<Imagen>imagenes;
+    private ArrayList<Imagen> imagenes;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Ciudad> ciudades;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Telefono> telefonos;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Tipo> tipos;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Horario> horarios;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Telefono telefono;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Horario horario;
+
+    @Getter
+    @Setter
+    private Lugar lugarCalificacionMayor;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
-    @Getter @Setter
-    private ArrayList<String>dias;
+    @Getter
+    @Setter
+    private ArrayList<String> dias;
 
-    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio, ComentarioServicio comentarioServicio, FavoritoServicio favoritoServicio) {
+    public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, ImagenServicio imagenServicio, HorarioServicio horarioServicio, TelefonoServicio telefonoServicio, ComentarioServicio comentarioServicio, FavoritoServicio favoritoServicio, MailService mailService) {
         this.lugarServicio = lugarServicio;
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
@@ -83,29 +98,31 @@ public class LugarBean implements Serializable {
         this.telefonoServicio = telefonoServicio;
         this.comentarioServicio = comentarioServicio;
         this.favoritoServicio = favoritoServicio;
+        this.mailService = mailService;
     }
 
     @PostConstruct
-    public void inicializar(){
-        this.lugar= new Lugar();
+    public void inicializar() {
+        this.lugar = new Lugar();
         this.horario = new Horario();
+        this.lugarCalificacionMayor = obtenerLugarCalificacionMayor();
         this.ciudades = ciudadServicio.listarCiudades();
         this.tipos = tipoServicio.listarTipos();
         this.imagenes = new ArrayList<>();
         this.horarios = new ArrayList<>();
         this.telefonos = new ArrayList<>();
         this.dias = new ArrayList<>();
-        this.telefono= new Telefono();
+        this.telefono = new Telefono();
         llenarDias();
 
     }
 
-    public String registrarLugar(){
+    public String registrarLugar() {
         try {
-            if (personaLogin!=null) {
+            if (personaLogin != null) {
                 if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty() && !telefonos.isEmpty()) {
 
-                    for(Horario h:horarios){
+                    for (Horario h : horarios) {
                         horarioServicio.registrarHorario(h);
                     }
 
@@ -119,7 +136,7 @@ public class LugarBean implements Serializable {
                         imagenServicio.registrarImagen(i);
                     }
 
-                    for(Telefono t: telefonos){
+                    for (Telefono t : telefonos) {
                         t.setLugar(lugarCreado);
                         telefonoServicio.registrarTelefono(t);
                     }
@@ -135,19 +152,19 @@ public class LugarBean implements Serializable {
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null,msg);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
         }
 
         return null;
     }
 
 
-    public void actualizarLugar(){
+    public void actualizarLugar() {
 
-        if(personaLogin!=null){
+        if (personaLogin != null) {
 
             try {
 
@@ -155,10 +172,10 @@ public class LugarBean implements Serializable {
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el lugar se actualizo correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
-                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","No pudimos actualizar el lugar");
-                FacesContext.getCurrentInstance().addMessage(null,msg);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos actualizar el lugar");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
 
             }
 
@@ -167,33 +184,33 @@ public class LugarBean implements Serializable {
     }
 
 
-    public void subirImagenes(FileUploadEvent event){
+    public void subirImagenes(FileUploadEvent event) {
 
         UploadedFile imagen = event.getFile();
         String nombreImagen = subirImagen(imagen);
 
-        if(nombreImagen!=null){
+        if (nombreImagen != null) {
 
-           Imagen foto = new Imagen(nombreImagen);
+            Imagen foto = new Imagen(nombreImagen);
 
             imagenes.add(foto);
         }
     }
 
 
-    public String subirImagen(UploadedFile file){
+    public String subirImagen(UploadedFile file) {
 
-        try{
+        try {
             InputStream input = file.getInputStream();
             String fileName = FilenameUtils.getName(file.getFileName());
-            String baseName = FilenameUtils.getBaseName(fileName)+"_";
-            String extension = "."+FilenameUtils.getExtension(fileName);
-            File fileDest = File.createTempFile(baseName,extension,new File(urlImagenes));
+            String baseName = FilenameUtils.getBaseName(fileName) + "_";
+            String extension = "." + FilenameUtils.getExtension(fileName);
+            File fileDest = File.createTempFile(baseName, extension, new File(urlImagenes));
             FileOutputStream output = new FileOutputStream(fileDest);
-            IOUtils.copy(input,output);
+            IOUtils.copy(input, output);
 
             return fileDest.getName();
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
@@ -230,7 +247,7 @@ public class LugarBean implements Serializable {
 
         try {
 
-            if(horaInicio!=null && horaFin!=null) {
+            if (horaInicio != null && horaFin != null) {
                 String inicio = this.horaInicio.toString().split(" ")[3].substring(0, 5);
                 String fin = this.horaFin.toString().split(" ")[3].substring(0, 5);
                 horario.setHoraInicio(inicio);
@@ -238,9 +255,9 @@ public class LugarBean implements Serializable {
                 System.out.println(horario);
                 this.horarios.add(horario);
                 nuevoHorario();
-            }else{
-                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","Asigne un horario");
-                FacesContext.getCurrentInstance().addMessage(null,msg);
+            } else {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Asigne un horario");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -252,13 +269,13 @@ public class LugarBean implements Serializable {
         nuevoHorario();
     }
 
-    public void nuevoTelefono(){
+    public void nuevoTelefono() {
         this.telefono = new Telefono();
     }
 
-    public void crearTelefono(){
+    public void crearTelefono() {
 
-        if (personaLogin!=null) {
+        if (personaLogin != null) {
 
             this.telefonos.add(telefono);
             nuevoTelefono();
@@ -271,9 +288,9 @@ public class LugarBean implements Serializable {
         nuevoTelefono();
     }
 
-    public void eliminarLugar(){
+    public void eliminarLugar() {
 
-        if (personaLogin!=null){
+        if (personaLogin != null) {
             try {
 
                 Lugar lugarAux = lugarServicio.obtenerLugar(lugar.getId());
@@ -283,32 +300,32 @@ public class LugarBean implements Serializable {
 
                 List<Horario> horarios = horarioServicio.obtenerHorariosLugar(lugar.getId());
 
-                for(Horario h:horarios){
+                for (Horario h : horarios) {
 
                     horarioServicio.eliminarHorario(h.getId());
                 }
 
                 List<Telefono> telefonos = telefonoServicio.obtenerTelefonosLugar(lugar.getId());
 
-                for (Telefono t:telefonos){
+                for (Telefono t : telefonos) {
                     telefonoServicio.eliminarTelefono(t.getId());
                 }
 
                 List<Imagen> imagenes = imagenServicio.obtenerImagenesLugar(lugar.getId());
 
-                for (Imagen i: imagenes) {
+                for (Imagen i : imagenes) {
                     imagenServicio.eliminarImagen(i.getId());
                 }
 
-                List<Comentario>comentarios = comentarioServicio.obtenerComentariosLugar(lugar.getId());
+                List<Comentario> comentarios = comentarioServicio.obtenerComentariosLugar(lugar.getId());
 
-                for(Comentario c:comentarios){
+                for (Comentario c : comentarios) {
                     comentarioServicio.eliminarComentario(c.getId());
                 }
 
-                List<Favorito>favoritosLugar = favoritoServicio.obtenerListaFavoritosLugar(lugar.getId());
+                List<Favorito> favoritosLugar = favoritoServicio.obtenerListaFavoritosLugar(lugar.getId());
 
-                for(Favorito f:favoritosLugar){
+                for (Favorito f : favoritosLugar) {
                     favoritoServicio.eliminarFavorito(f.getId());
                 }
 
@@ -318,11 +335,25 @@ public class LugarBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
             } catch (Exception e) {
-                FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","No pudimos eliminar el lugar");
-                FacesContext.getCurrentInstance().addMessage(null,msg);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos eliminar el lugar");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
             }
         }
     }
 
+
+    public Lugar obtenerLugarCalificacionMayor() {
+
+        Lugar lugar = lugarServicio.obtenerLugarMejorCalificacion();
+
+        if (lugar != null) {
+            return lugar;
+        } else {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos encontrar ningun lugar");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+
+        return null;
+    }
 
 }

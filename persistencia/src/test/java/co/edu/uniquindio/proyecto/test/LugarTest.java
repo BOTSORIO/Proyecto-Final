@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -52,7 +51,7 @@ public class LugarTest {
                 Telefono telefono = new Telefono("3116310037");
 
 
-                Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
+                Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion, 77, 65, 13,12,true);
                 lugarNuevo.setCiudad(ciudad);
                 lugarNuevo.setUsuario(usuario);
                 lugarNuevo.setModerador(moderador);
@@ -95,7 +94,7 @@ public class LugarTest {
             Telefono telefono = new Telefono("3116310037");
 
 
-            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
+            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion, 77, 65, 13,12,true);
             lugarNuevo.setCiudad(ciudad);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);
@@ -144,7 +143,7 @@ public class LugarTest {
 
 
 
-            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion,13,12,true);
+            Lugar lugarNuevo = new Lugar("Pepitos","Lugar de baile",fechaCreacion,fechaAprobacion, 77, 65, 13,12,true);
             lugarNuevo.setCiudad(ciudad);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);

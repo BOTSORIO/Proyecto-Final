@@ -1,8 +1,10 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,22 +15,30 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Usuario extends Persona implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD CIUDAD =================================//
     @ManyToOne
+    @JsonIgnore
     private Ciudad ciudad;
 
     //================================= RELACION CON LA ENTIDAD LUGAR =================================//
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Lugar> lugares;
 
     //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Favorito> favoritos;
 
     //================================= CONSTRUCTOR  =================================//
@@ -37,11 +47,4 @@ public class Usuario extends Persona implements Serializable {
         lugares= new ArrayList<>();
     }
 
-
-    //================================= TO STRING DE LA ENTIDAD =================================//
-    @Override
-    public String toString() {
-        return "\nId :"+getId()+"\nNombre :"+ getNombre()+"\nNickname :"+getNickname()+"\nPassword"
-                +getPassword()+"\nEmail :"+getEmail()+"\n"+"Ciudad: "+getCiudad()+"\n";
-    }
 }

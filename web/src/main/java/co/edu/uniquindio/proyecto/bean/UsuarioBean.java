@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
-import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
-import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
-import co.edu.uniquindio.proyecto.servicios.LugarServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
@@ -18,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -31,8 +29,14 @@ public class UsuarioBean implements Serializable {
     private ComentarioServicio comentarioServicio;
 
     @Autowired
+    private LugarServicio lugarServicio;
+
+    @Autowired
     @Getter @Setter
     private CiudadServicio ciudadServicio;
+
+    @Autowired
+    private MailService mailService;
 
     @Getter @Setter
     private Usuario usuario;
@@ -51,6 +55,9 @@ public class UsuarioBean implements Serializable {
 
     @Getter @Setter
     private List<Lugar>lugaresUsuario;
+
+    @Getter @Setter
+    private List<Lugar>lugaresFavoritosUsuario;
 
     @Getter @Setter
     private List<Comentario>comentariosSR;
@@ -73,6 +80,7 @@ public class UsuarioBean implements Serializable {
         this.lugaresUsuario = obtenerLugaresUsuario();
         this.comentariosSR = obtenerComentariosSR();
         this.comentariosCR = obtenerComentariosCR();
+        this.lugaresFavoritosUsuario= obtenerLugaresFavoritosUsuario();
     }
 
     public void registrarUsuario() {
@@ -187,15 +195,19 @@ public class UsuarioBean implements Serializable {
     public void responderComentario(){
 
         Comentario comentarioEncontrado;
+        Usuario usuarioEncontrado;
 
         if(personaLogin!=null){
 
             try{
 
                 comentarioEncontrado = comentarioServicio.obtenerComentario(idComentarioResponder);
+                usuarioEncontrado = comentarioEncontrado.getUsuario();
+
 
                 if (comentarioEncontrado!=null){
                     comentarioServicio.responderComentario(comentario.getRespuesta(),idComentarioResponder);
+                    sendMailRespuesta(comentario.getRespuesta(),usuarioEncontrado.getEmail());
                     this.comentariosSR = obtenerComentariosSR();
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! la respuesta se registro exitosamente");
@@ -249,6 +261,28 @@ public class UsuarioBean implements Serializable {
 
     public void responder(Integer id) {
         this.idComentarioResponder = id;
+    }
+
+    public List<Lugar> obtenerLugaresFavoritosUsuario(){
+
+        List<Lugar> lugaresFav= new ArrayList<>();
+
+        if (personaLogin!=null){
+
+            lugaresFav=lugarServicio.obtenerLugaresFavoritosUsuario(personaLogin.getId());
+        }
+
+        return lugaresFav;
+    }
+
+
+    public void sendMailRespuesta(String respuesta,String email){
+
+        String subject = "En hora buena, alguien respondio tu comentario";
+        String message = respuesta;
+
+        mailService.sendMail("unilocal0804@gmail.com", email,subject,message);
+
     }
 
 }

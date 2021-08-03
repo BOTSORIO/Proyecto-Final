@@ -220,5 +220,56 @@ public class LugarServicioImpl implements LugarServicio {
         return lugares;
     }
 
+    @Override
+    public Lugar obtenerLugarMejorCalificacion(){
+
+        List<Lugar>lugares = listarLugares();
+        Lugar lugarAux = new Lugar();
+        int flag=0;
+
+        for(Lugar l:lugares){
+
+            try {
+                int calificacionPromedio=obtenerCalificacionPromedio(l.getId());
+
+                if(calificacionPromedio>flag){
+
+                    flag=calificacionPromedio;
+                    lugarAux = l;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return lugarAux;
+
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresFavoritosUsuario(String idUsuario) {
+
+        List<Lugar> lugares = lugarRepo.findAll();
+        List<Lugar>lugaresFavoritosUsuario=new ArrayList<>();
+
+        for (Lugar l:lugares){
+
+            List<Favorito>favoritos = l.getFavoritos();
+
+            for(Favorito f:favoritos){
+                if(f.getUsuario().getId().equalsIgnoreCase(idUsuario)){
+
+                    lugaresFavoritosUsuario.add(l);
+                }
+
+            }
+
+        }
+
+        return lugaresFavoritosUsuario;
+
+    }
 
 }

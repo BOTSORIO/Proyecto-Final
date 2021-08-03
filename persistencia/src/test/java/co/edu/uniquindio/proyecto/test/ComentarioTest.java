@@ -60,7 +60,7 @@ public class ComentarioTest {
             Date fechaCreacion = sdf.parse("2021/01/04");
 
             Usuario usuario= new Usuario("0655","Jose","kuro","kuro123","k@gmail.com");
-            Lugar lugar = new Lugar("no je","xd",fechaCreacion,fechaCreacion,12,12,true);
+            Lugar lugar = new Lugar("no je","xd",fechaCreacion,fechaCreacion, 77, 65, 12,12,true);
 
             Comentario comentarioNuevo = new Comentario("Cool xd", 10, lugar, usuario);
             comentarioNuevo.setLugar(lugar);
@@ -88,7 +88,7 @@ public class ComentarioTest {
             Date fechaCreacion = sdf.parse("2021/01/04");
 
             Usuario usuario= new Usuario("0655","Jose","kuro","kuro123","k@gmail.com");
-            Lugar lugar = new Lugar("no je","xd",fechaCreacion,fechaCreacion,12,12,true);
+            Lugar lugar = new Lugar("no je","xd",fechaCreacion,fechaCreacion, 77, 65, 12,12,true);
 
 
             Comentario comentarioNuevo = new Comentario("Cool xd", 10, lugar, usuario);

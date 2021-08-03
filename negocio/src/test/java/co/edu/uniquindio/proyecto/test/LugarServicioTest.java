@@ -47,7 +47,7 @@ public class LugarServicioTest {
             Telefono telefono = new Telefono("3116310037");
             Imagen imagen = new Imagen("adsdasda");
 
-            Lugar lugarNuevo= new Lugar("El castillo","Lugar de paso",fechaCreacion,fechaAprobacion,12,23,true);
+            Lugar lugarNuevo= new Lugar("El castillo","Lugar de paso",fechaCreacion,fechaAprobacion, 77, 65, 12,23,true);
             lugarNuevo.setTipo(tipo);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);

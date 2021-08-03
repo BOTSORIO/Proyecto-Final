@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.*;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Lugar implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
@@ -55,39 +57,53 @@ public class Lugar implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     //================================= RELACION CON LA ENTIDAD CIUDAD =================================//
     @ManyToOne
+    @JoinColumn(nullable = false)
+    @JsonIgnore
     private Ciudad ciudad;
 
     //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "lugar")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     //================================= RELACION CON LA ENTIDAD TIPO =================================//
     @ManyToOne
+    @JoinColumn(nullable = false)
+    @JsonIgnore
     private Tipo tipo;
 
     //================================= RELACION CON LA ENTIDAD IMAGEN =================================//
     @OneToMany(mappedBy = "lugar",fetch=FetchType.EAGER)
+    @ToString.Exclude
+    @JsonIgnore
     private List<Imagen> imagenes;
 
     //================================= RELACION CON LA ENTIDAD TELEFONO =================================//
     @OneToMany(mappedBy = "lugar")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Telefono> telefonos;
 
     //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "lugar")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Favorito> favoritos;
 
     //================================= RELACION CON LA ENTIDAD HORARIO =================================//
     @ManyToMany
+    @JsonIgnore
     private List<Horario> horarios;
 
     //================================= CONSTRUCTOR  =================================//
     @Builder
-    public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud, Boolean estado) {
+    public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, int i1, int i, float latitud, float longitud, Boolean estado) {
 
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -130,32 +146,5 @@ public class Lugar implements Serializable {
         return "default.png";
     }
 
-
-    //================================= TO STRING DE LA ENTIDAD =================================//
-    @Override
-    public String toString() {
-
-        String cadena="";
-
-        for(int i=0;i<getTelefonos().size();i++){
-
-            cadena += "Telefonos: \n"+getTelefonos().get(i).getTelefonoLugar()+"\n";
-        }
-
-        for (int i=0;i<getHorarios().size();i++){
-
-            cadena += "\nHorarios: \n"+ getHorarios().get(i).toString()+"\n";
-        }
-
-        for (int i=0;i<getComentarios().size();i++){
-
-            cadena += "\nComentarios: \n" +getComentarios().get(i).getComentario()+"\n";
-        }
-
-        return "\nCodigo: "+getId()+"\nNombre: "+getNombre()+"\nDescripcion: "+getDescripcion()
-                +"\nFechaC: "+getFechaCreacion()+"\nFechaA: "+getFechaAprobacion()+"\nLogintud: "+getLongitud()
-                +"\nLatitud: "+getLatitud()+"\nEstado: "+getEstado()+"\n\nCiudad: "+getCiudad()
-                +"\nModerador: "+getModerador()+"\nUsuario: "+getUsuario()+"\n"+"Tipo: "+getTipo()+"\n"+cadena+"\n";
-    }
 
 }
