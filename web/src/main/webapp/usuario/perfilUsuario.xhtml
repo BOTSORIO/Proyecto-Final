@@ -55,19 +55,46 @@
 
                         <p:column headerText="Responder">
                             <p:commandButton action="#{usuarioBean.responder(comentario.id)}"
-                                             onclick="PF('dlg3').show()"
+                                             onclick="PF('dlg3').show()" update="favoritosTable"
                                              icon="pi pi-send" styleClass="rounded-button ui-button-flat"/>
                         </p:column>
 
                         <p:column headerText="Eliminar">
                             <p:commandButton action="#{usuarioBean.eliminarComentario(comentario.id)}"
-                                             icon="pi pi-trash" update="sin_respuestaTable"
+                                             icon="pi pi-trash" update="sin_respuestaTable,favoritosTable"
                                              styleClass="rounded-button ui-button-flat"/>
                         </p:column>
                     </p:dataTable>
                     </h:form>
                 </p:outputPanel>
             </div>
+
+
+        <div class="card" style="margin: 2% 5%">
+            <h1 style="margin: 2% 5%">Estos son tus lugares favoritos </h1>
+
+            <p:outputPanel id="favoritos" style="margin: 2% 5%">
+                    <p:dataTable value="#{usuarioBean.lugaresFavoritosUsuario}" var="lugar" id="favoritosTable">
+                        <p:column headerText="Lugar">
+                            <h:outputText value="#{lugar.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Descripción">
+                            <f:facet name="header">
+                                <h:outputText value="Descripción"/>
+                            </f:facet>
+                            <h:outputText value="#{lugar.descripcion}"/>
+                        </p:column>
+
+                        <p:column headerText="Fecha">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{lugar.fechaCreacion}"/>
+                        </p:column>
+                    </p:dataTable>
+            </p:outputPanel>
+        </div>
 
 
 
@@ -80,7 +107,7 @@
 
                 <div style="margin-top: 5%;margin-left: 25%">
                     <p:commandButton style="min-width: 30%" value="Responder"
-                                     action="#{usuarioBean.responderComentario}" onclick="PF('dlg3').hide()" update="form:sin_respuestaTable"
+                                     action="#{usuarioBean.responderComentario}" onclick="PF('dlg3').hide()" update="form:sin_respuestaTable,favoritosTable"
                                      styleClass="ui-button-raised ui-button-success ui-button-flat"
                                      icon="pi pi-sign-in" iconPos="left"/>
 

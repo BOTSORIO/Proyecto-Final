@@ -23,22 +23,32 @@
         <div id="mapa">
             <div id='map' style="visibility: hidden"></div>
         </div>
+        <br></br>
+        <br></br>
         <div class="container">
+
             <div class="">
                 <div>
-                    <h2>Categorías</h2>
+                    <h2>Consultar el lugar con mayor calificación</h2>
                 </div>
                 <div>
-                    <p>Lista categorías</p>
+                    <p:commandButton action="#{lugarBean.lugarCalificacionMayor}"
+                                     onclick="PF('dlg6').show()"
+                                     icon="pi pi-info-circle" styleClass="rounded-button ui-button-flat"/>
                 </div>
             </div>
+
+            <br></br>
+            <br></br>
+            <br></br>
+
             <div class="">
                 <div>
                     <h2>Lugares más populares</h2>
                 </div>
+
                 <div>
                     <h:form id="form">
-
                         <p:carousel value="#{inicioBean.lugares}" var="lugar" responsive="true" itemStyle="text-align:center">
                             <div class="product">
                                 <div class="product-grid-item p-p-5">
@@ -64,6 +74,32 @@
                 </div>
             </div>
         </div>
+
+        <h:form>
+            <p:dialog id="dialogo" header="Lugar con la calificación mas alta" widgetVar="dlg6" Height="400px" width="40%" showEffect="fade"
+                      closeOnEscape="true" rendered="#{!seguridadBean.autenticado}">
+
+                    <h4>Nombre: #{lugarBean.lugarCalificacionMayor.nombre} </h4>
+                    <br></br>
+                    <h4>Descripción:  #{lugarBean.lugarCalificacionMayor.descripcion} </h4>
+                    <br></br>
+                    <h4>Fecha de creación:  #{lugarBean.lugarCalificacionMayor.fechaCreacion} </h4>
+                    <br></br>
+                    <h4>Ciudad:  #{lugarBean.lugarCalificacionMayor.ciudad.nombre} </h4>
+
+                <div class="col-2">
+                    <div class="fotox">
+                        <img src="resources/img/user.png" alt=""/>
+                    </div>
+                </div>
+
+                <p:button href="/index.xhtml" value="Volver"
+                          style="width: 50%; margin-left: 20%;margin-top: 5%"/>
+
+            </p:dialog>
+        </h:form>
+
+
     </ui:define>
 </ui:composition>
 </html>
