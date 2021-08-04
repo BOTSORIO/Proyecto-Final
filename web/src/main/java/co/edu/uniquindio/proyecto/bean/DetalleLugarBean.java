@@ -216,9 +216,9 @@ public class DetalleLugarBean implements Serializable {
 
     }
 
-    public void generarRuta(){
+    public String generarRuta(){
 
-        PrimeFaces.current().executeScript("crearMapa("+lugar.getLongitud()+","+lugar.getLatitud()+");");
+        return "/usuario/ruta?faces-redirect=true&amp;latitud="+lugar.getLatitud()+"&"+"longitud="+lugar.getLongitud();
     }
 
 }

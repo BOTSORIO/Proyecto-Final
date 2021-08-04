@@ -1,57 +1,46 @@
-function crearMapa(latitud,longitud) {
+window.onload = function (){
 
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
 
-            let enable = true;
+            let longitudOrigen = position.coords.longitude;
+            let latitudOrigen = position.coords.latitude;
             mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
-            var map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [-79.4512, 43.6568],
-                zoom: 13
-            });
 
-            //Añade un control de geolocalizacion al mapa en la ventana de la creacion del lugar
-            map.addControl(new mapboxgl.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy: true
-                },
-                trackUserLocation: true
-            }));
+            var map = new mapboxgl.Map({
+                container: 'mapa',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [position.coords.longitude,position.coords.latitude],
+                zoom: 12
+            });
 
             //Añade varios controles al mapa
             map.addControl(new mapboxgl.NavigationControl());
 
-            map.on("load", function (e) {
+            //Obtenemos el url con la longitud y latitud del lugar
+            const valores = window.location.search;
 
-                ubicarLugares(lugares, map);
+            //Creamos la instancia para extraer los valores
+            const urlParams = new URLSearchParams(valores);
+
+            //Accedemos a los valores
+            let latitud = urlParams.get('latitud');
+            let longitud = urlParams.get('longitud');
+
+            //Se añade la ubicación origen (ubicación actual) y destino (el lugar)
+            map.on('load', function() {
+                var directions = new MapboxDirections({
+                    accessToken: mapboxgl.accessToken
+                });
+                map.addControl(directions, 'top-left');
+
+                directions.setOrigin([longitudOrigen,latitudOrigen]);
+                directions.setDestination([longitud,latitud]);
             });
 
         })
-    }
 
-    function ubicarLugares(lugares, map) {
-
-        let bounds = new mapboxgl.LngLatBounds();
-
-        for (let l of lugares) {
-
-            new mapboxgl.Marker().setLngLat([l.lng, l.lat]).setPopup(new mapboxgl.Popup().setHTML("<strong>" + l.nombre + "</strong><br>" + l.descripcion)).addTo(map).togglePopup();
-
-            bounds.extend([l.lng, l.lat]);
-        }
-
-        map.fitBounds(bounds, {padding: 100});
-        document.getElementById("map").style.visibility = "visible";
 
     }
-
-    let dir = new MapboxDirections({
-        accessToken: mapboxgl.accessToken
-    });
-
-    map.addControl(dir, 'top-left');
-
 
 }

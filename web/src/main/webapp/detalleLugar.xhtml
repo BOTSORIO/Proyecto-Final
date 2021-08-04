@@ -137,8 +137,6 @@
                     <h:form>
                         <div class="card">
 
-                            <p:commandButton value="ruta" action="#{detalleLugarBean.generarRuta}" />
-
                             <p:dataTable var="horario" value="#{detalleLugarBean.lugar.horarios}">
                                 <p:column headerText="Día">
                                     <h:outputText value="#{horario.diaSemana}"/>
@@ -165,6 +163,9 @@
                     <div id="mapa" style="height: 300px">
                         <div id='map' style="visibility: visible;height: 300px;"></div>
                     </div>
+
+                    <br></br>
+                    <p:commandButton value="ruta" action="#{detalleLugarBean.generarRuta}"/>
 
                 </p:card>
             </div>
