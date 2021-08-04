@@ -77,7 +77,7 @@ public class DetalleLugarBean implements Serializable {
                 this.lugar = lugarServicio.obtenerLugar(id);
                 this.comentariosDetal = obtenerComentarios();
                 this.horarios = lugarServicio.listarHorarios(id);
-                this.abierto = verificarHorario();
+                //this.abierto = verificarHorario();
                 this.urlImagenes = new ArrayList<>();
                 this.listaTelefonos=new ArrayList<>();
                 this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
@@ -245,6 +245,8 @@ public class DetalleLugarBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println(flag);
         return flag;
     }
 

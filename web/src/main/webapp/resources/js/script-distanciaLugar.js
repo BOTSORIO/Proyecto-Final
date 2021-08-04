@@ -1,4 +1,4 @@
-window.onload = function (){
+function obtenerDistanciaLugar(latitud,longitud){
 
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -17,16 +17,6 @@ window.onload = function (){
             //Añade varios controles al mapa
             map.addControl(new mapboxgl.NavigationControl());
 
-            //Obtenemos el url con la longitud y latitud del lugar
-            const valores = window.location.search;
-
-            //Creamos la instancia para extraer los valores
-            const urlParams = new URLSearchParams(valores);
-
-            //Accedemos a los valores
-            let latitud = urlParams.get('latitud');
-            let longitud = urlParams.get('longitud');
-
             //Se añade la ubicación origen (ubicación actual) y destino (el lugar)
             map.on('load', function() {
                 var directions = new MapboxDirections({
@@ -41,16 +31,18 @@ window.onload = function (){
                 directions.interactive(false);
 
                 directions.on("route", function (e){
-
-
-                    console.log(e.route[0].distance);
+                    setDistancia(e.route[0].distance);
                 })
 
             });
 
         })
 
-
     }
 
+}
+
+//Asigna la distancia en el xhtml para ser usados en el bean
+function setDistancia(distancia){
+    document.getElementById("crear-lugar:lat-lugar").value  = distancia
 }
