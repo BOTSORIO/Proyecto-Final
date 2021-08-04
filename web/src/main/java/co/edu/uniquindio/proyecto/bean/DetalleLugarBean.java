@@ -60,7 +60,7 @@ public class DetalleLugarBean implements Serializable {
     private String icono;
 
     @Getter @Setter
-    private boolean abierto;
+    private String abierto;
 
     @Getter @Setter
     private List<String>urlImagenes;
@@ -77,7 +77,7 @@ public class DetalleLugarBean implements Serializable {
                 this.lugar = lugarServicio.obtenerLugar(id);
                 this.comentariosDetal = obtenerComentarios();
                 this.horarios = lugarServicio.listarHorarios(id);
-                //this.abierto = verificarHorario();
+                this.abierto = verificarHorario();
                 this.urlImagenes = new ArrayList<>();
                 this.listaTelefonos=new ArrayList<>();
                 this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
@@ -225,10 +225,10 @@ public class DetalleLugarBean implements Serializable {
         return "/usuario/ruta?faces-redirect=true&amp;latitud="+lugar.getLatitud()+"&"+"longitud="+lugar.getLongitud();
     }
 
-    public boolean verificarHorario(){
+    public String verificarHorario(){
 
         int id= Integer.parseInt(idLugar);
-        boolean flag= false;
+        String mensaje = "El lugar se encuentra cerrado";
 
         try {
 
@@ -239,15 +239,14 @@ public class DetalleLugarBean implements Serializable {
 
                 if (l.getId()==lugarEncontrado.getId()){
 
-                    flag=true;
+                   mensaje= "El lugar se encuentra abierto";
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println(flag);
-        return flag;
+        return mensaje;
     }
 
 }

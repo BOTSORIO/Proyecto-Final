@@ -51,7 +51,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
 
 
     @Query("select l from Lugar l join l.horarios h where h.diaSemana= :diaSemana and :horaActual between h.horaInicio and h.horaFin")
-    List<Lugar> obtenerLugaresAbiertos(String diaSemana,Date horaActual);
+    List<Lugar> obtenerLugaresAbiertos(String diaSemana,String horaActual);
 
 
     @Query("select new co.edu.uniquindio.proyecto.dto.NumeroTipoLugaresPopularDTO(l.tipo.nombre, count(l)) from Lugar l where l.estado=true group by l.tipo order by count(l) desc ")

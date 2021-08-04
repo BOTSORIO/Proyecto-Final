@@ -276,13 +276,15 @@ public class LugarServicioImpl implements LugarServicio {
        List<Lugar> lugares = lugarRepo.findAll();
        List<Lugar> lugaresAbiertos= new ArrayList<>();
 
+        String horaActual = new Date().toString().split(" ")[3].substring(0, 5);
+
        for (Lugar l:lugares){
 
            List<Horario> horarios = l.getHorarios();
 
            for (Horario h:horarios) {
 
-               lugaresAbiertos = lugarRepo.obtenerLugaresAbiertos(h.getDiaSemana(),new Date());
+               lugaresAbiertos = lugarRepo.obtenerLugaresAbiertos(h.getDiaSemana(),horaActual);
            }
        }
        return  lugaresAbiertos;
