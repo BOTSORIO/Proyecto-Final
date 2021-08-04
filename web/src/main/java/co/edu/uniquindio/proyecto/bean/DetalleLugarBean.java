@@ -60,6 +60,9 @@ public class DetalleLugarBean implements Serializable {
     private String icono;
 
     @Getter @Setter
+    private boolean abierto;
+
+    @Getter @Setter
     private List<String>urlImagenes;
 
     @PostConstruct
@@ -74,6 +77,7 @@ public class DetalleLugarBean implements Serializable {
                 this.lugar = lugarServicio.obtenerLugar(id);
                 this.comentariosDetal = obtenerComentarios();
                 this.horarios = lugarServicio.listarHorarios(id);
+                this.abierto = verificarHorario();
                 this.urlImagenes = new ArrayList<>();
                 this.listaTelefonos=new ArrayList<>();
                 this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
@@ -219,6 +223,29 @@ public class DetalleLugarBean implements Serializable {
     public String generarRuta(){
 
         return "/usuario/ruta?faces-redirect=true&amp;latitud="+lugar.getLatitud()+"&"+"longitud="+lugar.getLongitud();
+    }
+
+    public boolean verificarHorario(){
+
+        int id= Integer.parseInt(idLugar);
+        boolean flag= false;
+
+        try {
+
+            List<Lugar> lugaresAbiertos= lugarServicio.obtenerLugaresAbiertos();
+            Lugar lugarEncontrado = lugarServicio.obtenerLugar2(id);
+
+            for (Lugar l:lugaresAbiertos){
+
+                if (l.getId()==lugarEncontrado.getId()){
+
+                    flag=true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
 }

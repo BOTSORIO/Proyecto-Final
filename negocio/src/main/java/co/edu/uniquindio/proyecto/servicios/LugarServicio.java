@@ -43,4 +43,6 @@ public interface LugarServicio {
     Lugar obtenerLugarMejorCalificacion();
 
     List<Lugar> obtenerLugaresFavoritosUsuario(String idUsuario);
+
+    List<Lugar> obtenerLugaresAbiertos();
 }

@@ -267,9 +267,25 @@ public class LugarServicioImpl implements LugarServicio {
             }
 
         }
-
         return lugaresFavoritosUsuario;
+    }
 
+    @Override
+    public List<Lugar> obtenerLugaresAbiertos(){
+
+       List<Lugar> lugares = lugarRepo.findAll();
+       List<Lugar> lugaresAbiertos= new ArrayList<>();
+
+       for (Lugar l:lugares){
+
+           List<Horario> horarios = l.getHorarios();
+
+           for (Horario h:horarios) {
+
+               lugaresAbiertos = lugarRepo.obtenerLugaresAbiertos(h.getDiaSemana(),new Date());
+           }
+       }
+       return  lugaresAbiertos;
     }
 
 }
