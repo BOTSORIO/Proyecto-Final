@@ -122,6 +122,10 @@
                     Tipo de lugar:    #{detalleLugarBean.lugar.tipo.nombre}
                     <br></br>
                     <br></br>
+                    Cerrado/Abierto :
+                    <p:toggleSwitch value="#{detalleLugarBean.abierto}" disabled="true"/>
+                    <br></br>
+                    <br></br>
                     <h:form>
                         <div class="card">
                             <p:dataTable var="telefono" value="#{detalleLugarBean.listaTelefonos}">
