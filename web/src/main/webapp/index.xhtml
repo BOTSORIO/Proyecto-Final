@@ -49,7 +49,8 @@
 
                 <div>
                     <h:form id="form">
-                        <p:carousel value="#{inicioBean.lugares}" var="lugar" responsive="true" itemStyle="text-align:center">
+                        <p:carousel value="#{inicioBean.lugares}" var="lugar" responsive="true"
+                                    itemStyle="text-align:center">
                             <div class="product">
                                 <div class="product-grid-item p-p-5">
                                     <div class="product-grid-item-top">
@@ -60,7 +61,8 @@
                                         </div>
                                     </div>
                                     <div class="product-grid-item-content" style="margin: 5%">
-                                        <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..." height="300"/>
+                                        <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."
+                                             height="300"/>
                                         <div class="product-description">#{lugar.descripcion}</div>
                                         <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.id)}"
                                                          styleClass="ui-button-raised" icon="pi pi-arrow-right"
@@ -76,25 +78,23 @@
         </div>
 
         <h:form>
-            <p:dialog id="dialogo" header="Lugar con la calificación mas alta" widgetVar="dlg6" Height="400px" width="40%" showEffect="fade"
+            <p:dialog id="dialogo" header="Lugar con la calificación mas alta" widgetVar="dlg6" Height="400px"
+                      width="40%" showEffect="fade"
                       closeOnEscape="true" rendered="#{!seguridadBean.autenticado}">
 
-                    <h4>Nombre: #{lugarBean.lugarCalificacionMayor.nombre} </h4>
-                    <br></br>
-                    <h4>Descripción:  #{lugarBean.lugarCalificacionMayor.descripcion} </h4>
-                    <br></br>
-                    <h4>Fecha de creación:  #{lugarBean.lugarCalificacionMayor.fechaCreacion} </h4>
-                    <br></br>
-                    <h4>Ciudad:  #{lugarBean.lugarCalificacionMayor.ciudad.nombre} </h4>
+                <h4> <center>Nombre: #{lugarBean.lugarCalificacionMayor.nombre}</center> </h4>
+                <br></br>
+                <h4> <center>Descripción:  #{lugarBean.lugarCalificacionMayor.descripcion}</center> </h4>
+                <br></br>
+                <h4> <center>Fecha de creación:  #{lugarBean.lugarCalificacionMayor.fechaCreacion}</center> </h4>
+                <br></br>
+                <h4> <center>Ciudad:  #{lugarBean.lugarCalificacionMayor.ciudad.nombre}</center> </h4>
 
-                <div class="col-2">
-                    <div class="fotox">
-                        <img src="resources/img/user.png" alt=""/>
-                    </div>
-                </div>
+                <img src="resources/img/lugar.png" alt="" style="margin-left: 37%"/>
+                <br></br>
 
                 <p:button href="/index.xhtml" value="Volver"
-                          style="width: 50%; margin-left: 20%;margin-top: 5%"/>
+                          style="width: 50%; margin-left: 25%;margin-top: 5%"/>
 
             </p:dialog>
         </h:form>
