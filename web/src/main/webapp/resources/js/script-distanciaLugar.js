@@ -5,36 +5,16 @@ function obtenerDistanciaLugar(latitud,longitud){
 
             let longitudOrigen = position.coords.longitude;
             let latitudOrigen = position.coords.latitude;
-            mapboxgl.accessToken = 'pk.eyJ1IjoiZmptdXJjaWFoIiwiYSI6ImNrcDhvNzVoNjAwY2MydnBjaWZ5am0xeWkifQ.CbBV5gBoxdhFKRt6lU3xCA';
 
-            var map = new mapboxgl.Map({
-                container: 'mapa',
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [position.coords.longitude,position.coords.latitude],
-                zoom: 12
-            });
+            let markerInicial =  new mapboxgl.Marker().setLngLat([longitudOrigen,latitudOrigen]);
+            let markerFinal = new mapboxgl.Marker().setLngLat([longitud,latitud]);
+            let posInicial = markerInicial.getLngLat();
+            let posFinal = markerFinal.getLngLat();
+            let distancia = (posInicial.distanceTo(posFinal)).toFixed(0);
 
-            //Añade varios controles al mapa
-            map.addControl(new mapboxgl.NavigationControl());
+            console.log(distancia)
 
-            //Se añade la ubicación origen (ubicación actual) y destino (el lugar)
-            map.on('load', function() {
-                var directions = new MapboxDirections({
-                    accessToken: mapboxgl.accessToken,language: 'es',unit: 'metric'
-                });
-
-                directions.setOrigin([longitudOrigen,latitudOrigen]);
-                directions.setDestination([longitud,latitud]);
-
-                map.addControl(directions, 'top-left');
-
-                directions.interactive(false);
-
-                directions.on("route", function (e){
-                    setDistancia(e.route[0].distance);
-                })
-
-            });
+            setDistancia(distancia);
 
         })
 
@@ -44,5 +24,5 @@ function obtenerDistanciaLugar(latitud,longitud){
 
 //Asigna la distancia en el xhtml para ser usados en el bean
 function setDistancia(distancia){
-    document.getElementById("crear-lugar:lat-lugar").value  = distancia
+    document.getElementById("busqueda:distancia").value  = distancia
 }

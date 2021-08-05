@@ -273,20 +273,48 @@ public class LugarServicioImpl implements LugarServicio {
     @Override
     public List<Lugar> obtenerLugaresAbiertos(){
 
-       List<Lugar> lugares = lugarRepo.findAll();
-       List<Lugar> lugaresAbiertos= new ArrayList<>();
+       String diaSemana="";
+       List<Lugar> lugaresAbiertos = new ArrayList<>();
 
-        String horaActual = new Date().toString().split(" ")[3].substring(0, 5);
+       String dia= new Date().toString().split(" ")[0];
+       String horaActual = new Date().toString().split(" ")[3].substring(0, 5);
 
-       for (Lugar l:lugares){
+       switch (dia){
 
-           List<Horario> horarios = l.getHorarios();
+           case "Mon" :
+               diaSemana = "Lunes";
+               break;
 
-           for (Horario h:horarios) {
+           case "Tue":
+               diaSemana = "Martes";
+               break;
 
-               lugaresAbiertos = lugarRepo.obtenerLugaresAbiertos(h.getDiaSemana(),horaActual);
-           }
+           case "Wed":
+               diaSemana = "Miercoles";
+               break;
+
+           case "Thu":
+               diaSemana = "Jueves";
+               break;
+
+           case "Fri":
+               diaSemana = "Viernes";
+               break;
+
+           case "Sat":
+               diaSemana = "Sabado";
+               break;
+
+           case "Sun":
+               diaSemana = "Domingo";
+               break;
        }
+
+       if (!dia.equalsIgnoreCase("") && !horaActual.equalsIgnoreCase("")){
+
+           lugaresAbiertos = lugarRepo.obtenerLugaresAbiertos(diaSemana,horaActual);
+       }
+
        return  lugaresAbiertos;
     }
 
