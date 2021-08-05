@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,30 +43,11 @@ public class LugaresCercanosBean {
         this.lugares = lugarServicio.listarLugares();
         this.lugaresCercanos = new ArrayList<>();
 
-       // PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(this.lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud(),l.getEstado())).collect(Collectors.toList()))+");");
     }
 
     public void obtenerLugaresCercanos(){
 
-        if(lugares.size()>0){
-
-            for(Lugar l:lugares){
-
-                PrimeFaces.current().executeScript("obtenerDistanciaLugar("+l.getLatitud()+","+l.getLongitud()+");");
-
-                System.out.println(distancia);
-
-                //float distanciaKM = distancia/1000;
-
-                //if(distanciaKM<=distanciaBusqueda){
-
-                //    lugaresCercanos.add(l);
-                //}
-
-            }
-
-        }
-
+        PrimeFaces.current().executeScript("obtenerDistanciaLugar("+new Gson().toJson(this.lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud(),l.getEstado())).collect(Collectors.toList()))+","+distanciaBusqueda+");");
     }
 
 }
