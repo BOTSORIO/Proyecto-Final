@@ -53,6 +53,7 @@ public class Lugar implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
     @ManyToOne
+    @JsonIgnore
     private Moderador moderador;
 
     //================================= RELACION CON LA ENTIDAD USUARIO =================================//
@@ -62,7 +63,7 @@ public class Lugar implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD CIUDAD =================================//
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @ToString.Exclude
     @JsonIgnore
     private Ciudad ciudad;
 
@@ -74,7 +75,6 @@ public class Lugar implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD TIPO =================================//
     @ManyToOne
-    @JoinColumn(nullable = false)
     @JsonIgnore
     private Tipo tipo;
 

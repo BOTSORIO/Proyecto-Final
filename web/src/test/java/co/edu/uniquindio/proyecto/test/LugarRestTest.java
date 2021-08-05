@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -47,19 +46,19 @@ public class LugarRestTest {
     @Transactional
     public void eliminarLugar() throws Exception{
 
-        mockMvc.perform(delete("/api/lugares/{id}", 1)
+        mockMvc.perform(delete("/api/lugares/{id}", 2)
                         .contentType("application/json"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
     }
 
     @Test
-
+    @Transactional
     public void actualizarLugar() throws Exception{
 
 
         Lugar lugar1= new Lugar();
-        lugar1.setId(1);
+        lugar1.setId(2);
         lugar1.setFechaCreacion(new Date());
         lugar1.setNombre("Rancho");
         lugar1.setDescripcion("Arepa");
@@ -67,7 +66,7 @@ public class LugarRestTest {
         lugar1.setLatitud(4.52009964502443F);
         lugar1.setLongitud(-75.7124921956696F);
 
-        mockMvc.perform(put("/api/lugares/{id}",1)
+        mockMvc.perform(put("/api/lugares/{id}",2)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(lugar1)))
                 .andDo(MockMvcResultHandlers.print())
