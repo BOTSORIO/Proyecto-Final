@@ -29,7 +29,7 @@ function obtenerDistanciaLugar(lugares,distanciaBusqueda){
 
                 let distanciaKM = distancia/1000;
 
-                if(distanciaKM<=distanciaBusqueda){
+                if(distanciaKM<=distanciaBusqueda && distanciaBusqueda<=10){
 
                     lugaresCercanos.push(l)
                 }

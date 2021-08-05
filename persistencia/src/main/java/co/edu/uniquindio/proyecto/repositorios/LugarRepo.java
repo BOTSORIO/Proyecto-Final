@@ -131,4 +131,5 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer>{
 
     @Query("select l from Lugar l where l.estado=true")
     List<Lugar> obtenerTodosLugaresAprobados();
+
 }
