@@ -116,6 +116,36 @@
                             </div>
                         </div>
                     </f:facet>
+
+                    <div class="row" style="margin-bottom: 2%">
+
+                        <div class="col">
+                            <p:commandButton icon="pi pi-link" value="Ir"
+                                             styleClass="ui-button-raised ui-button-flat"
+                                             action="#{detalleLugarBean.generarRuta}" style="margin-right: 2%"/>
+
+                            <p:commandButton type="button" icon="pi pi-twitter" value="Tweet"
+                                             onclick="window.location.href='https://twitter.com/share?ref_src=twsrc%5Etfw'"
+                                             styleClass="ui-button-raised ui-button-flat" style="margin-left: 10%"/>
+                            <script async="true" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                            <script async="true" defer="true" crossorigin="anonymous"
+                                    src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0"
+                                    nonce="QDpa21bh"></script>
+                        </div>
+                        <div class="col">
+                            <div class="fb-share-button" data-size="large"
+                                 data-href="http://www.localhost:8080/detalleLugar.xhtml?lugar=#{detalleLugarBean.lugar.id}"
+                                 data-layout="button">
+
+                                <p:commandButton type="button" icon="pi pi-facebook" value="Compartir"
+                                                 onclick="window.location.href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse'"
+                                                 styleClass="ui-button-raised ui-button-flat"/>
+
+                            </div>
+                        </div>
+                    </div>
+
                     <h6> Información: </h6>
                     #{detalleLugarBean.lugar.descripcion}
                     <br></br>
@@ -171,26 +201,6 @@
 
                     <div id="mapa" style="height: 300px">
                         <div id='map' style="visibility: visible;height: 300px;"></div>
-                    </div>
-
-                    <br></br>
-                    <p:commandButton icon="pi pi-link" value="ruta" action="#{detalleLugarBean.generarRuta}"/>
-
-
-                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
-                       data-size="large" data-show-count="false">Tweet</a>
-                    <script async="true" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-                    <script async="true" defer="true" crossorigin="anonymous"
-                            src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0"
-                            nonce="QDpa21bh"></script>
-                    <div class="fb-share-button" data-size="large"
-                         data-href="http://www.localhost:8080/detalleLugar.xhtml?lugar=#{detalleLugarBean.lugar.id}"
-                         data-layout="button">
-                        <a target="_blank"
-                           href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                           class="fb-xfbml-parse-ignore">Compartir</a>
                     </div>
                 </p:card>
             </div>
