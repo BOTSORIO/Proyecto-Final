@@ -83,7 +83,8 @@
 
                         <p:commandButton icon="pi pi-check" value="Guardar"
                                          action="#{detalleLugarBean.ingresarComentario}"
-                                         style="margin-left: 7%; width: 40%" update="@form,comentarios_table,promedioLugar"/>
+                                         style="margin-left: 7%; width: 40%"
+                                         update="@form,comentarios_table,promedioLugar"/>
                         <p:button icon="pi pi-undo" value="Volver" styleClass="ui-button-secondary"
                                   style="margin-left: .5em; width: 40%" href="/index.xhtml"/>
                     </h:form>
@@ -98,7 +99,8 @@
 
                         <div class="row">
                             <div class="col">
-                                <p:rating id="promedioLugar" value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
+                                <p:rating id="promedioLugar" value="#{detalleLugarBean.calificacionPromedio}"
+                                          readonly="true"/>
                             </div>
                             <div class="col-4">
                                 <p:commandButton id="favorito" action="#{detalleLugarBean.marcarFavorito}"
@@ -123,7 +125,7 @@
                     <br></br>
                     <br></br>
 
-                    <p:outputLabel >
+                    <p:outputLabel>
                         #{detalleLugarBean.abierto}
                     </p:outputLabel>
 
@@ -172,18 +174,25 @@
                     </div>
 
                     <br></br>
-                    <p:commandButton value="ruta" action="#{detalleLugarBean.generarRuta}"/>
+                    <p:commandButton icon="pi pi-link" value="ruta" action="#{detalleLugarBean.generarRuta}"/>
 
 
-                    <a  href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
+                       data-size="large" data-show-count="false">Tweet</a>
                     <script async="true" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                   
 
-                    <script async="true" defer="true" crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0" nonce="QDpa21bh"></script>
-                    <div class="fb-share-button"  data-href="http://www.localhost:8080/detalleLugar.xhtml?lugar=#{detalleLugarBean.lugar.id}" data-layout="button">
-                        <a  target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore" >Compartir</a>
+
+                    <script async="true" defer="true" crossorigin="anonymous"
+                            src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0"
+                            nonce="QDpa21bh"></script>
+                    <div class="fb-share-button" data-size="large"
+                         data-href="http://www.localhost:8080/detalleLugar.xhtml?lugar=#{detalleLugarBean.lugar.id}"
+                         data-layout="button">
+                        <a target="_blank"
+                           href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                           class="fb-xfbml-parse-ignore">Compartir</a>
                     </div>
-                    </p:card>
+                </p:card>
             </div>
         </div>
 
