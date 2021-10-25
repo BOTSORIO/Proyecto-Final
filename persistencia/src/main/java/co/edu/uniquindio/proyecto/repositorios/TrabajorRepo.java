@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ModeradorRepo extends JpaRepository<Moderador,String> {
+public interface ModeradorRepo extends JpaRepository<Trabajador,String> {
 
     //================================= REPOSITORIO DE MODERADOR =================================//
 
-    Optional<Moderador> findByEmail(String email);
+    Optional<Trabajador> findByEmail(String email);
 
-    Optional<Moderador> findByNickname(String nickname);
+    Optional<Trabajador> findByNickname(String nickname);
 
-    Moderador findByEmailAndPassword(String email,String password);
+    Trabajador findByEmailAndPassword(String email, String password);
 }
