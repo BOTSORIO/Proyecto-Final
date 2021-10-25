@@ -9,9 +9,9 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
-    private final LugarRepo lugarRepo;
+    private final MascotaRepo lugarRepo;
 
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, LugarRepo lugarRepo) {
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, MascotaRepo lugarRepo) {
         this.usuarioRepo = usuarioRepo;
         this.lugarRepo = lugarRepo;
     }
@@ -157,9 +157,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public List<Lugar> obtenerLugaresPorUsuario(String idUsuario){
+    public List<Mascota> obtenerLugaresPorUsuario(String idUsuario){
 
-        List<Lugar> lugaresU = lugarRepo.obtenerLugaresPorUsuario(idUsuario);
+        List<Mascota> lugaresU = lugarRepo.obtenerLugaresPorUsuario(idUsuario);
 
         return lugaresU;
     }
@@ -167,10 +167,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public List<Comentario> obtenerComentariosSinRespuesta(String idUsuario){
 
-        List<Lugar> lugaresU = obtenerLugaresPorUsuario(idUsuario);
+        List<Mascota> lugaresU = obtenerLugaresPorUsuario(idUsuario);
         List<Comentario> comentariosSR=new ArrayList<>();
 
-        for (Lugar l:lugaresU){
+        for (Mascota l:lugaresU){
             List<Comentario>comentariosLugar=l.getComentarios();
 
             if(comentariosLugar.size()>0){
@@ -193,10 +193,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public List<Comentario> obtenerComentariosConRespuesta(String idUsuario){
 
-        List<Lugar> lugaresU = obtenerLugaresPorUsuario(idUsuario);
+        List<Mascota> lugaresU = obtenerLugaresPorUsuario(idUsuario);
         List<Comentario> comentariosCR=new ArrayList<>();
 
-        for (Lugar l:lugaresU){
+        for (Mascota l:lugaresU){
             List<Comentario>comentariosLugar=l.getComentarios();
 
             if(comentariosLugar.size()>0){
@@ -218,7 +218,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public List<Lugar> listarFavoritosUsuario(String id){
+    public List<Mascota> listarFavoritosUsuario(String id){
         return usuarioRepo.obtenerLugaresFav(id);
     }
 

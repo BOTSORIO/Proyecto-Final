@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Imagen implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
@@ -27,19 +25,13 @@ public class Imagen implements Serializable {
     @NotBlank
     private String url;
 
-    //================================= RELACION CON LA ENTIDAD LUGAR =================================//
+    //================================= RELACION CON LA ENTIDAD MASCOTA =================================//
     @ManyToOne
-    private Lugar lugar;
+    private Mascota mascota;
 
     //================================= CONSTRUCTOR  =================================//
     public Imagen(String url) {
         this.url = url;
     }
 
-
-    //================================= TO STRING DE LA ENTIDAD =================================//
-    @Override
-    public String toString() {
-        return "\nCodigo: " + getId() + "\nURL: " + getUrl();
-    }
 }

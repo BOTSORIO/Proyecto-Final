@@ -8,13 +8,13 @@ import java.util.*;
 @Service
 public class LugarServicioImpl implements LugarServicio {
 
-    private final LugarRepo lugarRepo;
+    private final MascotaRepo lugarRepo;
     private final ComentarioRepo comentarioRepo;
     private final TelefonoRepo telefonoRepo;
     private final FavoritoRepo favoritoRepo;
 
 
-    public LugarServicioImpl(LugarRepo lugarRepo, ComentarioRepo comentarioRepo, TelefonoRepo telefonoRepo, FavoritoRepo favoritoRepo) {
+    public LugarServicioImpl(MascotaRepo lugarRepo, ComentarioRepo comentarioRepo, TelefonoRepo telefonoRepo, FavoritoRepo favoritoRepo) {
         this.lugarRepo = lugarRepo;
         this.comentarioRepo = comentarioRepo;
         this.telefonoRepo = telefonoRepo;
@@ -22,7 +22,7 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public Lugar registrarLugar(Lugar l) throws Exception {
+    public Mascota registrarLugar(Mascota l) throws Exception {
 
 
         l.setEstado(false);
@@ -32,9 +32,9 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public void actualizarLugar(Lugar l,int codigoLugar) throws Exception {
+    public void actualizarLugar(Mascota l, int codigoLugar) throws Exception {
 
-        Lugar lugar = obtenerLugar(codigoLugar);
+        Mascota lugar = obtenerLugar(codigoLugar);
 
         if(lugar != null){
             lugar.setNombre(l.getNombre());
@@ -52,7 +52,7 @@ public class LugarServicioImpl implements LugarServicio {
     @Override
     public void eliminarLugar(int id) throws Exception {
 
-        Lugar lugarEncontrado = obtenerLugar2(id);
+        Mascota lugarEncontrado = obtenerLugar2(id);
 
         if(lugarEncontrado != null){
 
@@ -64,16 +64,16 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public void actualizarLugar(Lugar l) throws Exception{
+    public void actualizarLugar(Mascota l) throws Exception{
 
         lugarRepo.save(l);
 
     }
 
     @Override
-    public Lugar obtenerLugar(int id) throws Exception {
+    public Mascota obtenerLugar(int id) throws Exception {
 
-      Optional<Lugar> lugar = lugarRepo.findById(id);
+      Optional<Mascota> lugar = lugarRepo.findById(id);
 
       if(lugar.isEmpty()){
           throw  new Exception("No se encontro el lugar");
@@ -83,9 +83,9 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public Lugar obtenerLugar2(int id) throws Exception {
+    public Mascota obtenerLugar2(int id) throws Exception {
 
-        Lugar lugar = lugarRepo.obtenerLugar(id);
+        Mascota lugar = lugarRepo.obtenerLugar(id);
 
         if(lugar==null){
             throw  new Exception("No se encontro el lugar");
@@ -96,12 +96,12 @@ public class LugarServicioImpl implements LugarServicio {
 
 
     @Override
-    public List<Lugar> listarLugares() {
+    public List<Mascota> listarLugares() {
         return lugarRepo.findAll();
     }
 
     @Override
-    public List<Lugar> buscarLugares(String cadena) {
+    public List<Mascota> buscarLugares(String cadena) {
         return lugarRepo.busquedaLugaresTipoNombre(cadena);
     }
 
@@ -131,7 +131,7 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public void ingresarComentario(Comentario c, Lugar lugar,Persona persona) throws Exception {
+    public void ingresarComentario(Comentario c, Mascota lugar, Persona persona) throws Exception {
 
         try {
             if (lugar != null && persona != null) {
@@ -147,7 +147,7 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public void marcarFavorito(Lugar lugar, Persona persona) throws Exception {
+    public void marcarFavorito(Mascota lugar, Persona persona) throws Exception {
 
         Favorito favorito = new Favorito();
 
@@ -160,7 +160,7 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public void eliminarFavorito(Lugar lugar, Persona persona) throws Exception{
+    public void eliminarFavorito(Mascota lugar, Persona persona) throws Exception{
 
         Favorito favorito;
 
@@ -179,7 +179,7 @@ public class LugarServicioImpl implements LugarServicio {
     public int obtenerCalificacionPromedio(int idLugar) throws Exception {
 
         Integer calificacion=0;
-        Lugar lugarEncontrado= lugarRepo.obtenerLugar(idLugar);
+        Mascota lugarEncontrado= lugarRepo.obtenerLugar(idLugar);
 
         if (lugarEncontrado!=null){
 
@@ -201,9 +201,9 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> obtenerLugaresPorTipo(String tipo){
+    public List<Mascota> obtenerLugaresPorTipo(String tipo){
 
-        List<Lugar>lugares;
+        List<Mascota>lugares;
 
         lugares = lugarRepo.busquedaLugaresTipoNombre(tipo);
 
@@ -211,9 +211,9 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> obtenerLugaresPorCiudad(String nombreCiudad){
+    public List<Mascota> obtenerLugaresPorCiudad(String nombreCiudad){
 
-        List<Lugar>lugares;
+        List<Mascota>lugares;
 
         lugares = lugarRepo.obtenerLugaresPorCiudad(nombreCiudad);
 
@@ -221,13 +221,13 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public Lugar obtenerLugarMejorCalificacion(){
+    public Mascota obtenerLugarMejorCalificacion(){
 
-        List<Lugar>lugares = listarLugares();
-        Lugar lugarAux = new Lugar();
+        List<Mascota>lugares = listarLugares();
+        Mascota lugarAux = new Mascota();
         int flag=0;
 
-        for(Lugar l:lugares){
+        for(Mascota l:lugares){
 
             try {
                 int calificacionPromedio=obtenerCalificacionPromedio(l.getId());
@@ -249,12 +249,12 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> obtenerLugaresFavoritosUsuario(String idUsuario) {
+    public List<Mascota> obtenerLugaresFavoritosUsuario(String idUsuario) {
 
-        List<Lugar> lugares = lugarRepo.findAll();
-        List<Lugar>lugaresFavoritosUsuario=new ArrayList<>();
+        List<Mascota> lugares = lugarRepo.findAll();
+        List<Mascota>lugaresFavoritosUsuario=new ArrayList<>();
 
-        for (Lugar l:lugares){
+        for (Mascota l:lugares){
 
             List<Favorito>favoritos = l.getFavoritos();
 
@@ -271,10 +271,10 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> obtenerLugaresAbiertos(){
+    public List<Mascota> obtenerLugaresAbiertos(){
 
        String diaSemana="";
-       List<Lugar> lugaresAbiertos = new ArrayList<>();
+       List<Mascota> lugaresAbiertos = new ArrayList<>();
 
        String dia= new Date().toString().split(" ")[0];
        String horaActual = new Date().toString().split(" ")[3].substring(0, 5);

@@ -1,36 +1,36 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Administrador extends Persona implements Serializable {
 
-    //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
+    //================================= RELACION CON LA ENTIDAD TRABAJADOR =================================//
     @OneToMany(mappedBy = "administrador")
-    private List<Moderador> moderadores;
+    private List<Trabajador> trabajadores;
+
+    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
+    @OneToMany(mappedBy = "administrador")
+    private List<Usuario> usuarios;
+
+    //================================= RELACION CON LA ENTIDAD SERVICIO =================================//
+    @OneToMany(mappedBy = "administrador")
+    private List<Servicio> servicios;
 
     //================================= CONSTRUCTOR  =================================//
     public Administrador(String id, String nombre, String nickname, String password, String email) {
         super(id, nombre, nickname, password, email);
-        moderadores = new ArrayList<Moderador>();
+        trabajadores = new ArrayList<>();
+        usuarios= new ArrayList<>();
+        servicios= new ArrayList<>();
     }
 
-
-    //================================= TO STRING DE LA ENTIDAD =================================//
-    @Override
-    public String toString() {
-        return "\nId :"+getId()+"\nNombre: "+ getNombre()+"\nNickname: "+getNickname()+"\nPassword: "
-                +getPassword()+"\nEmail: "+getEmail()+ "\n\n";
-    }
 
 }

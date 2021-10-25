@@ -36,7 +36,7 @@ public class DetalleLugarBean implements Serializable {
     private ComentarioServicio comentarioServicio;
 
     @Getter @Setter
-    private Lugar lugar;
+    private Mascota lugar;
 
     @Getter @Setter
     private List<Comentario> comentariosDetal;
@@ -98,7 +98,7 @@ public class DetalleLugarBean implements Serializable {
                 }
 
 
-                List<Lugar>lugares=new ArrayList<>();
+                List<Mascota>lugares=new ArrayList<>();
                 lugares.add(lugar);
                 PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(lugares.stream().map(l -> new MarkerDTO(l.getId(),l.getNombre(),l.getDescripcion(),l.getLatitud(),l.getLongitud(),l.getEstado())).collect(Collectors.toList()))+");");
 
@@ -111,7 +111,7 @@ public class DetalleLugarBean implements Serializable {
 
     public void ingresarComentario(){
 
-        Lugar lugarEncontrado;
+        Mascota lugarEncontrado;
         Usuario usuarioCreador;
         try {
             int id = Integer.parseInt(idLugar);
@@ -134,7 +134,7 @@ public class DetalleLugarBean implements Serializable {
 
     public void marcarFavorito() {
 
-        Lugar lugarEncontrado;
+        Mascota lugarEncontrado;
 
         if(personaLogin!= null){
 
@@ -150,7 +150,7 @@ public class DetalleLugarBean implements Serializable {
 
     public void eliminarFavorito(){
 
-        Lugar lugarEncontrado;
+        Mascota lugarEncontrado;
 
         if (personaLogin != null){
 
@@ -232,10 +232,10 @@ public class DetalleLugarBean implements Serializable {
 
         try {
 
-            List<Lugar> lugaresAbiertos= lugarServicio.obtenerLugaresAbiertos();
-            Lugar lugarEncontrado = lugarServicio.obtenerLugar2(id);
+            List<Mascota> lugaresAbiertos= lugarServicio.obtenerLugaresAbiertos();
+            Mascota lugarEncontrado = lugarServicio.obtenerLugar2(id);
 
-            for (Lugar l:lugaresAbiertos){
+            for (Mascota l:lugaresAbiertos){
 
                 if (l.getId()==lugarEncontrado.getId()){
 

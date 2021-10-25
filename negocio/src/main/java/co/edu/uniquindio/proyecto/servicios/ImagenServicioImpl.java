@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
-import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
+import co.edu.uniquindio.proyecto.repositorios.MascotaRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +11,9 @@ import java.util.Optional;
 public class ImagenServicioImpl implements ImagenServicio{
 
     private final ImagenRepo imagenRepo;
-    private final LugarRepo lugarRepo;
+    private final MascotaRepo lugarRepo;
 
-    public ImagenServicioImpl(ImagenRepo imagenRepo, LugarRepo lugarRepo) {
+    public ImagenServicioImpl(ImagenRepo imagenRepo, MascotaRepo lugarRepo) {
         this.imagenRepo = imagenRepo;
         this.lugarRepo = lugarRepo;
     }

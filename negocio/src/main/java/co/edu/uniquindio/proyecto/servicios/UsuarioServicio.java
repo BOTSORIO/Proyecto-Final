@@ -20,13 +20,13 @@ public interface UsuarioServicio {
 
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
 
-    List<Lugar> obtenerLugaresPorUsuario(String idUsuario);
+    List<Mascota> obtenerLugaresPorUsuario(String idUsuario);
 
     List<Comentario> obtenerComentariosSinRespuesta(String idUsuario);
 
     List<Comentario> obtenerComentariosConRespuesta(String idUsuario);
 
-    List<Lugar> listarFavoritosUsuario(String id);
+    List<Mascota> listarFavoritosUsuario(String id);
 
     List<Usuario> listarUsuarios();
 

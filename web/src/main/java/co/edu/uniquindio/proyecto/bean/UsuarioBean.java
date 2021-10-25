@@ -4,11 +4,9 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -54,10 +52,10 @@ public class UsuarioBean implements Serializable {
     private List<Ciudad> ciudades;
 
     @Getter @Setter
-    private List<Lugar>lugaresUsuario;
+    private List<Mascota>lugaresUsuario;
 
     @Getter @Setter
-    private List<Lugar>lugaresFavoritosUsuario;
+    private List<Mascota>lugaresFavoritosUsuario;
 
     @Getter @Setter
     private List<Comentario>comentariosSR;
@@ -141,9 +139,9 @@ public class UsuarioBean implements Serializable {
     }
 
 
-    public List<Lugar> obtenerLugaresUsuario(){
+    public List<Mascota> obtenerLugaresUsuario(){
 
-        List<Lugar> lugaresU = null;
+        List<Mascota> lugaresU = null;
 
         if (personaLogin!=null){
             try{
@@ -263,9 +261,9 @@ public class UsuarioBean implements Serializable {
         this.idComentarioResponder = id;
     }
 
-    public List<Lugar> obtenerLugaresFavoritosUsuario(){
+    public List<Mascota> obtenerLugaresFavoritosUsuario(){
 
-        List<Lugar> lugaresFav= new ArrayList<>();
+        List<Mascota> lugaresFav= new ArrayList<>();
 
         if (personaLogin!=null){
 

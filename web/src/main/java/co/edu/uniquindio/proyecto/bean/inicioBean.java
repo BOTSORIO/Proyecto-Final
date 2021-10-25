@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.MarkerDTO;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Mascota;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class inicioBean implements Serializable {
     private LugarServicio lugarServicio;
 
     @Getter @Setter
-    private List<Lugar> lugares;
+    private List<Mascota> lugares;
 
     @PostConstruct
     public void inicializar(){

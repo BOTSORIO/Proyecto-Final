@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -9,9 +8,9 @@ import java.util.*;
 public class TelefonoServicioImpl implements TelefonoServicio{
 
    private final TelefonoRepo telefonoRepo;
-   private final LugarRepo lugarRepo;
+   private final MascotaRepo lugarRepo;
 
-    public TelefonoServicioImpl(TelefonoRepo telefonoRepo, LugarRepo lugarRepo) {
+    public TelefonoServicioImpl(TelefonoRepo telefonoRepo, MascotaRepo lugarRepo) {
         this.telefonoRepo = telefonoRepo;
         this.lugarRepo = lugarRepo;
     }

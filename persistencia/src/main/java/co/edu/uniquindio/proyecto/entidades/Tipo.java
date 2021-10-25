@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Tipo implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
@@ -31,29 +29,14 @@ public class Tipo implements Serializable {
     @Size(max = 100, message = "El tipo no puede superar los 100 caracteres")
     private String nombre;
 
-    //================================= RELACION CON LA ENTIDAD LUGAR =================================//
+    //================================= RELACION CON LA ENTIDAD MASCOTA =================================//
     @OneToMany(mappedBy = "tipo")
-    private List<Lugar> lugares;
+    private List<Mascota> mascotas;
 
     //================================= CONSTRUCTOR  =================================//
     public Tipo(String nombre) {
         this.nombre = nombre;
-        lugares= new ArrayList<>();
+        mascotas= new ArrayList<>();
     }
 
-
-    //================================= TO STRING DE LA ENTIDAD =================================//
-    @Override
-    public String toString() {
-
-        String cadena="";
-
-        for (int i=0;i<getLugares().size();i++){
-
-            cadena +="Codigo: "+getLugares().get(i).getId()+"\n";
-            cadena +="Nombre: "+getLugares().get(i).getNombre()+"\n";
-            cadena += "================\n";
-        }
-        return "\nCodigo :" + getId() + "\nNombre :" + getNombre()  + "\nLugares :\n" + cadena;
-    }
 }

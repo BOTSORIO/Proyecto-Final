@@ -98,10 +98,10 @@ public class InformacionPorDefecto implements CommandLineRunner {
             horarios.add(h1);
             horarios.add(h2);
 
-            Lugar lugar1 = new Lugar("El castillo","Lugar bonito",new Date(),new Date(),4.52009964502443F,
+            Mascota lugar1 = new Mascota("El castillo","Lugar bonito",new Date(),new Date(),4.52009964502443F,
                     -75.7124921956696F,ciudad1, u,new ArrayList<>(), horarios,tipo1);
 
-            Lugar lugar2 = new Lugar("Selva negra","Cafe central",new Date(),new Date(),4.543038953770576F,
+            Mascota lugar2 = new Mascota("Selva negra","Cafe central",new Date(),new Date(),4.543038953770576F,
                     -75.68641861978931F,ciudad3, u,new ArrayList<>(), horarios,tipo3);
 
             lugarServicio.registrarLugar(lugar1);

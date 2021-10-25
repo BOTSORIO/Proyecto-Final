@@ -12,7 +12,6 @@ import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearTicks;
 import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.bar.BarChartOptions;
-import org.primefaces.model.charts.optionconfig.animation.Animation;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.optionconfig.title.Title;
@@ -52,7 +51,7 @@ public class AdministradorBean implements Serializable {
     private Administrador administrador;
 
     @Getter @Setter
-    private Moderador moderador;
+    private Trabajador moderador;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -74,7 +73,7 @@ public class AdministradorBean implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        this.moderador  = new Moderador();
+        this.moderador  = new Trabajador();
         this.administrador = obtenerAdministrador();
         this.ciudades = ciudadServicio.listarCiudades();
         graficarLugaresTipo();
@@ -141,7 +140,7 @@ public class AdministradorBean implements Serializable {
         try{
             if(personaLogin!=null){
 
-                Moderador moderadorAux = moderadorServicio.obtenerModerador(moderador.getId());
+                Trabajador moderadorAux = moderadorServicio.obtenerModerador(moderador.getId());
 
                 if (moderadorAux!=null){
 
@@ -171,7 +170,7 @@ public class AdministradorBean implements Serializable {
 
         for(Tipo t:listaTipos){
 
-            List<Lugar>listaLugaresTipo=lugarServicio.obtenerLugaresPorTipo(t.getNombre());
+            List<Mascota>listaLugaresTipo=lugarServicio.obtenerLugaresPorTipo(t.getNombre());
 
             pieLugaresTipo.set(t.getNombre(),listaLugaresTipo.size());
         }
@@ -230,7 +229,7 @@ public class AdministradorBean implements Serializable {
 
         for(Ciudad c:ciudades){
 
-            List<Lugar>lugares = lugarServicio.obtenerLugaresPorCiudad(c.getNombre());
+            List<Mascota>lugares = lugarServicio.obtenerLugaresPorCiudad(c.getNombre());
             valores.add(lugares.size());
             labels.add(c.getNombre());
             bgColor.add("rgba(54, 162, 235, 0.2)");
@@ -257,9 +256,9 @@ public class AdministradorBean implements Serializable {
 
         BarChartOptions opciones = opcionesBarras("Lugares populares e impopulares",0,5);
 
-        List<Lugar>lugares=lugarServicio.listarLugares();
+        List<Mascota>lugares=lugarServicio.listarLugares();
 
-        for(Lugar l:lugares){
+        for(Mascota l:lugares){
 
             try{
                 valores.add(lugarServicio.obtenerCalificacionPromedio(l.getId()));

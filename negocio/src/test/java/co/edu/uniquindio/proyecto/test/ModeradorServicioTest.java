@@ -31,10 +31,10 @@ public class ModeradorServicioTest {
 
             Administrador administradorEncontrado= administradorServicio.obtenerAdministrador("5");
 
-            Moderador moderadorNuevo = new Moderador("1","Braian","ghostbit","braian123","bra@gmail.com");
+            Trabajador moderadorNuevo = new Trabajador("1","Braian","ghostbit","braian123","bra@gmail.com");
             moderadorNuevo.setAdministrador(administradorEncontrado);
 
-            Moderador moderadorRegistrado = moderadorServicio.registrarModerador(moderadorNuevo);
+            Trabajador moderadorRegistrado = moderadorServicio.registrarModerador(moderadorNuevo);
 
             System.out.println(moderadorRegistrado);
 
@@ -52,13 +52,13 @@ public class ModeradorServicioTest {
 
         try{
 
-            Moderador aux= new Moderador();
+            Trabajador aux= new Trabajador();
 
             aux.setNickname("TUBBCITA");
 
             moderadorServicio.actualizarModerador(aux,"f@gmail.com","fer123");
 
-            Moderador moderadorEncontrado = moderadorServicio.obtenerModerador("123");
+            Trabajador moderadorEncontrado = moderadorServicio.obtenerModerador("123");
 
             Assertions.assertEquals("TUBBCITA",moderadorEncontrado.getNickname());
 
@@ -74,10 +74,10 @@ public class ModeradorServicioTest {
 
         try{
 
-            Moderador moderadorEncontrado = moderadorServicio.obtenerModerador("123");
+            Trabajador moderadorEncontrado = moderadorServicio.obtenerModerador("123");
 
             moderadorServicio.eliminarModerador(moderadorEncontrado.getEmail(),moderadorEncontrado.getPassword());
-            Moderador moderadorBorrado= moderadorServicio.obtenerModerador("123");
+            Trabajador moderadorBorrado= moderadorServicio.obtenerModerador("123");
 
             Assertions.assertNull(moderadorBorrado);
 
@@ -91,7 +91,7 @@ public class ModeradorServicioTest {
     @Sql("classpath:moderadores.sql")
     public void listarModeradoresTest(){
 
-        List<Moderador> moderadores = moderadorServicio.listarModeradores();
+        List<Trabajador> moderadores = moderadorServicio.listarModeradores();
 
         System.out.println(moderadores);
     }

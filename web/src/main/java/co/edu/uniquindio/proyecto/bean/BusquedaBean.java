@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.MarkerDTO;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Mascota;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import com.google.gson.Gson;
 import org.primefaces.PrimeFaces;
@@ -22,7 +22,7 @@ public class BusquedaBean implements Serializable {
     private String busquedaParam;
     private String busqueda;
 
-    private List<Lugar> lugares;
+    private List<Mascota> lugares;
 
     @Autowired
     private LugarServicio lugarServicio;
@@ -59,11 +59,11 @@ public class BusquedaBean implements Serializable {
         this.busquedaParam = busquedaParam;
     }
 
-    public List<Lugar> getLugares() {
+    public List<Mascota> getLugares() {
         return lugares;
     }
 
-    public void setLugares(List<Lugar> lugares) {
+    public void setLugares(List<Mascota> lugares) {
         this.lugares = lugares;
     }
 }

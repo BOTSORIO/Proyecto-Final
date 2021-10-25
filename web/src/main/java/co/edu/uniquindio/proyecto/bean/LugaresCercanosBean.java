@@ -1,16 +1,14 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.MarkerDTO;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Mascota;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -26,10 +24,10 @@ public class LugaresCercanosBean {
     LugarServicio lugarServicio;
 
     @Setter @Getter
-    private List<Lugar> lugares;
+    private List<Mascota> lugares;
 
     @Getter @Setter
-    private List<Lugar>lugaresCercanos;
+    private List<Mascota>lugaresCercanos;
 
     @Getter @Setter
     private float distancia;

@@ -40,14 +40,14 @@ public class LugarServicioTest {
             Date fechaAprobacion=sdf.parse("2021/01/04");
 
             Ciudad ciudad= new Ciudad("Medellin");
-            Moderador moderador= new Moderador("9","Carlos","rojo","rojo123","ro@gmail.com");
+            Trabajador moderador= new Trabajador("9","Carlos","rojo","rojo123","ro@gmail.com");
             Usuario usuario= new Usuario("0","Omar","omitar","omar123","omar@gmail.com");
             Tipo tipo = new Tipo("Motel");
             Horario horario=new Horario("Lunes a viernes","10:00","20:00");
             Telefono telefono = new Telefono("3116310037");
             Imagen imagen = new Imagen("adsdasda");
 
-            Lugar lugarNuevo= new Lugar("El castillo","Lugar de paso",fechaCreacion,fechaAprobacion, 77, 65, 12,23,true);
+            Mascota lugarNuevo= new Mascota("El castillo","Lugar de paso",fechaCreacion,fechaAprobacion, 77, 65, 12,23,true);
             lugarNuevo.setTipo(tipo);
             lugarNuevo.setUsuario(usuario);
             lugarNuevo.setModerador(moderador);
@@ -56,7 +56,7 @@ public class LugarServicioTest {
             lugarNuevo.getTelefonos().add(telefono);
             lugarNuevo.getImagenes().add(imagen);
 
-            Lugar lugarRegistrado = lugarServicio.registrarLugar(lugarNuevo);
+            Mascota lugarRegistrado = lugarServicio.registrarLugar(lugarNuevo);
 
             Assertions.assertNotNull(lugarRegistrado);
 
@@ -71,13 +71,13 @@ public class LugarServicioTest {
 
         try {
 
-            Lugar aux = new Lugar();
+            Mascota aux = new Mascota();
 
             aux.setEstado(false);
 
             lugarServicio.actualizarLugar(aux,1);
 
-            Lugar lugarEncontrado = lugarServicio.obtenerLugar(1);
+            Mascota lugarEncontrado = lugarServicio.obtenerLugar(1);
             Assertions.assertEquals(false,lugarEncontrado.getEstado());
 
         }catch (Exception e){
@@ -91,11 +91,11 @@ public class LugarServicioTest {
 
         try {
 
-            Lugar lugarEncontrado = lugarServicio.obtenerLugar(1);
+            Mascota lugarEncontrado = lugarServicio.obtenerLugar(1);
             System.out.println(lugarEncontrado);
 
             lugarServicio.eliminarLugar(lugarEncontrado.getId());
-            Lugar lugarBorrado= lugarServicio.obtenerLugar(1);
+            Mascota lugarBorrado= lugarServicio.obtenerLugar(1);
 
             Assertions.assertNull(lugarBorrado);
 
@@ -108,7 +108,7 @@ public class LugarServicioTest {
     @Sql("classpath:lugares.sql")
     public void listarLugaresTest(){
 
-        List<Lugar> lugares= lugarServicio.listarLugares();
+        List<Mascota> lugares= lugarServicio.listarLugares();
 
         System.out.println(lugares);
     }

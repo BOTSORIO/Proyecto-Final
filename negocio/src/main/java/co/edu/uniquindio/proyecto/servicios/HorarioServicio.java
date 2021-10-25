@@ -1,7 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Horario;
-
 import java.util.List;
 
 public interface HorarioServicio {

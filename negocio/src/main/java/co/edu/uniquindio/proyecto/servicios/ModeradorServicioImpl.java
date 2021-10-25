@@ -9,22 +9,22 @@ import java.util.*;
 @Service
 public class ModeradorServicioImpl implements ModeradorServicio{
 
-    private final ModeradorRepo moderadorRepo;
-    private final LugarRepo lugarRepo;
+    private final TrabajorRepo moderadorRepo;
+    private final MascotaRepo lugarRepo;
 
-    public ModeradorServicioImpl(ModeradorRepo moderadorRepo, LugarRepo lugarRepo) {
+    public ModeradorServicioImpl(TrabajorRepo moderadorRepo, MascotaRepo lugarRepo) {
         this.moderadorRepo = moderadorRepo;
         this.lugarRepo = lugarRepo;
     }
 
     public boolean estaDisponible(String email){
-        Optional<Moderador> modEmail = moderadorRepo.findByEmail(email);
+        Optional<Trabajador> modEmail = moderadorRepo.findByEmail(email);
 
         return  modEmail.isPresent();
     }
 
     @Override
-    public Moderador registrarModerador(Moderador m) throws Exception {
+    public Trabajador registrarModerador(Trabajador m) throws Exception {
 
         if (m.getId().length()>10){
             throw new Exception("La cedula solo puede tener 10 caracteres");
@@ -46,7 +46,7 @@ public class ModeradorServicioImpl implements ModeradorServicio{
             throw new Exception("La contraseña solo puede tener 100 caracteres compa");
         }
 
-        Optional<Moderador> modNick= moderadorRepo.findByNickname(m.getNickname());
+        Optional<Trabajador> modNick= moderadorRepo.findByNickname(m.getNickname());
         if(modNick.isPresent()){
             throw new Exception("El moderador ya existe");
         }
@@ -59,9 +59,9 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
-    public void actualizarModerador(Moderador m,String email,String password) throws Exception {
+    public void actualizarModerador(Trabajador m, String email, String password) throws Exception {
 
-      Moderador moderadorObtenido = obtenerEmailPassword(email,password);
+      Trabajador moderadorObtenido = obtenerEmailPassword(email,password);
 
       if(moderadorObtenido != null){
           moderadorObtenido.setId(m.getId());
@@ -79,7 +79,7 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     @Override
     public void eliminarModerador(String email,String password) throws Exception {
 
-        Moderador moderadorEncontrado = obtenerEmailPassword(email,password);
+        Trabajador moderadorEncontrado = obtenerEmailPassword(email,password);
 
         if (moderadorEncontrado != null){
             moderadorRepo.delete(moderadorEncontrado);
@@ -89,9 +89,9 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
-    public Moderador obtenerModerador(String id) throws Exception {
+    public Trabajador obtenerModerador(String id) throws Exception {
 
-        Optional<Moderador> moderador = moderadorRepo.findById(id);
+        Optional<Trabajador> moderador = moderadorRepo.findById(id);
 
         if(moderador.isEmpty()){
             throw new Exception("No existe un moderador con el id dado");
@@ -102,9 +102,9 @@ public class ModeradorServicioImpl implements ModeradorServicio{
 
 
     @Override
-    public Moderador obtenerEmailPassword(String email, String password) throws Exception {
+    public Trabajador obtenerEmailPassword(String email, String password) throws Exception {
 
-        Moderador moderador = moderadorRepo.findByEmailAndPassword(email,password);
+        Trabajador moderador = moderadorRepo.findByEmailAndPassword(email,password);
 
         if(moderador == null){
 
@@ -114,32 +114,32 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     }
 
     @Override
-    public List<Lugar> obtenerLugaresAprobados(String email){
+    public List<Mascota> obtenerLugaresAprobados(String email){
 
-        List<Lugar> lugares = lugarRepo.obtenerLugaresAprobados(email);
-
-        return lugares;
-    }
-
-    @Override
-    public List<Lugar> obtenerTodosLugaresAprobados(){
-
-        List<Lugar> lugares = lugarRepo.obtenerTodosLugaresAprobados();
+        List<Mascota> lugares = lugarRepo.obtenerLugaresAprobados(email);
 
         return lugares;
     }
 
     @Override
-    public List<Lugar> obtenerLugaresSinAprobacion(){
+    public List<Mascota> obtenerTodosLugaresAprobados(){
 
-        List<Lugar> lugares = lugarRepo.obtenerLugaresSinAprobacion();
+        List<Mascota> lugares = lugarRepo.obtenerTodosLugaresAprobados();
+
+        return lugares;
+    }
+
+    @Override
+    public List<Mascota> obtenerLugaresSinAprobacion(){
+
+        List<Mascota> lugares = lugarRepo.obtenerLugaresSinAprobacion();
 
         return lugares;
     }
 
 
     @Override
-    public List<Moderador> listarModeradores() {
+    public List<Trabajador> listarModeradores() {
 
         return moderadorRepo.findAll();
     }

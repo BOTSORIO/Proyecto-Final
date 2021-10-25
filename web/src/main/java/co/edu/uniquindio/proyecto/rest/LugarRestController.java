@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.rest;
 
 import co.edu.uniquindio.proyecto.dto.Mensaje;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Mascota;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ public class LugarRestController {
 
 
     @GetMapping
-    public List<Lugar> listar(){
+    public List<Mascota> listar(){
 
         return lugarServicio.listarLugares();
     }
 
     @PostMapping
-    public ResponseEntity<Mensaje> crear(@RequestBody Lugar lugar){
+    public ResponseEntity<Mensaje> crear(@RequestBody Mascota lugar){
 
         try {
             lugarServicio.registrarLugar(lugar);
@@ -35,7 +35,7 @@ public class LugarRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Mensaje> actualizar(@RequestBody Lugar lugar,@PathVariable(name="id") Integer id){
+    public ResponseEntity<Mensaje> actualizar(@RequestBody Mascota lugar, @PathVariable(name="id") Integer id){
 
         try {
             lugarServicio.actualizarLugar(lugar,id);
@@ -89,7 +89,7 @@ public class LugarRestController {
 
 
     @GetMapping("/favoritosUsuario/{idUsuario}")
-    public List<Lugar> listarFavoritosUsuario(@PathVariable(name="idUsuario") String id){
+    public List<Mascota> listarFavoritosUsuario(@PathVariable(name="idUsuario") String id){
 
         return lugarServicio.obtenerLugaresFavoritosUsuario(id);
     }

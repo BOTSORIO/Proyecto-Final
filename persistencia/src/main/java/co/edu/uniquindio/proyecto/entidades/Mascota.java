@@ -2,10 +2,8 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.*;
 import java.util.*;
 
@@ -15,7 +13,7 @@ import java.util.*;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Lugar implements Serializable {
+public class Mascota implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
@@ -29,49 +27,26 @@ public class Lugar implements Serializable {
     @Size(max = 100)
     private String nombre;
 
-    @Column(name = "descripcion",length =200, nullable = false)
+    @Column(name = "raza",length =50)
     @NotBlank
     @Size(max = 200)
-    private String descripcion;
+    private String raza;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_creacion", nullable = false)
-    private Date fechaCreacion;
+    @Column(name = "fecha_registro", nullable = false)
+    private Date fechaRegistro;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_aprobacion")
-    private Date fechaAprobacion;
+    @Column(name = "cantidad_vacunas")
+    @Positive
+    private int cantidadVacunas;
 
-    @Column(name = "latitud", nullable = false)
-    private float latitud;
-
-    @Column(name = "longitud", nullable = false)
-    private float longitud;
-
-    @Column(name = "estado", nullable = false)
-    private Boolean estado;
-
-    //================================= RELACION CON LA ENTIDAD MODERADOR =================================//
-    @ManyToOne
-    @JsonIgnore
-    private Moderador moderador;
+    @Column(name = "peso")
+    private double peso;
 
     //================================= RELACION CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
-
-    //================================= RELACION CON LA ENTIDAD CIUDAD =================================//
-    @ManyToOne
-    @ToString.Exclude
-    @JsonIgnore
-    private Ciudad ciudad;
-
-    //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
-    @OneToMany(mappedBy = "lugar")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Comentario> comentarios;
 
     //================================= RELACION CON LA ENTIDAD TIPO =================================//
     @ManyToOne
@@ -79,59 +54,34 @@ public class Lugar implements Serializable {
     private Tipo tipo;
 
     //================================= RELACION CON LA ENTIDAD IMAGEN =================================//
-    @OneToMany(mappedBy = "lugar",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "mascota",fetch=FetchType.EAGER)
     @ToString.Exclude
     @JsonIgnore
     private List<Imagen> imagenes;
 
-    //================================= RELACION CON LA ENTIDAD TELEFONO =================================//
-    @OneToMany(mappedBy = "lugar")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Telefono> telefonos;
 
-    //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
-    @OneToMany(mappedBy = "lugar")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Favorito> favoritos;
-
-    //================================= RELACION CON LA ENTIDAD HORARIO =================================//
-    @ManyToMany
-    @JsonIgnore
-    private List<Horario> horarios;
+    //================================= RELACION CON LA ENTIDAD SERVICIO =================================//
+    @ManyToOne
+    private Servicio servicio;
 
     //================================= CONSTRUCTOR  =================================//
     @Builder
-    public Lugar(String nombre, String descripcion, Date fechaCreacion, Date fechaAprobacion, int i1, int i, float latitud, float longitud, Boolean estado) {
+    public Mascota(String nombre, String raza, Date fechaRegistro) {
 
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaAprobacion = fechaAprobacion;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.estado = estado;
-        this.horarios=new ArrayList<>();
-        this.telefonos= new ArrayList<>();
+        this.raza = raza;
+        this.fechaRegistro = fechaRegistro;
         this.imagenes = new ArrayList<>();
-        this.favoritos = new ArrayList<>();
-        this.comentarios = new ArrayList<>();
     }
 
     @Builder
-    public Lugar(String nombre1, String descripcion, Date fechaCreacion, Date fechaAprobacion, float latitud, float longitud,Ciudad ciudad,Usuario usuarioCreador,List<Imagen>imagenes,List<Horario>horarios,Tipo tipo) {
+    public Mascota(String nombre, String raza, Date fechaRegistro, Usuario usuario, List<Imagen>imagenes,Tipo tipo) {
 
-        this.nombre = nombre1;
-        this.descripcion = descripcion;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaAprobacion = fechaAprobacion;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.ciudad = ciudad;
-        this.horarios = horarios;
+        this.nombre = nombre;
+        this.raza = raza;
+        this.fechaRegistro = fechaRegistro;
         this.imagenes = imagenes;
-        this.usuario  = usuarioCreador;
+        this.usuario  = usuario;
         this.tipo = tipo;
 
     }

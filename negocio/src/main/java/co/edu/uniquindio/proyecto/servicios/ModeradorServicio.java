@@ -6,21 +6,21 @@ import java.util.List;
 
 public interface ModeradorServicio {
 
-    Moderador registrarModerador(Moderador m) throws Exception;
+    Trabajador registrarModerador(Trabajador m) throws Exception;
 
-    void actualizarModerador(Moderador m, String email,String password) throws Exception;
+    void actualizarModerador(Trabajador m, String email, String password) throws Exception;
 
     void eliminarModerador(String email,String password) throws Exception;
 
-    Moderador obtenerModerador(String id) throws Exception;
+    Trabajador obtenerModerador(String id) throws Exception;
 
-    List<Lugar> obtenerLugaresAprobados(String email);
+    List<Mascota> obtenerLugaresAprobados(String email);
 
-    List<Lugar> obtenerTodosLugaresAprobados();
+    List<Mascota> obtenerTodosLugaresAprobados();
 
-    List<Lugar> obtenerLugaresSinAprobacion();
+    List<Mascota> obtenerLugaresSinAprobacion();
 
-    List<Moderador> listarModeradores();
+    List<Trabajador> listarModeradores();
 
-    Moderador obtenerEmailPassword(String email, String password) throws Exception;
+    Trabajador obtenerEmailPassword(String email, String password) throws Exception;
 }

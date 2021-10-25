@@ -39,7 +39,7 @@ public class LugarBean implements Serializable {
 
     @Getter
     @Setter
-    private Lugar lugar;
+    private Mascota lugar;
 
     @Getter
     @Setter
@@ -79,7 +79,7 @@ public class LugarBean implements Serializable {
 
     @Getter
     @Setter
-    private Lugar lugarCalificacionMayor;
+    private Mascota lugarCalificacionMayor;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -103,7 +103,7 @@ public class LugarBean implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        this.lugar = new Lugar();
+        this.lugar = new Mascota();
         this.horario = new Horario();
         this.lugarCalificacionMayor = obtenerLugarCalificacionMayor();
         this.ciudades = ciudadServicio.listarCiudades();
@@ -129,7 +129,7 @@ public class LugarBean implements Serializable {
                     lugar.setUsuario((Usuario) personaLogin);
                     lugar.setHorarios(horarios);
 
-                    Lugar lugarCreado = lugarServicio.registrarLugar(lugar);
+                    Mascota lugarCreado = lugarServicio.registrarLugar(lugar);
 
                     for (Imagen i : imagenes) {
                         i.setLugar(lugarCreado);
@@ -218,11 +218,11 @@ public class LugarBean implements Serializable {
         return null;
     }
 
-    public Lugar getLugar() {
+    public Mascota getLugar() {
         return lugar;
     }
 
-    public void setLugar(Lugar lugar) {
+    public void setLugar(Mascota lugar) {
         this.lugar = lugar;
     }
 
@@ -293,7 +293,7 @@ public class LugarBean implements Serializable {
         if (personaLogin != null) {
             try {
 
-                Lugar lugarAux = lugarServicio.obtenerLugar(lugar.getId());
+                Mascota lugarAux = lugarServicio.obtenerLugar(lugar.getId());
                 lugarAux.getHorarios().clear();
 
                 lugarServicio.actualizarLugar(lugarAux);
@@ -342,9 +342,9 @@ public class LugarBean implements Serializable {
     }
 
 
-    public Lugar obtenerLugarCalificacionMayor() {
+    public Mascota obtenerLugarCalificacionMayor() {
 
-        Lugar lugar = lugarServicio.obtenerLugarMejorCalificacion();
+        Mascota lugar = lugarServicio.obtenerLugarMejorCalificacion();
 
         if (lugar != null) {
             return lugar;

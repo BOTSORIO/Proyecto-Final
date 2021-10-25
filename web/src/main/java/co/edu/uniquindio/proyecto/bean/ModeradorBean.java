@@ -12,9 +12,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,19 +25,19 @@ public class ModeradorBean implements Serializable {
 
     @Getter
     @Setter
-    private List<Lugar> lugaresAprobados;
+    private List<Mascota> lugaresAprobados;
 
     @Getter
     @Setter
-    private List<Lugar> lugaresTAprobados;
+    private List<Mascota> lugaresTAprobados;
 
     @Getter
     @Setter
-    private List<Lugar> lugaresDesaprobados;
+    private List<Mascota> lugaresDesaprobados;
 
     @Getter
     @Setter
-    private Moderador moderador;
+    private Trabajador moderador;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -66,7 +64,7 @@ public class ModeradorBean implements Serializable {
 
     public void aprobarLugar(int id) {
 
-        Lugar lugarEncontrado ;
+        Mascota lugarEncontrado ;
 
         if (personaLogin != null) {
 
@@ -77,7 +75,7 @@ public class ModeradorBean implements Serializable {
                 if (lugarEncontrado != null && !lugarEncontrado.getEstado()) {
 
                     lugarEncontrado.setEstado(true);
-                    lugarEncontrado.setModerador((Moderador) personaLogin);
+                    lugarEncontrado.setModerador((Trabajador) personaLogin);
                     lugarEncontrado.setFechaAprobacion(new Date());
 
                     lugarServicio.actualizarLugar(lugarEncontrado);
@@ -96,7 +94,7 @@ public class ModeradorBean implements Serializable {
 
     public void desaprobarLugar(int id){
 
-        Lugar lugarEncontrado ;
+        Mascota lugarEncontrado ;
 
         if (personaLogin != null) {
 
@@ -130,9 +128,9 @@ public class ModeradorBean implements Serializable {
 
     }
 
-    public List<Lugar> obtenerTodosLugaresAprobados(){
+    public List<Mascota> obtenerTodosLugaresAprobados(){
 
-        List<Lugar> aprobados = null;
+        List<Mascota> aprobados = null;
 
         if (personaLogin!=null){
 
@@ -141,9 +139,9 @@ public class ModeradorBean implements Serializable {
         return aprobados;
     }
 
-    public List<Lugar> obtenerLugaresAprobados(){
+    public List<Mascota> obtenerLugaresAprobados(){
 
-        List<Lugar> aprobados = null;
+        List<Mascota> aprobados = null;
 
         if (personaLogin!=null){
 
@@ -152,9 +150,9 @@ public class ModeradorBean implements Serializable {
         return aprobados;
     }
 
-    public List<Lugar> obtenerLugaresDesaprobados() throws Exception {
+    public List<Mascota> obtenerLugaresDesaprobados() throws Exception {
 
-        List<Lugar> desaprobados=null;
+        List<Mascota> desaprobados=null;
 
         if (personaLogin!=null){
 
@@ -168,9 +166,9 @@ public class ModeradorBean implements Serializable {
         return desaprobados;
     }
 
-    public Moderador obtenerModerador() {
+    public Trabajador obtenerModerador() {
 
-        Moderador moderadorEncontrado = new Moderador();
+        Trabajador moderadorEncontrado = new Trabajador();
 
         if (personaLogin != null) {
 

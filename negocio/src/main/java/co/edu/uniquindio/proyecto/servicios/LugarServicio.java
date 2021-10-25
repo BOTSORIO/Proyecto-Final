@@ -6,21 +6,21 @@ import java.util.List;
 
 public interface LugarServicio {
 
-    Lugar registrarLugar(Lugar l) throws Exception;
+    Mascota registrarLugar(Mascota l) throws Exception;
 
-    void  actualizarLugar(Lugar l, int codigoLugar) throws Exception;
+    void  actualizarLugar(Mascota l, int codigoLugar) throws Exception;
 
-    void actualizarLugar(Lugar l) throws Exception;
+    void actualizarLugar(Mascota l) throws Exception;
 
     void eliminarLugar(int id) throws Exception;
 
-    Lugar obtenerLugar(int id) throws Exception;
+    Mascota obtenerLugar(int id) throws Exception;
 
-    Lugar obtenerLugar2(int id) throws Exception;
+    Mascota obtenerLugar2(int id) throws Exception;
 
-    List<Lugar> listarLugares();
+    List<Mascota> listarLugares();
 
-    List<Lugar> buscarLugares(String nombre);
+    List<Mascota> buscarLugares(String nombre);
 
     List<Comentario> listarComentarios(Integer idLugar);
 
@@ -28,21 +28,21 @@ public interface LugarServicio {
 
     void registrarComentario(Comentario c) throws Exception;
 
-    void ingresarComentario(Comentario c,Lugar lugar,Persona persona) throws Exception;
+    void ingresarComentario(Comentario c, Mascota lugar, Persona persona) throws Exception;
 
-    void marcarFavorito(Lugar lugar, Persona p) throws Exception;
+    void marcarFavorito(Mascota lugar, Persona p) throws Exception;
 
-    void eliminarFavorito(Lugar lugar, Persona persona) throws Exception;
+    void eliminarFavorito(Mascota lugar, Persona persona) throws Exception;
 
     int obtenerCalificacionPromedio(int idLugar) throws Exception;
 
-    List<Lugar> obtenerLugaresPorTipo(String tipo);
+    List<Mascota> obtenerLugaresPorTipo(String tipo);
 
-    List<Lugar> obtenerLugaresPorCiudad(String nombreCiudad);
+    List<Mascota> obtenerLugaresPorCiudad(String nombreCiudad);
 
-    Lugar obtenerLugarMejorCalificacion();
+    Mascota obtenerLugarMejorCalificacion();
 
-    List<Lugar> obtenerLugaresFavoritosUsuario(String idUsuario);
+    List<Mascota> obtenerLugaresFavoritosUsuario(String idUsuario);
 
-    List<Lugar> obtenerLugaresAbiertos();
+    List<Mascota> obtenerLugaresAbiertos();
 }

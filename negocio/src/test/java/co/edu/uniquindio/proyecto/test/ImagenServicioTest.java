@@ -26,7 +26,7 @@ public class ImagenServicioTest {
 
         try{
 
-            Lugar lugarEncontrado = lugarServicio.obtenerLugar(1);
+            Mascota lugarEncontrado = lugarServicio.obtenerLugar(1);
 
             Imagen imagenNueva = new Imagen("adsafsasdsa");
             imagenNueva.setLugar(lugarEncontrado);

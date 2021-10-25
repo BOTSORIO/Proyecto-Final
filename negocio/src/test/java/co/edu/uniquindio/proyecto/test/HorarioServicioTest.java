@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.NegocioApplication;
-import co.edu.uniquindio.proyecto.entidades.*;
-import co.edu.uniquindio.proyecto.repositorios.HorarioRepo;
 import co.edu.uniquindio.proyecto.servicios.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

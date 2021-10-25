@@ -23,28 +23,21 @@ public class Usuario extends Persona implements Serializable {
     @JsonIgnore
     private Ciudad ciudad;
 
-    //================================= RELACION CON LA ENTIDAD LUGAR =================================//
+    //================================= RELACION CON LA ENTIDAD MASCOTA =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
     @JsonIgnore
-    private List<Lugar> lugares;
+    private List<Mascota> mascotas;
 
-    //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
-    @OneToMany(mappedBy = "usuario")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Comentario> comentarios;
+    //================================= RELACION CON LA ENTIDAD ADMINISTRADOR =================================//
+    @ManyToOne
+    private Administrador administrador;
 
-    //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
-    @OneToMany(mappedBy = "usuario")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Favorito> favoritos;
 
     //================================= CONSTRUCTOR  =================================//
     public Usuario(String id, String nombre, String nickname, String password, String email) {
         super(id, nombre, nickname, password, email);
-        lugares= new ArrayList<>();
+        mascotas= new ArrayList<>();
     }
 
 }

@@ -26,7 +26,7 @@ public class TelefonoServicioTest {
 
         try {
 
-            Lugar lugarEncontrado= lugarServicio.obtenerLugar(1);
+            Mascota lugarEncontrado= lugarServicio.obtenerLugar(1);
 
             Telefono telefonoNuevo = new Telefono("322532131");
             telefonoNuevo.setLugar(lugarEncontrado);

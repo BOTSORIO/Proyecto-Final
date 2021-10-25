@@ -31,7 +31,7 @@ public class LugarRestTest {
     @Transactional
     public void registrarLugar() throws Exception{
 
-        Lugar lugar = Lugar.builder().nombre("Pepitos").descripcion("Lugar de comida").fechaCreacion(new Date()).latitud(4.52009964502443F)
+        Mascota lugar = Mascota.builder().nombre("Pepitos").descripcion("Lugar de comida").fechaCreacion(new Date()).latitud(4.52009964502443F)
                 .longitud(-75.7124921956696F).build();
 
         mockMvc.perform(post("/api/lugares")
@@ -57,7 +57,7 @@ public class LugarRestTest {
     public void actualizarLugar() throws Exception{
 
 
-        Lugar lugar1= new Lugar();
+        Mascota lugar1= new Mascota();
         lugar1.setId(2);
         lugar1.setFechaCreacion(new Date());
         lugar1.setNombre("Rancho");

@@ -9,6 +9,6 @@ public interface ImagenRepo extends JpaRepository<Imagen,Integer>{
 
     //================================= REPOSITORIO DE IMAGEN =================================//
 
-    @Query("select i.url from Imagen i where i.lugar.id=:idLugar")
-    String obtenerUrlImagen(Integer idLugar);
+    @Query("select i.url from Imagen i where i.mascota.id=:idMascota")
+    String obtenerUrlImagen(Integer idMascota);
 }

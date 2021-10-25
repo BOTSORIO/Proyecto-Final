@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -9,9 +8,9 @@ import java.util.*;
 public class HorarioServicioImpl implements  HorarioServicio{
 
    private final HorarioRepo horarioRepo;
-   private final LugarRepo lugarRepo;
+   private final MascotaRepo lugarRepo;
 
-    public HorarioServicioImpl(HorarioRepo horarioRepo, LugarRepo lugarRepo) {
+    public HorarioServicioImpl(HorarioRepo horarioRepo, MascotaRepo lugarRepo) {
         this.horarioRepo = horarioRepo;
         this.lugarRepo = lugarRepo;
     }

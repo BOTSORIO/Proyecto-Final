@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ModeradorRepo extends JpaRepository<Trabajador,String> {
+public interface TrabajorRepo extends JpaRepository<Trabajador,String> {
 
     //================================= REPOSITORIO DE MODERADOR =================================//
 
